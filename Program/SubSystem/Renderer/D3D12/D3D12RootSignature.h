@@ -1,0 +1,31 @@
+/**
+* @file    D3D12RootSignature.h
+* @brief
+*
+* @date	   2022/05/13 2022年度初版
+* @author  飯塚陽太
+*/
+#pragma once
+
+
+#include <d3d12.h>
+#include <wrl/client.h>
+#include "D3D12DeviceChild.h"
+
+class D3D12RootSignature : public D3D12DeviceChild
+{
+public:
+
+	bool Create(D3D12_FILTER samplerFilter,
+				D3D12_TEXTURE_ADDRESS_MODE samplerAdressModeU,
+				D3D12_TEXTURE_ADDRESS_MODE samplerAdressModeV,
+				D3D12_TEXTURE_ADDRESS_MODE samplerAdressModeW) noexcept;
+
+	/** デバイス設定するための関数です。*/
+	void SetGraphics();
+	void SetCompute();
+
+private:
+
+	Microsoft::WRL::ComPtr<ID3D12RootSignature> m_rootsignature;
+};

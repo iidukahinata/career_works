@@ -1,0 +1,761 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Application">
+      <UniqueIdentifier>{97220e62-3828-419f-bc39-e944971bf96e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{2b59ad45-725e-4a29-a925-04ab7d0411fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem">
+      <UniqueIdentifier>{35f17c59-5333-49a8-a4c5-e7dccda413fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty">
+      <UniqueIdentifier>{8c8e154f-1197-45a3-b5e5-e0c660f74979}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\DirectTex">
+      <UniqueIdentifier>{f8271eec-53fc-4a43-b844-ce74879cc976}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\FMOD">
+      <UniqueIdentifier>{09632076-7c5b-408b-bf36-a16b808aac8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\imgui">
+      <UniqueIdentifier>{fe11058b-24a4-4a4d-9a6d-65bc09986960}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Audio">
+      <UniqueIdentifier>{280d0a0f-b395-493f-9b59-ac4225d9e233}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Gui">
+      <UniqueIdentifier>{64d3f7a4-7f6b-4490-b1ee-e456f9fec62e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Input">
+      <UniqueIdentifier>{cbd31513-91ed-49d3-ae9d-8fc557513c0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\IOStream">
+      <UniqueIdentifier>{df150d7e-279f-4e7f-8265-4cd9480a5f28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Log">
+      <UniqueIdentifier>{74c41bea-ae8c-474c-b867-5e62f3ecd1fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Math">
+      <UniqueIdentifier>{ff21058c-dc1e-4828-8073-47b9cca19db0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Phisics">
+      <UniqueIdentifier>{7d93fa86-bcd4-431d-a280-f3b7239d53b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Renderer">
+      <UniqueIdentifier>{6e0b70b8-019c-401b-a309-e48adaeac6c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Resource">
+      <UniqueIdentifier>{994b5407-09a6-4b77-a937-a7ff952e7d20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Scene">
+      <UniqueIdentifier>{97fa475a-e3bf-4d5f-9e7d-a9c3f3f41934}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\ThreadPool">
+      <UniqueIdentifier>{91291c6a-d94e-4db9-a751-c111eefac470}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Timer">
+      <UniqueIdentifier>{532a8617-9fdf-443b-998f-9d23d0617ac9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Tools">
+      <UniqueIdentifier>{49020388-a70a-4e9c-acb4-1e2aedea659e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Window">
+      <UniqueIdentifier>{cf390bbc-9dd6-471e-ad1e-b523c8209bf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Resource\Resources">
+      <UniqueIdentifier>{16da4491-7f17-42e6-98f1-d544cfbb8462}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Resource\ResourceLoader">
+      <UniqueIdentifier>{85ade1d6-5613-4c82-a5e0-859c3924aa22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Resource\ResourceLoader\ModelLoader">
+      <UniqueIdentifier>{a46b9be4-770d-4bdb-9b76-a9c83eda8eaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Resource\ResourceLoader\TextureLoader">
+      <UniqueIdentifier>{72bc2d25-057b-4167-9f80-735263159eb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Resource\Resources\3DModel">
+      <UniqueIdentifier>{c01ae5b3-ac52-4987-afbb-6fd408cf7948}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Resource\Resources\2DSprite">
+      <UniqueIdentifier>{0635a65d-0a8d-4ed0-8f54-9a00d624c53d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Resource\Resources\Audio">
+      <UniqueIdentifier>{4e2e722f-2322-48cb-aff9-9ba3deb9ce19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Renderer\Camera">
+      <UniqueIdentifier>{4ac70078-d3d7-45d1-8885-893e5d83d140}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Renderer\D3D11">
+      <UniqueIdentifier>{95cad495-08d1-4bee-869d-45a743804919}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Renderer\D3D12">
+      <UniqueIdentifier>{07c26028-c438-4ccf-98a4-d6ff0dee0571}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Renderer\Drawings">
+      <UniqueIdentifier>{7a574bf5-8a6b-44ed-86b8-070fceaf51a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Renderer\Geometry">
+      <UniqueIdentifier>{17b2c961-e7ef-4c42-8b08-7715a34de3ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Renderer\Shader">
+      <UniqueIdentifier>{d232027f-c82e-4669-8357-317b91104de2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Renderer\Drawings\Effect">
+      <UniqueIdentifier>{8c929dd9-5b7d-44fc-bcec-b9990078db6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Renderer\Drawings\Light">
+      <UniqueIdentifier>{d4a8add7-0ff4-4d63-9f41-6ef671f8c8fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Renderer\Drawings\SkyBox">
+      <UniqueIdentifier>{4ffffea8-11e8-4f85-9d3d-943193ad49c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Renderer\Drawings\Effect\PostEffect">
+      <UniqueIdentifier>{1e07a66c-0f07-47e1-a97c-a1ddac8aca52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene">
+      <UniqueIdentifier>{a62d9525-01f0-4562-9a2f-43514d0314b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameObject">
+      <UniqueIdentifier>{f06bcc08-8dbd-4bb1-ad25-3c07d861547f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Program\Application\Application.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\GameObject\Player.cpp">
+      <Filter>Game\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\GameObject\Road.cpp">
+      <Filter>Game\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\Scene\EditScene.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\Scene\GameScene.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\WinMain.cpp" />
+    <ClCompile Include="Program\ThirdParty\directxtex\include\DDSTextureLoader.cpp">
+      <Filter>ThirdParty\DirectTex</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\ThirdParty\directxtex\include\WICTextureLoader.cpp">
+      <Filter>ThirdParty\DirectTex</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\ThirdParty\imgui\imgui_impl_win32.cpp">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\ThirdParty\imgui\imgui_tables.cpp">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\ThirdParty\imgui\imgui_widgets.cpp">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\ThirdParty\imgui\imgui.cpp">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\ThirdParty\imgui\imgui_demo.cpp">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\ThirdParty\imgui\imgui_draw.cpp">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\ThirdParty\imgui\imgui_impl_dx11.cpp">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Audio\Audio.cpp">
+      <Filter>SubSystem\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Audio\AudioListener.cpp">
+      <Filter>SubSystem\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Audio\AudioSpeaker.cpp">
+      <Filter>SubSystem\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Gui\MyGui.cpp">
+      <Filter>SubSystem\Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Input\Input.cpp">
+      <Filter>SubSystem\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\IOStream\FileStream.cpp">
+      <Filter>SubSystem\IOStream</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Log\DebugLog.cpp">
+      <Filter>SubSystem\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Math\Vector2.cpp">
+      <Filter>SubSystem\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Math\Vector3.cpp">
+      <Filter>SubSystem\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Math\Matrix.cpp">
+      <Filter>SubSystem\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Phisics\OBB.cpp">
+      <Filter>SubSystem\Phisics</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Phisics\Phisics.cpp">
+      <Filter>SubSystem\Phisics</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Phisics\SimulationManager.cpp">
+      <Filter>SubSystem\Phisics</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Phisics\Body.cpp">
+      <Filter>SubSystem\Phisics</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Phisics\Collider.cpp">
+      <Filter>SubSystem\Phisics</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Window\Window.cpp">
+      <Filter>SubSystem\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Tools\Tools.cpp">
+      <Filter>SubSystem\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Tools\COM.cpp">
+      <Filter>SubSystem\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Tools\SpinLock.cpp">
+      <Filter>SubSystem\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Timer\Timer.cpp">
+      <Filter>SubSystem\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\ThreadPool\ThreadPool.cpp">
+      <Filter>SubSystem\ThreadPool</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Scene\Transform.cpp">
+      <Filter>SubSystem\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Scene\GameObject.cpp">
+      <Filter>SubSystem\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Scene\Scene.cpp">
+      <Filter>SubSystem\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Scene\SceneManager.cpp">
+      <Filter>SubSystem\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Resource\ResourceManager.cpp">
+      <Filter>SubSystem\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Resource\ResourceLoader\ModelLoader\ModelLoader.cpp">
+      <Filter>SubSystem\Resource\ResourceLoader\ModelLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Resource\ResourceLoader\TextureLoader\TextureLoader.cpp">
+      <Filter>SubSystem\Resource\ResourceLoader\TextureLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Resource\Resources\2DSprite\Sprite.cpp">
+      <Filter>SubSystem\Resource\Resources\2DSprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Resource\Resources\3DModel\Model.cpp">
+      <Filter>SubSystem\Resource\Resources\3DModel</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Resource\Resources\3DModel\ModelData.cpp">
+      <Filter>SubSystem\Resource\Resources\3DModel</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Resource\Resources\3DModel\Quad.cpp">
+      <Filter>SubSystem\Resource\Resources\3DModel</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Resource\Resources\3DModel\Texture.cpp">
+      <Filter>SubSystem\Resource\Resources\3DModel</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Resource\Resources\Audio\AudioClip.cpp">
+      <Filter>SubSystem\Resource\Resources\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Resource\Resources\IResource.cpp">
+      <Filter>SubSystem\Resource\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\Camera\Camera.cpp">
+      <Filter>SubSystem\Renderer\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D11\D3D11ComputeShader.cpp">
+      <Filter>SubSystem\Renderer\D3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D11\D3D11GrahicsDevice.cpp">
+      <Filter>SubSystem\Renderer\D3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D11\D3D11IndexBuffer.cpp">
+      <Filter>SubSystem\Renderer\D3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D11\D3D11InputLayout.cpp">
+      <Filter>SubSystem\Renderer\D3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D11\D3D11PixelShader.cpp">
+      <Filter>SubSystem\Renderer\D3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D11\D3D11RenderTexture.cpp">
+      <Filter>SubSystem\Renderer\D3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D11\D3D11SamplerState.cpp">
+      <Filter>SubSystem\Renderer\D3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D11\D3D11Shader.cpp">
+      <Filter>SubSystem\Renderer\D3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D11\D3D11Texture.cpp">
+      <Filter>SubSystem\Renderer\D3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D11\D3D11VertexShader.cpp">
+      <Filter>SubSystem\Renderer\D3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12CommandContext.cpp">
+      <Filter>SubSystem\Renderer\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12DescriptorHeap.cpp">
+      <Filter>SubSystem\Renderer\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12DeviceChild.cpp">
+      <Filter>SubSystem\Renderer\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Fence.cpp">
+      <Filter>SubSystem\Renderer\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12GrahicsDevice.cpp">
+      <Filter>SubSystem\Renderer\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12IndexBuffer.cpp">
+      <Filter>SubSystem\Renderer\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12PipelineState.cpp">
+      <Filter>SubSystem\Renderer\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12RenderTexture.cpp">
+      <Filter>SubSystem\Renderer\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12RootSignature.cpp">
+      <Filter>SubSystem\Renderer\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Shader.cpp">
+      <Filter>SubSystem\Renderer\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Texture.cpp">
+      <Filter>SubSystem\Renderer\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\Renderer.cpp">
+      <Filter>SubSystem\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\RenderStates.cpp">
+      <Filter>SubSystem\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\TransformCBuffer.cpp">
+      <Filter>SubSystem\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\Drawings\SkyBox\SkyBox.cpp">
+      <Filter>SubSystem\Renderer\Drawings\SkyBox</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\Drawings\Light\DirectionalLight.cpp">
+      <Filter>SubSystem\Renderer\Drawings\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\Drawings\Light\LightMap.cpp">
+      <Filter>SubSystem\Renderer\Drawings\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\Drawings\Light\PointLight.cpp">
+      <Filter>SubSystem\Renderer\Drawings\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\Drawings\Light\SpotLight.cpp">
+      <Filter>SubSystem\Renderer\Drawings\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\Drawings\Effect\PostEffect\DepthOfField.cpp">
+      <Filter>SubSystem\Renderer\Drawings\Effect\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\Drawings\Effect\PostEffect\Monotone.cpp">
+      <Filter>SubSystem\Renderer\Drawings\Effect\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\Drawings\Effect\PostEffect\Bloom.cpp">
+      <Filter>SubSystem\Renderer\Drawings\Effect\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\Drawings\Effect\PostEffect\Blur.cpp">
+      <Filter>SubSystem\Renderer\Drawings\Effect\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\Drawings\Effect\Postprocessing.cpp">
+      <Filter>SubSystem\Renderer\Drawings\Effect</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Program\Application\Application.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\GameObject\Player.h">
+      <Filter>Game\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\GameObject\Road.h">
+      <Filter>Game\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\Scene\EditScene.h">
+      <Filter>Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\Scene\GameScene.h">
+      <Filter>Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\Game.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\ThirdParty\FMOD\include\fmod.h">
+      <Filter>ThirdParty\FMOD</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\ThirdParty\FMOD\include\fmod.hpp">
+      <Filter>ThirdParty\FMOD</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\ThirdParty\FMOD\include\fmod_codec.h">
+      <Filter>ThirdParty\FMOD</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\ThirdParty\FMOD\include\fmod_common.h">
+      <Filter>ThirdParty\FMOD</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\ThirdParty\FMOD\include\fmod_dsp.h">
+      <Filter>ThirdParty\FMOD</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\ThirdParty\FMOD\include\fmod_dsp_effects.h">
+      <Filter>ThirdParty\FMOD</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\ThirdParty\FMOD\include\fmod_errors.h">
+      <Filter>ThirdParty\FMOD</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\ThirdParty\FMOD\include\fmod_output.h">
+      <Filter>ThirdParty\FMOD</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\ThirdParty\imgui\imgui_impl_dx11.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\ThirdParty\imgui\imgui_impl_win32.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\ThirdParty\imgui\imgui_internal.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\ThirdParty\imgui\imstb_rectpack.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\ThirdParty\imgui\imstb_textedit.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\ThirdParty\imgui\imstb_truetype.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\ThirdParty\imgui\imconfig.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\ThirdParty\imgui\imgui.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Audio\Audio.h">
+      <Filter>SubSystem\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Audio\AudioHelper.h">
+      <Filter>SubSystem\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Audio\AudioListener.h">
+      <Filter>SubSystem\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Audio\AudioSpeaker.h">
+      <Filter>SubSystem\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Gui\MyGui.h">
+      <Filter>SubSystem\Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Input\Input.h">
+      <Filter>SubSystem\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\IOStream\FileStream.h">
+      <Filter>SubSystem\IOStream</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Log\DebugLog.h">
+      <Filter>SubSystem\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Math\Vector2.h">
+      <Filter>SubSystem\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Math\Vector3.h">
+      <Filter>SubSystem\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Math\Vector4.h">
+      <Filter>SubSystem\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Math\MathCore.h">
+      <Filter>SubSystem\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Math\MathHelper.h">
+      <Filter>SubSystem\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Math\Matrix.h">
+      <Filter>SubSystem\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Phisics\OBB.h">
+      <Filter>SubSystem\Phisics</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Phisics\Phisics.h">
+      <Filter>SubSystem\Phisics</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Phisics\SimulationManager.h">
+      <Filter>SubSystem\Phisics</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Phisics\Body.h">
+      <Filter>SubSystem\Phisics</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Phisics\Collider.h">
+      <Filter>SubSystem\Phisics</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Window\Window.h">
+      <Filter>SubSystem\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Tools\SpinLock.h">
+      <Filter>SubSystem\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Tools\Tools.h">
+      <Filter>SubSystem\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Tools\COM.h">
+      <Filter>SubSystem\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Tools\Octree.h">
+      <Filter>SubSystem\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Timer\Timer.h">
+      <Filter>SubSystem\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\ThreadPool\ThreadPool.h">
+      <Filter>SubSystem\ThreadPool</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Scene\SceneManager.h">
+      <Filter>SubSystem\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Scene\Transform.h">
+      <Filter>SubSystem\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Scene\GameObject.h">
+      <Filter>SubSystem\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Scene\Scene.h">
+      <Filter>SubSystem\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Resource\ResourceManager.h">
+      <Filter>SubSystem\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Resource\ResourceLoader\ModelLoader\ModelLoader.h">
+      <Filter>SubSystem\Resource\ResourceLoader\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Resource\ResourceLoader\TextureLoader\TextureLoader.h">
+      <Filter>SubSystem\Resource\ResourceLoader\TextureLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Resource\Resources\2DSprite\Sprite.h">
+      <Filter>SubSystem\Resource\Resources\2DSprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Resource\Resources\3DModel\Material.h">
+      <Filter>SubSystem\Resource\Resources\3DModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Resource\Resources\3DModel\Mesh.h">
+      <Filter>SubSystem\Resource\Resources\3DModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Resource\Resources\3DModel\Model.h">
+      <Filter>SubSystem\Resource\Resources\3DModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Resource\Resources\3DModel\ModelData.h">
+      <Filter>SubSystem\Resource\Resources\3DModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Resource\Resources\3DModel\Quad.h">
+      <Filter>SubSystem\Resource\Resources\3DModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Resource\Resources\3DModel\Texture.h">
+      <Filter>SubSystem\Resource\Resources\3DModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Resource\Resources\Audio\AudioClip.h">
+      <Filter>SubSystem\Resource\Resources\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Resource\Resources\IResource.h">
+      <Filter>SubSystem\Resource\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\Camera\Camera.h">
+      <Filter>SubSystem\Renderer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D11\D3D11ConstantBuffer.h">
+      <Filter>SubSystem\Renderer\D3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D11\D3D11DeviceChild.h">
+      <Filter>SubSystem\Renderer\D3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D11\D3D11GrahicsDevice.h">
+      <Filter>SubSystem\Renderer\D3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D11\D3D11IndexBuffer.h">
+      <Filter>SubSystem\Renderer\D3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D11\D3D11InputLayout.h">
+      <Filter>SubSystem\Renderer\D3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D11\D3D11RenderTexture.h">
+      <Filter>SubSystem\Renderer\D3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D11\D3D11SamplerState.h">
+      <Filter>SubSystem\Renderer\D3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D11\D3D11Shader.h">
+      <Filter>SubSystem\Renderer\D3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D11\D3D11Texture.h">
+      <Filter>SubSystem\Renderer\D3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D11\D3D11VertexBuffer.h">
+      <Filter>SubSystem\Renderer\D3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12CommandContext.h">
+      <Filter>SubSystem\Renderer\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12ConstantBuffer.h">
+      <Filter>SubSystem\Renderer\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12DescriptorHeap.h">
+      <Filter>SubSystem\Renderer\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12DeviceChild.h">
+      <Filter>SubSystem\Renderer\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12GrahicsDevice.h">
+      <Filter>SubSystem\Renderer\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12IndexBuffer.h">
+      <Filter>SubSystem\Renderer\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12PipelineState.h">
+      <Filter>SubSystem\Renderer\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12RenderTexture.h">
+      <Filter>SubSystem\Renderer\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12RootSignature.h">
+      <Filter>SubSystem\Renderer\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12Shader.h">
+      <Filter>SubSystem\Renderer\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12Texture.h">
+      <Filter>SubSystem\Renderer\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12VertexBuffer.h">
+      <Filter>SubSystem\Renderer\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\Renderer.h">
+      <Filter>SubSystem\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\RenderStates.h">
+      <Filter>SubSystem\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\TransformCBuffer.h">
+      <Filter>SubSystem\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\Geometry\Cube.h">
+      <Filter>SubSystem\Renderer\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\Geometry\Plane.h">
+      <Filter>SubSystem\Renderer\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\Geometry\Vertex.h">
+      <Filter>SubSystem\Renderer\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\Drawings\SkyBox\SkyBox.h">
+      <Filter>SubSystem\Renderer\Drawings\SkyBox</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\Drawings\Light\Light.h">
+      <Filter>SubSystem\Renderer\Drawings\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\Drawings\Light\LightMap.h">
+      <Filter>SubSystem\Renderer\Drawings\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\Drawings\Effect\PostEffect\DepthOfField.h">
+      <Filter>SubSystem\Renderer\Drawings\Effect\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\Drawings\Effect\PostEffect\Monotone.h">
+      <Filter>SubSystem\Renderer\Drawings\Effect\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\Drawings\Effect\PostEffect\PostEffect.h">
+      <Filter>SubSystem\Renderer\Drawings\Effect\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\Drawings\Effect\PostEffect\Bloom.h">
+      <Filter>SubSystem\Renderer\Drawings\Effect\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\Drawings\Effect\PostEffect\Blur.h">
+      <Filter>SubSystem\Renderer\Drawings\Effect\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\Drawings\Effect\Postprocessing.h">
+      <Filter>SubSystem\Renderer\Drawings\Effect</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Program\ThirdParty\FMOD\include\fmod_dsp.cs">
+      <Filter>ThirdParty\FMOD</Filter>
+    </None>
+    <None Include="Program\ThirdParty\FMOD\include\fmod_errors.cs">
+      <Filter>ThirdParty\FMOD</Filter>
+    </None>
+    <None Include="Program\ThirdParty\FMOD\include\fmod.cs">
+      <Filter>ThirdParty\FMOD</Filter>
+    </None>
+    <None Include="Program\SubSystem\Renderer\Shader\Light.hlsli">
+      <Filter>SubSystem\Renderer\Shader</Filter>
+    </None>
+    <None Include="Program\SubSystem\Renderer\Shader\PBR.hlsli">
+      <Filter>SubSystem\Renderer\Shader</Filter>
+    </None>
+    <None Include="Program\SubSystem\Renderer\Shader\psvsCommon.hlsli">
+      <Filter>SubSystem\Renderer\Shader</Filter>
+    </None>
+    <None Include="Program\SubSystem\Renderer\Shader\Blur.hlsli">
+      <Filter>SubSystem\Renderer\Shader</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\LambertVS.hlsl">
+      <Filter>SubSystem\Renderer\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\LuminanceSamplingPS.hlsl">
+      <Filter>SubSystem\Renderer\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\MonotonePS.hlsl">
+      <Filter>SubSystem\Renderer\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\PBR_PS.hlsl">
+      <Filter>SubSystem\Renderer\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\PBR_VS.hlsl">
+      <Filter>SubSystem\Renderer\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\TexturePS.hlsl">
+      <Filter>SubSystem\Renderer\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\TextureVS.hlsl">
+      <Filter>SubSystem\Renderer\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\XBlurVS.hlsl">
+      <Filter>SubSystem\Renderer\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\YBlurVS.hlsl">
+      <Filter>SubSystem\Renderer\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\BloomPS.hlsl">
+      <Filter>SubSystem\Renderer\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\BlurPS.hlsl">
+      <Filter>SubSystem\Renderer\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\BoxPS.hlsl">
+      <Filter>SubSystem\Renderer\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\BoxVS.hlsl">
+      <Filter>SubSystem\Renderer\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\DepthOfFieldPS.hlsl">
+      <Filter>SubSystem\Renderer\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\LambertPS.hlsl">
+      <Filter>SubSystem\Renderer\Shader</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>
