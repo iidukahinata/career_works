@@ -18,7 +18,7 @@ namespace Math
 								  0, 0, 1, 0,
 								  0, 0, 0, 1);
 
-	constexpr Matrix::Matrix(const Vector4& InX, const Vector4& InY, const Vector4& InZ, const Vector4& InW) noexcept
+	Matrix::Matrix(const Vector4& InX, const Vector4& InY, const Vector4& InZ, const Vector4& InW) noexcept
 	{
 		m[0][0] = InX.x; m[0][1] = InX.y;  m[0][2] = InX.z;  m[0][3] = InX.w;
 		m[1][0] = InY.x; m[1][1] = InY.y;  m[1][2] = InY.z;  m[1][3] = InY.w;
@@ -29,9 +29,9 @@ namespace Math
 	Matrix::Matrix(const Vector3& position, const Vector3& eulerAngles, const Vector3& scale) noexcept
 	{
 		auto world = DirectX::XMMatrixScalingFromVector(DirectX::XMLoadFloat3(&scale)) *
+			DirectX::XMMatrixRotationZ(eulerAngles.z) *
 			DirectX::XMMatrixRotationX(eulerAngles.x) *
 			DirectX::XMMatrixRotationY(eulerAngles.y) *
-			DirectX::XMMatrixRotationZ(eulerAngles.z) *
 			DirectX::XMMatrixTranslationFromVector(DirectX::XMLoadFloat3(&position));
 
 		DirectX::XMStoreFloat4x4(this, world);
@@ -49,9 +49,9 @@ namespace Math
 		Matrix rotation;
 		DirectX::XMStoreFloat4x4(
 			&rotation,
+			DirectX::XMMatrixRotationZ(eulerAngles.z) *
 			DirectX::XMMatrixRotationX(eulerAngles.x) *
-			DirectX::XMMatrixRotationY(eulerAngles.y) *
-			DirectX::XMMatrixRotationZ(eulerAngles.z));
+			DirectX::XMMatrixRotationY(eulerAngles.y));
 		return rotation;
 	}
 
@@ -76,10 +76,14 @@ namespace Math
 
 	Vector3 Matrix::GetEulerAngles() const noexcept
 	{
-		float c = sqrtf(1.0f - m[2][1] * m[2][1]);
-		if (isnan(c))
-			c = 0.0f;
-
-		return Vector3(atan2f(-m[2][1], std::move(c)), atan2f(m[2][0], m[2][2]), atan2f(m[0][1], m[1][1]));
+		if (m[2][1] == 1.f)
+		{
+			return Vector3(-PI / 2.f, 0.f, -atan2f(m[1][0], m[0][0]));
+		}
+		if (m[2][1] == -1.f)
+		{
+			return Vector3((PI / 2.f), 0.f, -atan2f(m[1][0], m[0][0]));
+		}
+		return Vector3(-asin(m[2][1]), atan2f(m[2][0], m[2][2]), atan2f(m[0][1], m[1][1]));
 	}
 }

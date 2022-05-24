@@ -86,7 +86,7 @@ void LightMove(DirectionalLight* light)
 
 void GameScene::Awake()
 {
-	AddGameObject(new Road);
+	AddGameObject(new Player);
 }
 
 void GameScene::Init()

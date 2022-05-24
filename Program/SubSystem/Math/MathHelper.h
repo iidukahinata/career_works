@@ -24,4 +24,16 @@ namespace Math
 	struct Vector3;
 	struct Vector4;
 	struct Matrix;
+
+	constexpr float ToRadian(float degree)
+	{
+		constexpr float rad = PI / 180.f;
+		return degree * rad;
+	}
+
+	constexpr float ToDegree(float radian)
+	{
+		constexpr float degree = 180.f / PI;
+		return radian * degree;
+	}
 }

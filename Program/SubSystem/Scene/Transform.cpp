@@ -113,24 +113,14 @@ DirectX::XMMATRIX Transform::GetWorldMatrixXM() const
 
 Math::Vector3 Transform::GetUp()
 {
-	auto rot = DirectX::XMMatrixRotationX(m_localRotation.x) *
-		DirectX::XMMatrixRotationY(m_localRotation.y) *
-		DirectX::XMMatrixRotationZ(m_localRotation.z);
-
-	Math::Vector3 up;
-	DirectX::XMStoreFloat3(&up, rot.r[1]);
-	return up;
+	auto rot = Math::Matrix::CreateRotation(m_localRotation);
+	return Math::Vector3(rot.m[1][0], rot.m[1][1], rot.m[1][2]);
 }
 
 Math::Vector3 Transform::GetForward()
 {
-	auto rot = DirectX::XMMatrixRotationX(m_localRotation.x) *
-		DirectX::XMMatrixRotationY(m_localRotation.y) *
-		DirectX::XMMatrixRotationZ(m_localRotation.z);
-
-	Math::Vector3 forward;
-	DirectX::XMStoreFloat3(&forward, rot.r[2]);
-	return forward;
+	auto rot = Math::Matrix::CreateRotation(m_localRotation);
+	return Math::Vector3(rot.m[2][0], rot.m[2][1], rot.m[2][2]);
 }
 
 void Transform::SetPearent(IGameObject* parent) noexcept

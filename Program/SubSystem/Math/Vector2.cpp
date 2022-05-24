@@ -20,11 +20,11 @@ namespace Math
 	const Vector2 Vector2::Right( 1.0f,  0.0f);
 	const Vector2 Vector2::Left (-1.0f,  0.0f);
 
-	constexpr Vector2::Vector2(const Vector3& V) noexcept : 
+	Vector2::Vector2(const Vector3& V) noexcept : 
 		DirectX::XMFLOAT2(V.x, V.y)
 	{}
 
-	constexpr Vector2::Vector2(const Vector4& V) noexcept :
+	Vector2::Vector2(const Vector4& V) noexcept :
 		DirectX::XMFLOAT2(V.x, V.y)
 	{}
 }

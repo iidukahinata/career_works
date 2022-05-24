@@ -31,7 +31,7 @@ namespace Math
 			DirectX::XMFLOAT4X4(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33)
 		{}
 
-		constexpr Matrix(const Vector4& InX, const Vector4& InY, const Vector4& InZ, const Vector4& InW) noexcept;
+		Matrix(const Vector4& InX, const Vector4& InY, const Vector4& InZ, const Vector4& InW) noexcept;
 
 		Matrix(const Vector3& position, const Vector3& eulerAngles, const Vector3& scale) noexcept;
 
@@ -68,7 +68,7 @@ namespace Math
 			return result;
 		}
 
-		Matrix operator+=(const Matrix& Other) noexcept
+		constexpr Matrix operator+=(const Matrix& Other) noexcept
 		{			
 			for (int x = 0; x < 4; ++x)
 			{

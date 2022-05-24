@@ -51,7 +51,7 @@ namespace Math
 			DirectX::XMFLOAT3(value, value, value)
 		{}
 
-		constexpr Vector3(const Vector4& V) noexcept;
+		Vector3(const Vector4& V) noexcept;
 
 		constexpr Vector3(const Vector3& V) noexcept :
 			DirectX::XMFLOAT3(V.x, V.y, V.z)

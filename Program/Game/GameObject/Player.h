@@ -15,5 +15,25 @@ public:
 
 private:
 
+	void InputAction() noexcept;
+
+	void Rolling() noexcept;
+	void Move1Mass() noexcept;
+	void Rotation90Degree() noexcept;
+
+	void RotationWorld(const Math::Vector3& angle) noexcept;
+
+	void FinishRotate() noexcept;
+
+	int InputNum() const noexcept;
+	bool IsInput() const noexcept;
+
+private:
+
+	static const int AngleSize = 2;
+	int m_angles[AngleSize] = {};
+
+	int m_angleCount;
+
 	Model m_model;
 };
