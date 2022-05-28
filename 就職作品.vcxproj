@@ -28,6 +28,7 @@
     <ClCompile Include="Program\Game\GameObject\Stage.cpp" />
     <ClCompile Include="Program\Game\Scene\EditScene.cpp" />
     <ClCompile Include="Program\Game\Scene\GameScene.cpp" />
+    <ClCompile Include="Program\Game\Scene\TitleScene.cpp" />
     <ClCompile Include="Program\SubSystem\Audio\Audio.cpp" />
     <ClCompile Include="Program\SubSystem\Audio\AudioListener.cpp" />
     <ClCompile Include="Program\SubSystem\Audio\AudioSpeaker.cpp" />
@@ -119,6 +120,7 @@
     <ClInclude Include="Program\Game\GameObject\Stage.h" />
     <ClInclude Include="Program\Game\Scene\EditScene.h" />
     <ClInclude Include="Program\Game\Scene\GameScene.h" />
+    <ClInclude Include="Program\Game\Scene\TitleScene.h" />
     <ClInclude Include="Program\SubSystem\Audio\Audio.h" />
     <ClInclude Include="Program\SubSystem\Audio\AudioHelper.h" />
     <ClInclude Include="Program\SubSystem\Audio\AudioListener.h" />

@@ -1,12 +1,25 @@
+/**
+* @file    Chack.cpp
+* @brief
+*
+* @date	   2022/05/28 2022îNìxèâî≈
+* @author  î—íÀózëæ
+* @note
+*/
+
+
 #include "Chack.h"
+#include <string>
 #include "SubSystem/Log/DebugLog.h"
-#include "SubSystem/Tools/Tools.h"
 
 #ifdef _DEBUG
-void chack(const char* text, const wchar_t* file, unsigned line)
+void chack(const char* message, const char* file, unsigned line, const char* text)
 {
-	std::string buf(text);
-	buf += std::string("\n\nprogram:") + ToString(file + std::wstring(L"  line:") + std::to_wstring(line));
+	std::string buf;
+	buf += std::string(text);
+	buf += std::string("\n\nprogram: ") + file;
+	buf += std::string("\n\nline: ") + std::to_string(line);
+	buf += std::string("\n\nexpr: ") + message;
 	LOG_ERROR(buf);
 }
 #endif // _DEBUG

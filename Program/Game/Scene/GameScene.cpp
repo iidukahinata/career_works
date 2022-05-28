@@ -2,7 +2,7 @@
 * @file    GameScene.cpp
 * @brief
 *
-* @date	   2022/04/13 2022年度初版
+* @date	   2022/05/28 2022年度初版
 * @version 1.00
 * @author  飯塚陽太
 * @note

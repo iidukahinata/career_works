@@ -2,14 +2,17 @@
 * @file    FileStream.cpp
 * @brief   ファイル操作クラス
 *
-* @data	   2022/05/06 2022年度初版
+* @data	   2022/05/28 2022年度初版
 * @author  飯塚陽太
 */
 
 
 #include "FileStream.h"
+#include "SubSystem/Log/DebugLog.h"
 
 #ifdef USE_C_VERSION
+#include <errno.h>
+
 FileStream::FileStream(std::string_view filePath, OpenMode mode)
 {
 	Load(filePath, mode);
@@ -44,7 +47,13 @@ bool FileStream::Load(std::string_view filePath, OpenMode mode) noexcept
 	}
 
 	if (error != 0)
+	{
+		std::string buf;
+		buf.resize(128);
+		strerror_s(buf.data(), buf.size(), static_cast<int>(error));
+		LOG_ERROR("error :" + std::string(buf));
 		m_fp = nullptr;
+	}
 
 	return IsOpen();
 }
@@ -71,6 +80,11 @@ bool FileStream::CreateFile(std::string_view filePath, OpenMode mode) noexcept
 		if (fp) fclose(fp);
 		return true;
 	}
+
+	std::string buf;
+	buf.resize(128);
+	strerror_s(buf.data(), buf.size(), static_cast<int>(error));
+	LOG_ERROR("error :" + std::string(buf));
 	return false;
 }
 

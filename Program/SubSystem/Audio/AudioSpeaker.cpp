@@ -2,7 +2,7 @@
  * @file	AudioSpeaker.cpp
  * @brief
  *
- * @date	2022/05/14 2022年度初版
+ * @date	2022/05/28 2022年度初版
  * @author	飯塚陽太
  */
 
@@ -11,11 +11,11 @@
 #include "Audio.h"
 #include "SubSystem/Resource/Resources/Audio/AudioClip.h"
 #include "SubSystem/Scene/Transform.h"
+#include "SubSystem/Tools/Chack.h"
 
 void AudioSpeaker::Update() noexcept
 {
-	if (!m_parent)
-		return;
+	Chack(m_parent);
 
 	Math::Vector3 worldPos = m_parent->GetWoldPosition();
 	Math::Vector3 velcity = worldPos - m_oldPos;
@@ -32,8 +32,7 @@ void AudioSpeaker::Update() noexcept
 
 void AudioSpeaker::Play() noexcept
 {
-	if (!m_audioClip)
-		return;
+	Chack(m_audioClip);
 
 	if (m_isPlaying)
 		Stop();
@@ -48,9 +47,6 @@ void AudioSpeaker::Play() noexcept
 
 void AudioSpeaker::PlayOneShot(AudioClip* const clip, float volume /* = 1.f */) const noexcept
 {
-	if (!clip)
-		return;
-
 	clip->Play();
 
 	// thisの設定をaudioDateに渡す
@@ -59,7 +55,7 @@ void AudioSpeaker::PlayOneShot(AudioClip* const clip, float volume /* = 1.f */) 
 	clip->SetVolume(volume);
 
 	// 3D 時、初期値として再生位置をセット。
-	if (!m_is2DMode) 
+	if (m_is2DMode == false)
 	{
 		auto worldPos = m_parent->GetWoldPosition();
 		FMOD_VECTOR pos = { worldPos.x, worldPos.y, worldPos.z };
@@ -70,24 +66,21 @@ void AudioSpeaker::PlayOneShot(AudioClip* const clip, float volume /* = 1.f */) 
 
 void AudioSpeaker::Pause() const noexcept
 {
-	if (!m_audioClip)
-		return;
+	Chack(m_audioClip);
 
 	m_audioClip->Pause();
 }
 
 void AudioSpeaker::UnPause() const noexcept
 {
-	if (!m_audioClip)
-		return;
+	Chack(m_audioClip);
 
 	m_audioClip->UnPause();
 }
 
 void AudioSpeaker::Stop() noexcept
 {
-	if (!m_audioClip)
-		return;
+	Chack(m_audioClip);
 
 	m_audioClip->Stop();
 	m_isPlaying = false;
@@ -150,9 +143,6 @@ void AudioSpeaker::SetMaxDistance(float max) noexcept
 
 void AudioSpeaker::SetOutPutMatrix(float* matrix, int size) noexcept
 {
-	if (!matrix)
-		return;
-
 	size = std::min(size, 8);
 	for (int i = 0; i < size; ++i)
 	{

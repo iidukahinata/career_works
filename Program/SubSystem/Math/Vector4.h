@@ -156,15 +156,15 @@ namespace Math
 
 		const float& operator[](int index) const
 		{
-			assert(0 <= index);
-			assert(index < 4);
+			Chack(0 <= index);
+			Chack(index < 4);
 			return (&x)[index];
 		}
 
 		float& operator[](int index)
 		{
-			assert(0 <= index);
-			assert(index < 4);
+			Chack(0 <= index);
+			Chack(index < 4);
 			return (&x)[index];
 		}
 

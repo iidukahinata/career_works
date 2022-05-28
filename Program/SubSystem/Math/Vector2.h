@@ -58,15 +58,15 @@ namespace Math
 
 		constexpr const float& operator[](int index) const
 		{
-			assert(0 <= index);
-			assert(index < 2);
+			Chack(0 <= index);
+			Chack(index < 2);
 			return (&x)[index];
 		}
 
 		constexpr float& operator[](int index)
 		{
-			assert(0 <= index);
-			assert(index < 2);
+			Chack(0 <= index);
+			Chack(index < 2);
 			return (&x)[index];
 		}
 

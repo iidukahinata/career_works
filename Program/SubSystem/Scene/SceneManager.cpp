@@ -2,18 +2,18 @@
 * @file    SceneManager.cpp
 * @brief   シーン管理クラス
 *
-* @date	   2022/04/30 2022年度初版
+* @date	   2022/05/28 2022年度初版
 * @author  飯塚陽太
 */
 
 
 #include "SceneManager.h"
 #include "SubSystem/Resource/ResourceManager.h"
+#include "SubSystem/Tools/Chack.h"
 
 void SceneManager::Update()
 {
-	if (m_sceneState == SceneState::Stop)
-		return;
+	Chack(m_sceneState != SceneState::Stop, "Scene がセットされていません。");
 
 	if (m_sceneState == SceneState::Change)
 	{
@@ -25,13 +25,9 @@ void SceneManager::Update()
 
 void SceneManager::Draw()
 {
-	if (m_sceneState == SceneState::Stop)
-		return;
+	Chack(m_sceneState != SceneState::Stop, "Scene がセットされていません。");
 
-	if (m_currentScene)
-	{
-		m_currentScene->Draw();
-	}
+	m_currentScene->Draw();
 }
 
 void SceneManager::Clear()
@@ -49,6 +45,7 @@ void SceneManager::Clear()
 
 void SceneManager::SceneSwitching()
 {
+	// 他の機能が ThreadPool を使用している場合、処理によっては無限ループに入る危険性がある。
 	ThreadPool::Get().WaitForAllTasksToFinish();
 
 	Clear();

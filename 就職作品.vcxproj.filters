@@ -388,6 +388,9 @@
     <ClCompile Include="Program\SubSystem\Tools\Chack.cpp">
       <Filter>SubSystem\Tools</Filter>
     </ClCompile>
+    <ClCompile Include="Program\Game\Scene\TitleScene.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Application\Application.h">
@@ -707,6 +710,9 @@
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Tools\Chack.h">
       <Filter>SubSystem\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\Scene\TitleScene.h">
+      <Filter>Game\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

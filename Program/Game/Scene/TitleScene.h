@@ -1,5 +1,5 @@
 /**
-* @file    CreateScene.h
+* @file    TitleScene.h
 * @brief
 *
 * @date	   2022/05/28 2022年度初版
@@ -14,22 +14,11 @@
 #include "SubSystem/Renderer/Drawings/SkyBox/SkyBox.h"
 
 
-class EditScene : public IScene
+class TitleScene : public IScene
 {
-	// 初期化
+public:
+
 	void Init() override;
-
-	// 更新
 	void Update() override;
-
-	// 描画
 	void Draw() override;
-
-private:
-
-	IGameObject* m_player;
-
-	Postprocessing postprocessing;
-
-	SkyBox skyBox;
 };

@@ -22,7 +22,7 @@ class AudioSpeaker
 {
 public:
 
-	/* 3D 処理を使用しない場合は空関数になります。*/
+	/* 3D 処理を使用しない場合は使用する必要はありません。*/
 	void Update() noexcept;
 
 	void Play() noexcept;

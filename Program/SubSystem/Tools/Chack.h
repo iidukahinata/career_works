@@ -6,20 +6,21 @@
 * @author  飯塚陽太
 * @note
 *  デバッグモードでの起動時のみログ出力
+*  assert 処理だけでは分からない部分を追記出来るようにするために作成。
+*  どのような実装ならバグの修正に役立つか瞑想中。
 */
 #pragma once
 
 
-#include <assert.h>
+#include <corecrt.h>
 
 #ifdef _DEBUG
+void chack(const char* message, const char* file, unsigned line, const char* text);
 
-void chack(const char* text, const wchar_t* file, unsigned line);
-
-#define Chack(Expression)  assert(Expression)
-#define Chack(isTrue, text)  if(!isTrue) { chack(text, _CRT_WIDE(__FILE__), (unsigned)(__LINE__)); }
+#define Chack(expr)  if(!(expr)) { chack(#expr, __FILE__, __LINE__, ""); }
+#define ChackF(expr, text)  if(!(expr)) { chack(#expr, __FILE__, __LINE__, text); }
 
 #else
-#define Chack(Expression)
-#define Chack(isTrue, text)
+#define Chack(expr)
+#define ChackF(expr, text)
 #endif // _DEBUG

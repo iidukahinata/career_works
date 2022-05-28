@@ -2,12 +2,13 @@
 * @file    GameObject.cpp
 * @brief   各GameObjectの抽象クラス
 *
-* @date	   2022/04/30 2022年度初版
+* @date	   2022/05/28 2022年度初版
 * @author  飯塚陽太
 */
 
 
 #include "GameObject.h"
+#include "SubSystem/Tools/Chack.h"
 
 int IGameObject::GetID() const noexcept
 {
@@ -16,6 +17,7 @@ int IGameObject::GetID() const noexcept
 
 void IGameObject::SetID(int id) noexcept
 {
+	Chack(id >= 0);
 	m_id = id;
 }
 
@@ -26,6 +28,6 @@ Transform& IGameObject::GetTransform() noexcept
 
 void IGameObject::SetScene(IScene* scene) noexcept
 {
-	assert(!m_scene);
+	Chack(!m_scene);
 	m_scene = scene;
 }

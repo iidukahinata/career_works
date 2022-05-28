@@ -2,12 +2,13 @@
 * @file    ThreadPool.cpp
 * @brief	並列処理クラス
 *
-* @date	   2022/05/14 2022年度初版
+* @date	   2022/05/28 2022年度初版
 * @author  飯塚陽太
 */
 
 
 #include "ThreadPool.h"
+#include "SubSystem/Tools/Chack.h"
 #include "SubSystem/Tools/COM.h"
 
 ThreadPool::~ThreadPool()
@@ -17,14 +18,11 @@ ThreadPool::~ThreadPool()
 
 bool ThreadPool::Init(int threadCount) noexcept
 {
+	Chack(threadCount > 0);
+	Chack(threadCount <= GetMaxThreadCount());
+
 	if (m_isRunning)
 		return true;
-
-	if (threadCount <= 0)
-		return false;
-
-	if (threadCount > GetMaxThreadCount())
-		return false;
 
 	m_isRunning = true;
 

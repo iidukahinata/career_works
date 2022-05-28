@@ -9,8 +9,8 @@
 
 
 #include <string>
-#include <assert.h>
 #include <DirectXMath.h>
+#include "SubSystem/Tools/Chack.h"
 
 #define PI 3.14159265359f
 #define PI_2 6.28318530718f

@@ -2,7 +2,7 @@
 * @file    Game.cpp
 * @brief
 *
-* @date	   2022/05/11 2022年度初版
+* @date	   2022/05/28 2022年度初版
 * @author  飯塚陽太
 */
 
@@ -13,8 +13,7 @@
 #include "SubSystem/Renderer/Renderer.h"
 #include "SubSystem/Resource/ResourceManager.h"
 
-#include "Game/Scene/EditScene.h"
-#include "Game/Scene/GameScene.h"
+#include "Game/Scene/TitleScene.h"
 
 void Game::Init()
 {
@@ -25,7 +24,7 @@ void Game::Init()
 	Audio::Get().Init(64);
 
 	// 初期シーンセット
-	m_sceneManager.ChangeScene<GameScene>();
+	m_sceneManager.ChangeScene<TitleScene>();
 }
 
 void Game::Update(double deltatime)

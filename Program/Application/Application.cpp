@@ -17,10 +17,10 @@
 bool Application::Init(HINSTANCE hInstance)
 {
 	// 第３引数 : フルスクリーンモード
-	Window::Get().CreateWindowClass(hInstance, 1280, 720, "Test", false);
-
-	// マルチスレッド処理を使用するため 0 指定
-	COM com(COMID::MULTITHREADED);
+	if (!Window::Get().CreateWindowClass(hInstance, 1280, 720, "Test", false))
+	{
+		return false;
+	}
 
 	// 外部からスレッドが使用される可能性があるのでCPU内最大スレッド数の半分を使用
 	ThreadPool::Get().Init(ThreadPool::Get().GetMaxThreadCount() / 2);

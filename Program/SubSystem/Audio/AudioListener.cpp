@@ -2,13 +2,14 @@
 * @file    AudioListener.cpp
 * @brief
 *
-* @date	   2022/05/09 2022年度初版
+* @date	   2022/05/28 2022年度初版
 * @author  飯塚陽太
 */
 
 
 #include "AudioListener.h"
 #include "Audio.h"
+#include "SubSystem/Tools/Chack.h"
 
 AudioListener::~AudioListener()
 {
@@ -24,18 +25,24 @@ void AudioListener::Init(Transform* parent) noexcept
 
 FMOD_VECTOR AudioListener::GetPosition() const noexcept
 {
+	Chack(m_parent, "このクラスは初期化されていません。");
+
 	auto pos = m_parent->GetWoldPosition();
 	return FMOD_VECTOR(pos.x, pos.y, pos.z);
 }
 
 FMOD_VECTOR AudioListener::GetForward() const noexcept
 {
+	Chack(m_parent, "このクラスは初期化されていません。");
+
 	auto forward = m_parent->GetForward();
 	return FMOD_VECTOR(forward.x, forward.y, forward.z);
 }
 
 FMOD_VECTOR AudioListener::GetUp() const noexcept
 {
+	Chack(m_parent, "このクラスは初期化されていません。");
+
 	auto up = m_parent->GetUp();
 	return FMOD_VECTOR(up.x, up.y, up.z);
 }

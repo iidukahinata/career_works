@@ -2,7 +2,7 @@
 * @file    Tools.cpp
 * @brief   便利関数
 *
-* @date	   2022/05/06 2022年度初版
+* @date	   2022/05/28 2022年度初版
 * @author  飯塚陽太
 */
 
@@ -40,11 +40,6 @@ std::string ToString(std::wstring_view str) noexcept
 
 std::string GetExt(std::string_view filePath) noexcept
 {
-	if (filePath.empty())
-	{
-		return std::string();
-	}
-
 	auto ext_i = filePath.find_last_of(".");
 	if (ext_i == std::string::npos) 
 	{

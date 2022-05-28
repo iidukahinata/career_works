@@ -2,13 +2,14 @@
 * @file    Tools.h
 * @brief   便利関数
 *
-* @date	   2022/05/06 2022年度初版
+* @date	   2022/05/28 2022年度初版
 * @author  飯塚陽太
 */
 #pragma once
 
 
-#include<string>
+#include <string>
+#include "SubSystem/Tools/Chack.h"
 
 /**
 * 文字列から wstring 型への変換

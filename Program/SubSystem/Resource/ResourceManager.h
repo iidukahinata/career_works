@@ -11,6 +11,7 @@
 #include <map>
 #include <memory>
 #include "Resources/IResource.h"
+#include "SubSystem/Log/DebugLog.h"
 
 /**
 * このクラスではデータ競合を引き起こさない。
@@ -66,9 +67,6 @@ private:
 template<class T>
 inline T* ResourceManager::Load(std::string_view filePath) noexcept
 {
-	if (filePath.empty())
-		return nullptr;
-
 	// 同じリソースを読み込まないために保持しているか調べる
 	if (auto copyResource = GetResourceByName<T>(filePath.data())) 
 	{
@@ -83,14 +81,16 @@ inline T* ResourceManager::Load(std::string_view filePath) noexcept
 		m_resources[filePath.data()] = std::make_unique<T>();
 	}
 
-	if (m_resources[filePath.data()])
+	if (auto& resource = m_resources[filePath.data()])
 	{
-		if (m_resources[filePath.data()]->Load(filePath.data()))
+		if (resource->Load(filePath.data()))
 		{
-			m_resources[filePath.data()]->AddRefreneceCount();
-			return dynamic_cast<T*>(m_resources[filePath.data()].get());
+			resource->AddRefreneceCount();
+			return dynamic_cast<T*>(resource.get());
 		}
 	}
+
+	LOG_ERROR("resource pointer の取得に失敗しました。");
 	return nullptr;
 }
 

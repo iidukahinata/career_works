@@ -1,11 +1,9 @@
 /**
 * @file    GameScene.h
-* @brief   GameSceneクラス
+* @brief
 *
-* @date	   2021/02/01 2021年度初版
-* @version 1.00
+* @date	   2022/05/28 2022年度初版
 * @author  飯塚陽太
-* @note
 */
 #pragma once
 
@@ -30,8 +28,6 @@ class GameScene : public IScene
 	void Draw() override;
 
 private:
-
-	IGameObject* m_player;
 
 	Postprocessing postprocessing;
 

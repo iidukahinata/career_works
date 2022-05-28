@@ -2,13 +2,14 @@
 * @file    Window.cpp
 * @brief   ウィンドウ管理クラス
 *
-* @date	   2022/05/14 2022年度初版
+* @date	   2022/05/28 2022年度初版
 * @author  飯塚陽太
 */
 
 
 #include "Window.h"
-#include "../Timer/Timer.h"
+#include "Subsystem/Timer/Timer.h"
+#include "Subsystem/Log/DebugLog.h"
 #include "ThirdParty/imgui/imgui_impl_win32.h"
 
 /** この前方宣言がないと imgui の入力を使用出来ない */
@@ -77,7 +78,9 @@ bool Window::CreateWindowClass(HINSTANCE hInstance, int width, int height, std::
 	w.lpfnWndProc = (WNDPROC)WindowProcedure;
 	w.lpszClassName = "windowClass";
 	w.hInstance = hInstance;
-	if (!RegisterClassEx(&w)) {
+	if (!RegisterClassEx(&w)) 
+	{
+		LOG_ERROR("RegisterClassEx に失敗しました。");
 		return false;
 	}
 
@@ -85,17 +88,20 @@ bool Window::CreateWindowClass(HINSTANCE hInstance, int width, int height, std::
 		w.lpszClassName,
 		title.data(),
 		windowStyles,
-		CW_USEDEFAULT,					// ウィンドウの左上Ｘ座標
-		CW_USEDEFAULT,					// ウィンドウの左上Ｙ座標
+		CW_USEDEFAULT,		// ウィンドウの左上Ｘ座標
+		CW_USEDEFAULT,		// ウィンドウの左上Ｙ座標
 		m_width,
 		m_height,
-		nullptr,						// 親ウィンドウのハンドル
-		nullptr,						// メニューハンドル
-		hInstance,						// 呼び出しアプリケーションハンドル
-		nullptr);						// 追加パラメータ
+		nullptr,			// 親ウィンドウのハンドル
+		nullptr,			// メニューハンドル
+		hInstance,			// 呼び出しアプリケーションハンドル
+		nullptr);			// 追加パラメータ
 
 	if (m_hWnd == nullptr)
+	{
+		LOG_ERROR("CreateWindow に失敗しました。");
 		return false;
+	}
 
 	return true;
 }

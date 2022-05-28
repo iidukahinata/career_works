@@ -2,7 +2,7 @@
 * @file    Scene.cpp
 * @brief   シーン抽象クラス
 *
-* @date	   2022/05/06 2022年度初版
+* @date	   2022/05/28 2022年度初版
 * @author  飯塚陽太
 */
 
@@ -10,6 +10,7 @@
 #include "Scene.h"
 #include "SceneManager.h"
 #include "SubSystem/Renderer/TransformCBuffer.h"
+#include "SubSystem/Tools/Chack.h"
 
 void IScene::Init()
 {
@@ -44,9 +45,6 @@ void IScene::Clear()
 
 void IScene::AddGameObject(IGameObject* gameObject)
 {
-	if (!gameObject)
-		return;
-
 	// 検索時間の短縮のために配列番号をIDとする
 	gameObject->SetID(m_gameObjects.size());
 	gameObject->SetScene(this);
@@ -66,10 +64,12 @@ IGameObject* IScene::GetGameObject(std::string_view name)
 	return nullptr;
 }
 
-void IScene::RemoveGameObject(int id)
+void IScene::RemoveGameObject(IGameObject* gameObject)
 {
-	if (id < 0 || m_gameObjects.size() <= id)
-		return;
+	int id = gameObject->GetID();
+
+	Chack(id >= 0);
+	Chack(id < m_gameObjects.size());
 
 	// O(1)でのデータ入れ替え処理
 	m_gameObjects.back()->SetID(id);
@@ -96,6 +96,6 @@ LightMap* IScene::GetLightMap() noexcept
 
 void IScene::SetSceneManager(SceneManager* sceneManager) noexcept
 {
-	assert(!m_sceneManager);
+	Chack(!m_sceneManager);
 	m_sceneManager = sceneManager;
 }

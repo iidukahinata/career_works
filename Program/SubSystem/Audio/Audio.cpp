@@ -10,6 +10,7 @@
 #include "Audio.h"
 #include "AudioHelper.h"
 #include "AudioListener.h"
+#include "SubSystem/Tools/Chack.h"
 
 Audio::~Audio()
 {
@@ -50,12 +51,17 @@ void Audio::Update() const noexcept
 
 void Audio::Release() const noexcept
 {
-	m_system->close();
-	m_system->release();
+	if (m_system)
+	{
+		m_system->close();
+		m_system->release();
+	}
 }
 
 void Audio::Set3DSettings(float dopplerscale, float distancefactor, float rolloffscale) const noexcept
 {
+	Chack(m_system, "‚±‚ÌƒNƒ‰ƒX‚Í‰Šú‰»‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB");
+
 	auto result = m_system->set3DSettings(dopplerscale, distancefactor, rolloffscale);
 	AUDIO_EORROR_CHECK(result);
 }

@@ -2,7 +2,7 @@
 * @file    Scene.h
 * @brief   シーン抽象クラス
 *
-* @date	   2022/05/06 2022年度初版
+* @date	   2022/05/28 2022年度初版
 * @author  飯塚陽太
 */
 #pragma once
@@ -46,7 +46,7 @@ public:
 	/** GameObject function */
 	void AddGameObject(IGameObject* gameObject);
 	IGameObject* GetGameObject(std::string_view name);
-	void RemoveGameObject(int id);
+	void RemoveGameObject(IGameObject* gameObject);
 	std::vector<std::unique_ptr<IGameObject>>& GetGameObjects() noexcept;
 
 	/** アクセス */

@@ -2,12 +2,13 @@
 * @file    Timer.cpp
 * @brief   フレーム管理クラス
 *
-* @date	   2022/04/30 2022年度初版
+* @date	   2022/05/28 2022年度初版
 * @author  飯塚陽太
 */
 
 
 #include "Timer.h"
+#include "SubSystem/Tools/Chack.h"
 
 Timer::Timer()
 {
@@ -38,10 +39,8 @@ void Timer::ResetMeasurement() noexcept
 
 void Timer::SetFPS(float fps) noexcept
 {
-	if (fps > 0.f)
-	{
-		m_fpsTime = (1.f / fps);
-	}
+	Chack(fps > 0.f);
+	m_fpsTime = (1.f / fps);
 }
 
 double Timer::GetDeltaTime() const noexcept
