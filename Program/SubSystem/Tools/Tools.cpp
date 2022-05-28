@@ -24,6 +24,20 @@ std::wstring ToWstring(std::string_view str) noexcept
 	return wstr;
 }
 
+std::string ToString(std::wstring_view str) noexcept
+{
+	// •ÏŠ·Œã‚Ì•¶Žš—ñ‚Ì’·‚³‚ðŽæ“¾
+	int lenght = WideCharToMultiByte(CP_OEMCP, 0, str.data(), -1, (char*)NULL, 0, NULL, NULL);
+
+	std::string ret;
+	ret.resize(lenght);
+
+	// •¶Žš—ñ•ÏŠ·
+	WideCharToMultiByte(CP_OEMCP, 0, str.data(), -1, ret.data(), lenght, NULL, NULL);
+
+	return ret;
+}
+
 std::string GetExt(std::string_view filePath) noexcept
 {
 	if (filePath.empty())

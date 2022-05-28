@@ -42,7 +42,6 @@
     <ClCompile Include="Program\SubSystem\Phisics\Collider.cpp" />
     <ClCompile Include="Program\SubSystem\Phisics\OBB.cpp" />
     <ClCompile Include="Program\SubSystem\Phisics\Phisics.cpp" />
-    <ClCompile Include="Program\SubSystem\Phisics\SimulationManager.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\Camera\Camera.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\D3D11\D3D11ComputeShader.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\D3D11\D3D11GrahicsDevice.cpp" />
@@ -94,6 +93,7 @@
     <ClCompile Include="Program\SubSystem\Scene\Transform.cpp" />
     <ClCompile Include="Program\SubSystem\ThreadPool\ThreadPool.cpp" />
     <ClCompile Include="Program\SubSystem\Timer\Timer.cpp" />
+    <ClCompile Include="Program\SubSystem\Tools\Chack.cpp" />
     <ClCompile Include="Program\SubSystem\Tools\COM.cpp" />
     <ClCompile Include="Program\SubSystem\Tools\SpinLock.cpp" />
     <ClCompile Include="Program\SubSystem\Tools\Tools.cpp" />
@@ -137,7 +137,7 @@
     <ClInclude Include="Program\SubSystem\Phisics\Collider.h" />
     <ClInclude Include="Program\SubSystem\Phisics\OBB.h" />
     <ClInclude Include="Program\SubSystem\Phisics\Phisics.h" />
-    <ClInclude Include="Program\SubSystem\Phisics\SimulationManager.h" />
+    <ClInclude Include="Program\SubSystem\Phisics\PhisicsHelper.h" />
     <ClInclude Include="Program\SubSystem\Renderer\Camera\Camera.h" />
     <ClInclude Include="Program\SubSystem\Renderer\D3D11\D3D11ConstantBuffer.h" />
     <ClInclude Include="Program\SubSystem\Renderer\D3D11\D3D11DeviceChild.h" />
@@ -194,6 +194,7 @@
     <ClInclude Include="Program\SubSystem\Scene\Transform.h" />
     <ClInclude Include="Program\SubSystem\ThreadPool\ThreadPool.h" />
     <ClInclude Include="Program\SubSystem\Timer\Timer.h" />
+    <ClInclude Include="Program\SubSystem\Tools\Chack.h" />
     <ClInclude Include="Program\SubSystem\Tools\COM.h" />
     <ClInclude Include="Program\SubSystem\Tools\Octree.h" />
     <ClInclude Include="Program\SubSystem\Tools\SpinLock.h" />
@@ -377,13 +378,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\assimp\include;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\directxtex\include;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\FMOD\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\assimp\lib;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\directxtex\lib\x64\debug;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\FMOD\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\assimp\include;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\directxtex\include;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\FMOD\include;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\bullet\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\assimp\lib;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\directxtex\lib\x64\debug;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\FMOD\lib\x64;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\bullet\lib\debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\assimp\include;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\directxtex\include;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\FMOD\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\assimp\lib;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\directxtex\lib\x64\release;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\FMOD\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\assimp\include;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\directxtex\include;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\FMOD\include;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\bullet\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\assimp\lib;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\directxtex\lib\x64\release;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\FMOD\lib\x64;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\bullet\lib\release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

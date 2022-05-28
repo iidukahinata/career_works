@@ -1,33 +1,25 @@
 #pragma once
 
-#include <DirectXMath.h>
+
+#include <memory>
+#include "SubSystem/Math/Vector3.h"
+#include "SubSystem/Scene/Transform.h"
 
 class Collider
 {
-
 public:
-	static bool Test(Collider* c1, Collider* c2);
 
-	void Update(); // パラメータの更新
+	void Init(Transform* parent, class Body* body);
 
-	// 球タイプのColliderインスタンスを生成する
-	static Collider* CreateSphere(
-		class IGameObject* pOwner, DirectX::XMFLOAT3 centerPos, float radius);
+	const Math::Vector3& GetCentor() const noexcept;
+	void SetCentor(const Math::Vector3& center) noexcept;
 
-	// このColliderが球か線分かを表す変数
-	enum TYPE {
-		SPHERE, // 球
-		LINE,
-	};
+private:
 
-	TYPE mType;
+	Transform* m_parent;
+	class Body* m_body;
 
-	// 所有者GameObjectのポインタ
-	class IGameObject* mOwner;
+	std::unique_ptr<class btCollisionShape> m_shape;
 
-	// 球の場合に必要な変数
-	DirectX::XMVECTOR centerPos; // 中心点座標
-	float radius; // 半径
-
+	Math::Vector3 m_center;
 };
-

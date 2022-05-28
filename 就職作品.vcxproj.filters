@@ -205,9 +205,6 @@
     <ClCompile Include="Program\SubSystem\Phisics\Phisics.cpp">
       <Filter>SubSystem\Phisics</Filter>
     </ClCompile>
-    <ClCompile Include="Program\SubSystem\Phisics\SimulationManager.cpp">
-      <Filter>SubSystem\Phisics</Filter>
-    </ClCompile>
     <ClCompile Include="Program\SubSystem\Phisics\Body.cpp">
       <Filter>SubSystem\Phisics</Filter>
     </ClCompile>
@@ -388,6 +385,9 @@
     <ClCompile Include="Program\Game\GameObject\CameraMove.cpp">
       <Filter>Game\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="Program\SubSystem\Tools\Chack.cpp">
+      <Filter>SubSystem\Tools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Application\Application.h">
@@ -502,9 +502,6 @@
       <Filter>SubSystem\Phisics</Filter>
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Phisics\Phisics.h">
-      <Filter>SubSystem\Phisics</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Phisics\SimulationManager.h">
       <Filter>SubSystem\Phisics</Filter>
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Phisics\Body.h">
@@ -704,6 +701,12 @@
     </ClInclude>
     <ClInclude Include="Program\Game\GameObject\CameraMove.h">
       <Filter>Game\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Phisics\PhisicsHelper.h">
+      <Filter>SubSystem\Phisics</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Tools\Chack.h">
+      <Filter>SubSystem\Tools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,56 +1,32 @@
+
+
 #include "Collider.h"
-#include <DirectXMath.h>
+#include <btBulletCollisionCommon.h>
+#include "Body.h"
 #include "SubSystem/Scene/GameObject.h"
+#include "SubSystem/Tools/Chack.h"
 
-using namespace DirectX;
-
-bool Collider::Test(Collider * c1, Collider * c2)
+void Collider::Init(Transform* parent, Body* body)
 {
-	// 引数で受け取ったColliderが球か線分かを判定する
-	if (c1->mType == SPHERE)
-	{
-		if (c2->mType == SPHERE)
-		{
-			// 球vs球の当たり判定を実行
-			// 中心同士を結ぶベクトルを作る
-			XMVECTOR centerVec = c2->centerPos - c1->centerPos;
-			// 作ったベクトルの長さを計測
-			XMVECTOR centerLen = XMVector3Length(centerVec);
-			// 中心ベクトルの長さが、球①②の半径を足した値より小さいか？
-			if (XMVectorGetX(centerLen) < c1->radius + c2->radius)
-			{
-				return true;
-			}
-		}
-		else if (c2->mType == LINE)
-		{
-			// 球vs線分
-		}
-	}
-	else if (c1->mType == LINE)
-	{
-		if (c2->mType == SPHERE)
-		{
-			// 球vs線分
-		}
-	}
+	Chack(parent, "parent に	 nullptr を指定することは出来ません。");
+	Chack(body, "body に	 nullptr を指定することは出来ません。");
 
-	return false;
+	m_parent = parent;
+	m_body = body;
 }
 
-void Collider::Update()
+const Math::Vector3& Collider::GetCentor() const noexcept
 {
-	// 球の中心点を更新
-	auto pos = mOwner->GetTransform().GetPosition();
-	centerPos = XMVectorSet(pos.x, pos.y, pos.z, 0);
+	return m_center;
 }
 
-Collider * Collider::CreateSphere(IGameObject* pOwner, DirectX::XMFLOAT3 centerPos, float radius)
+void Collider::SetCentor(const Math::Vector3& center) noexcept
 {
-	Collider* pCollider = new Collider();
-	pCollider->mType = SPHERE;
-	pCollider->mOwner = pOwner;
-	pCollider->centerPos = XMLoadFloat3(&centerPos);
-	pCollider->radius = radius;
-	return pCollider;
+	if (m_center == center)
+	{
+		return;
+	}
+
+	m_center = center;
+	m_body->SetCollision(m_shape.get());
 }
