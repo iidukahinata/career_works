@@ -15,16 +15,6 @@ Math::Vector4 dir1 = { 0.5f, -0.5f, -1.f, 0.f };
 
 Player* player = nullptr;
 
-static const int BUFFER_TEXT_DEFAULT = 255;
-static void SetCharArray(char* array, const std::string& value)
-{
-	if (value.length() > BUFFER_TEXT_DEFAULT)
-		return;
-
-	memset(&array[0], 0, BUFFER_TEXT_DEFAULT * sizeof(array[0]));
-	copy(value.begin(), value.end(), array);
-}
-
 void DrawPlayer()
 {
 	ImGui::SetNextWindowPos(ImVec2(1000, 10), ImGuiCond_Once);
@@ -65,7 +55,7 @@ void EditScene::Update()
 {
 	IScene::Update();
 
-	m_mainCamera->Update(Math::Vector3::Zero, Math::Vector3::Zero);
+	m_mainCamera->Update();
 
 	postprocessing.Update();
 

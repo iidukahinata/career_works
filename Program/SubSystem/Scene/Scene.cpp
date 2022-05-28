@@ -11,6 +11,14 @@
 #include "SceneManager.h"
 #include "SubSystem/Renderer/TransformCBuffer.h"
 
+void IScene::Init()
+{
+	for (auto& gameObject : m_gameObjects)
+	{
+		gameObject->Init();
+	}
+}
+
 void IScene::Update()
 {
 	for (auto& gameObject : m_gameObjects)
@@ -43,7 +51,7 @@ void IScene::AddGameObject(IGameObject* gameObject)
 	gameObject->SetID(m_gameObjects.size());
 	gameObject->SetScene(this);
 
-	gameObject->Init();
+	gameObject->Awake();
 
 	m_gameObjects.emplace_back(gameObject);
 }
@@ -52,7 +60,7 @@ IGameObject* IScene::GetGameObject(std::string_view name)
 {
 	for (auto& gameObject : m_gameObjects)
 	{
-		if (gameObject->GetName().c_str() == name.data())
+		if (gameObject->GetName() == name.data())
 			return gameObject.get();
 	}
 	return nullptr;

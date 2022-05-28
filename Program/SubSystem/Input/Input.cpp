@@ -61,7 +61,7 @@ bool Input::GetKeyStateTrigger(Button::KeyAndMouse id) noexcept
 	// 配列外にアクセスしないための処理
 	if (m_currentKeyState.contains(id))
 	{
-		return m_currentKeyState[id] && m_previousKeyState[id];
+		return m_currentKeyState[id] && !m_previousKeyState[id];
 	}
 	else
 	{

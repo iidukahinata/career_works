@@ -19,11 +19,6 @@ void IGameObject::SetID(int id) noexcept
 	m_id = id;
 }
 
-const std::string& IGameObject::GetName() noexcept
-{
-	return m_name;
-}
-
 Transform& IGameObject::GetTransform() noexcept
 {
 	return m_transform;

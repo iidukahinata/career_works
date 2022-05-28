@@ -1,10 +1,18 @@
+/**
+* @file    Player.cpp
+* @brief
+*
+* @date	   2022/05/28 2022年度初版
+* @author  飯塚陽太
+*/
 
 
 #include "Player.h"
 #include "SubSystem/Scene/Scene.h"
 #include "SubSystem/Input/Input.h"
+#include "Stage.h"
 
-void Player::Init()
+void Player::Awake()
 {
 	// 頂点レイアウト作成
 	D3D11_INPUT_ELEMENT_DESC vertexDesc[] = {
@@ -18,6 +26,11 @@ void Player::Init()
 	modelDesc.layout = vertexDesc;
 	modelDesc.layoutSize = ARRAYSIZE(vertexDesc);
 	m_model.Init(modelDesc);
+}
+
+void Player::Init()
+{
+	m_stage = dynamic_cast<Stage*>(m_scene->GetGameObject("stage"));
 
 	m_transform.SetScale(Math::Vector3(0.05f));
 }
@@ -32,6 +45,11 @@ void Player::Update()
 void Player::Draw()
 {
 	m_model.Draw(m_transform.GetWorldMatrixXM());
+}
+
+const char* Player::GetName()
+{
+	return "player";
 }
 
 void Player::InputAction() noexcept
@@ -73,21 +91,26 @@ void Player::Rolling() noexcept
 
 void Player::Move1Mass() noexcept
 {
+	constexpr float halfMassSize = 0.845f;
+	const float commonValue = halfMassSize * static_cast<float>(m_rotateSpeed);
+
 	auto pos = m_transform.GetPosition();
 
-	pos.x += m_angles[0];
-	pos.y += 0.f;
-	pos.z += m_angles[1];
+	pos.x += m_massSize.x * -m_angles[0] * commonValue;
+	//pos.y += m_massSize.y * 0.f;
+	pos.z += m_massSize.z * m_angles[1] * commonValue;
+
+	m_transform.SetPosition(pos);
 }
 
 void Player::Rotation90Degree() noexcept
 {
-	++m_angleCount;
+	m_angleCount += m_rotateSpeed;
 
 	constexpr float rad = Math::ToRadian(1.f);
-	RotationWorld(Math::Vector3(m_angles[1] * rad, 0.f, m_angles[0] * rad));
+	RotationWorld(Math::Vector3(m_angles[1] * rad, 0.f, m_angles[0] * rad) * static_cast<float>(m_rotateSpeed));
 
-	if (m_angleCount == 90)
+	if (m_angleCount >= 90)
 	{
 		FinishRotate();
 	}

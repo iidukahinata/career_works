@@ -21,8 +21,11 @@
   <ItemGroup>
     <ClCompile Include="Program\Application\Application.cpp" />
     <ClCompile Include="Program\Game\Game.cpp" />
+    <ClCompile Include="Program\Game\GameObject\CameraMove.cpp" />
+    <ClCompile Include="Program\Game\GameObject\IMass.cpp" />
     <ClCompile Include="Program\Game\GameObject\Player.cpp" />
     <ClCompile Include="Program\Game\GameObject\Road.cpp" />
+    <ClCompile Include="Program\Game\GameObject\Stage.cpp" />
     <ClCompile Include="Program\Game\Scene\EditScene.cpp" />
     <ClCompile Include="Program\Game\Scene\GameScene.cpp" />
     <ClCompile Include="Program\SubSystem\Audio\Audio.cpp" />
@@ -109,8 +112,11 @@
   <ItemGroup>
     <ClInclude Include="Program\Application\Application.h" />
     <ClInclude Include="Program\Game\Game.h" />
+    <ClInclude Include="Program\Game\GameObject\CameraMove.h" />
+    <ClInclude Include="Program\Game\GameObject\IMass.h" />
     <ClInclude Include="Program\Game\GameObject\Player.h" />
     <ClInclude Include="Program\Game\GameObject\Road.h" />
+    <ClInclude Include="Program\Game\GameObject\Stage.h" />
     <ClInclude Include="Program\Game\Scene\EditScene.h" />
     <ClInclude Include="Program\Game\Scene\GameScene.h" />
     <ClInclude Include="Program\SubSystem\Audio\Audio.h" />

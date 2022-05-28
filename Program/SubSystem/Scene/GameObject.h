@@ -19,6 +19,15 @@ public:
 	/**
 	* サブクラスで初期化処理を実現させる
 	* Scene登録時に呼び出されるように設計されている
+	* モデル等リソース読み込みは Scene の Init 処理の実装方法に依存するため、
+	* Awake で書いておくことを推奨。
+	*/
+	virtual void Awake() {}
+
+	/**
+	* サブクラスで初期化処理を実現させる
+	* 呼び出しタイミングは所属 Scene の実装方法で変化
+	* 基本的に全ての GameObject が生成されてから実行される。
 	*/
 	virtual void Init() {}
 
@@ -36,7 +45,9 @@ public:
 
 	int GetID() const noexcept;
 	void SetID(int id) noexcept;
-	const std::string& GetName() noexcept;
+
+	/* Sceneクラスで検索等で使用される */
+	virtual const char* GetName() { return nullptr; }
 
 	Transform& GetTransform() noexcept;
 
@@ -47,9 +58,6 @@ protected:
 
 	// * Sceneクラスで探索時等に使用される
 	int m_id;
-
-	// * Sceneクラスで検索等で使用される
-	std::string m_name;
 
 	Transform m_transform;
 

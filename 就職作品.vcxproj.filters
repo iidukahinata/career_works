@@ -379,6 +379,15 @@
     <ClCompile Include="Program\SubSystem\Renderer\Drawings\Effect\Postprocessing.cpp">
       <Filter>SubSystem\Renderer\Drawings\Effect</Filter>
     </ClCompile>
+    <ClCompile Include="Program\Game\GameObject\IMass.cpp">
+      <Filter>Game\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\GameObject\Stage.cpp">
+      <Filter>Game\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\GameObject\CameraMove.cpp">
+      <Filter>Game\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Application\Application.h">
@@ -686,6 +695,15 @@
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Renderer\Drawings\Effect\Postprocessing.h">
       <Filter>SubSystem\Renderer\Drawings\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\GameObject\IMass.h">
+      <Filter>Game\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\GameObject\Stage.h">
+      <Filter>Game\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\GameObject\CameraMove.h">
+      <Filter>Game\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

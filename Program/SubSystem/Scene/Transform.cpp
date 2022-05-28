@@ -35,7 +35,7 @@ const Math::Vector3& Transform::GetPosition() const noexcept
 
 const Math::Vector3& Transform::GetWoldPosition() const
 {
-	return GetWorldMatrix().TransformPosition(m_localPosition);
+	return GetWorldMatrix().GetTranslation();
 }
 
 void Transform::SetRotation(const Math::Vector3& rotation) noexcept

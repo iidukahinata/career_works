@@ -13,14 +13,15 @@
 #include "SubSystem/Renderer/TransformCBuffer.h"
 #include "SubSystem/Input/Input.h"
 #include "../GameObject/Player.h"
-#include "../GameObject/Road.h"
+#include "../GameObject/Stage.h"
+#include "../GameObject/CameraMove.h"
 #include "SubSystem/Renderer/Drawings/Effect/PostEffect/Bloom.h"
 #include "SubSystem/Renderer/Drawings/Effect/PostEffect/Monotone.h"
 #include "SubSystem/Renderer/Drawings/Effect/PostEffect/DepthOfField.h"
 
 Math::Vector4 dir = { 0.5f, -0.5f, -1.f, 0.f };
 
-void CameraMove(Camera* camera)
+void CameraMovedes(Camera* camera)
 {
 	Math::Vector3 rot;
 	if (Input::Get().GetKeyStatePress(Button::Lshift))
@@ -87,6 +88,7 @@ void LightMove(DirectionalLight* light)
 void GameScene::Awake()
 {
 	AddGameObject(new Player);
+	AddGameObject(new Stage);
 }
 
 void GameScene::Init()
@@ -103,16 +105,18 @@ void GameScene::Init()
 	m_directionalLight.SetColor({ 1.f });
 	m_directionalLight.SetIntensity(1);
 	m_lightMap.SetAmbient({ 0.4f });
+
+	AddGameObject(new CameraMove);
+
+	IScene::Init();
 }
 
 void GameScene::Update()
 {
 	IScene::Update();
 
-	CameraMove(m_mainCamera.get());
+	CameraMovedes(m_mainCamera.get());
 	LightMove(&m_directionalLight);
-
-	m_mainCamera->Update(Math::Vector3::Zero, Math::Vector3::Zero);
 
 	postprocessing.Update();
 

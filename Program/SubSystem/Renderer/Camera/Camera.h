@@ -16,7 +16,7 @@ public:
 
 	Camera();
 
-	virtual void Update(Math::Vector3 playerPos, Math::Vector3 forwardVec) {}
+	virtual void Update() {}
 
 	float GetWidth() const;
 	void SetWidth(float width);
