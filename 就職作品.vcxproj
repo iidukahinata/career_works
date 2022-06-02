@@ -23,8 +23,8 @@
     <ClCompile Include="Program\Game\Game.cpp" />
     <ClCompile Include="Program\Game\GameObject\CameraMove.cpp" />
     <ClCompile Include="Program\Game\GameObject\IMass.cpp" />
+    <ClCompile Include="Program\Game\GameObject\Message.cpp" />
     <ClCompile Include="Program\Game\GameObject\Player.cpp" />
-    <ClCompile Include="Program\Game\GameObject\Road.cpp" />
     <ClCompile Include="Program\Game\GameObject\Stage.cpp" />
     <ClCompile Include="Program\Game\Scene\EditScene.cpp" />
     <ClCompile Include="Program\Game\Scene\GameScene.cpp" />
@@ -115,8 +115,8 @@
     <ClInclude Include="Program\Game\Game.h" />
     <ClInclude Include="Program\Game\GameObject\CameraMove.h" />
     <ClInclude Include="Program\Game\GameObject\IMass.h" />
+    <ClInclude Include="Program\Game\GameObject\Message.h" />
     <ClInclude Include="Program\Game\GameObject\Player.h" />
-    <ClInclude Include="Program\Game\GameObject\Road.h" />
     <ClInclude Include="Program\Game\GameObject\Stage.h" />
     <ClInclude Include="Program\Game\Scene\EditScene.h" />
     <ClInclude Include="Program\Game\Scene\GameScene.h" />
@@ -133,8 +133,12 @@
     <ClInclude Include="Program\SubSystem\Math\MathHelper.h" />
     <ClInclude Include="Program\SubSystem\Math\Matrix.h" />
     <ClInclude Include="Program\SubSystem\Math\Vector2.h" />
+    <ClInclude Include="Program\SubSystem\Math\Vector2T.h" />
     <ClInclude Include="Program\SubSystem\Math\Vector3.h" />
+    <ClInclude Include="Program\SubSystem\Math\Vector3T.h" />
     <ClInclude Include="Program\SubSystem\Math\Vector4.h" />
+    <ClInclude Include="Program\SubSystem\Math\Vector4T.h" />
+    <ClInclude Include="Program\SubSystem\Math\VectorTypes.h" />
     <ClInclude Include="Program\SubSystem\Phisics\Body.h" />
     <ClInclude Include="Program\SubSystem\Phisics\Collider.h" />
     <ClInclude Include="Program\SubSystem\Phisics\OBB.h" />

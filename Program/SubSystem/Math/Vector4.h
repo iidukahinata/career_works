@@ -18,28 +18,22 @@ namespace Math
 	{
 	public:
 
-		constexpr Vector4() noexcept : 
-			DirectX::XMFLOAT4(0.f, 0.f, 0.f, 0.f)
+		constexpr Vector4() noexcept : DirectX::XMFLOAT4(0.f, 0.f, 0.f, 0.f)
 		{}
 
-		constexpr Vector4(float value) noexcept : 
-			DirectX::XMFLOAT4(value, value, value, value)
+		constexpr Vector4(float value) noexcept : DirectX::XMFLOAT4(value, value, value, value)
 		{}
 
-		constexpr Vector4(const Vector4& V) noexcept :
-			DirectX::XMFLOAT4(V.x, V.y, V.z, V.w)
+		constexpr Vector4(const Vector4& V) noexcept : DirectX::XMFLOAT4(V.x, V.y, V.z, V.w)
 		{}
 
-		constexpr Vector4(const Vector3& V, float z) noexcept :
-			DirectX::XMFLOAT4(V.x, V.y, V.z, z)
+		constexpr Vector4(const Vector3& V, float z) noexcept : DirectX::XMFLOAT4(V.x, V.y, V.z, z)
 		{}
 
-		constexpr Vector4(const Vector2& V, float z, float w) noexcept :
-			DirectX::XMFLOAT4(V.x, V.y, z, w)
+		constexpr Vector4(const Vector2& V, float z, float w) noexcept : DirectX::XMFLOAT4(V.x, V.y, z, w)
 		{}
 
-		constexpr Vector4(float x, float y, float z, float w) noexcept : 
-			DirectX::XMFLOAT4(x, y, z, w)
+		constexpr Vector4(float x, float y, float z, float w) noexcept : DirectX::XMFLOAT4(x, y, z, w)
 		{}
 
 		constexpr Vector4 operator+(const Vector4& V) const noexcept
@@ -168,12 +162,12 @@ namespace Math
 			return (&x)[index];
 		}
 
-		float Dot(const Vector4& V)
+		float Dot(const Vector4& V) const noexcept
 		{
 			return Dot(*this, V);
 		}
 
-		static float Dot(const Vector4& A, const Vector4& B)
+		static float Dot(const Vector4& A, const Vector4& B) noexcept
 		{
 			float result;
 			auto v = DirectX::XMVector4Dot(DirectX::XMLoadFloat4(&A), DirectX::XMLoadFloat4(&B));

@@ -9,6 +9,7 @@ class MotionState : public btMotionState
 {
 public:
 
+	Body* m_body;
 	btTransform m_graphicsWorldTrans;
 	btTransform m_centerOfMassOffset;
 	btTransform m_startWorldTrans;
@@ -24,21 +25,38 @@ public:
 	{
 	}
 
+	MotionState(Body* body)
+		: m_body(body)
+	{
+	}
+
 	///synchronizes world transform from user to physics
 	virtual void getWorldTransform(btTransform& centerOfMassWorldTrans) const
 	{
 		centerOfMassWorldTrans = m_graphicsWorldTrans * m_centerOfMassOffset.inverse();
 	}
 
+	//virtual void getWorldTransform(btTransform& centerOfMassWorldTrans) const
+	//{
+	//	auto origin = ToBtVector3(m_body->GetParent()->GetWoldPosition());
+	//	auto rotation = ToBtQuaternion(Math::Vector4(m_body->GetParent()->GetRotation(), 1.f));
+	//
+	//	centerOfMassWorldTrans.setOrigin(origin);
+	//	centerOfMassWorldTrans.setRotation(rotation);
+	//}
+
 	///synchronizes world transform from physics to user
 	///Bullet only calls the update of worldtransform for active objects
 	virtual void setWorldTransform(const btTransform& centerOfMassWorldTrans)
 	{
-		//auto rot = worldTrans.getRotation();
-		//worldTrans.getOrigin() - rot * m_body->GetColliderCenter();
-
 		m_graphicsWorldTrans = centerOfMassWorldTrans * m_centerOfMassOffset;
 	}
+
+	//virtual void setWorldTransform(const btTransform& centerOfMassWorldTrans)
+	//{
+	//	auto rot = worldTrans.getRotation();
+	//	worldTrans.getOrigin() - rot * m_body->GetColliderCenter();
+	//}
 };
 
 Body::~Body()
@@ -48,6 +66,8 @@ Body::~Body()
 
 void Body::Init(Transform* parent, const BodyDesc& bodyDesc) noexcept
 {
+	Chack(parent, "parent ‚É	 nullptr ‚ðŽw’è‚·‚é‚±‚Æ‚Ío—ˆ‚Ü‚¹‚ñB");
+
 	m_parent = parent;
 
 	btVector3 inertia(0, 0, 0);
@@ -68,7 +88,7 @@ void Body::SetMass(float mass) noexcept
 {
 }
 
-const Math::Vector3& Body::GetVelocity() noexcept
+const Math::Vector3& Body::GetVelocity() const noexcept
 {
 	return ToVector3(m_rigidBody->getAngularVelocity());
 }
@@ -95,14 +115,14 @@ void Body::ClearForces() const noexcept
 	m_rigidBody->clearForces();
 }
 
-void Body::Active(bool isActive) noexcept
+void Body::Active(bool isActive) const noexcept
 {
 	m_rigidBody->activate(isActive);
 }
 
 void Body::SetCollision(btCollisionShape* shape) noexcept
 {
-	
+	m_collisionShape = shape;
 }
 
 btRigidBody* Body::GetRigidBody() const noexcept

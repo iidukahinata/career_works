@@ -2,7 +2,7 @@
 * @file    CameraMove.cpp
 * @brief
 *
-* @date	   2022/05/28 2022年度初版
+* @date	   2022/06/02 2022年度初版
 * @author  飯塚陽太
 */
 
@@ -28,6 +28,11 @@ void CameraMove::Update()
 	// 入力されたタイミングで、回転し始める。
 	if (Input::Get().GetKeyStateTrigger(Button::SPACE) || m_rotateCount > 0)
 	{
+		if (m_rotateCount == 0)
+		{
+			m_directionID = static_cast<DIRECTION>((m_directionID + 1) % 4);
+		}
+
 		RotationY90Degree();
 	}
 }
@@ -35,6 +40,19 @@ void CameraMove::Update()
 const char* CameraMove::GetName()
 {
 	return "cameraMove";
+}
+
+Math::Vector2 CameraMove::GetDirection() noexcept
+{
+	switch (m_directionID)
+	{
+	case DIRECTION::DOWN:  return Math::Vector2::Down;
+	case DIRECTION::LEFT:  return Math::Vector2::Left;
+	case DIRECTION::UP:	   return Math::Vector2::Up;
+	case DIRECTION::RIGHT: return Math::Vector2::Right;
+	default: break;
+	}
+	return Math::Vector2();
 }
 
 void CameraMove::RotationY90Degree() noexcept
@@ -47,7 +65,7 @@ void CameraMove::RotationY90Degree() noexcept
 
 	constexpr float rad = Math::ToRadian(1.f);
 	auto rot = m_transform.GetRotation();
-	rot.y += rad;
+	rot.y += rad * static_cast<float>(m_rotateSpeed);
 	m_transform.SetRotation(rot);
 }
 

@@ -121,16 +121,13 @@
     <Filter Include="Game\GameObject">
       <UniqueIdentifier>{f06bcc08-8dbd-4bb1-ad25-3c07d861547f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\GameObject\Mass">
+      <UniqueIdentifier>{7d781c8d-05d3-4a26-abbe-ff1f87364357}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program\Application\Application.cpp">
       <Filter>Application</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\Game\GameObject\Player.cpp">
-      <Filter>Game\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\Game\GameObject\Road.cpp">
-      <Filter>Game\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Program\Game\Scene\EditScene.cpp">
       <Filter>Game\Scene</Filter>
@@ -376,9 +373,6 @@
     <ClCompile Include="Program\SubSystem\Renderer\Drawings\Effect\Postprocessing.cpp">
       <Filter>SubSystem\Renderer\Drawings\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Game\GameObject\IMass.cpp">
-      <Filter>Game\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="Program\Game\GameObject\Stage.cpp">
       <Filter>Game\GameObject</Filter>
     </ClCompile>
@@ -391,16 +385,19 @@
     <ClCompile Include="Program\Game\Scene\TitleScene.cpp">
       <Filter>Game\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Program\Game\GameObject\IMass.cpp">
+      <Filter>Game\GameObject\Mass</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\GameObject\Player.cpp">
+      <Filter>Game\GameObject\Mass</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\GameObject\Message.cpp">
+      <Filter>Game\GameObject\Mass</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Application\Application.h">
       <Filter>Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\Game\GameObject\Player.h">
-      <Filter>Game\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\Game\GameObject\Road.h">
-      <Filter>Game\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Program\Game\Scene\EditScene.h">
       <Filter>Game\Scene</Filter>
@@ -696,9 +693,6 @@
     <ClInclude Include="Program\SubSystem\Renderer\Drawings\Effect\Postprocessing.h">
       <Filter>SubSystem\Renderer\Drawings\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Game\GameObject\IMass.h">
-      <Filter>Game\GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="Program\Game\GameObject\Stage.h">
       <Filter>Game\GameObject</Filter>
     </ClInclude>
@@ -713,6 +707,27 @@
     </ClInclude>
     <ClInclude Include="Program\Game\Scene\TitleScene.h">
       <Filter>Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Math\VectorTypes.h">
+      <Filter>SubSystem\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Math\Vector2T.h">
+      <Filter>SubSystem\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Math\Vector3T.h">
+      <Filter>SubSystem\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Math\Vector4T.h">
+      <Filter>SubSystem\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\GameObject\IMass.h">
+      <Filter>Game\GameObject\Mass</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\GameObject\Player.h">
+      <Filter>Game\GameObject\Mass</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\GameObject\Message.h">
+      <Filter>Game\GameObject\Mass</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

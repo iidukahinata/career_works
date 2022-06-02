@@ -36,24 +36,20 @@ namespace Math
 
 	public:
 
-		constexpr Vector2() noexcept :
-			DirectX::XMFLOAT2(0, 0)
+		constexpr Vector2() noexcept : DirectX::XMFLOAT2(0, 0)
 		{}
 
-		constexpr Vector2(float value) noexcept :
-			DirectX::XMFLOAT2(value, value)
+		constexpr Vector2(float value) noexcept : DirectX::XMFLOAT2(value, value)
 		{}
 
 		Vector2(const Vector4& V) noexcept;
 
 		Vector2(const Vector3& V) noexcept;
 
-		constexpr Vector2(const Vector2& V) noexcept : 
-			DirectX::XMFLOAT2(V.x, V.y)
+		constexpr Vector2(const Vector2& V) noexcept : DirectX::XMFLOAT2(V.x, V.y)
 		{}
 
-		constexpr Vector2(float x, float y) noexcept : 
-			DirectX::XMFLOAT2(x, y)
+		constexpr Vector2(float x, float y) noexcept : DirectX::XMFLOAT2(x, y)
 		{}
 
 		constexpr const float& operator[](int index) const

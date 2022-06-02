@@ -36,8 +36,9 @@ public:
 	Math::Matrix GetWorldMatrix() const;
 	DirectX::XMMATRIX GetWorldMatrixXM() const;
 
-	Math::Vector3 GetUp();
-	Math::Vector3 GetForward();
+	const Math::Vector3& GetRight() const noexcept;
+	const Math::Vector3& GetUp() const noexcept;
+	const Math::Vector3& GetForward() const noexcept;
 
 	void LockAt(const Math::Vector3& target, const Math::Vector3& up = Math::Vector3::Right);
 	void LockTo(const Math::Vector3& direction, const Math::Vector3& up = Math::Vector3::Right);
@@ -53,4 +54,8 @@ private:
 	Math::Vector3 m_localPosition;
 	Math::Vector3 m_localRotation;
 	Math::Vector3 m_localScale;
+
+	Math::Vector3 m_up;
+	Math::Vector3 m_forward;
+	Math::Vector3 m_right;
 };

@@ -1,3 +1,10 @@
+/**
+* @file    Stage.cpp
+* @brief
+*
+* @date	   2022/06/02 2022年度初版
+* @author  飯塚陽太
+*/
 
 
 #include "Stage.h"
@@ -11,18 +18,18 @@ void Stage::Awake()
 	};
 
 	// MassType が増えれば、その分のテクスチャ名を追加する必要があります。
-	SpriteDesc spriteDescs[MassType::MASS_TYPE_NONE];
+	SpriteDesc spriteDescs[FloorType::NONE];
 	spriteDescs[0].filePath = "assets/Dice/texture/GREEN_STONE.bin";
 	spriteDescs[1].filePath = "assets/Dice/texture/RED_SCISSOR.bin";
 	spriteDescs[2].filePath = "assets/Dice/texture/BLUE_PAPER.bin";
 
 	// 指定されていない場合の警告処理。
-	if (spriteDescs[MassType::MASS_TYPE_NONE - 1].filePath == nullptr)
+	if (spriteDescs[FloorType::NONE - 1].filePath == nullptr)
 	{
 		LOG_ERROR("mass type の全てのテクスチャが指定されていません。: Stage.cpp");
 	}
 
-	m_massSprites.resize(MassType::MASS_TYPE_NONE);
+	m_massSprites.resize(FloorType::NONE);
 	for (int i = 0; i < m_massSprites.size(); ++i)
 	{
 		spriteDescs[i].layout = vertexDesc;
@@ -41,7 +48,7 @@ void Stage::Init()
 	m_transform.SetRotation(Math::Vector3(Math::ToRadian(90.f), 0.f, 0.f));
 
 	ClearMap();
-	LoadMapChip();
+	LoadMapChip(1, 0);
 }
 
 void Stage::Update()
@@ -52,19 +59,27 @@ void Stage::Draw()
 {
 	for (int x = 0; x < MaxMapSize; ++x)
 	{
-		for (int y = 0; y < MaxMapSize; ++y)
+		for (int z = 0; z < MaxMapSize; ++z)
 		{
-			if (m_map[x][y] == MASS_TYPE_NONE)
+			if (m_map[x][z].first == FloorType::NONE)
 				continue;
 
-			if (m_map[x][y] < 0)
+			if (m_map[x][z].first < 0)
 				continue;
 
-			if (m_map[x][y] >= m_massSprites.size())
+			if (m_map[x][z].first >= m_massSprites.size())
 				continue;
 
-			m_transform.SetPosition(Math::Vector3(0.76f * x, -0.75f * 0.5f, 0.76f * y));
-			m_massSprites[m_map[x][y]].Draw(m_transform.GetWorldMatrixXM());
+			float posX = 0.75f * x;
+			float posY = 0.75f * m_map[x][z].second;
+			float posZ = 0.75f * z;
+
+			// Box の下面にペラポリの中心点を合わせるための調整
+			float adjustmentValue = -0.75f * 0.5f;
+
+			// Y 位置は playerBox と重なり描画がバグることがあるため、0.001f 調整している。
+			m_transform.SetPosition(Math::Vector3(posX, posY + adjustmentValue + 0.001f, posZ));
+			m_massSprites[m_map[x][z].first].Draw(m_transform.GetWorldMatrixXM());
 		}
 	}
 }
@@ -74,17 +89,73 @@ const char* Stage::GetName()
 	return "stage";
 }
 
-MassType Stage::GetMassType(int x, int y) noexcept
+IMass* Stage::GetMassData(Math::Vector3i pos) noexcept
 {
-	return m_map[x][y];
+	return m_mases[pos.x][pos.z];
+}
+
+FloorType Stage::GetMassType(Math::Vector3i pos) noexcept
+{
+	return m_map[pos.x][pos.z].first;
+}
+
+int Stage::GetMassHight(Math::Vector3i pos) noexcept
+{
+	return m_map[pos.x][pos.z].second;
+}
+
+bool Stage::SetMass(Math::Vector3i pos, IMass* data) noexcept
+{
+	// 範囲外アクセスを防ぐため
+	if (pos.x < 0 && pos.z < 0)
+		return false;
+
+	// 範囲外アクセスを防ぐため
+	if (pos.x >= MaxMapSize && pos.z >= MaxMapSize)
+		return false;
+
+	// 地面がない所に乗らないようにするため
+	if (GetMassType(pos) == FloorType::NONE)
+		return false;
+
+	// 段を登らないようにするため
+	if (GetMassHight(pos) >= pos.y)
+		return false;
+
+	m_mases[pos.x][pos.y] = data;
+
+	return true;
+}
+
+bool Stage::LoadMapChip(int world, int stage) noexcept
+{
+	auto name = std::to_string(world) + "_" + std::to_string(stage);
+
+	// 仮ステージとして一番下を 0 で埋めたものを作成。
+	for (int x = 0; x < MaxMapSize; ++x)
+	{
+		for (int z = 0; z < MaxMapSize; ++z)
+		{
+			m_map[x][z] = std::pair<FloorType, int>(FloorType::STONE, 0);
+		}
+	}
+
+	return true;
+}
+
+bool Stage::SaveMapChip(int world, int stage) const noexcept
+{
+	auto name = std::to_string(world) + "_" + std::to_string(stage);
+	return true;
 }
 
 void Stage::ClearMap() noexcept
 {
-	std::memset(m_map, (int)MassType::MASS_TYPE_NONE, sizeof(m_map));
-}
-
-void Stage::LoadMapChip() noexcept
-{
-	std::memset(m_map, 0, sizeof(m_map));
+	for (int x = 0; x < MaxMapSize; ++x)
+	{
+		for (int z = 0; z < MaxMapSize; ++z)
+		{
+			m_map[x][z] = std::pair<FloorType, int>(FloorType::NONE, 0);
+		}
+	}
 }

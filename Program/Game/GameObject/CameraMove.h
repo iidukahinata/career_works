@@ -2,7 +2,7 @@
 * @file    CameraMove.h
 * @brief
 *
-* @date	   2022/05/28 2022年度初版
+* @date	   2022/06/02 2022年度初版
 * @author  飯塚陽太
 */
 #pragma once
@@ -20,6 +20,8 @@ public:
 
 	const char* GetName() override;
 
+	Math::Vector2 GetDirection() noexcept;
+
 private:
 
 	void RotationY90Degree() noexcept;
@@ -27,10 +29,20 @@ private:
 
 private:
 
+	enum DIRECTION
+	{
+		UP,
+		RIGHT,
+		DOWN,
+		LEFT,
+	};
+
 	// * player を中心に回転するため。
 	IGameObject* player = nullptr;
 
 	// * 1 の場合、90 フレームで回転終了
-	int m_rotateSpeed = 1;
+	int m_rotateSpeed = 2;
 	int m_rotateCount = 0;
+
+	DIRECTION m_directionID = DIRECTION::UP;
 };

@@ -14,14 +14,18 @@ Transform::Transform() :
 	m_localPosition(0.f, 0.f, 0.f),
 	m_localRotation(0.f, 0.f, 0.f),
 	m_localScale(1.f, 1.f, 1.f)
-{}
+{
+	SetRotation(m_localRotation);
+}
 
 Transform::Transform(IGameObject* object) :
 	m_object(object),
 	m_localPosition(0.f, 0.f, 0.f),
 	m_localRotation(0.f, 0.f, 0.f),
 	m_localScale(1.f, 1.f, 1.f)
-{}
+{
+	SetRotation(m_localRotation);
+}
 
 void Transform::SetPosition(const Math::Vector3& position) noexcept
 {
@@ -41,6 +45,11 @@ const Math::Vector3& Transform::GetWoldPosition() const
 void Transform::SetRotation(const Math::Vector3& rotation) noexcept
 {
 	m_localRotation = rotation;
+
+	auto rot  = Math::Matrix::CreateRotation(m_localRotation);
+	m_right   = Math::Vector3(rot.m[0][0], rot.m[0][1], rot.m[0][2]);
+	m_up      = Math::Vector3(rot.m[1][0], rot.m[1][1], rot.m[1][2]);
+	m_forward = Math::Vector3(rot.m[2][0], rot.m[2][1], rot.m[2][2]);
 }
 
 const Math::Vector3& Transform::GetRotation() const noexcept
@@ -68,7 +77,7 @@ void Transform::LockAt(const Math::Vector3& target, const Math::Vector3& up /* =
 	DirectX::XMMATRIX invView = DirectX::XMMatrixInverse(nullptr, std::move(view));
 	Math::Matrix rotMatrix;
 	DirectX::XMStoreFloat4x4(&rotMatrix, std::move(invView));
-	m_localRotation = rotMatrix.GetEulerAngles();
+	SetRotation(rotMatrix.GetEulerAngles());
 }
 
 void Transform::LockTo(const Math::Vector3& direction, const Math::Vector3& up /* = Math::Vector3::Right */)
@@ -81,7 +90,7 @@ void Transform::LockTo(const Math::Vector3& direction, const Math::Vector3& up /
 	DirectX::XMMATRIX invView = DirectX::XMMatrixInverse(nullptr, std::move(view));
 	Math::Matrix rotMatrix;
 	DirectX::XMStoreFloat4x4(&rotMatrix, std::move(invView));
-	m_localRotation = rotMatrix.GetEulerAngles();
+	SetRotation(rotMatrix.GetEulerAngles());
 }
 
 Math::Matrix Transform::GetLocalMatrix() const
@@ -111,16 +120,19 @@ DirectX::XMMATRIX Transform::GetWorldMatrixXM() const
 	return GetWorldMatrix().ToMatrixXM();
 }
 
-Math::Vector3 Transform::GetUp()
+const Math::Vector3& Transform::GetRight() const noexcept
 {
-	auto rot = Math::Matrix::CreateRotation(m_localRotation);
-	return Math::Vector3(rot.m[1][0], rot.m[1][1], rot.m[1][2]);
+	return m_right;
 }
 
-Math::Vector3 Transform::GetForward()
+const Math::Vector3& Transform::GetUp() const noexcept
 {
-	auto rot = Math::Matrix::CreateRotation(m_localRotation);
-	return Math::Vector3(rot.m[2][0], rot.m[2][1], rot.m[2][2]);
+	return m_up;
+}
+
+const Math::Vector3& Transform::GetForward() const noexcept
+{
+	return m_forward;
 }
 
 void Transform::SetPearent(IGameObject* parent) noexcept
