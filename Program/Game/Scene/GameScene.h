@@ -2,7 +2,7 @@
 * @file    GameScene.h
 * @brief
 *
-* @date	   2022/05/28 2022年度初版
+* @date	   2022/06/02 2022年度初版
 * @author  飯塚陽太
 */
 #pragma once
@@ -26,10 +26,4 @@ class GameScene : public IScene
 
 	// 描画
 	void Draw() override;
-
-private:
-
-	Postprocessing postprocessing;
-
-	SkyBox skyBox;
 };

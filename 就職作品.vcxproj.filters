@@ -124,6 +124,9 @@
     <Filter Include="Game\GameObject\Mass">
       <UniqueIdentifier>{7d781c8d-05d3-4a26-abbe-ff1f87364357}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Component">
+      <UniqueIdentifier>{f13c7aa1-2450-43f2-8891-169620615f75}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program\Application\Application.cpp">
@@ -393,6 +396,15 @@
     </ClCompile>
     <ClCompile Include="Program\Game\GameObject\Message.cpp">
       <Filter>Game\GameObject\Mass</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\Component\HitStop.cpp">
+      <Filter>Game\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\GameObject\Human.cpp">
+      <Filter>Game\GameObject\Mass</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\GameObject\BackGraund.cpp">
+      <Filter>Game\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -729,6 +741,15 @@
     <ClInclude Include="Program\Game\GameObject\Message.h">
       <Filter>Game\GameObject\Mass</Filter>
     </ClInclude>
+    <ClInclude Include="Program\Game\Component\HitStop.h">
+      <Filter>Game\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\GameObject\Human.h">
+      <Filter>Game\GameObject\Mass</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\GameObject\BackGraund.h">
+      <Filter>Game\GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Program\ThirdParty\FMOD\include\fmod_dsp.cs">
@@ -797,6 +818,12 @@
       <Filter>SubSystem\Renderer\Shader</Filter>
     </FxCompile>
     <FxCompile Include="Program\SubSystem\Renderer\Shader\LambertPS.hlsl">
+      <Filter>SubSystem\Renderer\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\Texture2DPS.hlsl">
+      <Filter>SubSystem\Renderer\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\Texture2DVS.hlsl">
       <Filter>SubSystem\Renderer\Shader</Filter>
     </FxCompile>
   </ItemGroup>

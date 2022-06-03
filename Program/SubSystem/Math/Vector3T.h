@@ -47,6 +47,11 @@ namespace Math
 			return (&x)[index];
 		}
 
+		constexpr Vector3T<T> operator-() const noexcept
+		{
+			return Vector3T<T>(-x, -y, -z);
+		}
+
 		constexpr Vector3T<T> operator+(const Vector3T<T>& V) const noexcept
 		{
 			return Vector3T<T>(x + V.x, y + V.y, z + V.z);

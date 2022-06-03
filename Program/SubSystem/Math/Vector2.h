@@ -66,6 +66,11 @@ namespace Math
 			return (&x)[index];
 		}
 
+		constexpr Vector2 operator-() const noexcept
+		{
+			return Vector2(-x, -y);
+		}
+
 		constexpr Vector2 operator+(const Vector2& V) const noexcept
 		{
 			return Vector2(x + V.x, y + V.y);

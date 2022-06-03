@@ -37,7 +37,7 @@ void Renderer::Init()
 
 void Renderer::BeginFream()
 {
-	D3D11GrahicsDevice::Get().Clear(Math::Vector4(0.f, 0.f, 0.f, 1.f));
+	D3D11GrahicsDevice::Get().Clear(Math::Vector4(0, 0, 0));
 }
 
 void Renderer::EndFream()

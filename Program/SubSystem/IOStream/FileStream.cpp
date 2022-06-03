@@ -48,10 +48,16 @@ bool FileStream::Load(std::string_view filePath, OpenMode mode) noexcept
 
 	if (error != 0)
 	{
-		std::string buf;
-		buf.resize(128);
-		strerror_s(buf.data(), buf.size(), static_cast<int>(error));
-		LOG_ERROR("error :" + std::string(buf));
+		// 開かなかったことは 戻り値で判断出来るため外す。
+		if(error != 2)
+		{
+			std::string buf;
+			buf.resize(128);
+			strerror_s(buf.data(), buf.size(), static_cast<int>(error));
+			LOG_ERROR("error :" + std::string(buf));
+		}
+
+		m_openMode = OpenMode::Not_Mode;
 		m_fp = nullptr;
 	}
 

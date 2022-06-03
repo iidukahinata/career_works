@@ -2,7 +2,7 @@
 * @file    TitleScene.h
 * @brief
 *
-* @date	   2022/05/28 2022年度初版
+* @date	   2022/06/03 2022年度初版
 * @author  飯塚陽太
 */
 #pragma once

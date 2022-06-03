@@ -18,7 +18,7 @@
 struct SpriteDesc
 {
 	// * ’l‚ªİ’è‚³‚ê‚Ä‚¢‚é‚Í‰½‚æ‚è‚à—Dæ‚³‚ê‚Ü‚·B
-	const char* filePath = nullptr;
+	std::string filePath;
 
 	// * filePath ‚ÌŸ‚É“Ç‚İ‚Ü‚ê‚Ü‚·B
 	std::vector<Texture*> textures;

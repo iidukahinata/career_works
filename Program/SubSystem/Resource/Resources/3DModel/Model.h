@@ -17,10 +17,10 @@
 struct ModelDesc
 {
 	// * 読み込むモデルパスを指定してください。
-	const char* modelFilePath = nullptr;
+	std::string modelFilePath;
 
 	// * テクスチャが入っているフォルダパスを指定してください。
-	const char* textureFolderPath = nullptr;
+	std::string textureFolderPath;
 
 	// * null 以外の値である必要があります。
 	D3D11_INPUT_ELEMENT_DESC* layout = nullptr;

@@ -138,6 +138,11 @@ void ModelLoader::LoadMesh(aiMesh* aiMesh)
 
 std::vector<Texture*> ModelLoader::LoadTextures(aiMaterial* aiMaterial)
 {
+	if (m_textureDirectory.empty())
+	{
+		return std::vector<Texture*>();
+	}
+
 	std::vector<Texture*> textures;
 	// マテリアルからテクスチャ個数を取得し(基本は1個)ループする
 	for (unsigned int i = 0; i < aiMaterial->GetTextureCount(aiTextureType_DIFFUSE); ++i)
@@ -174,4 +179,5 @@ std::string ModelLoader::LookForTextureFolder(std::string_view path)
 			return entry.path().string();
 		}
 	}
+	return std::string();
 }

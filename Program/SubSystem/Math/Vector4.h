@@ -36,6 +36,25 @@ namespace Math
 		constexpr Vector4(float x, float y, float z, float w) noexcept : DirectX::XMFLOAT4(x, y, z, w)
 		{}
 
+		const float& operator[](int index) const
+		{
+			Chack(0 <= index);
+			Chack(index < 4);
+			return (&x)[index];
+		}
+
+		float& operator[](int index)
+		{
+			Chack(0 <= index);
+			Chack(index < 4);
+			return (&x)[index];
+		}
+
+		constexpr Vector4 operator-() const noexcept
+		{
+			return Vector4(-x, -y, -z, -w);
+		}
+
 		constexpr Vector4 operator+(const Vector4& V) const noexcept
 		{
 			return Vector4(x + V.x, y + V.y, z + V.z, w + V.w);
@@ -146,20 +165,6 @@ namespace Math
 			z /= value;
 			w /= value;
 			return *this;
-		}
-
-		const float& operator[](int index) const
-		{
-			Chack(0 <= index);
-			Chack(index < 4);
-			return (&x)[index];
-		}
-
-		float& operator[](int index)
-		{
-			Chack(0 <= index);
-			Chack(index < 4);
-			return (&x)[index];
 		}
 
 		float Dot(const Vector4& V) const noexcept

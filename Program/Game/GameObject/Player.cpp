@@ -2,7 +2,7 @@
 * @file    Player.cpp
 * @brief
 *
-* @date	   2022/06/01 2022年度初版
+* @date	   2022/06/03 2022年度初版
 * @author  飯塚陽太
 */
 
@@ -11,6 +11,7 @@
 #include "SubSystem/Scene/Scene.h"
 #include "SubSystem/Input/Input.h"
 #include "Stage.h"
+#include "Human.h"
 #include "CameraMove.h"
 #include "Message.h"
 
@@ -35,14 +36,18 @@ void Player::Init()
 	m_cameraMove = dynamic_cast<CameraMove*>(m_scene->GetGameObject("cameraMove"));
 	m_stage = dynamic_cast<Stage*>(m_scene->GetGameObject("stage"));
 
+	Math::Vector3 massPos(m_massPos.x, m_massPos.y, m_massPos.z);
+	m_transform.SetPosition(Math::Vector3(0.75f * massPos.x, 0.75f * massPos.y, 0.75f * massPos.z));
 	m_transform.SetScale(Math::Vector3(0.05f));
-	m_nextMassPos.y = 1;
 }
 
 void Player::Update()
 {
+	if (m_hitStop.IsHitStop())
+		return;
+
 	// enemy の移動を考慮するため 入力、回転の外で行う。
-	ChackTheNextMassFromMap();
+	ChackTheNextMassFromStage();
 
 	InputAction();
 
@@ -72,24 +77,24 @@ void Player::InputAction() noexcept
 	}
 
 	// カメラの向きから移動方向を決めるため、各向き事に違う処理を行う
-	if (Input::Get().GetKeyStateTrigger(Button::Left))
+	if (Input::Get().GetKeyStatePress(Button::Left))
 	{
 		m_angle = m_cameraMove->GetDirection();
 		m_angle = Math::Vector2(m_angle.y, m_angle.x);
 	}
-	if (Input::Get().GetKeyStateTrigger(Button::Right))
+	if (Input::Get().GetKeyStatePress(Button::Right))
 	{
-		m_angle = m_cameraMove->GetDirection() * -1.f;
+		m_angle = -m_cameraMove->GetDirection();
 		m_angle = Math::Vector2(m_angle.y, m_angle.x);
 	}
-	if (Input::Get().GetKeyStateTrigger(Button::Up))
+	if (Input::Get().GetKeyStatePress(Button::Up))
 	{
 		m_angle = m_cameraMove->GetDirection();
 		if (m_cameraMove->GetDirection().x != 0) m_angle.x *= -1.f;
 	}
-	if (Input::Get().GetKeyStateTrigger(Button::Down))
+	if (Input::Get().GetKeyStatePress(Button::Down))
 	{
-		m_angle = m_cameraMove->GetDirection() * -1.f;
+		m_angle = -m_cameraMove->GetDirection();
 		if (m_cameraMove->GetDirection().x != 0) m_angle.x *= -1.f;
 	}
 
@@ -98,6 +103,8 @@ void Player::InputAction() noexcept
 		m_nextMassPos.x += -m_angle.x;
 		m_nextMassPos.z +=  m_angle.y;
 		m_nextMassPos.y = m_massPos.y;
+
+		m_stage->RemoveMass(this);
 	}
 }
 
@@ -124,7 +131,7 @@ void Player::Move1Mass() noexcept
 	pos.z += m_massSize.z * m_angle.y * commonValue;
 
 	// 高さにずれが生じるため 0 を外す
-	// 0 を考慮する場合は、下記コードを修正する必要がある。しかし、player 挙動があまり変わらないため実装しないと思う。
+	// player 移動を等加速度運動に変更する場合は、下記コードを修正する必要がある。
 	if (m_angleCount > 0) pos.y += m_massSize.y * (static_cast<float>(45 - m_angleCount) / 45.f) * commonValue;
 
 	m_transform.SetPosition(pos);
@@ -148,9 +155,9 @@ void Player::ChackTheNextMassFromStage() noexcept
 	auto nextMassType = m_stage->GetMassType(m_nextMassPos);
 	switch (nextMassType)
 	{
-	case STONE: break;
-	case SCISSORS: break;
-	case PAPER: break;
+	case FLOOR: break;
+	case MESSAGE: break;
+	case PUTENEMY: break;
 	case NONE: break;
 	default: break;
 	}
@@ -164,34 +171,50 @@ void Player::ChackTheNextMassFromMap() noexcept
 		{
 		case MassType::PLAYER: break;
 		case MassType::ENEMY: HitEnemy(nextMass); break;
-		case MassType::ITEM: HitItem(nextMass); break;
-		case MassType::MESSEGE: HitMessege(nextMass); break;
+		case MassType::HUMAN: HitHuman(nextMass); break;
+		case MassType::MESSEGE: break;
 		default: break;
 		}
 	}
 }
 
-void Player::HitItem(IMass* hitMass) noexcept
+void Player::HitHuman(IMass* hitMass) noexcept
 {
-	if (isGetItem[GetNowBottomSurface()])
+	if (IsInput())
+	{
+		return;
+	}
+
+	if (isGetHuman[GetNowBottomSurface()])
 	{
 		// game over
 	}
 	else
 	{
-		isGetItem[GetNowBottomSurface()] = true;
-	}
-}
+		isGetHuman[GetNowBottomSurface()] = true;
 
-void Player::HitMessege(IMass* hitMass) noexcept
-{
-	auto messege = dynamic_cast<Message*>(hitMass);
-	messege->SetDrawMode(true);
+		m_stage->RemoveMass(hitMass);
+		m_scene->RemoveGameObject(hitMass);
+	}
 }
 
 void Player::HitEnemy(IMass* hitMass) noexcept
 {
+	if (IsInput())
+	{
+		if (isGetHuman[GetNowBottomSurface()])
+		{
 
+		}
+		else
+		{
+			// game over
+		}
+	}
+	else
+	{
+		// game over
+	}
 }
 
 void Player::RotationWorld(const Math::Vector3& angle) noexcept
@@ -211,42 +234,48 @@ void Player::FinishRolling() noexcept
 	m_angle = Math::Vector2();
 	m_angleCount = 0;
 	m_massPos = m_nextMassPos;
+
+	m_hitStop.Start(3);
+
+	ChackTheNextMassFromStage();
+	ChackTheNextMassFromMap();
+
+	m_stage->SetMass(m_massPos, this);
 }
 
 BOX_FACE_INFO Player::GetNowBottomSurface() noexcept
 {
+	auto chack = [](const auto& right, const auto& up, const auto& forward)
+	{
+		if (abs(right.y + 1.f) <= 0.001f)
+		{
+			return BOX_FACE_INFO::POSITIVE_X;
+		}
+		if (abs(up.y + 1.f) <= 0.001f)
+		{
+			return BOX_FACE_INFO::POSITIVE_Y;
+		}
+		if (abs(forward.y + 1.f) <= 0.001f)
+		{
+			return BOX_FACE_INFO::POSITIVE_Z;
+		}
+		return BOX_FACE_INFO::Max;
+	};
+
 	auto right = m_transform.GetRight();
 	auto up = m_transform.GetUp();
 	auto forward = m_transform.GetForward();
 
-	if (abs(right.y + 1.f) <= 0.001f)
+	int bottomSurface = chack(right, up, forward);
+	if (bottomSurface < BOX_FACE_INFO::Max)
 	{
-		return BOX_FACE_INFO::POSITIVE_X;
-	}
-	if (abs(up.y + 1.f) <= 0.001f)
-	{
-		return BOX_FACE_INFO::POSITIVE_Y;
-	}
-	if (abs(forward.y + 1.f) <= 0.001f)
-	{
-		return BOX_FACE_INFO::POSITIVE_Z;
+		return static_cast<BOX_FACE_INFO>(bottomSurface);
 	}
 
-	right *= -1.f;
-	up *= -1.f;
-	forward *= -1.f;
-
-	if (abs(right.y + 1.f) <= 0.001f)
+	bottomSurface = chack(-right, -up, -forward);
+	if (bottomSurface < BOX_FACE_INFO::Max)
 	{
-		return BOX_FACE_INFO::NEGATIVE_X;
-	}
-	if (abs(up.y + 1.f) <= 0.001f)
-	{
-		return BOX_FACE_INFO::NEGATIVE_Y;
-	}
-	if (abs(forward.y + 1.f) <= 0.001f)
-	{
-		return BOX_FACE_INFO::NEGATIVE_Z;
+		return static_cast<BOX_FACE_INFO>(bottomSurface + BOX_FACE_INFO::POSITIVE_Z);
 	}
 	return BOX_FACE_INFO::Max;
 }

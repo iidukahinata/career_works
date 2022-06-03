@@ -2,12 +2,17 @@
 * @file    Stage.cpp
 * @brief
 *
-* @date	   2022/06/02 2022年度初版
+* @date	   2022/06/03 2022年度初版
 * @author  飯塚陽太
 */
 
 
 #include "Stage.h"
+#include "Player.h"
+#include "Human.h"
+#include "Message.h"
+#include "SubSystem/Scene/Scene.h"
+#include "SubSystem/IOStream/FileStream.h"
 
 void Stage::Awake()
 {
@@ -19,12 +24,12 @@ void Stage::Awake()
 
 	// MassType が増えれば、その分のテクスチャ名を追加する必要があります。
 	SpriteDesc spriteDescs[FloorType::NONE];
-	spriteDescs[0].filePath = "assets/Dice/texture/GREEN_STONE.bin";
-	spriteDescs[1].filePath = "assets/Dice/texture/RED_SCISSOR.bin";
-	spriteDescs[2].filePath = "assets/Dice/texture/BLUE_PAPER.bin";
+	spriteDescs[0].filePath = "assets/Imqube/Floor/Floor.jpg";
+	spriteDescs[1].filePath = "assets/Imqube/Floor/Hint.jpg";
+	spriteDescs[2].filePath = "assets/Imqube/Floor/putEnemy.jpg";
 
 	// 指定されていない場合の警告処理。
-	if (spriteDescs[FloorType::NONE - 1].filePath == nullptr)
+	if (spriteDescs[FloorType::NONE - 1].filePath.empty())
 	{
 		LOG_ERROR("mass type の全てのテクスチャが指定されていません。: Stage.cpp");
 	}
@@ -34,9 +39,6 @@ void Stage::Awake()
 	{
 		spriteDescs[i].layout = vertexDesc;
 		spriteDescs[i].layoutSize = ARRAYSIZE(vertexDesc);
-
-		// モデル行列のスケール値で大きさ調整予定なので 1 を指定。
-		spriteDescs[i].width = spriteDescs[i].height = 1.f;
 
 		m_massSprites[i].Init(spriteDescs[i]);
 	}
@@ -49,10 +51,7 @@ void Stage::Init()
 
 	ClearMap();
 	LoadMapChip(1, 0);
-}
-
-void Stage::Update()
-{
+	SaveMapChip(1, 0);
 }
 
 void Stage::Draw()
@@ -91,27 +90,51 @@ const char* Stage::GetName()
 
 IMass* Stage::GetMassData(Math::Vector3i pos) noexcept
 {
+	// 範囲外アクセスを防ぐため
+	if (pos.x < 0 || pos.z < 0)
+		return nullptr;
+
+	// 範囲外アクセスを防ぐため
+	if (pos.x >= MaxMapSize || pos.z >= MaxMapSize)
+		return nullptr;
+
 	return m_mases[pos.x][pos.z];
 }
 
 FloorType Stage::GetMassType(Math::Vector3i pos) noexcept
 {
+	// 範囲外アクセスを防ぐため
+	if (pos.x < 0 || pos.z < 0)
+		return FloorType::NONE;
+
+	// 範囲外アクセスを防ぐため
+	if (pos.x >= MaxMapSize || pos.z >= MaxMapSize)
+		return FloorType::NONE;
+
 	return m_map[pos.x][pos.z].first;
 }
 
 int Stage::GetMassHight(Math::Vector3i pos) noexcept
 {
+	// 範囲外アクセスを防ぐため
+	if (pos.x < 0 || pos.z < 0)
+		return FloorType::NONE;
+
+	// 範囲外アクセスを防ぐため
+	if (pos.x >= MaxMapSize || pos.z >= MaxMapSize)
+		return FloorType::NONE;
+
 	return m_map[pos.x][pos.z].second;
 }
 
 bool Stage::SetMass(Math::Vector3i pos, IMass* data) noexcept
 {
 	// 範囲外アクセスを防ぐため
-	if (pos.x < 0 && pos.z < 0)
+	if (pos.x < 0 || pos.z < 0)
 		return false;
 
 	// 範囲外アクセスを防ぐため
-	if (pos.x >= MaxMapSize && pos.z >= MaxMapSize)
+	if (pos.x >= MaxMapSize || pos.z >= MaxMapSize)
 		return false;
 
 	// 地面がない所に乗らないようにするため
@@ -119,25 +142,106 @@ bool Stage::SetMass(Math::Vector3i pos, IMass* data) noexcept
 		return false;
 
 	// 段を登らないようにするため
-	if (GetMassHight(pos) >= pos.y)
+	if (GetMassHight(pos) < pos.y)
 		return false;
 
-	m_mases[pos.x][pos.y] = data;
+	data->SetMassPos(Math::Vector3i(pos.x, pos.y, pos.z));
+
+	m_mases[pos.x][pos.z] = data;
 
 	return true;
 }
 
+bool Stage::RemoveMass(IMass* mass) noexcept
+{
+	if (mass == nullptr)
+		return false;
+
+	auto pos = mass->GetMassPos();
+
+	// 範囲外アクセスを防ぐため
+	if (pos.x < 0 || pos.z < 0)
+		return false;
+
+	// 範囲外アクセスを防ぐため
+	if (pos.x >= MaxMapSize || pos.z >= MaxMapSize)
+		return false;
+
+	if (m_mases[pos.x][pos.z] == mass)
+	{
+		m_mases[pos.x][pos.z] = nullptr;
+		return true;
+	}
+	return false;
+}
+
 bool Stage::LoadMapChip(int world, int stage) noexcept
 {
-	auto name = std::to_string(world) + "_" + std::to_string(stage);
+	auto name = "assets/Imqube/Stage/" + std::to_string(world) + "_" + std::to_string(stage) + ".bin";
+
+	FileStream file;
+	if (!file.Load(name, OpenMode::Read_Mode))
+	{
+		return false;
+	}
+	
+	std::vector<std::pair<FloorType, int>> m_mapMeta;
+	file.Read(&m_mapMeta);
+	
+	for (int i = 0; i < m_mapMeta.size(); ++i)
+	{
+		m_map[i % 10][i / 10].first = m_mapMeta[i].first;
+		m_map[i % 10][i / 10].second = m_mapMeta[i].second;
+	}
+	
+	std::vector<std::pair<IMass::MassType, Math::Vector3i>> m_massMeta;
+	file.Read(&m_massMeta);
+	
+	for (int i = 0; i < m_massMeta.size(); ++i)
+	{
+		switch (m_massMeta[i].first)
+		{
+		case IMass::MassType::PLAYER: CreatePlayer(m_massMeta[i].second); break;
+		case IMass::MassType::ENEMY: CreateEnemy(m_massMeta[i].second);break;
+		case IMass::MassType::HUMAN: CreateHuman(m_massMeta[i].second);break;
+		case IMass::MassType::MESSEGE: CreateMessage(m_massMeta[i].second); break;
+		default: break;
+		}
+	}
 
 	// 仮ステージとして一番下を 0 で埋めたものを作成。
 	for (int x = 0; x < MaxMapSize; ++x)
 	{
 		for (int z = 0; z < MaxMapSize; ++z)
 		{
-			m_map[x][z] = std::pair<FloorType, int>(FloorType::STONE, 0);
+			m_map[x][z] = std::pair<FloorType, int>(FloorType::FLOOR, 0);
 		}
+	}
+
+	{
+		// 適当に初期値 0,0の位置に生成
+		Player* mass = new Player();
+		SetMass(Math::Vector3i(0, 0, 0), mass);
+		m_scene->AddGameObject(mass);
+	}
+
+	{
+		// 適当に初期値 3,3の位置に生成
+		Human* mass = new Human();
+		SetMass(Math::Vector3i(9, 0, 9), mass);
+		m_scene->AddGameObject(mass);
+	
+		++m_humansCount;
+	}
+
+	{
+		// 適当に初期値 3,3の位置に生成
+		m_map[4][4] = std::pair<FloorType, int>(FloorType::MESSAGE, 0);
+		
+		Message* mass = new Message();
+		mass->MessegeSpriteInit(0);
+		SetMass(Math::Vector3i(4, 0, 4), mass);
+		m_scene->AddGameObject(mass);
 	}
 
 	return true;
@@ -145,7 +249,37 @@ bool Stage::LoadMapChip(int world, int stage) noexcept
 
 bool Stage::SaveMapChip(int world, int stage) const noexcept
 {
-	auto name = std::to_string(world) + "_" + std::to_string(stage);
+	auto name = "assets/Imqube/Stage/" + std::to_string(world) + "_" + std::to_string(stage) + ".bin";
+
+	FileStream file;
+	if (!file.CreateFileAndLoad(name, OpenMode::Write_Mode))
+	{
+		return false;
+	}
+
+	std::vector<std::pair<FloorType, int>> m_mapMeta;
+	for (int x = 0; x < MaxMapSize; ++x)
+	{
+		for (int z = 0; z < MaxMapSize; ++z)
+		{
+			m_mapMeta.emplace_back(m_map[x][z].first, m_map[x][z].second);
+		}
+	}
+	file.Write(m_mapMeta);
+
+	std::vector<std::pair<IMass::MassType, Math::Vector3i>> m_massMeta;
+	for (int x = 0; x < MaxMapSize; ++x)
+	{
+		for (int z = 0; z < MaxMapSize; ++z)
+		{
+			if (m_mases[x][z])
+			{
+				m_massMeta.emplace_back(m_mases[x][z]->GetType(), m_mases[x][z]->GetMassPos());
+			}
+		}
+	}
+	file.Write(m_massMeta);
+
 	return true;
 }
 
@@ -158,4 +292,36 @@ void Stage::ClearMap() noexcept
 			m_map[x][z] = std::pair<FloorType, int>(FloorType::NONE, 0);
 		}
 	}
+}
+
+void Stage::CreatePlayer(Math::Vector3i pos) noexcept
+{
+	Player* mass = new Player();
+	SetMass(pos, mass);
+	m_scene->AddGameObject(mass);
+}
+
+void Stage::CreateEnemy(Math::Vector3i pos) noexcept
+{
+	//Enemy* mass = new Enemy();
+	//SetMass(pos, mass);
+	//m_scene->AddGameObject(mass);
+}
+
+void Stage::CreateHuman(Math::Vector3i pos) noexcept
+{
+	Human* mass = new Human();
+	SetMass(pos, mass);
+	m_scene->AddGameObject(mass);
+
+	++m_humansCount;
+}
+
+void Stage::CreateMessage(Math::Vector3i pos) noexcept
+{
+	m_map[pos.x][pos.z] = std::pair<FloorType, int>(FloorType::MESSAGE, pos.y);
+
+	Message* mass = new Message();
+	SetMass(pos, mass);
+	m_scene->AddGameObject(mass);
 }

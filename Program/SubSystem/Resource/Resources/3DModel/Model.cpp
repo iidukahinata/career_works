@@ -41,12 +41,12 @@ void Model::Init(const ModelDesc& desc)
 	// “Ç‚İ‚İ‘Ò‚¿‚ª‹N‚«‚È‚¢‚æ‚¤•À—ñˆ—‚Ås‚¤
 	ThreadPool::Get().AddTask([this, desc]
 	{
-		if (desc.modelFilePath)
+		if (!desc.modelFilePath.empty())
 		{
 			m_modelData = ResourceManager::Get().Load<ModelData>(desc.modelFilePath);
 		}
 
-		if (desc.textureFolderPath)
+		if (!desc.textureFolderPath.empty())
 		{
 			LoadTextures(desc.textureFolderPath);
 		}

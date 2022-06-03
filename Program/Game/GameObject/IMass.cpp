@@ -18,3 +18,8 @@ void IMass::SetMassPos(Math::Vector3i pos) noexcept
 {
     m_massPos = pos;
 }
+
+Math::Vector3i IMass::GetMassPos() const noexcept
+{
+    return m_massPos;
+}

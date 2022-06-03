@@ -2,7 +2,7 @@
 * @file    Message.h
 * @brief
 *
-* @date	   2022/06/02 2022年度初版
+* @date	   2022/06/03 2022年度初版
 * @author  飯塚陽太
 */
 
@@ -10,27 +10,32 @@
 #include "Message.h"
 #include "Stage.h"
 #include "SubSystem/Scene/Scene.h"
+#include "SubSystem/Window/Window.h"
 
 void Message::Init()
 {
+    m_transform.SetPosition(Math::Vector3(0.f, -0.6f, 0.f));
+    m_transform.SetScale(Math::Vector3(0.f * aspect.x, 0.f * aspect.y, 1.f));
     m_stage = dynamic_cast<Stage*>(m_scene->GetGameObject("stage"));
 }
 
 void Message::Update()
 {  
+    AnimUpdate();
+
     if (auto mass = m_stage->GetMassData(m_massPos))
     {
-        isDraw = mass->GetType() == MassType::PLAYER;
+        SetDrawMode(mass->GetType() == MassType::PLAYER);
     }
     else
     {
-        isDraw = false;
+        m_stage->SetMass(m_massPos, this);
     }
 }
 
 void Message::Draw()
 {
-    if (isDraw)
+    if (m_isDraw)
     {
         m_sprite.Draw(m_transform.GetWorldMatrixXM());
     }
@@ -50,17 +55,50 @@ void Message::MessegeSpriteInit(int id) noexcept
     };
 
     SpriteDesc spriteDesc;
-    spriteDesc.filePath = std::string("assets/ImqubeTex/Hint/Hint_" + std::to_string(id) + ".jpg").c_str();
+    spriteDesc.vsShader = "assets/Shader/Texture2DVS.cso";
+    spriteDesc.psShader = "assets/Shader/Texture2DPS.cso";
+    spriteDesc.filePath = "assets/Imqube/Hint/Hint_" + std::to_string(id) + ".jpg";
+
     spriteDesc.layout = vertexDesc;
     spriteDesc.layoutSize = ARRAYSIZE(vertexDesc);
-
-    // モデル行列のスケール値で大きさ調整予定なので 1 を指定。
-    spriteDesc.width = spriteDesc.height = 1.f;
+    spriteDesc.height = 1.f;
+    spriteDesc.width = (float)Window::Get().GetWindowHeight() / (float)Window::Get().GetWindowWidth();
 
     m_sprite.Init(spriteDesc);
 }
 
 void Message::SetDrawMode(bool isDraw) noexcept
 {
-    this->isDraw = isDraw;
+    if (m_isDraw == false && isDraw)
+    {
+        m_isAnim = true;
+        m_animSpeed = 1.f;
+        m_isDraw = isDraw;
+    }
+    if (m_isDraw && isDraw == false)
+    {
+        m_isAnim = true;
+        m_animSpeed = -1.f;
+    }
+}
+
+void Message::AnimUpdate() noexcept
+{
+    if (m_isAnim == false)
+        return;
+
+    m_nowSize += (m_animSpeed * 0.05f);
+    m_transform.SetScale(Math::Vector3(m_nowSize * aspect.x, m_nowSize * aspect.y, 1.f));
+
+    if (m_nowSize >= m_maxSize && m_animSpeed > 0)
+    {
+        m_transform.SetScale(Math::Vector3(m_maxSize * aspect.x, m_maxSize * aspect.y, 1.f));
+        m_isAnim = false;
+    }
+    if (m_nowSize <= m_minSize && m_animSpeed < 0)
+    {
+        m_transform.SetScale(Math::Vector3(m_minSize * aspect.x, m_minSize * aspect.x, 1.f));
+        m_isAnim = false;
+        m_isDraw = false;
+    }
 }

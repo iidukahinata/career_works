@@ -2,7 +2,7 @@
 * @file    CameraMove.cpp
 * @brief
 *
-* @date	   2022/06/02 2022年度初版
+* @date	   2022/06/03 2022年度初版
 * @author  飯塚陽太
 */
 
@@ -23,7 +23,9 @@ void CameraMove::Init()
 
 void CameraMove::Update()
 {
-	m_transform.SetPosition(player->GetTransform().GetWoldPosition());
+	auto nextPos = player->GetTransform().GetWoldPosition();
+	nextPos.y = m_transform.GetWoldPosition().y;
+	m_transform.SetPosition(nextPos);
 
 	// 入力されたタイミングで、回転し始める。
 	if (Input::Get().GetKeyStateTrigger(Button::SPACE) || m_rotateCount > 0)

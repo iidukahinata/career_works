@@ -25,7 +25,7 @@ void Sprite::Init(const SpriteDesc& desc)
 	ThreadPool::Get().AddTask([this, desc]
 	{
 		// w’è‚³‚ê‚½Path‚ğ—Dæ‚µ‚Ä’Ç‰Á
-		if (desc.filePath)
+		if (!desc.filePath.empty())
 		{
 			m_mesh.AddTexture(ResourceManager::Get().Load<D3D11Texture>(desc.filePath));
 		}

@@ -14,25 +14,27 @@
 
 void IScene::Init()
 {
-	for (auto& gameObject : m_gameObjects)
+	// 初期化中に GameObject が追加された場合 範囲 for だとアクセスバグが発生する。
+	for (int i = 0; i < m_gameObjects.size(); ++i)
 	{
-		gameObject->Init();
+		m_gameObjects[i]->Init();
 	}
 }
 
 void IScene::Update()
 {
-	for (auto& gameObject : m_gameObjects)
+	// 初期化中に GameObject が追加された場合 範囲 for だとアクセスバグが発生する。
+	for (int i = 0; i < m_gameObjects.size(); ++i)
 	{
-		gameObject->Update();
+		m_gameObjects[i]->Update();
 	}
 }
 
 void IScene::Draw()
 {
-	for (auto& gameObject : m_gameObjects)
+	for (int i = 0; i < m_gameObjects.size(); ++i)
 	{
-		gameObject->Draw();
+		m_gameObjects[i]->Draw();
 	}
 }
 

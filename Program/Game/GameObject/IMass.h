@@ -19,7 +19,7 @@ public:
 	{
 		PLAYER,
 		ENEMY,
-		ITEM,
+		HUMAN,
 		MESSEGE
 	};
 
@@ -33,6 +33,7 @@ public:
 	virtual MassType GetType() = 0;
 
 	void SetMassPos(Math::Vector3i pos) noexcept;
+	Math::Vector3i GetMassPos() const noexcept;
 
 protected:
 

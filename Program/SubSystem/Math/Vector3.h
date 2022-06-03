@@ -60,6 +60,25 @@ namespace Math
 		constexpr Vector3(float x, float y, float z) noexcept : DirectX::XMFLOAT3(x, y, z)
 		{}
 
+		const float& operator[](int index) const
+		{
+			Chack(0 <= index);
+			Chack(index < 3);
+			return (&x)[index];
+		}
+
+		float& operator[](int index)
+		{
+			Chack(0 <= index);
+			Chack(index < 3);
+			return (&x)[index];
+		}
+
+		constexpr Vector3 operator-() const noexcept
+		{
+			return Vector3(-x, -y, -z);
+		}
+
 		constexpr Vector3 operator+(const Vector3& V) const noexcept
 		{
 			return Vector3(x + V.x, y + V.y, z + V.z);
@@ -162,20 +181,6 @@ namespace Math
 			y /= value;
 			z /= value;
 			return *this;
-		}
-
-		const float& operator[](int index) const
-		{
-			Chack(0 <= index);
-			Chack(index < 3);
-			return (&x)[index];
-		}
-
-		float& operator[](int index)
-		{
-			Chack(0 <= index);
-			Chack(index < 3);
-			return (&x)[index];
 		}
 
 		Vector3 Cross(const Vector3& V) const noexcept
