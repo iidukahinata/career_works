@@ -8,6 +8,7 @@
 
 
 #include "GameScene.h"
+#include "SubSystem/Renderer/Drawings/Light/Light.h"
 #include "SubSystem/Renderer/TransformCBuffer.h"
 #include "SubSystem/Input/Input.h"
 #include "../GameObject/Stage.h"

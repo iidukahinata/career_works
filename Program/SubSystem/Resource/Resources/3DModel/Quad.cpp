@@ -13,10 +13,6 @@
 #include "SubSystem/Resource/ResourceManager.h"
 #include "SubSystem/ThreadPool/ThreadPool.h"
 
-Quad::Quad() : 
-	m_color(1, 1, 1, 1)
-{}
-
 void Quad::Init(const QuadDesc& desc)
 {
 	m_mesh = Plane::Make<Vertex3D>();
@@ -67,7 +63,7 @@ void Quad::Draw(const DirectX::XMMATRIX& world)
 	// プリミティブタイプをセット
 	D3D11GrahicsDevice::Get().GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	TransformCBuffer::Get().Bind(world, m_color);
+	TransformCBuffer::Get().Bind(world);
 
 	m_mesh.Draw();
 }

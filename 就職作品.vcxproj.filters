@@ -127,6 +127,9 @@
     <Filter Include="Game\Component">
       <UniqueIdentifier>{f13c7aa1-2450-43f2-8891-169620615f75}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SubSystem\Renderer\Shader\PostEffect">
+      <UniqueIdentifier>{241629f5-a90c-4fd3-8adc-24ddf0ee6349}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program\Application\Application.cpp">
@@ -767,21 +770,15 @@
     <None Include="Program\SubSystem\Renderer\Shader\PBR.hlsli">
       <Filter>SubSystem\Renderer\Shader</Filter>
     </None>
-    <None Include="Program\SubSystem\Renderer\Shader\psvsCommon.hlsli">
+    <None Include="Program\SubSystem\Renderer\Shader\Core.hlsli">
       <Filter>SubSystem\Renderer\Shader</Filter>
     </None>
     <None Include="Program\SubSystem\Renderer\Shader\Blur.hlsli">
-      <Filter>SubSystem\Renderer\Shader</Filter>
+      <Filter>SubSystem\Renderer\Shader\PostEffect</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Program\SubSystem\Renderer\Shader\LambertVS.hlsl">
-      <Filter>SubSystem\Renderer\Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\LuminanceSamplingPS.hlsl">
-      <Filter>SubSystem\Renderer\Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\MonotonePS.hlsl">
       <Filter>SubSystem\Renderer\Shader</Filter>
     </FxCompile>
     <FxCompile Include="Program\SubSystem\Renderer\Shader\PBR_PS.hlsl">
@@ -796,25 +793,10 @@
     <FxCompile Include="Program\SubSystem\Renderer\Shader\TextureVS.hlsl">
       <Filter>SubSystem\Renderer\Shader</Filter>
     </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\XBlurVS.hlsl">
-      <Filter>SubSystem\Renderer\Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\YBlurVS.hlsl">
-      <Filter>SubSystem\Renderer\Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\BloomPS.hlsl">
-      <Filter>SubSystem\Renderer\Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\BlurPS.hlsl">
-      <Filter>SubSystem\Renderer\Shader</Filter>
-    </FxCompile>
     <FxCompile Include="Program\SubSystem\Renderer\Shader\BoxPS.hlsl">
       <Filter>SubSystem\Renderer\Shader</Filter>
     </FxCompile>
     <FxCompile Include="Program\SubSystem\Renderer\Shader\BoxVS.hlsl">
-      <Filter>SubSystem\Renderer\Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\DepthOfFieldPS.hlsl">
       <Filter>SubSystem\Renderer\Shader</Filter>
     </FxCompile>
     <FxCompile Include="Program\SubSystem\Renderer\Shader\LambertPS.hlsl">
@@ -825,6 +807,27 @@
     </FxCompile>
     <FxCompile Include="Program\SubSystem\Renderer\Shader\Texture2DVS.hlsl">
       <Filter>SubSystem\Renderer\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\BloomPS.hlsl">
+      <Filter>SubSystem\Renderer\Shader\PostEffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\BlurPS.hlsl">
+      <Filter>SubSystem\Renderer\Shader\PostEffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\DepthOfFieldPS.hlsl">
+      <Filter>SubSystem\Renderer\Shader\PostEffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\LuminanceSamplingPS.hlsl">
+      <Filter>SubSystem\Renderer\Shader\PostEffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\MonotonePS.hlsl">
+      <Filter>SubSystem\Renderer\Shader\PostEffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\XBlurVS.hlsl">
+      <Filter>SubSystem\Renderer\Shader\PostEffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\YBlurVS.hlsl">
+      <Filter>SubSystem\Renderer\Shader\PostEffect</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

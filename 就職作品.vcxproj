@@ -231,9 +231,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Program\SubSystem\Renderer\Shader\Blur.hlsli" />
+    <None Include="Program\SubSystem\Renderer\Shader\Core.hlsli" />
     <None Include="Program\SubSystem\Renderer\Shader\Light.hlsli" />
     <None Include="Program\SubSystem\Renderer\Shader\PBR.hlsli" />
-    <None Include="Program\SubSystem\Renderer\Shader\psvsCommon.hlsli" />
     <None Include="Program\ThirdParty\FMOD\include\fmod.cs" />
     <None Include="Program\ThirdParty\FMOD\include\fmod_dsp.cs" />
     <None Include="Program\ThirdParty\FMOD\include\fmod_errors.cs" />

@@ -2,7 +2,7 @@
 * @file    D3D11ConstantBuffer.h
 * @brief   
 *
-* @date	   2022/05/10 2022年度初版
+* @date	   2022/06/06 2022年度初版
 * @author  飯塚陽太
 */
 #pragma once
@@ -17,7 +17,7 @@ class D3D11ConstantBuffer : public D3D11DeviceChild
 {
 public:
 
-	/** 
+	/**
 	* CPU側からの更新が多いと予測し動的リソースとして作成される。
 	* @param bufferSize [入力] 16倍数ビットではない値でも可能です。
 	*/
@@ -25,7 +25,7 @@ public:
 
 	/** GPU データを更新します。 */
 	void Update(const T& buffer) noexcept;
-	
+
 	/** デバイス設定するための関数です。*/
 	void VSSet(UINT slot) noexcept;
 	void PSSet(UINT slot) noexcept;

@@ -1,10 +1,4 @@
-#include "psvsCommon.hlsli"
 #include "PBR.hlsli"
-
-Texture2D g_texture : register(t0);
-Texture2D g_normalMap : register(t1);
-Texture2D g_metallicSmoothMap : register(t2); // rにメタリック、aにスムース
-sampler g_sampler;
 
 struct PS_IN {
 	float4 pos : SV_POSITION;
@@ -33,51 +27,32 @@ PS_OUT main(PS_IN input)
 {
 	float4 finalColor = float4(0, 0, 0, 1);
 
-	// サンプル取得
-	float4 albedoColor = g_texture.Sample(g_sampler, input.tex);
-	float4 metallicSmooth = g_metallicSmoothMap.Sample(g_sampler, input.tex);
-	float metallic = metallicSmooth.r;
-	float smooth = metallicSmooth.a;
-
-	// マテリアル生成
-	Material material;
-	material.albedoColor = albedoColor.xyz;
-	material.roughness = (1.f - smooth); // 滑らかさ → 粗さ に変更
-	material.metallic = metallic;
-
-	// 法線取得
+	Material material = GetMaterial(input.tex);
 	float3 normal = GetNormalsFromNormalMaps(input.normal, input.tangent, input.biNormal, input.tex);
 
 	// 平行光源計算
-	finalColor.xyz += PBR(material,
-						  ToLightFromDirectionalLight(directionalLight),
-						  input.toEye,
-						  normal);
+	finalColor.xyz += PBR(material, ToLightFromDirectionalLight(directionalLight), input.toEye, normal);
 
 	// ポイントライト計算
-	for (int i = 0; i < lightCount.x; i++)
+	const int pointLightCount = lightCount.x;
+	for (int i = 0; i < pointLightCount; ++i)
 	{
-		finalColor.xyz += PBR(material,
-							  ToLightFromPointLight(pointLights[i], input.worldPos),
-							  input.toEye,
-							  normal);
+		finalColor.xyz += PBR(material, ToLightFromPointLight(pointLights[i], input.worldPos), input.toEye, normal);
 	}
 
 	// スポットライト計算
-	for (int i = 0; i < lightCount.y; i++)
+	const int spotLightCount = lightCount.y;
+	for (int i = 0; i < spotLightCount; ++i)
 	{
-		finalColor.xyz += PBR(material,
-							  ToLightFromSpotLight(spotLights[i], input.worldPos),
-							  input.toEye,
-							  normal);
+		finalColor.xyz += PBR(material, ToLightFromSpotLight(spotLights[i], input.worldPos), input.toEye, normal);
 	}
-		
+
 	// 2022/04/16 カラー値が0以下になる現象を発見一時的にmax値で対処
 	finalColor.x = max(finalColor.x, 0.f);
 	finalColor.y = max(finalColor.y, 0.f);
 	finalColor.z = max(finalColor.z, 0.f);
 
-	finalColor.xyz += (ambientColor * albedoColor);
+	finalColor.xyz += (ambientColor.xyz * material.albedoColor);
 	
 	PS_OUT output;
 	output.color = finalColor;

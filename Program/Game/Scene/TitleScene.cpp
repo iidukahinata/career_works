@@ -8,6 +8,7 @@
 
 
 #include "TitleScene.h"
+#include "SubSystem/Renderer/Drawings/Light/Light.h"
 #include "SubSystem/Scene/SceneManager.h"
 #include "SubSystem/Renderer/TransformCBuffer.h"
 #include "SubSystem/Input/Input.h"

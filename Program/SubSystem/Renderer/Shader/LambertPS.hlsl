@@ -1,7 +1,5 @@
-#include "psvsCommon.hlsli"
 #include "Light.hlsli"
-
-#define PI 3.141592654
+#include "Core.hlsli"
 
 Texture2D g_texture;
 sampler g_sampler;
@@ -22,27 +20,27 @@ struct PS_OUT {
 
 PS_OUT main(PS_IN input)
 {
-	float3 lightDirection = normalize(directionalLight.direction);
-	float lightPower = saturate(dot(input.normal, lightDirection));
+	float4 finalColor = float4(0, 0, 0, 1);
+	
+	// サンプル取得
+	float4 baseColor = g_texture.Sample(g_sampler, input.tex);
+	
+	Light light = ToLightFromDirectionalLight(directionalLight);
+	float lightPower = saturate(dot(input.normal, light.direction));
 
 	// 正規化ランバート拡散反射光
-	float diffuse = directionalLight.color * lightPower / PI;
-
-	// 鏡面反射の強さ
-	float3 reflection = reflect(lightDirection, input.normal);
-	lightPower = saturate(dot(reflection, input.toEye));
-	lightPower = pow(lightPower, 5.0f);
+	float diffuse = lightPower / PI;
 
 	// 鏡面反射光
-	float3 specular = directionalLight.color * lightPower;
+	float3 reflection = reflect(light.direction, input.normal);
+	lightPower = saturate(dot(reflection, input.toEye));
+	lightPower = Pow5(lightPower);
+	float3 specular = lightPower;
 
 	// 最終的な光
-	float3 light = diffuse + specular;
-	light += 0.4f;
-
-	float4 finalColor = g_texture.Sample(g_sampler, input.tex);
-	finalColor.xyz *= light;
-
+	finalColor.xyz *= light.color * light.intensity * (diffuse + specular);
+	finalColor += (ambientColor * baseColor);
+	
 	PS_OUT output;
 	output.color = finalColor;
 	output.depth = input.viewPos.z;

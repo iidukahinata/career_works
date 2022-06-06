@@ -145,7 +145,10 @@ bool Stage::SetMass(Math::Vector3i pos, IMass* data) noexcept
 	if (GetMassHight(pos) < pos.y)
 		return false;
 
-	data->SetMassPos(Math::Vector3i(pos.x, pos.y, pos.z));
+	if (data)
+	{
+		data->SetMassPos(Math::Vector3i(pos.x, pos.y, pos.z));
+	}
 
 	m_mases[pos.x][pos.z] = data;
 
@@ -187,12 +190,7 @@ bool Stage::LoadMapChip(int world, int stage) noexcept
 	
 	std::vector<std::pair<FloorType, int>> m_mapMeta;
 	file.Read(&m_mapMeta);
-	
-	for (int i = 0; i < m_mapMeta.size(); ++i)
-	{
-		m_map[i % 10][i / 10].first = m_mapMeta[i].first;
-		m_map[i % 10][i / 10].second = m_mapMeta[i].second;
-	}
+	std::memcpy(m_map, m_mapMeta.data(), sizeof(m_map));
 	
 	std::vector<std::pair<IMass::MassType, Math::Vector3i>> m_massMeta;
 	file.Read(&m_massMeta);
@@ -208,42 +206,6 @@ bool Stage::LoadMapChip(int world, int stage) noexcept
 		default: break;
 		}
 	}
-
-	// 仮ステージとして一番下を 0 で埋めたものを作成。
-	for (int x = 0; x < MaxMapSize; ++x)
-	{
-		for (int z = 0; z < MaxMapSize; ++z)
-		{
-			m_map[x][z] = std::pair<FloorType, int>(FloorType::FLOOR, 0);
-		}
-	}
-
-	{
-		// 適当に初期値 0,0の位置に生成
-		Player* mass = new Player();
-		SetMass(Math::Vector3i(0, 0, 0), mass);
-		m_scene->AddGameObject(mass);
-	}
-
-	{
-		// 適当に初期値 3,3の位置に生成
-		Human* mass = new Human();
-		SetMass(Math::Vector3i(9, 0, 9), mass);
-		m_scene->AddGameObject(mass);
-	
-		++m_humansCount;
-	}
-
-	{
-		// 適当に初期値 3,3の位置に生成
-		m_map[4][4] = std::pair<FloorType, int>(FloorType::MESSAGE, 0);
-		
-		Message* mass = new Message();
-		mass->MessegeSpriteInit(0);
-		SetMass(Math::Vector3i(4, 0, 4), mass);
-		m_scene->AddGameObject(mass);
-	}
-
 	return true;
 }
 
@@ -257,16 +219,12 @@ bool Stage::SaveMapChip(int world, int stage) const noexcept
 		return false;
 	}
 
-	std::vector<std::pair<FloorType, int>> m_mapMeta;
-	for (int x = 0; x < MaxMapSize; ++x)
-	{
-		for (int z = 0; z < MaxMapSize; ++z)
-		{
-			m_mapMeta.emplace_back(m_map[x][z].first, m_map[x][z].second);
-		}
-	}
+	// 書き込みしやすいように一次元配列データにしている。
+	std::vector<std::pair<FloorType, int>> m_mapMeta(MaxMapSize * MaxMapSize);
+	std::memcpy(m_mapMeta.data(), m_map, sizeof(m_map));
 	file.Write(m_mapMeta);
 
+	// MassType : Position 情報を同じく一次元配列データにしている。
 	std::vector<std::pair<IMass::MassType, Math::Vector3i>> m_massMeta;
 	for (int x = 0; x < MaxMapSize; ++x)
 	{
@@ -324,4 +282,5 @@ void Stage::CreateMessage(Math::Vector3i pos) noexcept
 	Message* mass = new Message();
 	SetMass(pos, mass);
 	m_scene->AddGameObject(mass);
+	mass->MessegeSpriteInit(0);
 }

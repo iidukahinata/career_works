@@ -2,7 +2,7 @@
 * @file	   TransformCBuffer.h
 * @brief
 *
-* @date	   2022/05/10 2022年度初版
+* @date	   2022/06/06 2022年度初版
 * @author  飯塚陽太
 */
 #pragma once
@@ -29,8 +29,7 @@ public:
 	void Init();
 
 	/* デバイス設定を変更します。*/
-	void Bind(const DirectX::XMMATRIX& world,
-		const Math::Vector4& color = Math::Vector4(1, 1, 1, 1));
+	void Bind(const DirectX::XMMATRIX& world);
 
 	const DirectX::XMMATRIX& GetProjection() noexcept;
 	void SetProjection(const DirectX::XMMATRIX& projection) noexcept;
@@ -48,7 +47,6 @@ private:
 		DirectX::XMMATRIX world;
 		DirectX::XMMATRIX view;
 		DirectX::XMMATRIX projection;
-		Math::Vector4 color;
 	};
 
 	D3D11ConstantBuffer<ConstantBufferMatrix> m_constantBuffer;

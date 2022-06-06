@@ -1,4 +1,4 @@
-#include "psvsCommon.hlsli"
+#include "Core.hlsli"
 #include "Light.hlsli"
 
 struct VS_IN {

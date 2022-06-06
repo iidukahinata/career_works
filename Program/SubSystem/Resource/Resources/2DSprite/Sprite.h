@@ -2,7 +2,7 @@
 * @file    Sprite.h
 * @brief
 *
-* @date	   2022/05/11 2022年度初版
+* @date	   2022/06/06 2022年度初版
 * @author  飯塚陽太
 */
 #pragma once
@@ -42,12 +42,6 @@ struct SpriteDesc
 class Sprite
 {
 public:
-
-	Math::Vector4 m_color;
-
-public:
-
-	Sprite();
 
 	void Init(const SpriteDesc& desc);
 	void Draw(const DirectX::XMMATRIX& world);

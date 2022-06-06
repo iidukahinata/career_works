@@ -9,10 +9,6 @@
 
 
 #include"SubSystem/Scene/Scene.h"
-#include "SubSystem/Renderer/Drawings/Light/Light.h"
-#include "SubSystem/Renderer/Drawings/Effect/Postprocessing.h"
-#include "SubSystem/Renderer/Drawings/SkyBox/SkyBox.h"
-
 
 class TitleScene : public IScene
 {

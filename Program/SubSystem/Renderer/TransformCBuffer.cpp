@@ -2,7 +2,7 @@
 * @file	   TransformCBuffer.cpp
 * @brief
 *
-* @date	   2022/05/10 2022年度初版
+* @date	   2022/06/06 2022年度初版
 * @author  飯塚陽太
 */
 
@@ -10,22 +10,14 @@
 #include "TransformCBuffer.h"
 #include "SubSystem/Tools/Tools.h"
 
-
 void TransformCBuffer::Init()
 {
-	constexpr int bufferSize = AdjustToMultiples(sizeof(ConstantBufferMatrix), 16);
-	m_constantBuffer.Create(bufferSize);
+	m_constantBuffer.Create(sizeof(ConstantBufferMatrix));
 }
 
-void TransformCBuffer::Bind(
-	const DirectX::XMMATRIX& world,
-	const Math::Vector4& color /* = Math::Vector4(1, 1, 1, 1) */
-)
+void TransformCBuffer::Bind(const DirectX::XMMATRIX& world)
 {
-	ConstantBufferMatrix buffer = {
-		DirectX::XMMatrixTranspose(world),
-		m_viewXM, m_projectionXM, color
-	};
+	ConstantBufferMatrix buffer = { DirectX::XMMatrixTranspose(world), m_viewXM, m_projectionXM };
 
 	m_constantBuffer.Update(buffer);
 

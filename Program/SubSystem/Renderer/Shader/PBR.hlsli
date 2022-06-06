@@ -9,14 +9,13 @@
 */
 
 
+#include "Core.hlsli"
 #include "Light.hlsli"
 
-#define PI 3.141592654
-
-#define Pow2(x) pow(x, 2)
-#define Pow3(x) pow(x, 3)
-#define Pow4(x) pow(x, 4)
-#define Pow5(x) pow(x, 5)
+Texture2D g_texture : register(t0);
+Texture2D g_normalMap : register(t1);
+Texture2D g_metallicSmoothMap : register(t2); // rにメタリック、aにスムース
+sampler g_sampler;
 
 struct Material
 {
@@ -24,6 +23,23 @@ struct Material
 	float roughness;
 	float metallic;
 };
+
+Material GetMaterial(float2 tex)
+{
+	// サンプル取得
+	float4 albedoColor = g_texture.Sample(g_sampler, tex);
+	float4 metallicSmooth = g_metallicSmoothMap.Sample(g_sampler, tex);
+	float metallic = metallicSmooth.r;
+	float smooth = metallicSmooth.a;
+
+	// マテリアル生成
+	Material material;
+	material.albedoColor = albedoColor.xyz;
+	material.roughness = (1.f - smooth); // 滑らかさ → 粗さ に変更
+	material.metallic = metallic;
+	
+	return material;
+}
 
 // [Beckmann 1963]
 float DistributionBeckmann(float NdotH, float a2)

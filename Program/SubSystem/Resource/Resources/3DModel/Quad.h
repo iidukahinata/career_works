@@ -38,18 +38,12 @@ struct QuadDesc
 class Quad
 {
 public:
-
-	Math::Vector4 m_color;
-
-public:
-
-	Quad();
-
+	
 	void Init(const QuadDesc& desc);
 	void Draw(const DirectX::XMMATRIX& world);
 
 private:
-
+	
 	Mesh<Vertex3D> m_mesh;
 
 	// shader object

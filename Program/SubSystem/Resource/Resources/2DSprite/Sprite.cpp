@@ -2,7 +2,7 @@
 * @file    Sprite.cpp
 * @brief
 *
-* @date	   2022/05/01 2022年度初版
+* @date	   2022/06/06 2022年度初版
 * @author  飯塚陽太
 */
 
@@ -12,10 +12,6 @@
 #include "SubSystem/Renderer/Geometry/Plane.h"
 #include "SubSystem/Resource/ResourceManager.h"
 #include "SubSystem/ThreadPool/ThreadPool.h"
-
-Sprite::Sprite() : 
-	m_color(1, 1, 1, 1)
-{}
 
 void Sprite::Init(const SpriteDesc& desc)
 {
@@ -63,7 +59,7 @@ void Sprite::Draw(const DirectX::XMMATRIX& world)
 	// プリミティブタイプをセット
 	D3D11GrahicsDevice::Get().GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	TransformCBuffer::Get().Bind(world, m_color);
+	TransformCBuffer::Get().Bind(world);
 
 	m_mesh.Draw();
 }

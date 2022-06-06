@@ -9,6 +9,7 @@
 
 #include "BackGraund.h"
 #include "SubSystem/Window/Window.h"
+#include "SubSystem/Timer/Timer.h"
 
 void BackGraund::Init()
 {
@@ -30,11 +31,47 @@ void BackGraund::Init()
 
     m_sprite.Init(spriteDesc);
 
-    m_transform.SetPosition(Math::Vector3());
-    m_transform.SetScale(Math::Vector3(2, 2, 1));
+    m_transform.SetScale(Math::Vector3(3.f, 0.f, 1.f));
+}
+
+void BackGraund::Update()
+{
+    switch (m_animMode)
+    {
+    case BackGraund::Opne: OpneAnimUpdate(); break;
+    case BackGraund::Up: UpAnimUpdate(); break;
+    case BackGraund::Down: DownAnimUpdate(); break;
+    default: break;
+    }
 }
 
 void BackGraund::Draw()
 {
     m_sprite.Draw(m_transform.GetWorldMatrixXM());
+}
+
+void BackGraund::OpneAnimUpdate() noexcept
+{
+    m_addSpeed < 0.1f ? m_addSpeed += 0.001f : m_addSpeed += 0.05f;
+    if (m_addSpeed > 1.f) m_addSpeed = 1.f;
+
+    m_speed += (m_addSpeed * Timer::Get().GetDeltaTime());
+    m_transform.SetScale(m_transform.GetScale() + Math::Vector3(-m_speed, m_speed * 0.5f, 0.f));
+
+    constexpr float changeAnimSizeX = 1.5f;
+    if (m_transform.GetScale().x <= changeAnimSizeX)
+    {
+        m_animMode = AnimMode::Up;
+        m_transform.SetScale(Math::Vector3(1.5f, 0.75f, 1.f));
+    }
+}
+
+void BackGraund::UpAnimUpdate() noexcept
+{
+    m_animMode = AnimMode::Down;
+}
+
+void BackGraund::DownAnimUpdate() noexcept
+{
+    m_animMode = AnimMode::None;
 }

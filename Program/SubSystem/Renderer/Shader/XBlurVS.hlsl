@@ -1,4 +1,4 @@
-#include "psvsCommon.hlsli"
+#include "Core.hlsli"
 #include "Blur.hlsli"
 
 VS_OUT main(VS_IN input)

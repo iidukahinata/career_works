@@ -2,7 +2,7 @@
 * @file    HitStop.h
 * @brief
 *
-* @date	   2022/06/02 2022年度初版
+* @date	   2022/06/03 2022年度初版
 * @author  飯塚陽太
 */
 
@@ -23,6 +23,5 @@ bool HitStop::IsHitStop() noexcept
 		++m_numFream;
 		m_isHitStop = m_numFream <= m_endFream;
 	}
-
 	return m_isHitStop;
 }
