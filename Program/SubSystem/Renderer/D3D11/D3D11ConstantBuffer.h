@@ -52,7 +52,7 @@ inline bool D3D11ConstantBuffer<T>::Create(UINT bufferSize) noexcept
 	HRESULT hr = GetGraphicsDevice()->GetDevice()->CreateBuffer(&bufferDesc, nullptr, m_constantBuffer.GetAddressOf());
 	if (FAILED(hr))
 	{
-		LOG_ERROR("コンスタントバッファー作成失敗 : D3D11ConstantBuffer.cpp");
+		LOG_ERROR("コンスタントバッファー作成に失敗。");
 		return false;
 	}
 	return true;

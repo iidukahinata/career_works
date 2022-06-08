@@ -32,12 +32,12 @@ void Renderer::Init()
 	MyGui::Get().Init();
 
 	// fpsƒ^ƒCƒ€•`‰æ
-	MyGui::Get().AddWidget(DrawFrameRate);
+	//MyGui::Get().AddWidget(DrawFrameRate);
 }
 
 void Renderer::BeginFream()
 {
-	D3D11GrahicsDevice::Get().Clear(Math::Vector4(0, 0, 0));
+	D3D11GrahicsDevice::Get().Clear(Math::Vector4(1.f, 0.67f, 0.24f, 1.f));
 }
 
 void Renderer::EndFream()

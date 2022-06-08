@@ -24,13 +24,18 @@
     <ClCompile Include="Program\Game\Game.cpp" />
     <ClCompile Include="Program\Game\GameObject\BackGraund.cpp" />
     <ClCompile Include="Program\Game\GameObject\CameraMove.cpp" />
+    <ClCompile Include="Program\Game\GameObject\Effect.cpp" />
+    <ClCompile Include="Program\Game\GameObject\GameMaster.cpp" />
     <ClCompile Include="Program\Game\GameObject\Human.cpp" />
     <ClCompile Include="Program\Game\GameObject\IMass.cpp" />
     <ClCompile Include="Program\Game\GameObject\Message.cpp" />
     <ClCompile Include="Program\Game\GameObject\Player.cpp" />
     <ClCompile Include="Program\Game\GameObject\Stage.cpp" />
+    <ClCompile Include="Program\Game\GameObject\TitlePlayer.cpp" />
+    <ClCompile Include="Program\Game\GameObject\TitleString.cpp" />
     <ClCompile Include="Program\Game\Scene\EditScene.cpp" />
     <ClCompile Include="Program\Game\Scene\GameScene.cpp" />
+    <ClCompile Include="Program\Game\Scene\SelectScene.cpp" />
     <ClCompile Include="Program\Game\Scene\TitleScene.cpp" />
     <ClCompile Include="Program\SubSystem\Audio\Audio.cpp" />
     <ClCompile Include="Program\SubSystem\Audio\AudioListener.cpp" />
@@ -119,13 +124,18 @@
     <ClInclude Include="Program\Game\Game.h" />
     <ClInclude Include="Program\Game\GameObject\BackGraund.h" />
     <ClInclude Include="Program\Game\GameObject\CameraMove.h" />
+    <ClInclude Include="Program\Game\GameObject\Effect.h" />
+    <ClInclude Include="Program\Game\GameObject\GameMaster.h" />
     <ClInclude Include="Program\Game\GameObject\Human.h" />
     <ClInclude Include="Program\Game\GameObject\IMass.h" />
     <ClInclude Include="Program\Game\GameObject\Message.h" />
     <ClInclude Include="Program\Game\GameObject\Player.h" />
     <ClInclude Include="Program\Game\GameObject\Stage.h" />
+    <ClInclude Include="Program\Game\GameObject\TitlePlayer.h" />
+    <ClInclude Include="Program\Game\GameObject\TitleString.h" />
     <ClInclude Include="Program\Game\Scene\EditScene.h" />
     <ClInclude Include="Program\Game\Scene\GameScene.h" />
+    <ClInclude Include="Program\Game\Scene\SelectScene.h" />
     <ClInclude Include="Program\Game\Scene\TitleScene.h" />
     <ClInclude Include="Program\SubSystem\Audio\Audio.h" />
     <ClInclude Include="Program\SubSystem\Audio\AudioHelper.h" />
@@ -261,6 +271,16 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\ColorTecture2DPS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Program\SubSystem\Renderer\Shader\DepthOfFieldPS.hlsl">

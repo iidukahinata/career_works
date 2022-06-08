@@ -35,8 +35,8 @@ Material GetMaterial(float2 tex)
 	// マテリアル生成
 	Material material;
 	material.albedoColor = albedoColor.xyz;
-	material.roughness = (1.f - smooth); // 滑らかさ → 粗さ に変更
 	material.metallic = metallic;
+	material.roughness = (1.f - smooth); // 滑らかさ → 粗さ に変更
 	
 	return material;
 }
@@ -100,7 +100,7 @@ float3 DiffuseLambert(float3 DiffuseColor)
 }
 
 // [EA DICE 2014]
-float DiffuseFresnel(float LdotH, float NdotL, float3 NdotV, float roughness)
+float DiffuseFresnel(float LdotH, float NdotL, float NdotV, float roughness)
 {
 	float energyBias = lerp(0.0f, 0.5f, roughness);
 	float energyFactor = lerp(1.0, 1.0 / 1.51, roughness);

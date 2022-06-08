@@ -32,7 +32,7 @@ bool D3D11SamplerState::Create(
 	HRESULT hr = GetGraphicsDevice()->GetDevice()->CreateSamplerState(&samplerDesc, m_sampler.GetAddressOf());
 	if (FAILED(hr))
 	{
-		LOG_ERROR("サンプラー作成失敗 : D3D11SamplerState.cpp");
+		LOG_ERROR("サンプラー作成に失敗。");
 		return false;
 	}
 	return true;

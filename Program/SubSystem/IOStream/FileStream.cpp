@@ -2,7 +2,7 @@
 * @file    FileStream.cpp
 * @brief   ファイル操作クラス
 *
-* @data	   2022/05/28 2022年度初版
+* @data	   2022/06/06 2022年度初版
 * @author  飯塚陽太
 */
 
@@ -112,6 +112,16 @@ void FileStream::Close() noexcept
 
 	m_fp = nullptr;
 	m_openMode = OpenMode::Not_Mode;
+}
+
+bool FileStream::IsOpen() const noexcept
+{ 
+	return m_fp;
+}
+
+bool FileStream::IsEof() const noexcept
+{
+	return feof(m_fp) != 0;
 }
 #else
 FileStream::FileStream(std::string_view filePath, OpenMode mode)

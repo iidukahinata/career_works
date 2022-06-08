@@ -24,7 +24,7 @@ namespace Math
 		constexpr Vector3T() noexcept : x(0), y(0), z(0)
 		{}
 
-		constexpr Vector3T(T value) noexcept : x(value), y(value), z(value)
+		explicit constexpr Vector3T(T value) noexcept : x(value), y(value), z(value)
 		{}
 
 		constexpr Vector3T(const Vector3T<T>& V) noexcept : x(V.x), y(V.y), z(V.z)

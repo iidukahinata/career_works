@@ -101,3 +101,8 @@ void IScene::SetSceneManager(SceneManager* sceneManager) noexcept
 	Chack(!m_sceneManager);
 	m_sceneManager = sceneManager;
 }
+
+SceneManager* IScene::GetSceneManager() const noexcept
+{
+	return m_sceneManager;
+}

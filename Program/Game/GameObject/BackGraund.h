@@ -11,35 +11,63 @@
 #include "SubSystem/Scene/GameObject.h"
 #include "SubSystem/Resource/Resources/2DSprite/Sprite.h"
 
-class BackGraund : public IGameObject
+class PartternBackGraound
 {
 public:
 
+	void Awake() noexcept;
+	void Init(class Camera* camera) noexcept;
+	void Update() noexcept;
+	void Draw(UINT index) noexcept;
+
+private:
+
+	Transform m_transform;
+
+	static const int patternSize = 6;
+	Sprite m_sprites[patternSize];
+
+	static const int maxCentorPosSize = 10;
+	Math::Vector3 m_patternCentorPositions[maxCentorPosSize];
+
+	Math::Vector3 m_velocity = Math::Vector3(-0.02f, 0.02f, 0.f);
+
+	Math::Vector3 m_bottomPos;
+};
+
+class SelectBackGraund : public IGameObject
+{
+public:
+
+	enum class AnimMode
+	{
+		ScreenIn,
+		ScreenOut,
+		None,
+	};
+
 	// IGameObject
+	void Awake() override;
 	void Init() override;
 	void Update() override;
 	void Draw() override;
 
 private:
 
-	void OpneAnimUpdate() noexcept;
-	void UpAnimUpdate() noexcept;
-	void DownAnimUpdate() noexcept;
+	void ScreenInAnimUpdate() noexcept;
+	void ScreenOutAnimUpdate() noexcept;
 
 private:
 
-	enum AnimMode
-	{
-		Opne,
-		Up,
-		Down,
-		None,
-	};
+	Sprite m_backSprite;
 
-	AnimMode m_animMode = AnimMode::Opne;
+	class GameMaster* m_master = nullptr;
 
-	float m_addSpeed = 0.f;
-	float m_speed = 0.f;
+	PartternBackGraound m_parttern;
 
-	Sprite m_sprite;
+	AnimMode m_animMode = AnimMode::ScreenIn;
+
+	int m_nowSelectSceneIndex = 0;
+
+	float m_speed = -0.075f;
 };

@@ -1,28 +1,23 @@
 /**
-* @file    GameScene.cpp
+* @file    SelectScene.cpp
 * @brief
 *
-* @date	   2022/06/03 2022年度初版
+* @date	   2022/06/08 2022年度初版
 * @author  飯塚陽太
 */
 
 
-#include "GameScene.h"
+#include "SelectScene.h"
+
 #include "SubSystem/Renderer/Drawings/Light/Light.h"
+#include "SubSystem/Scene/SceneManager.h"
 #include "SubSystem/Renderer/TransformCBuffer.h"
 #include "SubSystem/Input/Input.h"
-#include "../GameObject/Stage.h"
-#include "../GameObject/Player.h"
-#include "../GameObject/CameraMove.h"
 
+#include "../GameObject/BackGraund.h"
 #include "../GameObject/GameMaster.h"
 
-void GameScene::Awake()
-{
-	AddGameObject(new Stage);
-}
-
-void GameScene::Init()
+void SelectScene::Init()
 {
 	m_lightMap.Init();
 
@@ -36,19 +31,21 @@ void GameScene::Init()
 	m_lightMap.SetAmbient(Math::Vector4(0.4f));
 
 	AddGameObject(new GameMaster);
-	AddGameObject(new CameraMove);
+	AddGameObject(new SelectBackGraund);
 
 	IScene::Init();
+
+	m_master = dynamic_cast<GameMaster*>(GetGameObject("GameMaster"));
 }
 
-void GameScene::Update()
+void SelectScene::Update()
 {
 	IScene::Update();
 
 	m_lightMap.Update(m_mainCamera->GetTransform().GetWoldPosition());
 }
 
-void GameScene::Draw()
+void SelectScene::Draw()
 {
 	TransformCBuffer::Get().SetProjection(m_mainCamera->GetProjectionMatrixXM());
 	TransformCBuffer::Get().SetView(m_mainCamera->GetViewMatrixXM());

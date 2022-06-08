@@ -21,7 +21,6 @@ namespace Math
 	const Vector3 Vector3::Forward	  ( 1.0f,  0.0f,  0.0f);
 	const Vector3 Vector3::BackForward(-1.0f,  0.0f,  0.0f);
 
-	Vector3::Vector3(const Vector4& V) noexcept 
-		: DirectX::XMFLOAT3(V.x, V.y, V.z)
+	Vector3::Vector3(const Vector4& V) noexcept : DirectX::XMFLOAT3(V.x, V.y, V.z)
 	{}
 }

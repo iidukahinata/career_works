@@ -46,15 +46,15 @@ namespace Math
 		constexpr Vector3() noexcept : DirectX::XMFLOAT3(0, 0, 0)
 		{}
 
-		constexpr Vector3(float value) noexcept : DirectX::XMFLOAT3(value, value, value)
+		explicit constexpr Vector3(float value) noexcept : DirectX::XMFLOAT3(value, value, value)
 		{}
 
-		Vector3(const Vector4& V) noexcept;
+		explicit Vector3(const Vector4& V) noexcept;
 
 		constexpr Vector3(const Vector3& V) noexcept : DirectX::XMFLOAT3(V.x, V.y, V.z)
 		{}
 
-		constexpr Vector3(const Vector2& V, float z) noexcept : DirectX::XMFLOAT3(V.x, V.y, z)
+		explicit constexpr Vector3(const Vector2& V, float z) noexcept : DirectX::XMFLOAT3(V.x, V.y, z)
 		{}
 
 		constexpr Vector3(float x, float y, float z) noexcept : DirectX::XMFLOAT3(x, y, z)

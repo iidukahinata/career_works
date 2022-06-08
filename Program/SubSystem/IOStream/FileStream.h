@@ -2,11 +2,11 @@
 * @file    FileStream.h
 * @brief   ファイル操作クラス
 *
-* @data	   2022/05/14 2022年度初版
+* @data	   2022/06/06 2022年度初版
 * @author  飯塚陽太
 * @note
 *  書き読み込み速度向上のため c 言語での処理に修正。
-*  fscanf 操作は使用していません。
+*  fscanf 操作関数は作成していません。
 *  c++ での処理は c 言語での処理の下に残しておく。
 */
 #pragma once
@@ -92,8 +92,8 @@ public:
 
 	void Close() noexcept;
 
-	bool IsOpen() const noexcept { return m_fp; }
-	bool IsEof() const noexcept { return feof(m_fp) != 0; }
+	bool IsOpen() const noexcept;
+	bool IsEof() const noexcept;
 
 private:
 

@@ -9,6 +9,7 @@
 
 #include "D3D11RenderTexture.h"
 #include "Application/Application.h"
+#include "SubSystem/Log/DebugLog.h"
 
 bool D3D11RenderTexture::Create(
 	UINT widthSize,
@@ -35,6 +36,7 @@ bool D3D11RenderTexture::Create(
 
 	HRESULT hr = device->CreateTexture2D(&renderTargetTextureDesc, nullptr, renderTargetViewTexture.GetAddressOf());
 	if (FAILED(hr)) {
+		LOG_ERROR("RenderTarget 用テクスチャの生成に失敗しました。");
 		return false;
 	}
 
@@ -47,6 +49,7 @@ bool D3D11RenderTexture::Create(
 	// レンダーターゲットビューの生成
 	hr = device->CreateRenderTargetView(renderTargetViewTexture.Get(), &renderTargetViewDesc, m_renderTarget.GetAddressOf());
 	if (FAILED(hr)) {
+		LOG_ERROR("RenderTargetView の生成に失敗しました。");
 		return false;
 	}
 
@@ -60,6 +63,7 @@ bool D3D11RenderTexture::Create(
 	// シェーダリソースビューの生成
 	hr = device->CreateShaderResourceView(renderTargetViewTexture.Get(), &srvDesc, m_texture.GetAddressOfShaderResourceView());
 	if (FAILED(hr)) {
+		LOG_ERROR("ShaderResourceView の生成に失敗しました。");
 		return false;
 	}
 
@@ -81,6 +85,7 @@ bool D3D11RenderTexture::Create(
 
 	hr = device->CreateTexture2D(&depthStencilTextureDesc, nullptr, depthStencilTexture.GetAddressOf());
 	if (FAILED(hr)) {
+		LOG_ERROR("深度バッファ用テクスチャの生成に失敗しました。");
 		return false;
 	}
 
@@ -93,6 +98,7 @@ bool D3D11RenderTexture::Create(
 	// 深度バッファの生成
 	hr = device->CreateDepthStencilView(depthStencilTexture.Get(), &depthStencilDesc, m_depthStencil.GetAddressOf());
 	if (FAILED(hr)) {
+		LOG_ERROR("深度バッファの生成に失敗しました。");
 		return false;
 	}
 

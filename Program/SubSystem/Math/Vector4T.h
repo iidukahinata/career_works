@@ -24,7 +24,7 @@ namespace Math
 		constexpr Vector4T() noexcept : x(0), y(0), z(0), w(0)
 		{}
 
-		constexpr Vector4T(T value) noexcept : x(value), y(value), z(value), w(value)
+		explicit constexpr Vector4T(T value) noexcept : x(value), y(value), z(value), w(value)
 		{}
 
 		constexpr Vector4T(const Vector4T<T>& V) noexcept : x(V.x), y(V.y), z(V.z), w(V.w)

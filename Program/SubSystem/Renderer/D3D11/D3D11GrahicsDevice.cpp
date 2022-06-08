@@ -111,7 +111,7 @@ bool D3D11GrahicsDevice::Init()
 	}
 
 	// MSAA
-	bool isMSAA = false;
+	bool isMSAA = true;
 	UINT Quality = 0;
 	m_device->CheckMultisampleQualityLevels(DXGI_FORMAT_D32_FLOAT, 4, &Quality);
 

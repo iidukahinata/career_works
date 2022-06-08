@@ -31,17 +31,13 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lpar
 		{
 		case VK_ESCAPE:
 			int sts = MessageBoxA(hwnd, "終了しますか?", "終了確認", MB_YESNO);
-			if (sts == IDYES) {
-				DestroyWindow(hwnd);
-			}
+			if (sts == IDYES) DestroyWindow(hwnd);
 			break;
 		}
 		break;
 
 	case WM_ACTIVATE:
-		if (LOWORD(wparam) != WA_INACTIVE) {
-			Timer::Get().ResetMeasurement();
-		}
+		if (LOWORD(wparam) != WA_INACTIVE) Timer::Get().ResetMeasurement();
 		break;
 
 	case WM_EXITSIZEMOVE:

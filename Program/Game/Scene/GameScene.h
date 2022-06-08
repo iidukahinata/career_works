@@ -22,4 +22,9 @@ class GameScene : public IScene
 
 	// •`‰æ
 	void Draw() override;
+
+	const char* GetName() override
+	{
+		return "Game";
+	}
 };

@@ -17,7 +17,7 @@
 bool Application::Init(HINSTANCE hInstance)
 {
 	// 第３引数 : フルスクリーンモード
-	if (!Window::Get().CreateWindowClass(hInstance, 1280, 720, "Test", false))
+	if (!Window::Get().CreateWindowClass(hInstance, 640, 480, "Test", false))
 	{
 		return false;
 	}

@@ -31,7 +31,7 @@ bool D3D11PixelShader::Create(
 
 	if (FAILED(hr))
 	{
-		LOG_ERROR(std::string(shader) + " : PixelShaderì¬¸”s : D3D11PixelShader.cpp");
+		LOG_ERROR(std::string(shader) + " : PixelShaderì¬‚É¸”sB");
 		return false;
 	}
 	return true;

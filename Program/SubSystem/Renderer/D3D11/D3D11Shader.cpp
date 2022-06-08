@@ -23,6 +23,12 @@ bool D3D11Shader::CompileFromFile(std::string_view shader, std::string_view entr
 	if (GetExt(shader) == "cso")
 	{
 		hr = D3DReadFileToBlob(ToWstring(shader).c_str(), m_blob.ReleaseAndGetAddressOf());
+
+		if (FAILED(hr))
+		{
+			LOG_ERROR("Shader コンパイルに失敗。");
+			return false;
+		}
 	}
 	else
 	{
@@ -41,14 +47,9 @@ bool D3D11Shader::CompileFromFile(std::string_view shader, std::string_view entr
 
 		if (FAILED(hr))
 		{
-			LOG_ERROR((char*)errorBlob->GetBufferPointer());
+			LOG_ERROR_MSG("Shader コンパイルに失敗。", (char*)errorBlob->GetBufferPointer());
 			return false;
 		}
-	}
-
-	if (FAILED(hr))
-	{
-		return false;
 	}
 	return true;
 }

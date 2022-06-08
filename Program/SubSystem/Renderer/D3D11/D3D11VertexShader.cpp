@@ -28,7 +28,7 @@ bool D3D11VertexShader::Create(std::string_view shader, std::string_view entrypo
 
 	if (FAILED(hr))
 	{
-		LOG_ERROR(std::string(shader) + " : VertexShaderì¬¸”s : D3D11VertexShader.cpp");
+		LOG_ERROR(std::string(shader) + " : VertexShaderì¬‚É¸”sB");
 		return false;
 	}
 	return true;

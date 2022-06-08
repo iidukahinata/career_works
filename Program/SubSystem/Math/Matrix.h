@@ -20,8 +20,7 @@ namespace Math
 
 	public:
 
-		constexpr Matrix() noexcept :
-			DirectX::XMFLOAT4X4(Identity)
+		constexpr Matrix() noexcept : DirectX::XMFLOAT4X4(Identity)
 		{}
 
 		constexpr Matrix(float m00, float m01, float m02, float m03,

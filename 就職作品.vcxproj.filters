@@ -121,14 +121,26 @@
     <Filter Include="Game\GameObject">
       <UniqueIdentifier>{f06bcc08-8dbd-4bb1-ad25-3c07d861547f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\GameObject\Mass">
-      <UniqueIdentifier>{7d781c8d-05d3-4a26-abbe-ff1f87364357}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Component">
       <UniqueIdentifier>{f13c7aa1-2450-43f2-8891-169620615f75}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SubSystem\Renderer\Shader\Core">
+      <UniqueIdentifier>{676e59f5-ce95-4a97-aff3-9b7f6d31b0a8}</UniqueIdentifier>
+    </Filter>
     <Filter Include="SubSystem\Renderer\Shader\PostEffect">
       <UniqueIdentifier>{241629f5-a90c-4fd3-8adc-24ddf0ee6349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameObject\InGame">
+      <UniqueIdentifier>{43e7ae7d-cb02-4973-9d66-c8c95ae8f6bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameObject\OutGame">
+      <UniqueIdentifier>{7a502c2d-4afd-446d-8859-3cff79509ece}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameObject\InGame\Mass">
+      <UniqueIdentifier>{7d781c8d-05d3-4a26-abbe-ff1f87364357}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameObject\Common">
+      <UniqueIdentifier>{f8f0ce3f-7adf-435e-91c3-93888ef0b56d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -379,12 +391,6 @@
     <ClCompile Include="Program\SubSystem\Renderer\Drawings\Effect\Postprocessing.cpp">
       <Filter>SubSystem\Renderer\Drawings\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Game\GameObject\Stage.cpp">
-      <Filter>Game\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\Game\GameObject\CameraMove.cpp">
-      <Filter>Game\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="Program\SubSystem\Tools\Chack.cpp">
       <Filter>SubSystem\Tools</Filter>
     </ClCompile>
@@ -392,22 +398,43 @@
       <Filter>Game\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Program\Game\GameObject\IMass.cpp">
-      <Filter>Game\GameObject\Mass</Filter>
+      <Filter>Game\GameObject\InGame\Mass</Filter>
     </ClCompile>
     <ClCompile Include="Program\Game\GameObject\Player.cpp">
-      <Filter>Game\GameObject\Mass</Filter>
+      <Filter>Game\GameObject\InGame\Mass</Filter>
     </ClCompile>
     <ClCompile Include="Program\Game\GameObject\Message.cpp">
-      <Filter>Game\GameObject\Mass</Filter>
+      <Filter>Game\GameObject\InGame\Mass</Filter>
     </ClCompile>
     <ClCompile Include="Program\Game\Component\HitStop.cpp">
       <Filter>Game\Component</Filter>
     </ClCompile>
     <ClCompile Include="Program\Game\GameObject\Human.cpp">
-      <Filter>Game\GameObject\Mass</Filter>
+      <Filter>Game\GameObject\InGame\Mass</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\GameObject\TitleString.cpp">
+      <Filter>Game\GameObject\OutGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\GameObject\Effect.cpp">
+      <Filter>Game\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\GameObject\CameraMove.cpp">
+      <Filter>Game\GameObject\InGame</Filter>
     </ClCompile>
     <ClCompile Include="Program\Game\GameObject\BackGraund.cpp">
-      <Filter>Game\GameObject</Filter>
+      <Filter>Game\GameObject\OutGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\GameObject\Stage.cpp">
+      <Filter>Game\GameObject\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\GameObject\TitlePlayer.cpp">
+      <Filter>Game\GameObject\OutGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\Scene\SelectScene.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\GameObject\GameMaster.cpp">
+      <Filter>Game\GameObject\Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -708,12 +735,6 @@
     <ClInclude Include="Program\SubSystem\Renderer\Drawings\Effect\Postprocessing.h">
       <Filter>SubSystem\Renderer\Drawings\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Game\GameObject\Stage.h">
-      <Filter>Game\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\Game\GameObject\CameraMove.h">
-      <Filter>Game\GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="Program\SubSystem\Phisics\PhisicsHelper.h">
       <Filter>SubSystem\Phisics</Filter>
     </ClInclude>
@@ -736,22 +757,43 @@
       <Filter>SubSystem\Math</Filter>
     </ClInclude>
     <ClInclude Include="Program\Game\GameObject\IMass.h">
-      <Filter>Game\GameObject\Mass</Filter>
+      <Filter>Game\GameObject\InGame\Mass</Filter>
     </ClInclude>
     <ClInclude Include="Program\Game\GameObject\Player.h">
-      <Filter>Game\GameObject\Mass</Filter>
+      <Filter>Game\GameObject\InGame\Mass</Filter>
     </ClInclude>
     <ClInclude Include="Program\Game\GameObject\Message.h">
-      <Filter>Game\GameObject\Mass</Filter>
+      <Filter>Game\GameObject\InGame\Mass</Filter>
     </ClInclude>
     <ClInclude Include="Program\Game\Component\HitStop.h">
       <Filter>Game\Component</Filter>
     </ClInclude>
     <ClInclude Include="Program\Game\GameObject\Human.h">
-      <Filter>Game\GameObject\Mass</Filter>
+      <Filter>Game\GameObject\InGame\Mass</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\GameObject\TitleString.h">
+      <Filter>Game\GameObject\OutGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\GameObject\Effect.h">
+      <Filter>Game\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\GameObject\CameraMove.h">
+      <Filter>Game\GameObject\InGame</Filter>
     </ClInclude>
     <ClInclude Include="Program\Game\GameObject\BackGraund.h">
-      <Filter>Game\GameObject</Filter>
+      <Filter>Game\GameObject\OutGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\GameObject\Stage.h">
+      <Filter>Game\GameObject\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\GameObject\TitlePlayer.h">
+      <Filter>Game\GameObject\OutGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\Scene\SelectScene.h">
+      <Filter>Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\GameObject\GameMaster.h">
+      <Filter>Game\GameObject\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -764,17 +806,17 @@
     <None Include="Program\ThirdParty\FMOD\include\fmod.cs">
       <Filter>ThirdParty\FMOD</Filter>
     </None>
-    <None Include="Program\SubSystem\Renderer\Shader\Light.hlsli">
-      <Filter>SubSystem\Renderer\Shader</Filter>
-    </None>
     <None Include="Program\SubSystem\Renderer\Shader\PBR.hlsli">
-      <Filter>SubSystem\Renderer\Shader</Filter>
-    </None>
-    <None Include="Program\SubSystem\Renderer\Shader\Core.hlsli">
       <Filter>SubSystem\Renderer\Shader</Filter>
     </None>
     <None Include="Program\SubSystem\Renderer\Shader\Blur.hlsli">
       <Filter>SubSystem\Renderer\Shader\PostEffect</Filter>
+    </None>
+    <None Include="Program\SubSystem\Renderer\Shader\Core.hlsli">
+      <Filter>SubSystem\Renderer\Shader\Core</Filter>
+    </None>
+    <None Include="Program\SubSystem\Renderer\Shader\Light.hlsli">
+      <Filter>SubSystem\Renderer\Shader\Core</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -828,6 +870,9 @@
     </FxCompile>
     <FxCompile Include="Program\SubSystem\Renderer\Shader\YBlurVS.hlsl">
       <Filter>SubSystem\Renderer\Shader\PostEffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\ColorTecture2DPS.hlsl">
+      <Filter>SubSystem\Renderer\Shader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

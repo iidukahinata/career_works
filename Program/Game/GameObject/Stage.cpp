@@ -14,6 +14,8 @@
 #include "SubSystem/Scene/Scene.h"
 #include "SubSystem/IOStream/FileStream.h"
 
+#include "GameMaster.h"
+
 void Stage::Awake()
 {
 	// 頂点レイアウト作成
@@ -49,9 +51,10 @@ void Stage::Init()
 	m_transform.SetScale(Math::Vector3(0.75f));
 	m_transform.SetRotation(Math::Vector3(Math::ToRadian(90.f), 0.f, 0.f));
 
+	auto master = dynamic_cast<GameMaster*>(m_scene->GetGameObject("GameMaster"));
+
 	ClearMap();
-	LoadMapChip(1, 0);
-	SaveMapChip(1, 0);
+	LoadMapChip(master->LoadWorldNum(), master->LoadStageNum());
 }
 
 void Stage::Draw()

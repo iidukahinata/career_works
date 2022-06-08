@@ -43,6 +43,8 @@ public:
 	/** Scene 終了時のサブクラスでの解放処理を実現 */
 	virtual void Clear();
 
+	virtual const char* GetName() = 0;
+
 	/** GameObject function */
 	void AddGameObject(IGameObject* gameObject);
 	IGameObject* GetGameObject(std::string_view name);
@@ -55,6 +57,7 @@ public:
 
 	/** 遅延セットアップ */
 	void SetSceneManager(class SceneManager* sceneManager) noexcept;
+	class SceneManager* GetSceneManager() const noexcept;
 
 protected:
 

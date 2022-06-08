@@ -31,7 +31,7 @@ bool D3D11ComputeShader::Create(
 
 	if (FAILED(hr))
 	{
-		LOG_ERROR(std::string(shader) + " : ComputeShaderì¬¸”s : D3D11ComputeShader.cpp");
+		LOG_ERROR(std::string(shader) + " : ComputeShaderì¬‚É¸”sB");
 		return false;
 	}
 	return true;

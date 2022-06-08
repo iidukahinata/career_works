@@ -21,16 +21,16 @@ namespace Math
 		constexpr Vector4() noexcept : DirectX::XMFLOAT4(0.f, 0.f, 0.f, 0.f)
 		{}
 
-		constexpr Vector4(float value) noexcept : DirectX::XMFLOAT4(value, value, value, value)
+		explicit constexpr Vector4(float value) noexcept : DirectX::XMFLOAT4(value, value, value, value)
 		{}
 
 		constexpr Vector4(const Vector4& V) noexcept : DirectX::XMFLOAT4(V.x, V.y, V.z, V.w)
 		{}
 
-		constexpr Vector4(const Vector3& V, float z) noexcept : DirectX::XMFLOAT4(V.x, V.y, V.z, z)
+		explicit constexpr Vector4(const Vector3& V, float z) noexcept : DirectX::XMFLOAT4(V.x, V.y, V.z, z)
 		{}
 
-		constexpr Vector4(const Vector2& V, float z, float w) noexcept : DirectX::XMFLOAT4(V.x, V.y, z, w)
+		explicit constexpr Vector4(const Vector2& V, float z, float w) noexcept : DirectX::XMFLOAT4(V.x, V.y, z, w)
 		{}
 
 		constexpr Vector4(float x, float y, float z, float w) noexcept : DirectX::XMFLOAT4(x, y, z, w)
@@ -209,7 +209,7 @@ namespace Math
 
 		float DistanceSquared(const Vector3& V) const noexcept
 		{
-			return DistanceSquared(*this, V);
+			return DistanceSquared(Vector3(*this), V);
 		}
 
 		static float DistanceSquared(const Vector3& A, const Vector3& B) noexcept

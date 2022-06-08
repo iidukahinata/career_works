@@ -24,7 +24,7 @@ namespace Math
 		constexpr Vector2T() noexcept : x(0), y(0)
 		{}
 
-		constexpr Vector2T(T value) noexcept : x(value), y(value)
+		explicit constexpr Vector2T(T value) noexcept : x(value), y(value)
 		{}
 
 		constexpr Vector2T(const Vector2T<T>& V) noexcept : x(V.x), y(V.y)

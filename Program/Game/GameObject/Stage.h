@@ -41,14 +41,14 @@ public:
 	bool LoadMapChip(int world, int stage) noexcept;
 	bool SaveMapChip(int world, int stage) const noexcept;
 
-private:
-
-	void ClearMap() noexcept;
-
 	void CreatePlayer(Math::Vector3i pos) noexcept;
 	void CreateEnemy(Math::Vector3i pos) noexcept;
 	void CreateHuman(Math::Vector3i pos) noexcept;
 	void CreateMessage(Math::Vector3i pos) noexcept;
+
+private:
+
+	void ClearMap() noexcept;
 
 private:
 

@@ -9,16 +9,17 @@
 
 #include "D3D11InputLayout.h"
 #include "SubSystem/Log/DebugLog.h"
+#include "SubSystem/Tools/Chack.h"
 
 bool D3D11InputLayout::Create(D3D11_INPUT_ELEMENT_DESC* layout, UINT layoutSize, ID3DBlob* blob) noexcept
 {
 	if (!layout) {
-		LOG_ERROR("layoutを指定してください : D3D11InputLayout.cpp");
+		LOG_ERROR("layoutを指定してください。");
 		return false;
 	}
 
 	if (!blob) {
-		LOG_ERROR("blobに値をいれてください : D3D11InputLayout.cpp");
+		LOG_ERROR("blobに値をいれてください。");
 		return false;
 	}
 
@@ -31,7 +32,7 @@ bool D3D11InputLayout::Create(D3D11_INPUT_ELEMENT_DESC* layout, UINT layoutSize,
 		m_inputLayout.GetAddressOf());
 
 	if (FAILED(hr)) {
-		LOG_ERROR("InputLayout作成失敗 : D3D11InputLayout.h");
+		LOG_ERROR("InputLayout作成に失敗。");
 		return false;
 	}
 

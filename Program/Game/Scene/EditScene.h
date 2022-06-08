@@ -25,6 +25,11 @@ class EditScene : public IScene
 	// •`‰æ
 	void Draw() override;
 
+	const char* GetName() override
+	{
+		return "Edit";
+	}
+
 private:
 
 	IGameObject* m_player;

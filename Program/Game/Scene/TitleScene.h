@@ -17,4 +17,9 @@ public:
 	void Init() override;
 	void Update() override;
 	void Draw() override;
+
+	const char* GetName() override
+	{
+		return "Title";
+	}
 };

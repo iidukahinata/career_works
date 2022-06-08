@@ -53,7 +53,7 @@ inline bool D3D11VertexBuffer<T>::Create(const std::vector<T>& vertices, D3D11_U
 	HRESULT hr = GetGraphicsDevice()->GetDevice()->CreateBuffer(&bufferDesc, &initData, m_vertexBuffer.GetAddressOf());
 	if (FAILED(hr))
 	{
-		LOG_ERROR("頂点バッファー作成失敗 : D3D11VertexBuffer.h");
+		LOG_ERROR("頂点バッファー作成に失敗。");
 		return false;
 	}
 	return true;

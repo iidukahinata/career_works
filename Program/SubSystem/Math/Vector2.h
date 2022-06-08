@@ -39,12 +39,12 @@ namespace Math
 		constexpr Vector2() noexcept : DirectX::XMFLOAT2(0, 0)
 		{}
 
-		constexpr Vector2(float value) noexcept : DirectX::XMFLOAT2(value, value)
+		explicit constexpr Vector2(float value) noexcept : DirectX::XMFLOAT2(value, value)
 		{}
 
-		Vector2(const Vector4& V) noexcept;
+		explicit Vector2(const Vector4& V) noexcept;
 
-		Vector2(const Vector3& V) noexcept;
+		explicit Vector2(const Vector3& V) noexcept;
 
 		constexpr Vector2(const Vector2& V) noexcept : DirectX::XMFLOAT2(V.x, V.y)
 		{}

@@ -12,10 +12,11 @@
 
 bool D3D11Texture::Create(const DirectX::Image* images, size_t imageSize, const DirectX::TexMetadata& meta)
 {
-	auto hr = DirectX::CreateShaderResourceViewEx(
+	Chack(images, "ˆø”’l image‚É’l‚ð‚¢‚ê‚Ä‚­‚¾‚³‚¢B");
+
+	auto hr = DirectX::CreateShaderResourceView(
 		GetGraphicsDevice()->GetDevice(),
 		images, imageSize, meta,
-		D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0, false,
 		m_shaderResourceView.ReleaseAndGetAddressOf());
 
 	if (FAILED(hr)) {
