@@ -2,7 +2,7 @@
 * @file		AudioSpeaker.h
 * @brief
 *
-* @date		2022/05/14 2022年度初版
+* @date		2022/06/09 2022年度初版
 * @author	飯塚陽太
 */
 #pragma once
@@ -21,6 +21,8 @@
 class AudioSpeaker
 {
 public:
+
+	~AudioSpeaker();
 
 	/* 3D 処理を使用しない場合は使用する必要はありません。*/
 	void Update() noexcept;

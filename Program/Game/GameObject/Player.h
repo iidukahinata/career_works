@@ -37,6 +37,8 @@ public:
 
 	MassType GetType() override;
 
+	bool isGameOver() const noexcept;
+
 private:
 
 	void InputAction() noexcept;
@@ -62,6 +64,10 @@ private:
 
 private:
 
+	Model m_model;
+
+	HitStop m_hitStop;
+
 	Math::Vector3i m_nextMassPos;
 
 	//* Item を保持している面かを持つ
@@ -74,13 +80,11 @@ private:
 	// * この値が増えると回転速度が上がる。angleCount と合わせるため int を使用。
 	int m_rotateSpeed = 6;
 
+	bool m_isGameOver = false;
+
 	// * stage から map 情報を取得するため。
 	class Stage* m_stage = nullptr;
 
 	// * カメラの向きから移動方向を取得するため。
 	class CameraMove* m_cameraMove = nullptr;
-
-	Model m_model;
-
-	HitStop m_hitStop;
 };

@@ -2,7 +2,7 @@
  * @file	AudioSpeaker.cpp
  * @brief
  *
- * @date	2022/05/28 2022年度初版
+ * @date	2022/06/09 2022年度初版
  * @author	飯塚陽太
  */
 
@@ -12,6 +12,14 @@
 #include "SubSystem/Resource/Resources/Audio/AudioClip.h"
 #include "SubSystem/Scene/Transform.h"
 #include "SubSystem/Tools/Chack.h"
+
+AudioSpeaker::~AudioSpeaker()
+{
+	if (m_audioClip)
+	{
+		m_audioClip->SubReneceCount();
+	}
+}
 
 void AudioSpeaker::Update() noexcept
 {
@@ -57,10 +65,10 @@ void AudioSpeaker::PlayOneShot(AudioClip* const clip, float volume /* = 1.f */) 
 	// 3D 時、初期値として再生位置をセット。
 	if (m_is2DMode == false)
 	{
-		auto worldPos = m_parent->GetWoldPosition();
+		auto worldPos = m_parent ? m_parent->GetWoldPosition() : Math::Vector3::Zero;
 		FMOD_VECTOR pos = { worldPos.x, worldPos.y, worldPos.z };
 		FMOD_VECTOR vel = { 0, 0, 0 };
-		m_audioClip->SetAttributes(pos, vel);
+		clip->SetAttributes(pos, vel);
 	}
 }
 

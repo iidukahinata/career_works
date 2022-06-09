@@ -22,6 +22,7 @@ void SelectScene::Init()
 	m_lightMap.Init();
 
 	m_mainCamera = std::make_unique<Camera>();
+	m_mainCamera->GetTransform().SetPosition(Math::Vector3(0.f, 0.f, -15.f));
 	m_mainCamera->GetTransform().LockAt(Math::Vector3::Zero);
 
 	m_directionalLight.Init(&m_lightMap);

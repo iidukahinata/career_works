@@ -20,10 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program\Application\Application.cpp" />
+    <ClCompile Include="Program\Game\Component\Animator.cpp" />
     <ClCompile Include="Program\Game\Component\HitStop.cpp" />
     <ClCompile Include="Program\Game\Game.cpp" />
     <ClCompile Include="Program\Game\GameObject\BackGraund.cpp" />
     <ClCompile Include="Program\Game\GameObject\CameraMove.cpp" />
+    <ClCompile Include="Program\Game\GameObject\EditManager.cpp" />
     <ClCompile Include="Program\Game\GameObject\Effect.cpp" />
     <ClCompile Include="Program\Game\GameObject\GameMaster.cpp" />
     <ClCompile Include="Program\Game\GameObject\Human.cpp" />
@@ -120,10 +122,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Application\Application.h" />
+    <ClInclude Include="Program\Game\Component\Animator.h" />
     <ClInclude Include="Program\Game\Component\HitStop.h" />
     <ClInclude Include="Program\Game\Game.h" />
     <ClInclude Include="Program\Game\GameObject\BackGraund.h" />
     <ClInclude Include="Program\Game\GameObject\CameraMove.h" />
+    <ClInclude Include="Program\Game\GameObject\EditManager.h" />
     <ClInclude Include="Program\Game\GameObject\Effect.h" />
     <ClInclude Include="Program\Game\GameObject\GameMaster.h" />
     <ClInclude Include="Program\Game\GameObject\Human.h" />

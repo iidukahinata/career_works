@@ -2,7 +2,7 @@
 * @file    TitlePlayer.h
 * @brief
 *
-* @date	   2022/06/06 2022年度初版
+* @date	   2022/06/09 2022年度初版
 * @author  飯塚陽太
 */
 #pragma once
@@ -10,19 +10,16 @@
 
 #include "SubSystem/Scene/GameObject.h"
 #include "SubSystem/Resource/Resources/3DModel/Model.h"
+#include "../Component/Animator.h"
+#include "SubSystem/Audio/AudioSpeaker.h"
+#include "SubSystem/Resource/Resources/Audio/AudioClip.h"
+
 
 class TitlePlayer : public IGameObject
 {
 public:
-
-	enum class AnimMode
-	{
-		ScreenIn,
-		Rotation,
-		ScreenOut,
-		None,
-	};
-
+	
+	// IGameObject
 	void Init() override;
 	void Update() override;
 	void Draw() override;
@@ -33,16 +30,22 @@ public:
 
 private:
 
-	void ScreenInAnimUpdate() noexcept;
-	void ScreenOutAnimUpdate() noexcept;
-	void RotationAnimUpdate() noexcept;
+	/* Animation function */
+	void ScreenInAnim() noexcept;
+	void ScreenOutAnim() noexcept;
+	void RotationAnim() noexcept;
 
 private:
 
-	class TitleString* m_titleString = nullptr;
-
 	Model m_model;
 
-	AnimMode m_animMode;
+	Animator m_animator;
+
+	AudioSpeaker m_audioSpeaker;
+
+	AudioClip* m_audioClip = nullptr;
+
 	float m_speed = 10.f;
+
+	class TitleString* m_titleString = nullptr;
 };

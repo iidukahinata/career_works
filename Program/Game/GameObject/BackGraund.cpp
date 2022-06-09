@@ -41,25 +41,23 @@ void PartternBackGraound::Init(Camera* camera) noexcept
 {
     for (int i = 0; i < maxCentorPosSize; ++i)
     {
-        m_patternCentorPositions[i].x = (i - (maxCentorPosSize / 2)) * -0.75f + 2.25f;
+        m_patternCentorPositions[i].x = (i - (maxCentorPosSize / 2)) * 0.75f + 1.5f;
         m_patternCentorPositions[i].y = (i - (maxCentorPosSize / 2)) * -1.f;
 
-        // Zバッファでの重なるバグを回避するため
-        m_patternCentorPositions[i].z = i * -0.0001f;
+        m_bottomPos = m_patternCentorPositions[i];
     }
-
-    m_bottomPos = m_patternCentorPositions[maxCentorPosSize - 1];
 }
 
 void PartternBackGraound::Update() noexcept
 {
     for (int i = 0; i < maxCentorPosSize; ++i)
     {
-        m_patternCentorPositions[i] += m_velocity;
-        if (m_patternCentorPositions[i].y >= 5.f)
+        if (m_patternCentorPositions[i].y >= (5.f - 0.001f))
         {
             m_patternCentorPositions[i] = m_bottomPos;
         }
+
+        m_patternCentorPositions[i] += m_velocity;
     }
 }
 
@@ -106,24 +104,23 @@ void SelectBackGraund::Awake()
 void SelectBackGraund::Init()
 {
     m_transform.SetPosition(Math::Vector3(0.f, 6.f, 0.f));
-    m_transform.SetScale(Math::Vector3(2.7f, 4.5f, 0.f));
+    m_transform.SetScale(Math::Vector3(2.67f, 4.5f, 0.f));
 
     m_parttern.Init(m_scene->GetMainCamera());
 
     m_master = dynamic_cast<GameMaster*>(m_scene->GetGameObject("GameMaster"));
+
+    m_animator.RegisterAnimation("ScreenIn", [this] { ScreenInAnim(); });
+    m_animator.RegisterAnimation("ScreenOut", [this] { ScreenOutAnim(); });
+
+    m_animator.SetAnimation("ScreenIn");
 }
 
 void SelectBackGraund::Update()
 {
     m_parttern.Update();
 
-    switch (m_animMode)
-    {
-    case AnimMode::ScreenIn: ScreenInAnimUpdate(); break;
-    case AnimMode::ScreenOut: ScreenOutAnimUpdate(); break;
-    case AnimMode::None: break;
-    default: break;
-    }
+    m_animator.Update();
 }
 
 void SelectBackGraund::Draw()
@@ -136,7 +133,7 @@ void SelectBackGraund::Draw()
     m_backSprite.Draw(m_transform.GetWorldMatrixXM());
 }
 
-void SelectBackGraund::ScreenInAnimUpdate() noexcept
+void SelectBackGraund::ScreenInAnim() noexcept
 {
     auto pos = m_transform.GetPosition();
     pos.y += m_speed;
@@ -144,14 +141,14 @@ void SelectBackGraund::ScreenInAnimUpdate() noexcept
 
     if (pos.y < -1.2f)
     {
-        m_animMode = AnimMode::None;
+        m_animator.StopAnimation();
 
         pos.y = -1.2f;
         m_transform.SetPosition(pos);
     }
 }
 
-void SelectBackGraund::ScreenOutAnimUpdate() noexcept
+void SelectBackGraund::ScreenOutAnim() noexcept
 {
     auto pos = m_transform.GetPosition();
     pos.y -= m_speed;
@@ -159,7 +156,7 @@ void SelectBackGraund::ScreenOutAnimUpdate() noexcept
 
     if (pos.y >= 6.f)
     {
-        m_animMode = AnimMode::None;
+        m_animator.StopAnimation();
 
         pos.y = 6.f;
         m_transform.SetPosition(pos);

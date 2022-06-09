@@ -2,7 +2,7 @@
 * @file    Human.cpp
 * @brief
 *
-* @date	   2022/06/03 2022年度初版
+* @date	   2022/06/09 2022年度初版
 * @author  飯塚陽太
 */
 
@@ -29,19 +29,29 @@ void Human::Init()
 {
 	Math::Vector3 massPos(m_massPos.x, m_massPos.y, m_massPos.z);
 	m_transform.SetPosition(Math::Vector3(0.75f * massPos.x, 0.75f * massPos.y - 0.5f, 0.75f * massPos.z));
+
+	m_animator.RegisterAnimation("Rotation", [this] {RotationAnim(); });
+	m_animator.SetAnimation("Rotation");
 }
 
 void Human::Update()
 {
-	constexpr float rad = Math::ToRadian(1.f);
-	RotationWorld(Math::Vector3(0.f, rad, 0.f));
+	m_animator.Update();
+}
+
+void Human::RotationAnim() noexcept
+{
+	constexpr const float maxSizeY = 1.2f;
+	constexpr const float minSizeY = 0.8f;
+
+	RotationWorld(Math::Vector3(0.f, Math::ToRadian(1.f), 0.f));
 
 	m_transform.SetScale(m_transform.GetScale() + Math::Vector3(0.f, m_animSpeed, 0.f));
-	if (m_transform.GetScale().y >= m_maxSizeY && m_animSpeed > 0.f)
+	if (m_transform.GetScale().y >= maxSizeY && m_animSpeed > 0.f)
 	{
 		m_animSpeed *= -1.f;
 	}
-	else if (m_transform.GetScale().y <= m_minSizeY && m_animSpeed < 0.f)
+	else if (m_transform.GetScale().y <= minSizeY && m_animSpeed < 0.f)
 	{
 		m_animSpeed *= -1.f;
 	}

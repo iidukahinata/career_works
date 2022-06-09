@@ -2,7 +2,7 @@
 * @file    Player.cpp
 * @brief
 *
-* @date	   2022/06/03 2022年度初版
+* @date	   2022/06/08 2022年度初版
 * @author  飯塚陽太
 */
 
@@ -13,7 +13,6 @@
 #include "Stage.h"
 #include "Human.h"
 #include "CameraMove.h"
-#include "Message.h"
 
 void Player::Awake()
 {
@@ -100,6 +99,7 @@ void Player::InputAction() noexcept
 
 	if (IsInput())
 	{
+		// 高さは考慮していない
 		m_nextMassPos.x += -m_angle.x;
 		m_nextMassPos.z +=  m_angle.y;
 		m_nextMassPos.y = m_massPos.y;
@@ -158,7 +158,7 @@ void Player::ChackTheNextMassFromStage() noexcept
 	case FLOOR: break;
 	case MESSAGE: break;
 	case PUTENEMY: break;
-	case NONE: break;
+	case NONE: m_isGameOver = true; break;
 	default: break;
 	}
 }
@@ -180,6 +180,7 @@ void Player::ChackTheNextMassFromMap() noexcept
 
 void Player::HitHuman(IMass* hitMass) noexcept
 {
+	// 回転後に取得判定を入れるため
 	if (IsInput())
 	{
 		return;
@@ -187,7 +188,7 @@ void Player::HitHuman(IMass* hitMass) noexcept
 
 	if (isGetHuman[GetNowBottomSurface()])
 	{
-		// game over
+		m_isGameOver = true;
 	}
 	else
 	{
@@ -208,12 +209,12 @@ void Player::HitEnemy(IMass* hitMass) noexcept
 		}
 		else
 		{
-			// game over
+			m_isGameOver = true;
 		}
 	}
 	else
 	{
-		// game over
+		m_isGameOver = true;
 	}
 }
 
@@ -275,7 +276,7 @@ BOX_FACE_INFO Player::GetNowBottomSurface() noexcept
 	bottomSurface = chack(-right, -up, -forward);
 	if (bottomSurface < BOX_FACE_INFO::Max)
 	{
-		return static_cast<BOX_FACE_INFO>(bottomSurface + BOX_FACE_INFO::POSITIVE_Z);
+		return static_cast<BOX_FACE_INFO>(bottomSurface + BOX_FACE_INFO::NEGATIVE_X);
 	}
 	return BOX_FACE_INFO::Max;
 }
@@ -292,4 +293,9 @@ int Player::InputNum() const noexcept
 bool Player::IsInput() const noexcept
 {
 	return m_angle.x != 0 || m_angle.y != 0;
+}
+
+bool Player::isGameOver() const noexcept
+{
+	return m_isGameOver;
 }

@@ -10,6 +10,7 @@
 
 #include "IMass.h"
 #include "SubSystem/Resource/Resources/2DSprite/Sprite.h"
+#include "../Component/Animator.h"
 
 class Message : public IMass
 {
@@ -28,24 +29,23 @@ public:
 
 private:
 
-	void AnimUpdate() noexcept;
+	/* Animation function */
+	void OpenAnim() noexcept;
 
 private:
 
-	const Math::Vector2 aspect = Math::Vector2(3.2f, 2.4f);
+	Sprite m_sprite;
 
-	const float m_maxSize = 0.3f;
-	const float m_minSize = 0.f;
+	Animator m_animator;
+
+	const Math::Vector2 aspect = Math::Vector2(3.2f, 2.4f);
 
 	float m_nowSize = 0.f;
 
 	float m_animSpeed = 0.f;
 
 	bool m_isDraw = false;
-	bool m_isAnim = false;
 
 	// * stage Ç©ÇÁ map èÓïÒÇéÊìæÇ∑ÇÈÇΩÇﬂÅB
 	class Stage* m_stage = nullptr;
-
-	Sprite m_sprite;
 };

@@ -2,17 +2,18 @@
 * @file    TitlePlayer.cpp
 * @brief
 *
-* @date	   2022/06/06 2022年度初版
+* @date	   2022/06/09 2022年度初版
 * @author  飯塚陽太
 */
 
 
 #include "TitlePlayer.h"
-#include "TitleString.h"
 #include "SubSystem/Scene/Scene.h"
 #include "SubSystem/Scene/SceneManager.h"
 #include "SubSystem/Timer/Timer.h"
+#include "SubSystem/Resource/ResourceManager.h"
 
+#include "TitleString.h"
 #include "Game/Scene/SelectScene.h"
 
 void TitlePlayer::Init()
@@ -30,22 +31,25 @@ void TitlePlayer::Init()
 	modelDesc.layoutSize = ARRAYSIZE(vertexDesc);
 	m_model.Init(modelDesc);
 
+	m_animator.RegisterAnimation("ScreenIn", [this] { ScreenInAnim(); });
+	m_animator.RegisterAnimation("Rotation", [this] { RotationAnim(); });
+	m_animator.RegisterAnimation("ScreenOut", [this] { ScreenOutAnim(); });
+
+	m_audioClip = ResourceManager::Get().Load<AudioClip>("assets/Imqube/Wav/SE_YES2.wav");
+	
 	m_titleString = dynamic_cast<TitleString*>(m_scene->GetGameObject("TitleString"));
 
 	m_transform.SetPosition(Math::Vector3(0.f, -10.f, 0.f));
 	m_transform.SetScale(Math::Vector3(0.1f));
+
+	m_animator.SetAnimation("ScreenIn");
+
+	m_audioSpeaker.SetAudioClip(m_audioClip);
 }
 
 void TitlePlayer::Update()
 {
-	switch (m_animMode)
-	{
-	case AnimMode::ScreenIn: ScreenInAnimUpdate(); break;
-	case AnimMode::Rotation: RotationAnimUpdate(); break;
-	case AnimMode::ScreenOut: ScreenOutAnimUpdate(); break;
-	case AnimMode::None: break;
-	default: break;
-	}
+	m_animator.Update();
 }
 
 void TitlePlayer::Draw()
@@ -60,23 +64,25 @@ const char* TitlePlayer::GetName()
 
 void TitlePlayer::StartScreenOutAnim() noexcept
 {
-	m_animMode = AnimMode::ScreenOut;
+	m_animator.SetAnimation("ScreenOut");
 	m_speed = -2.f;
+
+	m_audioSpeaker.Play();
 
 	m_titleString->StartFadeOutAnim();
 }
 
-void TitlePlayer::ScreenInAnimUpdate() noexcept
+void TitlePlayer::ScreenInAnim() noexcept
 {
-	if (m_titleString->GetAnimMode() == TitleString::AnimMode::None)
+	// タイトル文字が表示されてからアニメーションを開始するため。
+	if (m_titleString->IsNoneAnim())
 	{
 		auto pos = m_transform.GetPosition() + Math::Vector3(0.f, m_speed * Timer::Get().GetDeltaTime(), 0.f);
 		m_transform.SetPosition(pos);
 
-		if (pos.y > 0.f)
+		if (pos.y >= 0.f)
 		{
-			m_animMode = AnimMode::Rotation;
-			m_speed = 1.f;
+			m_animator.SetAnimation("Rotation");
 
 			pos.y = 0.f;
 			m_transform.SetPosition(pos);
@@ -86,26 +92,25 @@ void TitlePlayer::ScreenInAnimUpdate() noexcept
 	}
 }
 
-void TitlePlayer::ScreenOutAnimUpdate() noexcept
+void TitlePlayer::ScreenOutAnim() noexcept
 {
 	auto pos = m_transform.GetPosition() + Math::Vector3(0.f, m_speed * Timer::Get().GetDeltaTime(), 0.f);
 	m_transform.SetPosition(pos);
 
-	m_speed += 0.5f;
+	m_speed += 0.75f;
 
-	constexpr float maxSpeed = 15.f;
+	constexpr float maxSpeed = 20.f;
 	m_speed > maxSpeed ? m_speed = maxSpeed : m_speed;
 
 	if (pos.y > 8.f)
 	{
-		m_animMode = AnimMode::None;
-
+		m_animator.StopAnimation();
 		m_scene->GetSceneManager()->ChangeScene<SelectScene>();
 	}
 }
 
-void TitlePlayer::RotationAnimUpdate() noexcept
+void TitlePlayer::RotationAnim() noexcept
 {
-	auto rot = m_transform.GetRotation() + Math::Vector3(0.f, Math::ToRadian(m_speed), 0.f);
+	auto rot = m_transform.GetRotation() + Math::Vector3(0.f, Math::ToRadian(1.f), 0.f);
 	m_transform.SetRotation(rot);
 }

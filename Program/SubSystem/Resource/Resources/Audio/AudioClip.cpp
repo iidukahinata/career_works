@@ -140,9 +140,9 @@ void AudioClip::SetDefaults(float frequency, int priority) const noexcept
 
 void AudioClip::SetMode(FMOD_MODE mode) const noexcept
 {
-	Chack(m_sound);
+	Chack(m_channel);
 
-	auto result = m_sound->setMode(mode);
+	auto result = m_channel->setMode(mode);
 	AUDIO_EORROR_CHECK(result);
 }
 
@@ -167,7 +167,7 @@ void AudioClip::Release() const noexcept
 
 bool AudioClip::Do_Load(std::string_view filePath) noexcept
 {
-	auto result = Audio::Get().GetSystem()->createSound(filePath.data(), FMOD_3D, nullptr, &m_sound);
+	auto result = Audio::Get().GetSystem()->createSound(filePath.data(), FMOD_3D | FMOD_LOOP_NORMAL, nullptr, &m_sound);
 
 	if (result != FMOD_OK) 
 	{

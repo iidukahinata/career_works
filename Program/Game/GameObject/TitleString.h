@@ -11,18 +11,11 @@
 #include "SubSystem/Scene/GameObject.h"
 #include "SubSystem/Resource/Resources/2DSprite/Sprite.h"
 #include "SubSystem/Renderer/D3D11/D3D11ConstantBuffer.h"
+#include "../Component/Animator.h"
 
 class TitleString : public IGameObject
 {
 public:
-
-	enum class AnimMode
-	{
-		Opne,
-		UpDown,
-		FadeOut,
-		None,
-	};
 
 	// IGameObject
 	void Init() override;
@@ -31,24 +24,26 @@ public:
 
 	const char* GetName() override;
 
-	AnimMode GetAnimMode() const noexcept;
-
 	void StartUpDownAnim() noexcept;
 	void StartFadeOutAnim() noexcept;
 
+	bool IsNoneAnim() const noexcept;
+
 private:
 
-	void OpneAnimUpdate() noexcept;
-	void UpDownAnimUpdate() noexcept;
-	void FadeOutAnimUpdate() noexcept;
-
-	void StopTitleAnim() noexcept;
-
 	void SetColor(const Math::Vector4& color) noexcept;
+
+	/* Animation function */
+	void OpneAnim() noexcept;
+	void UpDownAnim() noexcept;
+	void FadeOutAnim() noexcept;
+	void StopTitleAnim() noexcept;
 
 private:
 
 	Sprite m_sprite;
+
+	Animator m_animator;
 
 	struct ConstantBufferColor
 	{
@@ -56,8 +51,6 @@ private:
 	};
 
 	D3D11ConstantBuffer<ConstantBufferColor> m_constantBuffer;
-
-	AnimMode m_animMode = AnimMode::Opne;
 
 	float m_addSpeed = 0.f;
 	float m_speed = 0.f;

@@ -436,6 +436,12 @@
     <ClCompile Include="Program\Game\GameObject\GameMaster.cpp">
       <Filter>Game\GameObject\Common</Filter>
     </ClCompile>
+    <ClCompile Include="Program\Game\GameObject\EditManager.cpp">
+      <Filter>Game\GameObject\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\Component\Animator.cpp">
+      <Filter>Game\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\Application\Application.h">
@@ -794,6 +800,12 @@
     </ClInclude>
     <ClInclude Include="Program\Game\GameObject\GameMaster.h">
       <Filter>Game\GameObject\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\GameObject\EditManager.h">
+      <Filter>Game\GameObject\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\Component\Animator.h">
+      <Filter>Game\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

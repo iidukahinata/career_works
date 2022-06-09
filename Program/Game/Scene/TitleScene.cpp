@@ -14,6 +14,7 @@
 #include "SubSystem/Renderer/TransformCBuffer.h"
 #include "SubSystem/Input/Input.h"
 
+#include "../GameObject/GameMaster.h"
 #include "../GameObject/TitleString.h"
 #include "../GameObject/TitlePlayer.h"
 #include "../GameObject/BackGraund.h"
@@ -32,6 +33,7 @@ void TitleScene::Init()
 	m_directionalLight.SetIntensity(1);
 	m_lightMap.SetAmbient(Math::Vector4(0.4f));
 
+	AddGameObject(new GameMaster);
 	AddGameObject(new TitlePlayer);
 	AddGameObject(new TitleString);
 

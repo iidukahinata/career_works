@@ -33,20 +33,19 @@ void TitleString::Init()
 
     m_constantBuffer.Create(sizeof(ConstantBufferColor));
 
-    SetColor(Math::Vector4(1.f));
+    m_animator.RegisterAnimation("Opne", [this] { OpneAnim(); });
+    m_animator.RegisterAnimation("UpDown", [this] { UpDownAnim(); });
+    m_animator.RegisterAnimation("FadeOut", [this] { FadeOutAnim(); });
 
+    SetColor(Math::Vector4(1.f));
     m_transform.SetScale(Math::Vector3(3.f, 0.f, 1.f));
+
+    m_animator.SetAnimation("Opne");
 }
 
 void TitleString::Update()
 {
-    switch (m_animMode)
-    {
-    case AnimMode::Opne: OpneAnimUpdate(); break;
-    case AnimMode::UpDown: UpDownAnimUpdate(); break;
-    case AnimMode::FadeOut: FadeOutAnimUpdate(); break;
-    default: break;
-    }
+    m_animator.Update();
 }
 
 void TitleString::Draw()
@@ -61,14 +60,9 @@ const char* TitleString::GetName()
     return "TitleString";
 }
 
-TitleString::AnimMode TitleString::GetAnimMode() const noexcept
-{
-    return m_animMode;
-}
-
 void TitleString::StartUpDownAnim() noexcept
 {
-    m_animMode = AnimMode::UpDown;
+    m_animator.SetAnimation("UpDown");
 
     m_addSpeed = 0.f;
     m_speed = 0.01f;
@@ -76,13 +70,24 @@ void TitleString::StartUpDownAnim() noexcept
 
 void TitleString::StartFadeOutAnim() noexcept
 {
-    m_animMode = AnimMode::FadeOut;
+    m_animator.SetAnimation("FadeOut");
 
     m_addSpeed = 0.03f;
     m_speed = 1.f;
 }
 
-void TitleString::OpneAnimUpdate() noexcept
+bool TitleString::IsNoneAnim() const noexcept
+{
+    return !m_animator.IsPlaying();
+}
+
+void TitleString::SetColor(const Math::Vector4& color) noexcept
+{
+    ConstantBufferColor buffer = { color };
+    m_constantBuffer.Update(buffer);
+}
+
+void TitleString::OpneAnim() noexcept
 {
     // ゆっくり出てきて、勢いが急に出てくるようにしている。
     m_addSpeed < 0.03f ? m_addSpeed += 0.001f : m_addSpeed += 0.025f;
@@ -96,11 +101,11 @@ void TitleString::OpneAnimUpdate() noexcept
     {
         m_transform.SetScale(Math::Vector3(1.5f, 0.75f, 1.f));
 
-        m_animMode = AnimMode::None;
+        m_animator.StopAnimation();
     }
 }
 
-void TitleString::UpDownAnimUpdate() noexcept
+void TitleString::UpDownAnim() noexcept
 {
     m_speed -= 0.000075f;
 
@@ -130,13 +135,13 @@ void TitleString::UpDownAnimUpdate() noexcept
 
     m_transform.SetScale(addScale + Math::Vector3(1.5f, 0.75f, 1.f));
 
-    if(pos.y < 0.5f && m_speed < 0.f)
+    if (pos.y < 0.5f && m_speed < 0.f)
     {
         StopTitleAnim();
     }
 }
 
-void TitleString::FadeOutAnimUpdate() noexcept
+void TitleString::FadeOutAnim() noexcept
 {
     m_speed -= m_addSpeed;
     if (m_speed < 0.f)m_speed = 0.f;
@@ -146,7 +151,7 @@ void TitleString::FadeOutAnimUpdate() noexcept
 
 void TitleString::StopTitleAnim() noexcept
 {
-    m_animMode = AnimMode::None;
+    m_animator.StopAnimation();
 
     auto pos = m_transform.GetPosition();
     pos.y = 0.5f;
@@ -156,10 +161,4 @@ void TitleString::StopTitleAnim() noexcept
 
     m_addSpeed = 0.f;
     m_speed = 0.f;
-}
-
-void TitleString::SetColor(const Math::Vector4& color) noexcept
-{
-    ConstantBufferColor buffer = { color };
-    m_constantBuffer.Update(buffer);
 }

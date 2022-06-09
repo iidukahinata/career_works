@@ -10,6 +10,7 @@
 
 #include "SubSystem/Scene/GameObject.h"
 #include "SubSystem/Resource/Resources/2DSprite/Sprite.h"
+#include "../Component/Animator.h"
 
 class PartternBackGraound
 {
@@ -27,10 +28,10 @@ private:
 	static const int patternSize = 6;
 	Sprite m_sprites[patternSize];
 
-	static const int maxCentorPosSize = 10;
+	static const int maxCentorPosSize = 13;
 	Math::Vector3 m_patternCentorPositions[maxCentorPosSize];
 
-	Math::Vector3 m_velocity = Math::Vector3(-0.02f, 0.02f, 0.f);
+	Math::Vector3 m_velocity = Math::Vector3(-0.015f, 0.02f, 0.f);
 
 	Math::Vector3 m_bottomPos;
 };
@@ -38,13 +39,6 @@ private:
 class SelectBackGraund : public IGameObject
 {
 public:
-
-	enum class AnimMode
-	{
-		ScreenIn,
-		ScreenOut,
-		None,
-	};
 
 	// IGameObject
 	void Awake() override;
@@ -54,8 +48,9 @@ public:
 
 private:
 
-	void ScreenInAnimUpdate() noexcept;
-	void ScreenOutAnimUpdate() noexcept;
+	/* Animation function */
+	void ScreenInAnim() noexcept;
+	void ScreenOutAnim() noexcept;
 
 private:
 
@@ -65,7 +60,7 @@ private:
 
 	PartternBackGraound m_parttern;
 
-	AnimMode m_animMode = AnimMode::ScreenIn;
+	Animator m_animator;
 
 	int m_nowSelectSceneIndex = 0;
 

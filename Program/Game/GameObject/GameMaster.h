@@ -9,11 +9,24 @@
 
 
 #include "SubSystem/Scene/GameObject.h"
+#include "SubSystem/Audio/AudioSpeaker.h"
+#include "SubSystem/Resource/Resources/Audio/AudioClip.h"
 
 
 class GameMaster : public IGameObject
 {
 public:
+
+	enum class NowScene
+	{
+		Title,
+		Select,
+		Game,
+		Game_Pauose,
+		Game_GameOver,
+		Edit,
+		None,
+	};
 
 	// IGameObject
 	void Init() override;
@@ -25,6 +38,8 @@ public:
 	int& LoadWorldNum() noexcept;
 	int& LoadStageNum() noexcept;
 
+	NowScene GetNowScene() noexcept;
+
 private:
 
 	void TitleUpdate() noexcept;
@@ -34,17 +49,13 @@ private:
 
 private:
 
-	enum class NowScene
-	{
-		Title,
-		Select,
-		Game,
-		Edit,
-		None,
-	};
-
 	NowScene m_nowScene = NowScene::None;
 
 	static const int maxWorldNum = 6;
 	static const int maxStageNum = 5;
+
+	class Player* m_player = nullptr;
+
+	AudioClip* m_audioClip = nullptr;
+	AudioSpeaker m_audioSpeaker;
 };

@@ -8,30 +8,40 @@
 
 
 #include "GameMaster.h"
+#include "../GameObject/Player.h"
 #include "../Scene/GameScene.h"
 #include "../Scene/EditScene.h"
 #include "SubSystem/Scene/Scene.h"
 #include "SubSystem/Scene/SceneManager.h"
 #include "SubSystem/Input/Input.h"
+#include "SubSystem/Resource/ResourceManager.h"
 
 void GameMaster::Init()
 {
     if (m_scene->GetName() == "Title")
     {
+        m_audioClip = ResourceManager::Get().Load<AudioClip>("assets/Imqube/Wav/BGM_GAMETITLE.wav");
         m_nowScene = NowScene::Title;
     }
     else if (m_scene->GetName() == "Select")
     {
+        m_audioClip = ResourceManager::Get().Load<AudioClip>("assets/Imqube/Wav/BGM_GAMEMENU.wav");
         m_nowScene = NowScene::Select;
     }
     else if (m_scene->GetName() == "Game")
     {
+        m_audioClip = ResourceManager::Get().Load<AudioClip>("assets/Imqube/Wav/BGM_LEVEL1.wav");
         m_nowScene = NowScene::Game;
     }
     else if (m_scene->GetName() == "Edit")
     {
         m_nowScene = NowScene::Edit;
     }
+
+    m_player = dynamic_cast<Player*>(m_scene->GetGameObject("player"));
+
+    m_audioSpeaker.SetIsLoop(true);
+    m_audioSpeaker.SetAudioClip(m_audioClip, true);
 }
 
 void GameMaster::Update()
@@ -62,6 +72,11 @@ int& GameMaster::LoadStageNum() noexcept
 {
     static int stageNum = 0;
     return stageNum;
+}
+
+GameMaster::NowScene GameMaster::GetNowScene() noexcept
+{
+    return m_nowScene;
 }
 
 void GameMaster::TitleUpdate() noexcept
@@ -101,6 +116,15 @@ void GameMaster::SelectUpdate() noexcept
 
 void GameMaster::GameUpdate() noexcept
 {
+    if (Input::Get().GetKeyStateTrigger(Button::Return))
+    {
+        m_nowScene = NowScene::Game_Pauose;
+    }
+
+    if (m_player->isGameOver())
+    {
+        m_nowScene = NowScene::Game_GameOver;
+    }
 }
 
 void GameMaster::EditUpdate() noexcept
