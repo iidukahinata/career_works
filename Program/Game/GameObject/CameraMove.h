@@ -2,7 +2,7 @@
 * @file    CameraMove.h
 * @brief
 *
-* @date	   2022/06/02 2022年度初版
+* @date	   2022/06/10 2022年度初版
 * @author  飯塚陽太
 */
 #pragma once
@@ -37,12 +37,12 @@ private:
 		LEFT,
 	};
 
-	// * player を中心に回転するため。
-	IGameObject* player = nullptr;
+	DIRECTION m_directionID = DIRECTION::UP;
 
 	// * 1 の場合、90 フレームで回転終了
 	int m_rotateSpeed = 2;
 	int m_rotateCount = 0;
 
-	DIRECTION m_directionID = DIRECTION::UP;
+	// * player を中心に回転するため。
+	class Player* player = nullptr;
 };

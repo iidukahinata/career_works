@@ -2,7 +2,7 @@
 * @file    Stage.h
 * @brief
 *
-* @date	   2022/06/03 2022年度初版
+* @date	   2022/06/09 2022年度初版
 * @author  飯塚陽太
 */
 #pragma once
@@ -46,11 +46,15 @@ public:
 	void CreateHuman(Math::Vector3i pos) noexcept;
 	void CreateMessage(Math::Vector3i pos) noexcept;
 
+	bool IsClear() const noexcept;
+
 private:
 
 	void ClearMap() noexcept;
 
 private:
+
+	std::vector<Sprite> m_massSprites;
 
 	static const int MaxMapSize = 10;
 
@@ -59,6 +63,4 @@ private:
 	IMass* m_mases[MaxMapSize][MaxMapSize] = { 0 };
 
 	int m_humansCount = 0;
-
-	std::vector<Sprite> m_massSprites;
 };

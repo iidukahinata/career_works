@@ -2,7 +2,7 @@
 * @file    Player.cpp
 * @brief
 *
-* @date	   2022/06/08 2022年度初版
+* @date	   2022/06/09 2022年度初版
 * @author  飯塚陽太
 */
 
@@ -32,12 +32,15 @@ void Player::Awake()
 
 void Player::Init()
 {
-	m_cameraMove = dynamic_cast<CameraMove*>(m_scene->GetGameObject("cameraMove"));
-	m_stage = dynamic_cast<Stage*>(m_scene->GetGameObject("stage"));
+	m_cameraMove = m_scene->GetGameObject<CameraMove>("cameraMove");
+	m_stage = m_scene->GetGameObject<Stage>("stage");
 
 	Math::Vector3 massPos(m_massPos.x, m_massPos.y, m_massPos.z);
 	m_transform.SetPosition(Math::Vector3(0.75f * massPos.x, 0.75f * massPos.y, 0.75f * massPos.z));
 	m_transform.SetScale(Math::Vector3(0.05f));
+
+	m_animator.RegisterAnimation("GameClear", [this] { GameClearAnim(); });
+	m_animator.RegisterAnimation("GameOver", [this] { GameOverAnim(); });
 }
 
 void Player::Update()
@@ -45,16 +48,30 @@ void Player::Update()
 	if (m_hitStop.IsHitStop())
 		return;
 
-	// enemy の移動を考慮するため 入力、回転の外で行う。
-	ChackTheNextMassFromStage();
+	// アニメーション中は game が終了しているため入力等を受け付けないようにするため
+	if (!m_animator.IsPlaying())
+	{
+		// enemy の移動を考慮するため 入力、回転の外で行う。
+		ChackTheNextMassFromStage();
 
-	InputAction();
+		InputAction();
 
-	Rolling();
+		Rolling();
+	}
+	else
+	{
+		m_animator.Update();
+	}
 }
 
 void Player::Draw()
 {
+	// game over animation がないため描画しないことにする。
+	if (IsGameOver())
+	{
+		return;
+	}
+
 	m_model.Draw(m_transform.GetWorldMatrixXM());
 }
 
@@ -75,26 +92,42 @@ void Player::InputAction() noexcept
 		return;
 	}
 
+	auto InuptLeft = [this] {
+		m_angle = m_cameraMove->GetDirection();
+		m_angle = Math::Vector2(m_angle.y, m_angle.x);
+	};
+
+	auto InuptRight = [this] {
+		m_angle = -m_cameraMove->GetDirection();
+		m_angle = Math::Vector2(m_angle.y, m_angle.x);
+	};
+
+	auto InuptUp = [this] {
+		m_angle = m_cameraMove->GetDirection();
+		if (m_cameraMove->GetDirection().x != 0) m_angle.x *= -1.f;
+	};
+
+	auto InuptDown = [this] {
+		m_angle = -m_cameraMove->GetDirection();
+		if (m_cameraMove->GetDirection().x != 0) m_angle.x *= -1.f;
+	};
+
 	// カメラの向きから移動方向を決めるため、各向き事に違う処理を行う
 	if (Input::Get().GetKeyStatePress(Button::Left))
 	{
-		m_angle = m_cameraMove->GetDirection();
-		m_angle = Math::Vector2(m_angle.y, m_angle.x);
+		InuptLeft();
 	}
 	if (Input::Get().GetKeyStatePress(Button::Right))
 	{
-		m_angle = -m_cameraMove->GetDirection();
-		m_angle = Math::Vector2(m_angle.y, m_angle.x);
+		InuptRight();
 	}
 	if (Input::Get().GetKeyStatePress(Button::Up))
 	{
-		m_angle = m_cameraMove->GetDirection();
-		if (m_cameraMove->GetDirection().x != 0) m_angle.x *= -1.f;
+		InuptUp();
 	}
 	if (Input::Get().GetKeyStatePress(Button::Down))
 	{
-		m_angle = -m_cameraMove->GetDirection();
-		if (m_cameraMove->GetDirection().x != 0) m_angle.x *= -1.f;
+		InuptDown();
 	}
 
 	if (IsInput())
@@ -158,7 +191,7 @@ void Player::ChackTheNextMassFromStage() noexcept
 	case FLOOR: break;
 	case MESSAGE: break;
 	case PUTENEMY: break;
-	case NONE: m_isGameOver = true; break;
+	case NONE: m_animator.SetAnimation("GameOver"); break;
 	default: break;
 	}
 }
@@ -188,7 +221,7 @@ void Player::HitHuman(IMass* hitMass) noexcept
 
 	if (isGetHuman[GetNowBottomSurface()])
 	{
-		m_isGameOver = true;
+		m_animator.SetAnimation("GameOver");
 	}
 	else
 	{
@@ -196,6 +229,11 @@ void Player::HitHuman(IMass* hitMass) noexcept
 
 		m_stage->RemoveMass(hitMass);
 		m_scene->RemoveGameObject(hitMass);
+
+		if(m_stage->IsClear())
+		{
+			m_animator.SetAnimation("GameClear");
+		}
 	}
 }
 
@@ -209,12 +247,12 @@ void Player::HitEnemy(IMass* hitMass) noexcept
 		}
 		else
 		{
-			m_isGameOver = true;
+			m_animator.SetAnimation("GameOver");
 		}
 	}
 	else
 	{
-		m_isGameOver = true;
+		m_animator.SetAnimation("GameOver");
 	}
 }
 
@@ -295,7 +333,26 @@ bool Player::IsInput() const noexcept
 	return m_angle.x != 0 || m_angle.y != 0;
 }
 
-bool Player::isGameOver() const noexcept
+void Player::GameClearAnim() noexcept
 {
-	return m_isGameOver;
+	auto pos = m_transform.GetPosition();
+	pos.y += 0.025f;
+	m_transform.SetPosition(pos);
+
+	RotationWorld(Math::Vector3(0.f, Math::ToRadian(10.f), 0.f));
+}
+
+void Player::GameOverAnim() noexcept
+{
+
+}
+
+bool Player::IsGameOver() const noexcept
+{
+	return m_animator.GetCurrentAnimName() == "GameOver";
+}
+
+bool Player::IsGameClear() const noexcept
+{
+	return m_animator.GetCurrentAnimName() == "GameClear";
 }

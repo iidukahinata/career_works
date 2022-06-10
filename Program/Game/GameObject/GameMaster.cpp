@@ -2,7 +2,7 @@
 * @file    GameMaster.cpp
 * @brief
 *
-* @date	   2022/06/08 2022年度初版
+* @date	   2022/06/10 2022年度初版
 * @author  飯塚陽太
 */
 
@@ -16,7 +16,9 @@
 #include "SubSystem/Input/Input.h"
 #include "SubSystem/Resource/ResourceManager.h"
 
-void GameMaster::Init()
+#include "../Scene/SelectScene.h"
+
+void GameMaster::Awake()
 {
     if (m_scene->GetName() == "Title")
     {
@@ -37,7 +39,10 @@ void GameMaster::Init()
     {
         m_nowScene = NowScene::Edit;
     }
+}
 
+void GameMaster::Init()
+{
     m_player = dynamic_cast<Player*>(m_scene->GetGameObject("player"));
 
     m_audioSpeaker.SetIsLoop(true);
@@ -50,6 +55,9 @@ void GameMaster::Update()
     {
     case NowScene::Title: TitleUpdate(); break;
     case NowScene::Select: SelectUpdate(); break;
+    case NowScene::Game_Pauose: GamePauseUpdate(); break;
+    case NowScene::Game_Clear: GameClearUpdate(); break;
+    case NowScene::Game_GameOver: GameClearUpdate(); break;
     case NowScene::Game: GameUpdate(); break;
     case NowScene::Edit: EditUpdate(); break;
     case NowScene::None: break;
@@ -121,10 +129,35 @@ void GameMaster::GameUpdate() noexcept
         m_nowScene = NowScene::Game_Pauose;
     }
 
-    if (m_player->isGameOver())
+    if (m_player->IsGameOver())
     {
         m_nowScene = NowScene::Game_GameOver;
     }
+
+    if (m_player->IsGameClear())
+    {
+        m_nowScene = NowScene::Game_Clear;
+    }
+}
+
+void GameMaster::GameClearUpdate() noexcept
+{
+    if (Input::Get().GetKeyStateTrigger(Button::Return))
+    {
+        m_scene->GetSceneManager()->ChangeScene<SelectScene>();
+    }
+}
+
+void GameMaster::GameOverUpdate() noexcept
+{
+    if (Input::Get().GetKeyStateTrigger(Button::Return))
+    {
+        m_scene->GetSceneManager()->ChangeScene<SelectScene>();
+    }
+}
+
+void GameMaster::GamePauseUpdate() noexcept
+{
 }
 
 void GameMaster::EditUpdate() noexcept

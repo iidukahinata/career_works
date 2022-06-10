@@ -15,8 +15,14 @@
 
 AudioClip::~AudioClip()
 {
-	Stop();
-	Release();
+	if (m_channel)
+	{
+		Stop();
+	}
+	if (m_sound)
+	{
+		Release();
+	}
 }
 
 void AudioClip::Play(FMOD::ChannelGroup* channelgroup /* = nullptr */) noexcept
@@ -152,8 +158,12 @@ bool AudioClip::IsPlaying() const noexcept
 
 	bool isPlaying;
 	auto result = m_channel->isPlaying(&isPlaying);
-	AUDIO_EORROR_CHECK(result);
 
+	// ‰¹Œ¹‚ªI—¹‚µ‚Ä‚¢‚é‚àƒGƒ‰[•¶‚ª•Ô‚³‚ê‚é‚½‚ß
+	if (result != FMOD_ERR_INVALID_HANDLE)
+	{
+		AUDIO_EORROR_CHECK(result);
+	}
 	return isPlaying;
 }
 

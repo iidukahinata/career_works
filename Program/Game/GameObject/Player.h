@@ -2,7 +2,7 @@
 * @file    IMass.h
 * @brief
 *
-* @date	   2022/06/03 2022年度初版
+* @date	   2022/06/09 2022年度初版
 * @author  飯塚陽太
 */
 #pragma once
@@ -10,6 +10,7 @@
 
 #include "IMass.h"
 #include "../Component/HitStop.h"
+#include "../Component/Animator.h"
 #include "SubSystem/Resource/Resources/3DModel/Model.h"
 
 enum BOX_FACE_INFO
@@ -37,7 +38,8 @@ public:
 
 	MassType GetType() override;
 
-	bool isGameOver() const noexcept;
+	bool IsGameOver() const noexcept;
+	bool IsGameClear() const noexcept;
 
 private:
 
@@ -62,11 +64,17 @@ private:
 	int InputNum() const noexcept;
 	bool IsInput() const noexcept;
 
+	/* Animation funciton */
+	void GameClearAnim() noexcept;
+	void GameOverAnim() noexcept;
+
 private:
 
 	Model m_model;
 
 	HitStop m_hitStop;
+
+	Animator m_animator;
 
 	Math::Vector3i m_nextMassPos;
 
@@ -79,8 +87,6 @@ private:
 
 	// * この値が増えると回転速度が上がる。angleCount と合わせるため int を使用。
 	int m_rotateSpeed = 6;
-
-	bool m_isGameOver = false;
 
 	// * stage から map 情報を取得するため。
 	class Stage* m_stage = nullptr;

@@ -142,6 +142,9 @@
     <Filter Include="Game\GameObject\Common">
       <UniqueIdentifier>{f8f0ce3f-7adf-435e-91c3-93888ef0b56d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\GameObject\OutGame\UI">
+      <UniqueIdentifier>{59e07e68-ea7e-4c35-8667-8eaad52708a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program\Application\Application.cpp">
@@ -441,6 +444,9 @@
     </ClCompile>
     <ClCompile Include="Program\Game\Component\Animator.cpp">
       <Filter>Game\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\GameObject\UIText.cpp">
+      <Filter>Game\GameObject\OutGame\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -807,6 +813,9 @@
     <ClInclude Include="Program\Game\Component\Animator.h">
       <Filter>Game\Component</Filter>
     </ClInclude>
+    <ClInclude Include="Program\Game\GameObject\UIText.h">
+      <Filter>Game\GameObject\OutGame\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Program\ThirdParty\FMOD\include\fmod_dsp.cs">
@@ -856,9 +865,6 @@
     <FxCompile Include="Program\SubSystem\Renderer\Shader\LambertPS.hlsl">
       <Filter>SubSystem\Renderer\Shader</Filter>
     </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\Texture2DPS.hlsl">
-      <Filter>SubSystem\Renderer\Shader</Filter>
-    </FxCompile>
     <FxCompile Include="Program\SubSystem\Renderer\Shader\Texture2DVS.hlsl">
       <Filter>SubSystem\Renderer\Shader</Filter>
     </FxCompile>
@@ -883,7 +889,7 @@
     <FxCompile Include="Program\SubSystem\Renderer\Shader\YBlurVS.hlsl">
       <Filter>SubSystem\Renderer\Shader\PostEffect</Filter>
     </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\ColorTecture2DPS.hlsl">
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\ColorTexturePS.hlsl">
       <Filter>SubSystem\Renderer\Shader</Filter>
     </FxCompile>
   </ItemGroup>

@@ -41,12 +41,12 @@ void Human::Update()
 
 void Human::RotationAnim() noexcept
 {
-	constexpr const float maxSizeY = 1.2f;
-	constexpr const float minSizeY = 0.8f;
+	constexpr float maxSizeY = 1.2f;
+	constexpr float minSizeY = 0.8f;
 
 	RotationWorld(Math::Vector3(0.f, Math::ToRadian(1.f), 0.f));
-
 	m_transform.SetScale(m_transform.GetScale() + Math::Vector3(0.f, m_animSpeed, 0.f));
+
 	if (m_transform.GetScale().y >= maxSizeY && m_animSpeed > 0.f)
 	{
 		m_animSpeed *= -1.f;

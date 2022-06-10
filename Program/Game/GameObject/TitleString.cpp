@@ -2,7 +2,7 @@
 * @file    TitleString.cpp
 * @brief
 *
-* @date	   2022/06/08 2022年度初版
+* @date	   2022/06/10 2022年度初版
 * @author  飯塚陽太
 */
 
@@ -11,7 +11,7 @@
 #include "SubSystem/Window/Window.h"
 #include "SubSystem/Timer/Timer.h"
 
-void TitleString::Init()
+void TitleString::Awake()
 {
     // 頂点レイアウト作成
     D3D11_INPUT_ELEMENT_DESC vertexDesc[] = {
@@ -30,15 +30,18 @@ void TitleString::Init()
     spriteDesc.width = (float)Window::Get().GetWindowHeight() / (float)Window::Get().GetWindowWidth();
 
     m_sprite.Init(spriteDesc);
+}
 
+void TitleString::Init()
+{
     m_constantBuffer.Create(sizeof(ConstantBufferColor));
+
+    SetColor(Math::Vector4(1.f));
+    m_transform.SetScale(Math::Vector3(3.f, 0.f, 1.f));
 
     m_animator.RegisterAnimation("Opne", [this] { OpneAnim(); });
     m_animator.RegisterAnimation("UpDown", [this] { UpDownAnim(); });
     m_animator.RegisterAnimation("FadeOut", [this] { FadeOutAnim(); });
-
-    SetColor(Math::Vector4(1.f));
-    m_transform.SetScale(Math::Vector3(3.f, 0.f, 1.f));
 
     m_animator.SetAnimation("Opne");
 }

@@ -18,7 +18,7 @@
 #include "../GameObject/TitleString.h"
 #include "../GameObject/TitlePlayer.h"
 #include "../GameObject/BackGraund.h"
-#include "../GameObject/Effect.h"
+#include "../GameObject/UIText.h"
 
 void TitleScene::Init()
 {
@@ -36,10 +36,7 @@ void TitleScene::Init()
 	AddGameObject(new GameMaster);
 	AddGameObject(new TitlePlayer);
 	AddGameObject(new TitleString);
-
-	// 透過処理の部分でバグがあるため使用しない。
-	// 多段階レンダリングを作成すれば対応できる。
-	//AddGameObject(new Effect); 
+	AddGameObject(new TextUIManager);
 
 	IScene::Init();
 }

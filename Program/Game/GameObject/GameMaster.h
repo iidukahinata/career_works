@@ -23,12 +23,14 @@ public:
 		Select,
 		Game,
 		Game_Pauose,
+		Game_Clear,
 		Game_GameOver,
 		Edit,
 		None,
 	};
 
 	// IGameObject
+	void Awake() override;
 	void Init() override;
 	void Update() override;
 
@@ -45,6 +47,9 @@ private:
 	void TitleUpdate() noexcept;
 	void SelectUpdate() noexcept;
 	void GameUpdate() noexcept;
+	void GameClearUpdate() noexcept;
+	void GameOverUpdate() noexcept;
+	void GamePauseUpdate() noexcept;
 	void EditUpdate() noexcept;
 
 private:

@@ -2,21 +2,20 @@
 * @file    TitlePlayer.cpp
 * @brief
 *
-* @date	   2022/06/09 2022年度初版
+* @date	   2022/06/10 2022年度初版
 * @author  飯塚陽太
 */
 
 
 #include "TitlePlayer.h"
+#include "TitleString.h"
+#include "../Scene/SelectScene.h"
 #include "SubSystem/Scene/Scene.h"
 #include "SubSystem/Scene/SceneManager.h"
 #include "SubSystem/Timer/Timer.h"
 #include "SubSystem/Resource/ResourceManager.h"
 
-#include "TitleString.h"
-#include "Game/Scene/SelectScene.h"
-
-void TitlePlayer::Init()
+void TitlePlayer::Awake()
 {
 	// 頂点レイアウト作成
 	D3D11_INPUT_ELEMENT_DESC vertexDesc[] = {
@@ -31,19 +30,21 @@ void TitlePlayer::Init()
 	modelDesc.layoutSize = ARRAYSIZE(vertexDesc);
 	m_model.Init(modelDesc);
 
-	m_animator.RegisterAnimation("ScreenIn", [this] { ScreenInAnim(); });
-	m_animator.RegisterAnimation("Rotation", [this] { RotationAnim(); });
-	m_animator.RegisterAnimation("ScreenOut", [this] { ScreenOutAnim(); });
-
 	m_audioClip = ResourceManager::Get().Load<AudioClip>("assets/Imqube/Wav/SE_YES2.wav");
-	
+}
+
+void TitlePlayer::Init()
+{
 	m_titleString = dynamic_cast<TitleString*>(m_scene->GetGameObject("TitleString"));
 
 	m_transform.SetPosition(Math::Vector3(0.f, -10.f, 0.f));
 	m_transform.SetScale(Math::Vector3(0.1f));
 
-	m_animator.SetAnimation("ScreenIn");
+	m_animator.RegisterAnimation("ScreenIn", [this] { ScreenInAnim(); });
+	m_animator.RegisterAnimation("Rotation", [this] { RotationAnim(); });
+	m_animator.RegisterAnimation("ScreenOut", [this] { ScreenOutAnim(); });
 
+	m_animator.SetAnimation("ScreenIn");
 	m_audioSpeaker.SetAudioClip(m_audioClip);
 }
 

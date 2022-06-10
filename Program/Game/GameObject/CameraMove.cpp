@@ -2,18 +2,19 @@
 * @file    CameraMove.cpp
 * @brief
 *
-* @date	   2022/06/03 2022年度初版
+* @date	   2022/06/10 2022年度初版
 * @author  飯塚陽太
 */
 
 
 #include "CameraMove.h"
+#include "../GameObject/Player.h"
 #include "SubSystem/Scene/Scene.h"
 #include "SubSystem/Input/Input.h"
 
 void CameraMove::Init()
 {
-	player = m_scene->GetGameObject("player");
+	player = m_scene->GetGameObject<Player>("player");
 
 	if (auto camera = m_scene->GetMainCamera())
 	{
@@ -23,9 +24,16 @@ void CameraMove::Init()
 
 void CameraMove::Update()
 {
-	auto nextPos = player->GetTransform().GetWoldPosition();
-	nextPos.y = m_transform.GetWoldPosition().y;
-	m_transform.SetPosition(nextPos);
+	if (player->IsGameClear())
+	{
+		m_transform.SetPosition(player->GetTransform().GetWoldPosition());
+	}
+	else
+	{
+		auto nextPos = player->GetTransform().GetWoldPosition();
+		nextPos.y = m_transform.GetWoldPosition().y;
+		m_transform.SetPosition(nextPos);
+	}
 
 	// 入力されたタイミングで、回転し始める。
 	if (Input::Get().GetKeyStateTrigger(Button::SPACE) || m_rotateCount > 0)

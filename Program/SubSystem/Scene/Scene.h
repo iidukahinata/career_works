@@ -46,8 +46,14 @@ public:
 	virtual const char* GetName() = 0;
 
 	/** GameObject function */
+	template<class T>
+	T* AddGameObject();
 	void AddGameObject(IGameObject* gameObject);
+
+	template<class T>
+	T* GetGameObject(std::string_view name);
 	IGameObject* GetGameObject(std::string_view name);
+
 	void RemoveGameObject(IGameObject* gameObject);
 	std::vector<std::unique_ptr<IGameObject>>& GetGameObjects() noexcept;
 
@@ -76,3 +82,31 @@ protected:
 
 	class SceneManager* m_sceneManager = nullptr;
 };
+
+template<class T>
+inline T* IScene::AddGameObject()
+{
+	auto gameObject = new T;
+
+	// ŒŸõŽžŠÔ‚Ì’Zk‚Ì‚½‚ß‚É”z—ñ”Ô†‚ðID‚Æ‚·‚é
+	gameObject->SetID(m_gameObjects.size());
+	gameObject->SetScene(this);
+
+	gameObject->Awake();
+
+	m_gameObjects.emplace_back(gameObject);
+	return gameObject;
+}
+
+template<class T>
+inline T* IScene::GetGameObject(std::string_view name)
+{
+	for (auto& gameObject : m_gameObjects)
+	{
+		if (gameObject->GetName() == name.data())
+		{
+			return dynamic_cast<T*>(gameObject.get());
+		}
+	}
+	return nullptr;
+}

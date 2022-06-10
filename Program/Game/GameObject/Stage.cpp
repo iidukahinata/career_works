@@ -2,7 +2,7 @@
 * @file    Stage.cpp
 * @brief
 *
-* @date	   2022/06/03 2022年度初版
+* @date	   2022/06/09 2022年度初版
 * @author  飯塚陽太
 */
 
@@ -48,10 +48,10 @@ void Stage::Awake()
 
 void Stage::Init()
 {
+	auto master = m_scene->GetGameObject<GameMaster>("GameMaster");
+
 	m_transform.SetScale(Math::Vector3(0.75f));
 	m_transform.SetRotation(Math::Vector3(Math::ToRadian(90.f), 0.f, 0.f));
-
-	auto master = dynamic_cast<GameMaster*>(m_scene->GetGameObject("GameMaster"));
 
 	ClearMap();
 	LoadMapChip(master->LoadWorldNum(), master->LoadStageNum());
@@ -175,6 +175,11 @@ bool Stage::RemoveMass(IMass* mass) noexcept
 
 	if (m_mases[pos.x][pos.z] == mass)
 	{
+		if (mass->GetType() == IMass::MassType::HUMAN)
+		{
+			--m_humansCount;
+		}
+
 		m_mases[pos.x][pos.z] = nullptr;
 		return true;
 	}
@@ -193,10 +198,11 @@ bool Stage::LoadMapChip(int world, int stage) noexcept
 	
 	std::vector<std::pair<FloorType, int>> m_mapMeta;
 	file.Read(&m_mapMeta);
-	std::memcpy(m_map, m_mapMeta.data(), sizeof(m_map));
 	
 	std::vector<std::pair<IMass::MassType, Math::Vector3i>> m_massMeta;
 	file.Read(&m_massMeta);
+
+	std::memcpy(m_map, m_mapMeta.data(), sizeof(m_map));
 	
 	for (int i = 0; i < m_massMeta.size(); ++i)
 	{
@@ -225,7 +231,6 @@ bool Stage::SaveMapChip(int world, int stage) const noexcept
 	// 書き込みしやすいように一次元配列データにしている。
 	std::vector<std::pair<FloorType, int>> m_mapMeta(MaxMapSize * MaxMapSize);
 	std::memcpy(m_mapMeta.data(), m_map, sizeof(m_map));
-	file.Write(m_mapMeta);
 
 	// MassType : Position 情報を同じく一次元配列データにしている。
 	std::vector<std::pair<IMass::MassType, Math::Vector3i>> m_massMeta;
@@ -239,6 +244,8 @@ bool Stage::SaveMapChip(int world, int stage) const noexcept
 			}
 		}
 	}
+
+	file.Write(m_mapMeta);
 	file.Write(m_massMeta);
 
 	return true;
@@ -257,9 +264,8 @@ void Stage::ClearMap() noexcept
 
 void Stage::CreatePlayer(Math::Vector3i pos) noexcept
 {
-	Player* mass = new Player();
+	Player* mass = m_scene->AddGameObject<Player>();
 	SetMass(pos, mass);
-	m_scene->AddGameObject(mass);
 }
 
 void Stage::CreateEnemy(Math::Vector3i pos) noexcept
@@ -271,19 +277,26 @@ void Stage::CreateEnemy(Math::Vector3i pos) noexcept
 
 void Stage::CreateHuman(Math::Vector3i pos) noexcept
 {
-	Human* mass = new Human();
+	Human* mass = m_scene->AddGameObject<Human>();
 	SetMass(pos, mass);
-	m_scene->AddGameObject(mass);
 
+	// クリア時に使用するため加算
 	++m_humansCount;
 }
 
 void Stage::CreateMessage(Math::Vector3i pos) noexcept
 {
+	// ヒント表示される座標をヒント床にする
 	m_map[pos.x][pos.z] = std::pair<FloorType, int>(FloorType::MESSAGE, pos.y);
 
-	Message* mass = new Message();
+	Message* mass = m_scene->AddGameObject<Message>();
 	SetMass(pos, mass);
-	m_scene->AddGameObject(mass);
+	
+	// とりあえず一種類だけ表示
 	mass->MessegeSpriteInit(0);
+}
+
+bool Stage::IsClear() const noexcept
+{
+	return m_humansCount == 0;
 }

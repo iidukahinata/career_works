@@ -20,6 +20,7 @@ class TitlePlayer : public IGameObject
 public:
 	
 	// IGameObject
+	void Awake() override;
 	void Init() override;
 	void Update() override;
 	void Draw() override;

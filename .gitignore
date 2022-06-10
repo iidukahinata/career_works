@@ -1371,3 +1371,8 @@ FodyWeavers.xsd
 /assets/Imqube/Wav/BGM_GAMEMENU.wav
 /assets/Imqube/Wav/BGM_GAMECLEAR_SHORT.wav
 /assets/Imqube/Wav/BGM_GAMECLEAR.wav
+/assets/Imqube/UI/Restart.png
+/assets/Imqube/UI/PressEnterKey.bin
+/assets/Imqube/UI/GoStageSelect.png
+/assets/Imqube/UI/GoNextStage.png
+/assets/Imqube/Hint/Hint_Window.bin

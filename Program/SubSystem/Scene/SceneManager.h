@@ -64,6 +64,12 @@ inline void SceneManager::ChangeScene()
 	// 待ちが発生しないよう、シーン読み込みが終了した時にシーンが替わるようにしてある。
 	ThreadPool::Get().AddTask([this] 
 	{
+		// 現在シーンがない時は、バックでの読み込みが不要のため即座に待ちに入る。
+		if (!m_currentScene)
+		{
+			m_sceneState = SceneState::Change;
+		}
+
 		m_nextScene->Awake();
 		m_sceneState = SceneState::Change;
 	});
