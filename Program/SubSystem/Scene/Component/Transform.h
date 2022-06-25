@@ -7,16 +7,14 @@
 #pragma once
 
 
-#include "../IComponent.h"
 #include "SubSystem/Core/Math/Matrix.h"
 #include "SubSystem/Core/Math/Vector3.h"
 
 /**
 * 変換系はDirectXMathを使用して計算を行っている
 */
-class Transform : public IComponent
+class Transform
 {
-	SUB_CLASS(Transform)
 public:
 
 	Transform();

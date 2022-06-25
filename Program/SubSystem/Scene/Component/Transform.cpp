@@ -7,7 +7,6 @@
 
 
 #include "Transform.h"
-#include "SubSystem/Scene/GameObject.h"
 
 Transform::Transform() :
 	m_localPosition(0.f, 0.f, 0.f),

@@ -8,7 +8,7 @@
 
 #include "GameObject.h"
 #include "World.h"
-#include "Component/ComponentFactory.h"
+#include "Factory/ComponentFactory.h"
 
 IComponent* GameObject::AddComponent(std::string_view name) noexcept
 {
@@ -70,10 +70,11 @@ std::string_view GameObject::GetName() const noexcept
 	return m_name;
 }
 
-//Transform* GameObject::GetTransform() noexcept
-//{
-//	return m_transform;
-//}
+
+const Transform& GameObject::GetTransform() const noexcept
+{
+	return m_transform;
+}
 
 World* GameObject::GetOwner() const noexcept
 {

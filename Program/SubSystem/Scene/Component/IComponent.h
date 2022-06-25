@@ -7,6 +7,7 @@
 #pragma once
 
 
+#include "Transform.h"
 #include "SubSystem/Core/Common/Macro.h"
 
 class Context;
@@ -25,6 +26,8 @@ public:
 	/** テンプレート型が this と同じ型の時 true を返します。*/
 	template<class T>
 	bool IsSameClass() const noexcept;
+
+	const Transform& GetTransform() const noexcept;
 
 	GameObject* GetOwner() const noexcept;
 	World* GetWorld() const noexcept;

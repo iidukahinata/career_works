@@ -12,8 +12,6 @@
 #include <stdint.h>
 #include <string_view>
 
-#define GET_HASH(STR) GetHashFromCRC(#STR)
-
 constexpr uint32_t CRC_TABLE[256] = {
 			 0,   79764919,  159529838,  222504665,
 	 319059676,  398814059,  445009330,  507990021,
@@ -95,3 +93,5 @@ constexpr uint32_t GetHashFromCRC(std::string_view name)
 {
 	return CRC_32(name.data(), name.size());
 }
+
+#define GET_HASH(STR) GetHashFromCRC(#STR)

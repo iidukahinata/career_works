@@ -14,6 +14,5 @@ GameObjectPtr GameObjectFactory::Create(World* world)
 	gameObject->m_owner = world;
 	gameObject->m_id = 0;
 	gameObject->m_name = "GameObject";
-	gameObject->AddComponent("Transform");
 	return gameObject;
 }

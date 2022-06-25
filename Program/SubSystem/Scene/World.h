@@ -9,7 +9,7 @@
 
 #include <span>
 #include <vector>
-#include "GameObjectFactory.h"
+#include "Factory/GameObjectFactory.h"
 #include "SubSystem/Core/ISubsystem.h"
 
 class World : public ISubsystem

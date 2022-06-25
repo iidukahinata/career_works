@@ -8,7 +8,7 @@
 
 
 #include <memory>
-#include "GameObject.h"
+#include "../GameObject.h"
 
 typedef std::weak_ptr<GameObject> GameObjectRef;
 typedef std::shared_ptr<GameObject> GameObjectPtr;

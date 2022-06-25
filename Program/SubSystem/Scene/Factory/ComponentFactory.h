@@ -8,7 +8,7 @@
 
 
 #include <memory>
-#include "IComponent.h"
+#include "../Component/IComponent.h"
 
 typedef std::weak_ptr<IComponent> ComponentRef;
 typedef std::shared_ptr<IComponent> ComponentPtr;

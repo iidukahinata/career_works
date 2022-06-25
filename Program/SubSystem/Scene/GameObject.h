@@ -10,7 +10,7 @@
 #include <map>
 #include <memory>
 #include "Component/IComponent.h"
-#include "Component/Components/Transform.h"
+#include "Component/Transform.h"
 
 class GameObject
 {
@@ -27,16 +27,18 @@ public:
 	template<class T>
 	T* GetComponent();
 
-	/** 指定名コンポーネントを保持する場合、そのアドレスを返す。 */
+	/** 指定名コンポーネントを保持する場合、そのアドレスを返す。*/
 	IComponent* FindComponent(std::string_view name) const noexcept;
 
-	/* 各GameObject識別用に使用。*/
+	/** 各GameObject識別用に使用。*/
 	void SetName(std::string_view name) noexcept;
 	std::string_view GetName() const noexcept;
 
 	/** Worldクラスで以外で使用されると、場合によってはScene終了時までメモリが解放されず残り続けます。*/
 	void SetID(uint32_t id) noexcept;
 	uint32_t GetID() const noexcept;
+
+	const Transform& GetTransform() const noexcept;
 
 	World* GetOwner() const noexcept;
 	Context* GetContext() const noexcept;
@@ -51,6 +53,8 @@ private:
 
 	// * Worldクラスで探索時等に使用される
 	std::string_view m_name;
+
+	Transform m_transform;
 
 	// * -> ハッシュ値 : 各コンポーネントオブジェクト
 	std::map<uint32_t, std::shared_ptr<IComponent>> m_components;

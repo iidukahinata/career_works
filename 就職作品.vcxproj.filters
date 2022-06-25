@@ -130,7 +130,7 @@
     <Filter Include="SubSystem\Scene\Component\Conponents">
       <UniqueIdentifier>{85f3318e-a0f6-4007-823b-b71a6911367a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SubSystem\Scene\GameObject">
+    <Filter Include="SubSystem\Scene\Factory">
       <UniqueIdentifier>{fe75741e-2c2d-49d1-8bc6-b584a0cdfe0a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -373,17 +373,17 @@
     <ClCompile Include="Program\SubSystem\Scene\Component\Components\AudioSpeaker.cpp">
       <Filter>SubSystem\Scene\Component\Conponents</Filter>
     </ClCompile>
-    <ClCompile Include="Program\SubSystem\Scene\Component\Components\Transform.cpp">
-      <Filter>SubSystem\Scene\Component\Conponents</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Scene\Component\ComponentFactory.cpp">
+    <ClCompile Include="Program\SubSystem\Scene\Component\Transform.cpp">
       <Filter>SubSystem\Scene\Component</Filter>
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Scene\GameObject.cpp">
-      <Filter>SubSystem\Scene\GameObject</Filter>
+      <Filter>SubSystem\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Program\SubSystem\Scene\GameObjectFactory.cpp">
-      <Filter>SubSystem\Scene\GameObject</Filter>
+    <ClCompile Include="Program\SubSystem\Scene\Factory\ComponentFactory.cpp">
+      <Filter>SubSystem\Scene\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Scene\Factory\GameObjectFactory.cpp">
+      <Filter>SubSystem\Scene\Factory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -705,17 +705,17 @@
     <ClInclude Include="Program\SubSystem\Scene\Component\Components\AudioSpeaker.h">
       <Filter>SubSystem\Scene\Component\Conponents</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Scene\Component\Components\Transform.h">
-      <Filter>SubSystem\Scene\Component\Conponents</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Scene\Component\ComponentFactory.h">
+    <ClInclude Include="Program\SubSystem\Scene\Component\Transform.h">
       <Filter>SubSystem\Scene\Component</Filter>
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Scene\GameObject.h">
-      <Filter>SubSystem\Scene\GameObject</Filter>
+      <Filter>SubSystem\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Scene\GameObjectFactory.h">
-      <Filter>SubSystem\Scene\GameObject</Filter>
+    <ClInclude Include="Program\SubSystem\Scene\Factory\ComponentFactory.h">
+      <Filter>SubSystem\Scene\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Scene\Factory\GameObjectFactory.h">
+      <Filter>SubSystem\Scene\Factory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

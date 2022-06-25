@@ -70,7 +70,7 @@ public:
 	constexpr ClassTypeData(std::string_view name, size_t hash) : Name(name), Hash(hash)
 	{}
 
-	constexpr ClassTypeData(std::string_view name) : Name(name), Hash(GET_HASH(name))
+	constexpr ClassTypeData(std::string_view name) : Name(name), Hash(GetHashFromCRC(name))
 	{}
 
 	constexpr bool operator==(const ClassTypeData& typeData) const noexcept

@@ -9,6 +9,12 @@
 #include "IComponent.h"
 #include "../GameObject.h"
 
+const Transform& IComponent::GetTransform() const noexcept
+{
+	ASSERT(m_owner);
+	return m_owner->GetTransform();
+}
+
 GameObject* IComponent::GetOwner() const noexcept
 {
 	return m_owner;
