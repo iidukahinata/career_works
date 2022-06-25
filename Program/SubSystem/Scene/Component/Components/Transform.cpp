@@ -2,7 +2,7 @@
 * @file    Transform.cpp
 * @brief
 *
-* @date	   2022/06/23 2022年度初版
+* @date	   2022/06/25 2022年度初版
 */
 
 
@@ -10,16 +10,6 @@
 #include "SubSystem/Scene/GameObject.h"
 
 Transform::Transform() :
-	m_localPosition(0.f, 0.f, 0.f),
-	m_localRotation(0.f, 0.f, 0.f),
-	m_localScale(1.f, 1.f, 1.f),
-	m_right(1.f, 0.f, 0.f),
-	m_up(0.f, 1.f, 0.f),
-	m_forward(0.f, 0.f, 1.f)
-{}
-
-Transform::Transform(GameObject* object) :
-	m_object(object),
 	m_localPosition(0.f, 0.f, 0.f),
 	m_localRotation(0.f, 0.f, 0.f),
 	m_localScale(1.f, 1.f, 1.f),
@@ -136,11 +126,11 @@ const Math::Vector3& Transform::GetForward() const noexcept
 	return m_forward;
 }
 
-void Transform::SetPearent(GameObject* parent) noexcept
+void Transform::SetPearent(Transform* parent) noexcept
 {
 	if (parent)
 	{
-		//m_parent = parent->GetTransform();
+		m_parent = parent;
 	}
 	else
 	{
@@ -148,14 +138,19 @@ void Transform::SetPearent(GameObject* parent) noexcept
 	}
 }
 
-GameObject* Transform::GetPearent() const noexcept
+Transform* Transform::GetPearent() const noexcept
 {
-	if (m_parent)
+	return m_parent;
+}
+
+Transform* Transform::GetRoot() const noexcept
+{
+	Transform* root = nullptr;
+	Transform* parent = m_parent;
+	while (parent)
 	{
-		return m_parent->m_object;
+		root = parent;
+		parent = parent->m_parent;
 	}
-	else
-	{
-		return nullptr;
-	}
+	return root;
 }

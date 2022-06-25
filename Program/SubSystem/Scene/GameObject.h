@@ -2,7 +2,7 @@
 * @file    GameObject.h
 * @brief
 *
-* @date	   2022/06/24 2022年度初版
+* @date	   2022/06/25 2022年度初版
 */
 #pragma once
 
@@ -11,9 +11,6 @@
 #include <memory>
 #include "Component/IComponent.h"
 #include "Component/Components/Transform.h"
-
-class Context;
-class World;
 
 class GameObject
 {
@@ -62,7 +59,7 @@ private:
 template<class T>
 FORCEINLINE T* GameObject::GetComponent()
 {
-	for (auto& component : m_components)
+	for (const auto& component : m_components)
 	{
 		if (component.second->IsSameClass<T>())
 		{

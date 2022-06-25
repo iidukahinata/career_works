@@ -29,7 +29,7 @@ public:
 	*/
 	void SetFunction(Task&& task) noexcept;
 
-	/* 所属コンテナで使用される関数です。 */
+	/** 所属コンテナで使用される関数軍です。*/
 	void SetPointer(Pointer jobContainer) noexcept;
 	Pointer GetPointer() const noexcept;
 	void SetId(uint32_t id) noexcept;
@@ -37,12 +37,12 @@ public:
 
 private:
 
-	//* JobSystem セット後実行させる関数
+	// * JobSystem セット後実行させる関数
 	Task m_task;
 
-	//* 検索用に所属コンテナのポインタを保持します。
+	// * 検索用に所属コンテナのポインタを保持します。
 	Pointer m_jobContainer = nullptr;
 
-	//* コンテナでの配列の要素位置を保持します。
+	// * コンテナでの配列の要素位置を保持します。
 	uint32_t m_id = -1;
 };

@@ -29,12 +29,13 @@ bool Engine::Initialize(HINSTANCE hInstance)
 
 	ret = StartUpScreen(hInstance);
 	if (!ret) {
-		//LOG_ERROR("StartUpScreenに失敗");
+		LOG_ERROR("StartUpScreenに失敗");
 		return false;
 	}
 
 	// 外部からスレッドが使用される可能性があるのでCPU内最大スレッド数の半分を使用
-	AsyncJobSystem::Get().Initialize(AsyncJobSystem::Get().GetMaxThreadCount() / 2);
+	// 最低でも renderer thread と outer thread の2スレッド使用できる用にする。(まだ未完成)
+	//AsyncJobSystem::Get().Initialize(AsyncJobSystem::Get().GetMaxThreadCount() / 2);
 
 	EventManager::Get().Initialize();
 
@@ -42,7 +43,7 @@ bool Engine::Initialize(HINSTANCE hInstance)
 
 	ret = InitializeSubsystems();
 	if (!ret) {
-		//LOG_ERROR("Subsystemの初期化に失敗");
+		LOG_ERROR("Subsystemの初期化に失敗");
 		return false;
 	}
 
@@ -63,11 +64,11 @@ long Engine::MainLoop()
 		{
 			jobSystem.Execute(timer->GetDeltaTime(), FunctionType::Update);
 			jobSystem.Execute(timer->GetDeltaTime(), FunctionType::LateUpdate);
-		}
 
-		// renderer thread
-		//jobSystem.Execute(timer->GetDeltaTime(), FunctionType::Render);
-		//jobSystem.Execute(timer->GetDeltaTime(), FunctionType::LateRender);
+			// renderer thread として分ける予定のため分離している。
+			//jobSystem.Execute(timer->GetDeltaTime(), FunctionType::Render);
+			//jobSystem.Execute(timer->GetDeltaTime(), FunctionType::LateRender);
+		}
 	}
 
 	return window.GetMessage();

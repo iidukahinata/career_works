@@ -2,7 +2,7 @@
 * @file    GameObject.cpp
 * @brief
 *
-* @date	   2022/06/24 2022年度初版
+* @date	   2022/06/25 2022年度初版
 */
 
 
@@ -16,7 +16,7 @@ IComponent* GameObject::AddComponent(std::string_view name) noexcept
 
 	if (auto component = ComponentFactory::Create(this, name))
 	{
-		auto hash = component->GetType().Hash;
+		auto hash = component->GetTypeData().Hash;
 		m_components[hash] = component;
 		result = component.get();
 	}
@@ -39,9 +39,9 @@ void GameObject::RemoveComponent(IComponent* component) noexcept
 IComponent* GameObject::FindComponent(std::string_view name) const noexcept
 {
 	const ComponentType type(name);
-	for (auto& component : m_components)
+	for (const auto& component : m_components)
 	{
-		if (component.second->GetType() == type)
+		if (component.second->GetTypeData() == type)
 		{
 			return component.second.get();
 		}
@@ -82,5 +82,6 @@ World* GameObject::GetOwner() const noexcept
 
 Context* GameObject::GetContext() const noexcept
 {
-	return m_owner ? m_owner->GetContext() : nullptr;
+	ASSERT(m_owner);
+	return m_owner->GetContext();
 }

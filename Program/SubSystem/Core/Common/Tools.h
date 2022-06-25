@@ -2,8 +2,7 @@
 * @file    Tools.h
 * @brief   便利関数
 *
-* @date	   2022/05/28 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/25 2022年度初版
 */
 #pragma once
 

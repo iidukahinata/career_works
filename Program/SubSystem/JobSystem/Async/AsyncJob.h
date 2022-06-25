@@ -2,7 +2,7 @@
 * @file		AsyncJob.h
 * @brief
 *
-* @date		2022/06/16 2022年度初版
+* @date		2022/06/25 2022年度初版
 */
 #pragma once
 
@@ -16,14 +16,10 @@ public:
 
 	void Execute() noexcept;
 
-	/**
-	* JobSystem で実行される関数 function を設定
-	*/
+	/** JobSystem で実行される関数 function を設定。*/
 	void SetFunction(Task&& task) noexcept;
 
-	/**
-	* JobSystem で実行されるメンバ関数 function を設定
-	*/
+	/** JobSystem で実行されるメンバ関数 function を設定。*/
 	template<class T, class Func>
 	void SetFunction(T* ptr, Func task) noexcept;
 
@@ -31,10 +27,10 @@ public:
 
 private:
 
-	//* 非同期実行させるタスク処理。
+	// * 非同期実行させるタスク処理。
 	Task m_task;
 
-	//* タスク処理が完了したかを保持する。
+	// * タスク処理が完了したかを保持する。
 	std::atomic_bool m_finish = false;
 };
 

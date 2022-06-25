@@ -2,7 +2,7 @@
 * @file    Transform.h
 * @brief
 *
-* @date	   2022/06/23 2022年度初版
+* @date	   2022/06/25 2022年度初版
 */
 #pragma once
 
@@ -20,7 +20,6 @@ class Transform : public IComponent
 public:
 
 	Transform();
-	Transform(class GameObject* object);
 
 	void SetPosition(const Math::Vector3& position) noexcept;
 	const Math::Vector3& GetPosition() const noexcept;
@@ -44,12 +43,12 @@ public:
 	void LockAt(const Math::Vector3& target, const Math::Vector3& up = Math::Vector3::Right);
 	void LockTo(const Math::Vector3& direction, const Math::Vector3& up = Math::Vector3::Right);
 
-	void SetPearent(class GameObject* parent) noexcept;
-	class GameObject* GetPearent() const noexcept;
+	void SetPearent(Transform* parent) noexcept;
+	Transform* GetPearent() const noexcept;
+	Transform* GetRoot() const noexcept;
 
 private:
 
-	class GameObject* m_object = nullptr;
 	Transform* m_parent = nullptr;
 
 	Math::Vector3 m_localPosition;

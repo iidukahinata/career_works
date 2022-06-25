@@ -2,7 +2,7 @@
 * @file    Window.h
 * @brief
 *
-* @date	   2022/06/23 2022年度初版
+* @date	   2022/06/25 2022年度初版
 */
 #pragma once
 
@@ -50,13 +50,13 @@ public:
 
 private:
 
-	/** 生成した window 識別子 */
+	// * 生成した window 識別子
 	HWND m_hWnd;
 
-	/** window 状態を外部から取得するための変数 */
+	//*  window 状態を外部から取得するための変数
 	MSG m_message;
 
-	/** window size */
+	// * window size
 	int m_width;
 	int m_height;
 	bool m_fullscreen;

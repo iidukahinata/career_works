@@ -2,7 +2,7 @@
  * @file	InputDevice.h
  * @brief   入力制御クラス
  *
- * @date	2022/06/23 2022年度初版
+ * @date	2022/06/25 2022年度初版
  */
 #pragma once
 
@@ -62,20 +62,20 @@ public:
 
 private:
 
+	/** 入力イベントチェックを行う。*/
 	void Update() noexcept;
 
-	/** この関数を使用しなくてもボタンは追加される */
-	void AddKey(Button::KeyAndMouse id) noexcept;
-
-	/* Event Set 関数 */
+	/** Event Set 関数 */
 	void PressKey(Button::KeyAndMouse id) const noexcept;
 	void ReleaseKey(Button::KeyAndMouse id) const noexcept;
+
+	void AddKey(Button::KeyAndMouse id) noexcept;
 
 private:
 
 	// Type -> <キーID、押されたか>
 	std::map<Button::KeyAndMouse, bool> m_previousKeyState;
 
-	/* Input Update 登録用 */
+	// * Input Update 登録用
 	Job m_job;
 };

@@ -2,7 +2,7 @@
 * @file    AsyncJobSystem.h
 * @brief
 *
-* @date	   2022/06/23 2022年度初版
+* @date	   2022/06/25 2022年度初版
 */
 #pragma once
 
@@ -26,25 +26,19 @@ public:
 
 	~AsyncJobSystem();
 
-	/**
-	* 指定個数 thread を使用して並列処理初期化
-	* @param threadCount [入力] 並列処理で使用する thred 数を指定する。
-	*/
+	/** 指定個数 thread を処理初期化。*/
 	bool Initialize(int threadCount) noexcept;
 
-	/**
-	* 並列処理で実行される処理の追加
-	* @param function [入力] 追加処理する関数を指定。
-	*/
+	/** 並列処理で実行される処理の追加。*/
 	void AddTask(AsyncJob* job) noexcept;
 
 	/** CPU最大使用可能スレッド数を返す */
 	int GetMaxThreadCount() const noexcept;
 
+private:
+
 	/** インスタンスの解放時に実行される */
 	void Stop() noexcept;
-
-private:
 
 	/** 生成された各 thread が処理する Task 実行を行う関数 */
 	void ThreadLoop() noexcept;

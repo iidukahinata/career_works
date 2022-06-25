@@ -18,6 +18,7 @@
 */
 class ResourceManager : public ISubsystem
 {
+	SUB_CLASS(ResourceManager)
 public:
 
 	void Shutdown() override;

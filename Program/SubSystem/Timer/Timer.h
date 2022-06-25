@@ -2,7 +2,7 @@
  * @file	Timer.h
  * @brief   フレーム管理クラス
  *
- * @date	2022/06/21 2022年度初版
+ * @date	2022/06/25 2022年度初版
  */
 #pragma once
 
@@ -10,7 +10,7 @@
 #include <chrono>
 #include "SubSystem/Core/ISubsystem.h"
 
- /*
+ /**
  * 可変フレームレートで制御出来るクラス
  */
 class Timer : public ISubsystem
@@ -44,7 +44,7 @@ public:
 
 private:
 
-	// 最新フレーム更新時間
+	// * 最新フレーム更新時間
 	std::chrono::high_resolution_clock::time_point m_previousTime;
 
 	// * フレーム経過時間(秒)

@@ -14,6 +14,7 @@
 */
 class EventListener
 {
+	SUPER_CLASS(EventListener)
 public:
 
 	virtual void Action(const std::any&) = 0;

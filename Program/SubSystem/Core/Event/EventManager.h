@@ -2,7 +2,7 @@
 * @file    EventManager.h
 * @brief
 *
-* @date	   2022/06/23 2022年度初版
+* @date	   2022/06/25 2022年度初版
 */
 #pragma once
 
@@ -46,6 +46,7 @@ public:
 
 private:
 
+	/** 前フレームで発生したイベントを処理します。*/
 	void Tick() noexcept;
 
 private:

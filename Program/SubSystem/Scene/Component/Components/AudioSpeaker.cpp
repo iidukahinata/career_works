@@ -8,9 +8,9 @@
 
 
 #include "AudioSpeaker.h"
-#include "Audio.h"
+//#include "Audio.h"
 #include "SubSystem/Resource/Resources/Audio/AudioClip.h"
-#include "SubSystem/Scene/Transform.h"
+//#include "SubSystem/Scene/Transform.h"
 #include "SubSystem/Core/Common/Common.h"
 
 AudioSpeaker::~AudioSpeaker()
@@ -23,19 +23,19 @@ AudioSpeaker::~AudioSpeaker()
 
 void AudioSpeaker::Update() noexcept
 {
-	ASSERT(m_parent);
-
-	Math::Vector3 worldPos = m_parent->GetWoldPosition();
-	Math::Vector3 velcity = worldPos - m_oldPos;
-
-	if (m_audioClip)
-	{
-		FMOD_VECTOR pos = { worldPos.x, worldPos.y, worldPos.z };
-		FMOD_VECTOR vel = { velcity.x, velcity.y, velcity.z };
-		m_audioClip->SetAttributes(pos, vel);
-	}
-
-	m_oldPos = worldPos;
+	//ASSERT(m_parent);
+	//
+	//Math::Vector3 worldPos = m_parent->GetWoldPosition();
+	//Math::Vector3 velcity = worldPos - m_oldPos;
+	//
+	//if (m_audioClip)
+	//{
+	//	FMOD_VECTOR pos = { worldPos.x, worldPos.y, worldPos.z };
+	//	FMOD_VECTOR vel = { velcity.x, velcity.y, velcity.z };
+	//	m_audioClip->SetAttributes(pos, vel);
+	//}
+	//
+	//m_oldPos = worldPos;
 }
 
 void AudioSpeaker::Play() noexcept
@@ -63,13 +63,13 @@ void AudioSpeaker::PlayOneShot(AudioClip* const clip, float volume /* = 1.f */) 
 	clip->SetVolume(volume);
 
 	// 3D 時、初期値として再生位置をセット。
-	if (m_is2DMode == false)
-	{
-		auto worldPos = m_parent ? m_parent->GetWoldPosition() : Math::Vector3::Zero;
-		FMOD_VECTOR pos = { worldPos.x, worldPos.y, worldPos.z };
-		FMOD_VECTOR vel = { 0, 0, 0 };
-		clip->SetAttributes(pos, vel);
-	}
+	//if (m_is2DMode == false)
+	//{
+	//	auto worldPos = m_parent ? m_parent->GetWoldPosition() : Math::Vector3::Zero;
+	//	FMOD_VECTOR pos = { worldPos.x, worldPos.y, worldPos.z };
+	//	FMOD_VECTOR vel = { 0, 0, 0 };
+	//	clip->SetAttributes(pos, vel);
+	//}
 }
 
 void AudioSpeaker::Pause() const noexcept

@@ -2,11 +2,12 @@
 * @file  Common.h
 * @brief 共通的な処理をまとめている
 *
-* @date	 2022/06/13 2022年度初版
+* @date	 2022/06/25 2022年度初版
 */
 #pragma once
 
 
+#include "Hash.h"
 #include "SubSystem/Log/DebugLog.h"
 
 // libファイルをまとめて管理する。
@@ -17,10 +18,6 @@
 #pragma comment(lib, "DirectXTex.lib")
 #pragma comment(lib, "assimp-vc141-mtd.lib")
 #pragma comment(lib, "fmodL_vc.lib")
-#pragma comment(lib, "BulletCollision.lib")
-#pragma comment(lib, "BulletDynamics.lib")
-#pragma comment(lib, "BulletSoftBody.lib")
-#pragma comment(lib, "LinearMath.lib")
 
 
 #ifdef _DEBUG
@@ -36,7 +33,7 @@
 #define INLINE inline
 #define FORCEINLINE __forceinline
 
-#define ALIGN(i) __declspec(align(i))
+#define ALIGN(N) __declspec(align(N))
 
 #ifdef _DEBUG
 #define LOG(text)		DebugLog::Get().Log(text)
@@ -57,16 +54,27 @@
 #define ASSERT(expr)
 #endif // _DEBUG
 
-struct CompileData
+/**
+* typeid 指定だとクラス名をそのままの文字列として取得出来ないため作成。
+* 使用用途にもよるが、このクラスのみの型比較は推奨しない。
+* それらの用途で使用する場合は名前比較も同時に行う方がより正確な答えになる。
+*/
+struct ClassTypeData
 {
 public:
 
-	const char* className = nullptr;
+	const std::string_view Name = nullptr;
 
-	const uint32_t classSize = 0;
+	const size_t Hash = 0;
 
-	const uint32_t hashID = 0;
-
-	constexpr CompileData(const char* name, uint32_t size, uint32_t hash) : className(name), classSize(size), hashID(hash)
+	constexpr ClassTypeData(std::string_view name, size_t hash) : Name(name), Hash(hash)
 	{}
+
+	constexpr ClassTypeData(std::string_view name) : Name(name), Hash(GET_HASH(name))
+	{}
+
+	constexpr bool operator==(const ClassTypeData& typeData) const noexcept
+	{
+		return Hash == typeData.Hash;
+	}
 };

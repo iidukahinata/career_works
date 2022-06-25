@@ -11,7 +11,7 @@
 
 class KeyPressed : public IEvent
 {
-	EVENT_CLASS(KeyPressed, KeyPressed)
+	SUB_CLASS(KeyPressed)
 public:
 
 	KeyPressed(uint32_t key);
@@ -24,7 +24,7 @@ private:
 
 class KeyReleased : public IEvent
 {
-	EVENT_CLASS(KeyReleased, KeyReleased)
+	SUB_CLASS(KeyReleased)
 public:
 
 	KeyReleased(uint32_t key);

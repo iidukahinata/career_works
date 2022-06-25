@@ -2,7 +2,7 @@
 * @file    Engine.h
 * @brief
 *
-* @date	   2022/06/23 2022年度初版
+* @date	   2022/06/25 2022年度初版
 */
 #pragma once
 
@@ -17,25 +17,33 @@ public:
 
 	Engine();
 
+	/** アプリケーション全体のセットアップを行います。*/
 	bool Initialize(HINSTANCE hInstance);
+
+	/** エンジンループを実現します。*/
 	long MainLoop();
 
 	/**
 	* この関数は JobSystem が解放される前に呼び出す必要があります。
-	* 理由は各システムがセットした Job が自身の解放処理のため JobSystem にアクセスするためです。
+	* 各システムがセットした Job 解放処理のため JobSystem にアクセスするためです。
 	*/
 	void Shutdown();
 
 private:
 
+	/** 主に、通常のウィンドウとデバックウィンドウを生成します。*/
 	bool StartUpScreen(HINSTANCE hInstance) noexcept;
+
+	/** 各システムクラスの生成を行う。*/
 	void RegisterSubsystemsToContainer() noexcept;
+
+	/** 登録された各システムのセットアップを行う。*/
 	bool InitializeSubsystems() noexcept;
 
 private:
 
 	HINSTANCE m_hInstance;
 
-	/* Subsystem 管理のコンテナクラス */
+	// * Subsystem 管理のコンテナクラス
 	std::unique_ptr<Context> m_context;
 };

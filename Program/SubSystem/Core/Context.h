@@ -2,7 +2,7 @@
  * @file	Context.h
  * @brief	Subsystemのサービスロケータクラス
  *
- * @date	2022/06/23 2022年度初版
+ * @date	2022/06/25 2022年度初版
  */
 #pragma once
 
@@ -18,12 +18,12 @@ public:
 
 	Context() = default;
 
-	/* 登録した Subsystem は取得時 Key クラスとして返されるため継承関係になければならない。 */
+	/** 登録した Subsystem は取得時 指定 Key クラスとして取得するため継承関係になければならない。*/
 	template<class Key>
 	void RegisterSubsystem(std::unique_ptr<ISubsystem> subsystem) noexcept;
 
 	/**
-	* @brief	コンテナから指定サブシステムの取得
+	* コンテナから指定サブシステムの取得
 	* @retval	指定サブシステムポインタ
 	* @retval	失敗時 nullptr
 	*/
@@ -32,24 +32,24 @@ public:
 
 private:
 
-	/* キーの重複が無いとして登録 */
+	/** キーの重複が無いもとして登録。*/
 	void RegisterSubsystem(uint32_t hash, ISubsystem* subsystem) noexcept;
 	ISubsystem* GetSubsystemByHash(uint32_t hash) noexcept;
 
 private:
 
-	// * -> ハッシュ値 : システムポインタ
+	// * Type -> <ハッシュ、システムオブジェクト>
 	std::map<uint32_t, std::unique_ptr<ISubsystem>> m_subsystems;
 };
 
 template<class Key>
 FORCEINLINE void Context::RegisterSubsystem(std::unique_ptr<ISubsystem> subsystem) noexcept
 {
-	RegisterSubsystem(Key::ClassData().hashID, subsystem.release());
+	RegisterSubsystem(Key::TypeData.Hash, subsystem.release());
 }
 
 template<class Key>
 FORCEINLINE Key* Context::GetSubsystem() noexcept
 {
-	return dynamic_cast<Key*>(GetSubsystemByHash(Key::ClassData().hashID));
+	return dynamic_cast<Key*>(GetSubsystemByHash(Key::TypeData.Hash));
 }

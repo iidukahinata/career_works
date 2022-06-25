@@ -27,10 +27,10 @@ void EventManager::Exit()
 
 bool EventManager::AddToQueue(std::shared_ptr<IEvent> eventBase) noexcept
 {
-	auto& eventType = eventBase->GetEventType();
+	auto& eventType = eventBase->GetTypeData();
 
 	// –³Œø‚È Event ‚ð“o˜^‚µ‚È‚¢‚½‚ß
-	if (eventType.Str.size() == 0)
+	if (eventType.Name.size() == 0)
 	{
 		return false;
 	}
@@ -48,13 +48,13 @@ bool EventManager::AddToQueue(std::shared_ptr<IEvent> eventBase) noexcept
 void EventManager::RemoveFromQueue(EventType eventType, bool isAll) noexcept
 {
 	// –³Œø‚È Event ‚Í“o˜^‚³‚ê‚Ä‚¢‚È‚¢‚½‚ß
-	if (eventType.Str.size() == 0)
+	if (eventType.Name.size() == 0)
 	{
 		return;
 	}
 
 	// ƒŠƒXƒi[ƒRƒ“ƒeƒi‚ª¶¬‚³‚ê‚Ä‚¢‚È‚¢Žž‚ÍŒ³XƒLƒ…[‚É’Ç‰Á‚³‚ê‚Ä‚¢‚È‚¢‚½‚ß
-	if (m_eventListeners.contains(eventType.Hash))
+	if (!m_eventListeners.contains(eventType.Hash))
 	{
 		return;
 	}
@@ -64,7 +64,7 @@ void EventManager::RemoveFromQueue(EventType eventType, bool isAll) noexcept
 	auto& eventQueue = m_eventQueues[m_numActiveQueue];
 	for (auto it = eventQueue.begin(); it != eventQueue.end();)
 	{
-		if ((*it)->GetEventType() == eventType)
+		if ((*it)->GetTypeData() == eventType)
 		{
 			it = eventQueue.erase(it);
 			if (!isAll) break;
@@ -79,7 +79,7 @@ void EventManager::RemoveFromQueue(EventType eventType, bool isAll) noexcept
 bool EventManager::AddEventLisener(EventListener* eventListener, const EventType& eventType) noexcept
 {
 	// –³Œø‚È Event ‚ð“o˜^‚µ‚È‚¢‚½‚ß
-	if (eventType.Str.size() == 0)
+	if (eventType.Name.size() == 0)
 	{
 		return false;
 	}
@@ -99,7 +99,7 @@ bool EventManager::AddEventLisener(EventListener* eventListener, const EventType
 bool EventManager::RemoveEventLisener(EventListener* eventListener, const EventType& eventType) noexcept
 {
 	// –³Œø‚È Event ‚ðŒŸõ‚µ‚È‚¢‚½‚ß
-	if (eventType.Str.size() == 0)
+	if (eventType.Name.size() == 0)
 	{
 		return true;
 	}
@@ -123,7 +123,7 @@ void EventManager::Tick() noexcept
 		auto& event = m_eventQueues[numQueue].front();
 		m_eventQueues[numQueue].pop_front();
 
-		auto listeners = m_eventListeners[event->GetEventType().Hash];
+		auto listeners = m_eventListeners[event->GetTypeData().Hash];
 		for (auto listener : listeners)
 		{
 			listener->Action(event->GetData());

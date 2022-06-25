@@ -2,7 +2,7 @@
 * @file    World.cpp
 * @brief
 *
-* @date	   2022/06/24 2022年度初版
+* @date	   2022/06/25 2022年度初版
 */
 
 
@@ -40,7 +40,7 @@ void World::AddGameObject(GameObjectPtr gameObject) noexcept
 
 GameObjectRef World::GetGameObjectByName(std::string_view name) const noexcept
 {
-	for (auto& gameObject : m_gameObjects)
+	for (const auto& gameObject : m_gameObjects)
 	{
 		if (gameObject->GetName() == name)
 		{

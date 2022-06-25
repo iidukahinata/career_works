@@ -2,7 +2,7 @@
 * @file		JobSystem.h
 * @brief
 *
-* @date		2022/06/16 2022年度初版
+* @date		2022/06/25 2022年度初版
 */
 #pragma once
 
@@ -32,11 +32,11 @@ private:
 	{
 	public:
 
-		/* 定数時間での処理 */
+		/** 定数時間での処理。*/
 		void Register(Job* job) noexcept;
 		void Remove(Job* job) noexcept;
 
-		/* JobSystem内で　範囲 for 使用するために定義 */
+		/** JobSystem内で　範囲 for 使用するために定義。*/
 		auto begin() noexcept;
 		auto end() noexcept;
 
@@ -55,13 +55,13 @@ public:
 		return jobSystem;
 	}
 
-	/* Function Type を順に全て実行していきます。*/
+	/** Function Type を順に全て実行していきます。*/
 	void Execute(double deletaTime) noexcept;
 
-	/* 指定 Function Type を実行していきます。*/
+	/** 指定 Function Type を実行していきます。*/
 	void Execute(double deletaTime, FunctionType mode) noexcept;
 
-	/* Thread Safe な関数です。*/
+	/** Thread Safe な関数です。*/
 	void RegisterJob(Job* job, FunctionType mode) noexcept;
 	void RemoveJob(Job* job) noexcept;
 
@@ -69,5 +69,6 @@ private:
 
 	std::mutex m_mutex;
 
+	// * Type -> <タイプID、コンテナ>
 	std::map<FunctionType, JobContainer> m_containers;
 };
