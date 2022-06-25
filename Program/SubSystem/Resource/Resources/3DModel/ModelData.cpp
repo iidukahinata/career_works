@@ -15,11 +15,11 @@
 
 
 #include "ModelData.h"
-#include "SubSystem/IOStream/FileStream.h"
+#include "SubSystem/Core/IO/FileStream.h"
 #include "SubSystem/Renderer/TransformCBuffer.h"
 #include "SubSystem/Resource/ResourceLoader/ModelLoader/ModelLoader.h"
 #include "SubSystem/Resource/ResourceManager.h"
-#include "SubSystem/Tools/Tools.h"
+#include "SubSystem/Core/Common/Tools.h"
 
 void ModelData::Draw(const DirectX::XMMATRIX& world)
 {
@@ -32,10 +32,10 @@ void ModelData::Draw(const DirectX::XMMATRIX& world)
 
 bool ModelData::LoadTexture(std::string_view filePath)
 {
-	if (auto texture = ResourceManager::Get().Load<D3D11Texture>(filePath)) {
-		m_meshes[0].AddTexture(texture);
-		return true;
-	}
+	//if (auto texture = ResourceManager::Get().Load<D3D11Texture>(filePath)) {
+	//	m_meshes[0].AddTexture(texture);
+	//	return true;
+	//}
 	return false;
 }
 
@@ -111,7 +111,7 @@ bool ModelData::LoadFromFile(std::string_view filePath)
 			std::string texturePath;
 			fileStream.Read(&texturePath);
 		
-			textures[i] = ResourceManager::Get().Load<D3D11Texture>(texturePath);
+			//textures[i] = ResourceManager::Get().Load<D3D11Texture>(texturePath);
 		}
 
 		m_meshes.emplace_back(std::move(vertices), std::move(textures), std::move(indices));

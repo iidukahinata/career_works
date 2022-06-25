@@ -8,7 +8,6 @@
 
 
 #include "D3D11RenderTexture.h"
-#include "Application/Application.h"
 #include "SubSystem/Log/DebugLog.h"
 
 bool D3D11RenderTexture::Create(

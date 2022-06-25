@@ -2,35 +2,24 @@
 * @file    Audio.h
 * @brief
 *
-* @date	   2022/05/10 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/23 2022年度初版
 */
 #pragma once
 
 
 #include <fmod.hpp>
+#include "SubSystem/Core/ISubsystem.h"
+#include "SubSystem/JobSystem/Sync/Job.h"
 
-class Audio
+class Audio : public ISubsystem
 {
-private:
-
-	Audio() = default;
-	Audio(const Audio&) = default;
-	Audio& operator=(const Audio&) = default;
-
+	SUB_CLASS(Audio)
 public:
 
-	~Audio();
+	Audio();
 
-	static Audio& Get() noexcept
-	{
-		static Audio instance;
-		return instance;
-	}
-
-	bool Init(int maxChannel) noexcept;
-	void Update() const noexcept;
-	void Release() const noexcept;
+	bool Initialize() override;
+	void Shutdown() override;
 
 	/* 全ての 3D サウンドのグローバル設定を変更します。*/
 	void Set3DSettings(float dopplerscale, float distancefactor, float rolloffscale) const noexcept;
@@ -42,7 +31,14 @@ public:
 
 private:
 
+	void Update() const noexcept;
+
+private:
+
 	FMOD::System* m_system = nullptr;
 
 	class AudioListener* m_lisrener = nullptr;
+
+	/* Audio Update 登録用 */
+	Job m_job;
 };

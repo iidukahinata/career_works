@@ -9,7 +9,7 @@
 
 #include "Blur.h"
 #include "SubSystem/Window/Window.h"
-#include "SubSystem/Tools/Tools.h"
+#include "SubSystem/Core/Common/Tools.h"
 
 #include"SubSystem/Input/Input.h"
 
@@ -76,16 +76,16 @@ void Blur::SetVariance(float variance)
 void Blur::CreateRenderTextures(const Math::Vector2& textureSize)
 {
 	// xブラー用のRenderTarget生成
-	m_xBlurRenderTexture.Create(
-		textureSize.x / 2,
-		textureSize.y,
-		DXGI_FORMAT_R32G32B32A32_FLOAT);	// HDRレンダリングを行うように32ビットモード
-
+	//m_xBlurRenderTexture.Create(
+	//	textureSize.x / 2,
+	//	textureSize.y,
+	//	DXGI_FORMAT_R32G32B32A32_FLOAT);	// HDRレンダリングを行うように32ビットモード
+	
 	// yブラー用のRenderTarget生成
-	m_yBlurRenderTexture.Create(
-		textureSize.x / 2,
-		textureSize.y / 2,
-		DXGI_FORMAT_R32G32B32A32_FLOAT);	// HDRレンダリングを行うように32ビットモード
+	//m_yBlurRenderTexture.Create(
+	//	textureSize.x / 2,
+	//	textureSize.y / 2,
+	//	DXGI_FORMAT_R32G32B32A32_FLOAT);	// HDRレンダリングを行うように32ビットモード
 }
 
 void Blur::CreateSprites(Texture* texture)

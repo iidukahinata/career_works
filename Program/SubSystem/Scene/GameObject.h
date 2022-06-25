@@ -1,65 +1,73 @@
 /**
 * @file    GameObject.h
-* @brief   各GameObjectの抽象クラス
+* @brief
 *
-* @date	   2022/04/30 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/24 2022年度初版
 */
 #pragma once
 
 
-#include "Transform.h"
+#include <map>
+#include <memory>
+#include "Component/IComponent.h"
+#include "Component/Components/Transform.h"
 
-class IGameObject
+class Context;
+class World;
+
+class GameObject
 {
+	friend struct GameObjectFactory;
 public:
 
-	virtual ~IGameObject() {}
+	/** 指定名コンポーネントの追加。指定名が存在しない等の場合、null を返す。*/
+	IComponent* AddComponent(std::string_view name) noexcept;
 
-	/**
-	* サブクラスで初期化処理を実現させる
-	* Scene登録時に呼び出されるように設計されている
-	* モデル等リソース読み込みは Scene の Init 処理の実装方法に依存するため、
-	* Awake で書いておくことを推奨。
-	*/
-	virtual void Awake() {}
+	/** 保持するコンポーネントを消去するため、そのアドレスを引数とする。*/
+	void RemoveComponent(IComponent* component) noexcept;
 
-	/**
-	* サブクラスで初期化処理を実現させる
-	* 呼び出しタイミングは所属 Scene の実装方法で変化
-	* 基本的に全ての GameObject が生成されてから実行される。
-	*/
-	virtual void Init() {}
+	/** 型名からコンポーネントを検索。*/
+	template<class T>
+	T* GetComponent();
 
-	/**
-	* サブクラスで更新処理を実現させる
-	* 呼び出しタイミングは所属 Scene の実装方法で変化
-	*/
-	virtual void Update() {}
+	/** 指定名コンポーネントを保持する場合、そのアドレスを返す。 */
+	IComponent* FindComponent(std::string_view name) const noexcept;
 
-	/**
-	* サブクラスで描画処理を実現させる
-	* 呼び出しタイミングは所属 Scene の実装方法で変化
-	*/
-	virtual void Draw() {}
+	/* 各GameObject識別用に使用。*/
+	void SetName(std::string_view name) noexcept;
+	std::string_view GetName() const noexcept;
 
-	int GetID() const noexcept;
-	void SetID(int id) noexcept;
+	/** Worldクラスで以外で使用されると、場合によってはScene終了時までメモリが解放されず残り続けます。*/
+	void SetID(uint32_t id) noexcept;
+	uint32_t GetID() const noexcept;
 
-	/* Sceneクラスで検索等で使用される */
-	virtual const char* GetName() { return nullptr; }
+	World* GetOwner() const noexcept;
+	Context* GetContext() const noexcept;
 
-	Transform& GetTransform() noexcept;
+private:
 
-	/** 遅延セットアップ */
-	void SetScene(class IScene* scene) noexcept;
+	/* 所属ワールドクラスを保持。*/
+	World* m_owner;
 
-protected:
+	// * WorldクラスでのID値
+	uint32_t m_id;
 
-	// * Sceneクラスで探索時等に使用される
-	int m_id;
+	// * Worldクラスで探索時等に使用される
+	std::string_view m_name;
 
-	Transform m_transform;
-
-	class IScene* m_scene = nullptr;
+	// * -> ハッシュ値 : 各コンポーネントオブジェクト
+	std::map<uint32_t, std::shared_ptr<IComponent>> m_components;
 };
+
+template<class T>
+FORCEINLINE T* GameObject::GetComponent()
+{
+	for (auto& component : m_components)
+	{
+		if (component.second->IsSameClass<T>())
+		{
+			return dynamic_cast<T*>(component.second.get());
+		}
+	}
+	return nullptr;
+}

@@ -8,7 +8,7 @@
 
 
 #include "Texture.h"
-#include "SubSystem/IOStream/FileStream.h"
+#include "SubSystem/Core/IO/FileStream.h"
 #include "SubSystem/Resource/ResourceLoader/TextureLoader/TextureLoader.h"
 
 bool Texture::Create(DirectX::ScratchImage* image)

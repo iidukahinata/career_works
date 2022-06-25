@@ -11,8 +11,8 @@
 #include <chrono>
 #include <WICTextureLoader.h>
 #include <DDSTextureLoader.h>
-#include "SubSystem/Log/DebugLog.h"
-#include "SubSystem/Tools/Tools.h"
+#include "SubSystem/Core/Common/Tools.h"
+#include "SubSystem/Core/Common/Common.h"
 
 DirectX::ScratchImage* TextureLoader::Load(std::string_view filePath) noexcept
 {
@@ -27,15 +27,15 @@ DirectX::ScratchImage* TextureLoader::Load(std::string_view filePath) noexcept
 	auto extname = GetExt(filePath);
 	if (extname == "dds")
 	{
-		hr = DirectX::LoadFromDDSFile(ret.c_str(), DirectX::DDS_FLAGS::DDS_FLAGS_NONE, &meta, *m_image);
+		hr = DirectX::LoadFromDDSFile(ret.data(), DirectX::DDS_FLAGS::DDS_FLAGS_NONE, &meta, *m_image);
 	}
 	else if (extname == "tga")
 	{
-		hr = DirectX::LoadFromTGAFile(ret.c_str(), &meta, *m_image);
+		hr = DirectX::LoadFromTGAFile(ret.data(), &meta, *m_image);
 	}
 	else  if (extname != "bin")
 	{
-		hr = DirectX::LoadFromWICFile(ret.c_str(), DirectX::WIC_FLAGS::WIC_FLAGS_NONE, &meta, *m_image);
+		hr = DirectX::LoadFromWICFile(ret.data(), DirectX::WIC_FLAGS::WIC_FLAGS_NONE, &meta, *m_image);
 	}
 
 	if (FAILED(hr)) {

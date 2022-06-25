@@ -11,27 +11,27 @@
 #include "SubSystem/Renderer/TransformCBuffer.h"
 #include "SubSystem/Renderer/Geometry/Plane.h"
 #include "SubSystem/Resource/ResourceManager.h"
-#include "SubSystem/ThreadPool/ThreadPool.h"
+//#include "SubSystem/ThreadPool/ThreadPool.h"
 
 void Sprite::Init(const SpriteDesc& desc)
 {
 	m_mesh = Plane::Make<Vertex2D>(desc.width, desc.height);
 
 	// 読み込み待ちが起きないよう並列処理で行う
-	ThreadPool::Get().AddTask([this, desc]
-	{
-		// 指定されたPathを優先して追加
-		if (!desc.filePath.empty())
-		{
-			m_mesh.AddTexture(ResourceManager::Get().Load<D3D11Texture>(desc.filePath));
-		}
-
-		// 読み込まれているデータがある時のみ処理
-		for (auto texture : desc.textures)
-		{
-			m_mesh.AddTexture(texture);
-		}
-	});
+	//ThreadPool::Get().AddTask([this, desc]
+	//{
+	//	// 指定されたPathを優先して追加
+	//	if (!desc.filePath.empty())
+	//	{
+	//		m_mesh.AddTexture(ResourceManager::Get().Load<D3D11Texture>(desc.filePath));
+	//	}
+	//
+	//	// 読み込まれているデータがある時のみ処理
+	//	for (auto texture : desc.textures)
+	//	{
+	//		m_mesh.AddTexture(texture);
+	//	}
+	//});
 
 	// 頂点シェーダー生成
 	m_vertexShader.Create(desc.vsShader);

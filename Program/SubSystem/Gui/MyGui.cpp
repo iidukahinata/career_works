@@ -2,8 +2,7 @@
 * @file    MyGui.cpp
 * @brief   gui管理クラス
 *
-* @date	   2022/04/27 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/17 2022年度初版
 */
 
 

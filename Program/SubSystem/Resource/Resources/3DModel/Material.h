@@ -16,10 +16,10 @@
 */
 struct Material
 {
-	float m_Alpha;
-	Math::Vector3 m_Ambient;	//環境色
-	Math::Vector3 m_Diffuse;	//ディフューズ色
-	Math::Vector3 m_Specular;	//スペキュラ色
+	float m_alpha;
+	Math::Vector3 m_ambient;	//環境色
+	Math::Vector3 m_diffuse;	//ディフューズ色
+	Math::Vector3 m_specular;	//スペキュラ色
 	Math::Vector3 m_emissive;   //エミッシブ
 
 	float m_specularPower;			//スペキュラ強さ

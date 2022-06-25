@@ -1,24 +1,19 @@
 /**
 * @file    Window.h
-* @brief   ウィンドウ管理クラス
+* @brief
 *
-* @date	   2022/05/06 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/23 2022年度初版
 */
 #pragma once
 
 
 #include <Windows.h>
-#include <string_view>
+#include "SubSystem/Core/Common/Macro.h"
 
 class Window
 {
-private:
-
 	Window() = default;
-	Window(const Window&) = default;
-	Window& operator=(const Window&) = default;
-
+	COPY_PROHIBITED(Window)
 public:
 
 	static Window& Get() noexcept

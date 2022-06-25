@@ -1,9 +1,8 @@
 /**
 * @file    ResourceManager.h
-* @brief   リソース管理クラス
+* @brief
 *
-* @date	   2022/05/06 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/23 2022年度初版
 */
 #pragma once
 
@@ -11,26 +10,17 @@
 #include <map>
 #include <memory>
 #include "Resources/IResource.h"
-#include "SubSystem/Log/DebugLog.h"
+#include "SubSystem/Core/ISubsystem.h"
+#include "SubSystem/Core/Common/Common.h"
 
 /**
 * このクラスではデータ競合を引き起こさない。
 */
-class ResourceManager
+class ResourceManager : public ISubsystem
 {
-private:
-
-	ResourceManager() = default;
-	ResourceManager(const ResourceManager&) = default;
-	ResourceManager& operator=(const ResourceManager&) = default;
-
 public:
 
-	static ResourceManager& Get() noexcept
-	{
-		static ResourceManager instance;
-		return instance;
-	}
+	void Shutdown() override;
 
 	/**
 	* 同じリソースを読み込まないために実装

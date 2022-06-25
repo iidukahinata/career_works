@@ -1,33 +1,86 @@
 /**
 * @file    GameObject.cpp
-* @brief   各GameObjectの抽象クラス
+* @brief
 *
-* @date	   2022/05/28 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/24 2022年度初版
 */
 
 
 #include "GameObject.h"
-#include "SubSystem/Tools/Chack.h"
+#include "World.h"
+#include "Component/ComponentFactory.h"
 
-int IGameObject::GetID() const noexcept
+IComponent* GameObject::AddComponent(std::string_view name) noexcept
+{
+	IComponent* result = nullptr;
+
+	if (auto component = ComponentFactory::Create(this, name))
+	{
+		auto hash = component->GetType().Hash;
+		m_components[hash] = component;
+		result = component.get();
+	}
+
+	return result;
+}
+
+void GameObject::RemoveComponent(IComponent* component) noexcept
+{
+	for (auto it = m_components.begin(); it != m_components.end(); it++)
+	{
+		if (it->second.get() == component)
+		{
+			m_components.erase(it);
+			break;
+		}
+	}
+}
+
+IComponent* GameObject::FindComponent(std::string_view name) const noexcept
+{
+	const ComponentType type(name);
+	for (auto& component : m_components)
+	{
+		if (component.second->GetType() == type)
+		{
+			return component.second.get();
+		}
+	}
+	return nullptr;
+}
+
+uint32_t GameObject::GetID() const noexcept
 {
 	return m_id;
 }
 
-void IGameObject::SetID(int id) noexcept
+void GameObject::SetID(uint32_t id) noexcept
 {
-	Chack(id >= 0);
+	ASSERT(id >= 0);
 	m_id = id;
 }
 
-Transform& IGameObject::GetTransform() noexcept
+void GameObject::SetName(std::string_view name) noexcept
 {
-	return m_transform;
+	m_name = name;
 }
 
-void IGameObject::SetScene(IScene* scene) noexcept
+std::string_view GameObject::GetName() const noexcept
 {
-	Chack(!m_scene);
-	m_scene = scene;
+	return m_name;
+}
+
+//Transform* GameObject::GetTransform() noexcept
+//{
+//	return m_transform;
+//}
+
+World* GameObject::GetOwner() const noexcept
+{
+	return m_owner;
+}
+
+Context* GameObject::GetContext() const noexcept
+{
+	return m_owner ? m_owner->GetContext() : nullptr;
 }

@@ -9,8 +9,8 @@
 
 
 #include "D3D11DeviceChild.h"
-#include "SubSystem/Log/DebugLog.h"
-#include "SubSystem/Tools/Tools.h"
+#include "SubSystem/Core/Common/Common.h"
+#include "SubSystem/Core/Common/Tools.h"
 
 template<class T>
 class D3D11ConstantBuffer : public D3D11DeviceChild

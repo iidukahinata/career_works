@@ -9,7 +9,7 @@
 
 #include "D3D11InputLayout.h"
 #include "SubSystem/Log/DebugLog.h"
-#include "SubSystem/Tools/Chack.h"
+#include "SubSystem/Core/Common/Common.h"
 
 bool D3D11InputLayout::Create(D3D11_INPUT_ELEMENT_DESC* layout, UINT layoutSize, ID3DBlob* blob) noexcept
 {

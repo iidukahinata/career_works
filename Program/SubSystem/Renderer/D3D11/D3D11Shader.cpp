@@ -10,7 +10,7 @@
 #include "D3D11Shader.h"
 #include <d3dcompiler.h>
 #include "SubSystem/Log/DebugLog.h"
-#include "SubSystem/Tools/Tools.h"
+#include "SubSystem/Core/Common/Tools.h"
 
 bool D3D11Shader::CompileFromFile(std::string_view shader, std::string_view entrypoint, std::string_view traget) noexcept
 {
@@ -22,7 +22,7 @@ bool D3D11Shader::CompileFromFile(std::string_view shader, std::string_view entr
 	HRESULT hr;
 	if (GetExt(shader) == "cso")
 	{
-		hr = D3DReadFileToBlob(ToWstring(shader).c_str(), m_blob.ReleaseAndGetAddressOf());
+		hr = D3DReadFileToBlob(ToWstring(shader).data(), m_blob.ReleaseAndGetAddressOf());
 
 		if (FAILED(hr))
 		{
@@ -35,7 +35,7 @@ bool D3D11Shader::CompileFromFile(std::string_view shader, std::string_view entr
 		// shaderコンパイル
 		Microsoft::WRL::ComPtr<ID3DBlob> errorBlob;
 		hr = D3DCompileFromFile(
-			ToWstring(shader).c_str(),
+			ToWstring(shader).data(),
 			nullptr,
 			D3D_COMPILE_STANDARD_FILE_INCLUDE,
 			entrypoint.data(),
@@ -47,7 +47,7 @@ bool D3D11Shader::CompileFromFile(std::string_view shader, std::string_view entr
 
 		if (FAILED(hr))
 		{
-			LOG_ERROR_MSG("Shader コンパイルに失敗。", (char*)errorBlob->GetBufferPointer());
+			LOG_ERROR((char*)errorBlob->GetBufferPointer());
 			return false;
 		}
 	}

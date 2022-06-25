@@ -1,13 +1,17 @@
 /**
 * @file    ResourceManager.cpp
-* @brief   リソース管理クラス
+* @brief
 *
-* @date	   2022/04/30 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/23 2022年度初版
 */
 
 
 #include "ResourceManager.h"
+
+void ResourceManager::Shutdown()
+{
+	Clear();
+}
 
 void ResourceManager::FreeUnusedResourceObjects() noexcept
 {

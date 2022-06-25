@@ -10,7 +10,7 @@
 
 #include "D3D11DeviceChild.h"
 #include "D3D11Texture.h"
-#include "SubSystem/Math/Vector4.h"
+#include "SubSystem/Core/Math/Vector4.h"
 #include "SubSystem/Resource/Resources/3DModel/Texture.h"
 
 class D3D11RenderTexture : public D3D11DeviceChild

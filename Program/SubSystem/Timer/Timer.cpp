@@ -2,18 +2,17 @@
 * @file    Timer.cpp
 * @brief   フレーム管理クラス
 *
-* @date	   2022/05/28 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/21 2022年度初版
 */
 
 
 #include "Timer.h"
-#include "SubSystem/Tools/Chack.h"
 
-Timer::Timer()
+bool Timer::Initialize()
 {
 	SetFPS(60);
 	ResetMeasurement();
+	return true;
 }
 
 bool Timer::ReachedNextFrame() noexcept
@@ -39,7 +38,7 @@ void Timer::ResetMeasurement() noexcept
 
 void Timer::SetFPS(float fps) noexcept
 {
-	Chack(fps > 0.f);
+	ASSERT(fps > 0.f);
 	m_fpsTime = (1.f / fps);
 }
 

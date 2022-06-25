@@ -8,11 +8,10 @@
 
 
 #include "SkyBox.h"
-#include "Application/Application.h"
 #include "SubSystem/Renderer/TransformCBuffer.h"
 #include "SubSystem/Renderer/Geometry/Cube.h"
 #include "SubSystem/Resource/ResourceManager.h"
-#include "SubSystem/ThreadPool/ThreadPool.h"
+//#include "SubSystem/ThreadPool/ThreadPool.h"
 
 bool SkyBox::Init(const std::string& filePath)
 {
@@ -20,10 +19,10 @@ bool SkyBox::Init(const std::string& filePath)
 	m_meshes.emplace_back(Cube::Make<Vertex3D>());
 
 	// “Ç‚İ‚İ‘Ò‚¿‚ª‹N‚«‚È‚¢‚æ‚¤•À—ñˆ—‚Ås‚¤
-	ThreadPool::Get().AddTask([this, filePath]
-	{
-		m_meshes[0].AddTexture(ResourceManager::Get().Load<D3D11Texture>(filePath.c_str()));
-	});
+	//ThreadPool::Get().AddTask([this, filePath]
+	//{
+	//	m_meshes[0].AddTexture(ResourceManager::Get().Load<D3D11Texture>(filePath.c_str()));
+	//});
 
 	SetUp();
 

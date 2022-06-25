@@ -9,8 +9,8 @@
 
 #include "D3D12Shader.h"
 #include <d3dcompiler.h>
-#include "SubSystem/Tools/Tools.h"
-#include "SubSystem/Log/DebugLog.h"
+#include "SubSystem/Core/Common/Tools.h"
+#include "SubSystem/Core/Common/Common.h"
 
 void D3D12Shader::Compile(const char* filePath, const char* entryPoint, const char* traget) noexcept
 {

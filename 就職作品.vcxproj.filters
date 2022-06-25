@@ -1,12 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Application">
-      <UniqueIdentifier>{97220e62-3828-419f-bc39-e944971bf96e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game">
-      <UniqueIdentifier>{2b59ad45-725e-4a29-a925-04ab7d0411fb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SubSystem">
       <UniqueIdentifier>{35f17c59-5333-49a8-a4c5-e7dccda413fb}</UniqueIdentifier>
     </Filter>
@@ -31,18 +25,6 @@
     <Filter Include="SubSystem\Input">
       <UniqueIdentifier>{cbd31513-91ed-49d3-ae9d-8fc557513c0e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SubSystem\IOStream">
-      <UniqueIdentifier>{df150d7e-279f-4e7f-8265-4cd9480a5f28}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SubSystem\Log">
-      <UniqueIdentifier>{74c41bea-ae8c-474c-b867-5e62f3ecd1fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SubSystem\Math">
-      <UniqueIdentifier>{ff21058c-dc1e-4828-8073-47b9cca19db0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SubSystem\Phisics">
-      <UniqueIdentifier>{7d93fa86-bcd4-431d-a280-f3b7239d53b0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SubSystem\Renderer">
       <UniqueIdentifier>{6e0b70b8-019c-401b-a309-e48adaeac6c0}</UniqueIdentifier>
     </Filter>
@@ -52,20 +34,11 @@
     <Filter Include="SubSystem\Scene">
       <UniqueIdentifier>{97fa475a-e3bf-4d5f-9e7d-a9c3f3f41934}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SubSystem\ThreadPool">
-      <UniqueIdentifier>{91291c6a-d94e-4db9-a751-c111eefac470}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SubSystem\Timer">
       <UniqueIdentifier>{532a8617-9fdf-443b-998f-9d23d0617ac9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SubSystem\Tools">
-      <UniqueIdentifier>{49020388-a70a-4e9c-acb4-1e2aedea659e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SubSystem\Window">
       <UniqueIdentifier>{cf390bbc-9dd6-471e-ad1e-b523c8209bf7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SubSystem\Resource\Resources">
-      <UniqueIdentifier>{16da4491-7f17-42e6-98f1-d544cfbb8462}</UniqueIdentifier>
     </Filter>
     <Filter Include="SubSystem\Resource\ResourceLoader">
       <UniqueIdentifier>{85ade1d6-5613-4c82-a5e0-859c3924aa22}</UniqueIdentifier>
@@ -75,15 +48,6 @@
     </Filter>
     <Filter Include="SubSystem\Resource\ResourceLoader\TextureLoader">
       <UniqueIdentifier>{72bc2d25-057b-4167-9f80-735263159eb7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SubSystem\Resource\Resources\3DModel">
-      <UniqueIdentifier>{c01ae5b3-ac52-4987-afbb-6fd408cf7948}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SubSystem\Resource\Resources\2DSprite">
-      <UniqueIdentifier>{0635a65d-0a8d-4ed0-8f54-9a00d624c53d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SubSystem\Resource\Resources\Audio">
-      <UniqueIdentifier>{4e2e722f-2322-48cb-aff9-9ba3deb9ce19}</UniqueIdentifier>
     </Filter>
     <Filter Include="SubSystem\Renderer\Camera">
       <UniqueIdentifier>{4ac70078-d3d7-45d1-8885-893e5d83d140}</UniqueIdentifier>
@@ -115,50 +79,62 @@
     <Filter Include="SubSystem\Renderer\Drawings\Effect\PostEffect">
       <UniqueIdentifier>{1e07a66c-0f07-47e1-a97c-a1ddac8aca52}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Scene">
-      <UniqueIdentifier>{a62d9525-01f0-4562-9a2f-43514d0314b1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\GameObject">
-      <UniqueIdentifier>{f06bcc08-8dbd-4bb1-ad25-3c07d861547f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Component">
-      <UniqueIdentifier>{f13c7aa1-2450-43f2-8891-169620615f75}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SubSystem\Renderer\Shader\Core">
       <UniqueIdentifier>{676e59f5-ce95-4a97-aff3-9b7f6d31b0a8}</UniqueIdentifier>
     </Filter>
     <Filter Include="SubSystem\Renderer\Shader\PostEffect">
       <UniqueIdentifier>{241629f5-a90c-4fd3-8adc-24ddf0ee6349}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\GameObject\InGame">
-      <UniqueIdentifier>{43e7ae7d-cb02-4973-9d66-c8c95ae8f6bf}</UniqueIdentifier>
+    <Filter Include="SubSystem\JobSystem">
+      <UniqueIdentifier>{529c6c42-84ab-4d39-ab6a-95e62f6c7ae8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\GameObject\OutGame">
-      <UniqueIdentifier>{7a502c2d-4afd-446d-8859-3cff79509ece}</UniqueIdentifier>
+    <Filter Include="SubSystem\Resource\Resources">
+      <UniqueIdentifier>{16da4491-7f17-42e6-98f1-d544cfbb8462}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\GameObject\InGame\Mass">
-      <UniqueIdentifier>{7d781c8d-05d3-4a26-abbe-ff1f87364357}</UniqueIdentifier>
+    <Filter Include="SubSystem\Resource\Resources\3DModel">
+      <UniqueIdentifier>{c01ae5b3-ac52-4987-afbb-6fd408cf7948}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\GameObject\Common">
-      <UniqueIdentifier>{f8f0ce3f-7adf-435e-91c3-93888ef0b56d}</UniqueIdentifier>
+    <Filter Include="SubSystem\Resource\Resources\2DSprite">
+      <UniqueIdentifier>{0635a65d-0a8d-4ed0-8f54-9a00d624c53d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\GameObject\OutGame\UI">
-      <UniqueIdentifier>{59e07e68-ea7e-4c35-8667-8eaad52708a9}</UniqueIdentifier>
+    <Filter Include="SubSystem\Resource\Resources\Audio">
+      <UniqueIdentifier>{4e2e722f-2322-48cb-aff9-9ba3deb9ce19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\JobSystem\Async">
+      <UniqueIdentifier>{aa6cecbe-b05f-4547-b8e8-9f0e7304f4f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\JobSystem\Sync">
+      <UniqueIdentifier>{012feeaa-38e7-446d-986f-f37aeb505621}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Core">
+      <UniqueIdentifier>{0fd78cdb-762b-452b-8ae5-a2c8cde2b268}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Core\Math">
+      <UniqueIdentifier>{ff21058c-dc1e-4828-8073-47b9cca19db0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Log">
+      <UniqueIdentifier>{74c41bea-ae8c-474c-b867-5e62f3ecd1fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Core\I/O">
+      <UniqueIdentifier>{df150d7e-279f-4e7f-8265-4cd9480a5f28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Core\Common">
+      <UniqueIdentifier>{49020388-a70a-4e9c-acb4-1e2aedea659e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Scene\Component">
+      <UniqueIdentifier>{24d58877-a16c-4f5b-bcde-19c218beb082}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Core\Event">
+      <UniqueIdentifier>{536c86d3-9167-4277-a6b8-66676c9ca96e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Scene\Component\Conponents">
+      <UniqueIdentifier>{85f3318e-a0f6-4007-823b-b71a6911367a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Scene\GameObject">
+      <UniqueIdentifier>{fe75741e-2c2d-49d1-8bc6-b584a0cdfe0a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Program\Application\Application.cpp">
-      <Filter>Application</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\Game\Scene\EditScene.cpp">
-      <Filter>Game\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\Game\Scene\GameScene.cpp">
-      <Filter>Game\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\Game\Game.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Program\WinMain.cpp" />
     <ClCompile Include="Program\ThirdParty\directxtex\include\DDSTextureLoader.cpp">
       <Filter>ThirdParty\DirectTex</Filter>
@@ -166,34 +142,7 @@
     <ClCompile Include="Program\ThirdParty\directxtex\include\WICTextureLoader.cpp">
       <Filter>ThirdParty\DirectTex</Filter>
     </ClCompile>
-    <ClCompile Include="Program\ThirdParty\imgui\imgui_impl_win32.cpp">
-      <Filter>ThirdParty\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\ThirdParty\imgui\imgui_tables.cpp">
-      <Filter>ThirdParty\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\ThirdParty\imgui\imgui_widgets.cpp">
-      <Filter>ThirdParty\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\ThirdParty\imgui\imgui.cpp">
-      <Filter>ThirdParty\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\ThirdParty\imgui\imgui_demo.cpp">
-      <Filter>ThirdParty\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\ThirdParty\imgui\imgui_draw.cpp">
-      <Filter>ThirdParty\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\ThirdParty\imgui\imgui_impl_dx11.cpp">
-      <Filter>ThirdParty\imgui</Filter>
-    </ClCompile>
     <ClCompile Include="Program\SubSystem\Audio\Audio.cpp">
-      <Filter>SubSystem\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Audio\AudioListener.cpp">
-      <Filter>SubSystem\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Audio\AudioSpeaker.cpp">
       <Filter>SubSystem\Audio</Filter>
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Gui\MyGui.cpp">
@@ -202,62 +151,14 @@
     <ClCompile Include="Program\SubSystem\Input\Input.cpp">
       <Filter>SubSystem\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Program\SubSystem\IOStream\FileStream.cpp">
-      <Filter>SubSystem\IOStream</Filter>
-    </ClCompile>
     <ClCompile Include="Program\SubSystem\Log\DebugLog.cpp">
       <Filter>SubSystem\Log</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Math\Vector2.cpp">
-      <Filter>SubSystem\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Math\Vector3.cpp">
-      <Filter>SubSystem\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Math\Matrix.cpp">
-      <Filter>SubSystem\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Phisics\OBB.cpp">
-      <Filter>SubSystem\Phisics</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Phisics\Phisics.cpp">
-      <Filter>SubSystem\Phisics</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Phisics\Body.cpp">
-      <Filter>SubSystem\Phisics</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Phisics\Collider.cpp">
-      <Filter>SubSystem\Phisics</Filter>
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Window\Window.cpp">
       <Filter>SubSystem\Window</Filter>
     </ClCompile>
-    <ClCompile Include="Program\SubSystem\Tools\Tools.cpp">
-      <Filter>SubSystem\Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Tools\COM.cpp">
-      <Filter>SubSystem\Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Tools\SpinLock.cpp">
-      <Filter>SubSystem\Tools</Filter>
-    </ClCompile>
     <ClCompile Include="Program\SubSystem\Timer\Timer.cpp">
       <Filter>SubSystem\Timer</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\ThreadPool\ThreadPool.cpp">
-      <Filter>SubSystem\ThreadPool</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Scene\Transform.cpp">
-      <Filter>SubSystem\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Scene\GameObject.cpp">
-      <Filter>SubSystem\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Scene\Scene.cpp">
-      <Filter>SubSystem\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Scene\SceneManager.cpp">
-      <Filter>SubSystem\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Resource\ResourceManager.cpp">
       <Filter>SubSystem\Resource</Filter>
@@ -394,74 +295,98 @@
     <ClCompile Include="Program\SubSystem\Renderer\Drawings\Effect\Postprocessing.cpp">
       <Filter>SubSystem\Renderer\Drawings\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="Program\SubSystem\Tools\Chack.cpp">
-      <Filter>SubSystem\Tools</Filter>
+    <ClCompile Include="Program\SubSystem\Core\Math\Matrix.cpp">
+      <Filter>SubSystem\Core\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Game\Scene\TitleScene.cpp">
-      <Filter>Game\Scene</Filter>
+    <ClCompile Include="Program\SubSystem\Core\Math\Vector2.cpp">
+      <Filter>SubSystem\Core\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Game\GameObject\IMass.cpp">
-      <Filter>Game\GameObject\InGame\Mass</Filter>
+    <ClCompile Include="Program\SubSystem\Core\Math\Vector3.cpp">
+      <Filter>SubSystem\Core\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Game\GameObject\Player.cpp">
-      <Filter>Game\GameObject\InGame\Mass</Filter>
+    <ClCompile Include="Program\SubSystem\Core\IO\FileStream.cpp">
+      <Filter>SubSystem\Core\I/O</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Game\GameObject\Message.cpp">
-      <Filter>Game\GameObject\InGame\Mass</Filter>
+    <ClCompile Include="Program\SubSystem\Core\Common\COM.cpp">
+      <Filter>SubSystem\Core\Common</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Game\Component\HitStop.cpp">
-      <Filter>Game\Component</Filter>
+    <ClCompile Include="Program\SubSystem\Core\Common\Tools.cpp">
+      <Filter>SubSystem\Core\Common</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Game\GameObject\Human.cpp">
-      <Filter>Game\GameObject\InGame\Mass</Filter>
+    <ClCompile Include="Program\SubSystem\JobSystem\Async\AsyncJob.cpp">
+      <Filter>SubSystem\JobSystem\Async</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Game\GameObject\TitleString.cpp">
-      <Filter>Game\GameObject\OutGame</Filter>
+    <ClCompile Include="Program\SubSystem\JobSystem\Async\AsyncJobSystem.cpp">
+      <Filter>SubSystem\JobSystem\Async</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Game\GameObject\Effect.cpp">
-      <Filter>Game\GameObject</Filter>
+    <ClCompile Include="Program\SubSystem\JobSystem\Sync\Job.cpp">
+      <Filter>SubSystem\JobSystem\Sync</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Game\GameObject\CameraMove.cpp">
-      <Filter>Game\GameObject\InGame</Filter>
+    <ClCompile Include="Program\SubSystem\JobSystem\Sync\JobSystem.cpp">
+      <Filter>SubSystem\JobSystem\Sync</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Game\GameObject\BackGraund.cpp">
-      <Filter>Game\GameObject\OutGame</Filter>
+    <ClCompile Include="Program\SubSystem\Core\Engine.cpp">
+      <Filter>SubSystem\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Game\GameObject\Stage.cpp">
-      <Filter>Game\GameObject\InGame</Filter>
+    <ClCompile Include="Program\ThirdParty\imgui\imgui_impl_dx11.cpp">
+      <Filter>ThirdParty\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Game\GameObject\TitlePlayer.cpp">
-      <Filter>Game\GameObject\OutGame</Filter>
+    <ClCompile Include="Program\ThirdParty\imgui\imgui_impl_win32.cpp">
+      <Filter>ThirdParty\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Game\Scene\SelectScene.cpp">
-      <Filter>Game\Scene</Filter>
+    <ClCompile Include="Program\ThirdParty\imgui\imgui_tables.cpp">
+      <Filter>ThirdParty\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Game\GameObject\GameMaster.cpp">
-      <Filter>Game\GameObject\Common</Filter>
+    <ClCompile Include="Program\ThirdParty\imgui\imgui_widgets.cpp">
+      <Filter>ThirdParty\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Game\GameObject\EditManager.cpp">
-      <Filter>Game\GameObject\Common</Filter>
+    <ClCompile Include="Program\ThirdParty\imgui\imgui.cpp">
+      <Filter>ThirdParty\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Game\Component\Animator.cpp">
-      <Filter>Game\Component</Filter>
+    <ClCompile Include="Program\ThirdParty\imgui\imgui_demo.cpp">
+      <Filter>ThirdParty\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="Program\Game\GameObject\UIText.cpp">
-      <Filter>Game\GameObject\OutGame\UI</Filter>
+    <ClCompile Include="Program\ThirdParty\imgui\imgui_draw.cpp">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Core\Event\EventManager.cpp">
+      <Filter>SubSystem\Core\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Core\ISubsystem.cpp">
+      <Filter>SubSystem\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Input\InputEvents.cpp">
+      <Filter>SubSystem\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Scene\World.cpp">
+      <Filter>SubSystem\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Core\Context.cpp">
+      <Filter>SubSystem\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Scene\Component\IComponent.cpp">
+      <Filter>SubSystem\Scene\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Scene\Component\Components\AudioListener.cpp">
+      <Filter>SubSystem\Scene\Component\Conponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Scene\Component\Components\AudioSpeaker.cpp">
+      <Filter>SubSystem\Scene\Component\Conponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Scene\Component\Components\Transform.cpp">
+      <Filter>SubSystem\Scene\Component\Conponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Scene\Component\ComponentFactory.cpp">
+      <Filter>SubSystem\Scene\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Scene\GameObject.cpp">
+      <Filter>SubSystem\Scene\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Scene\GameObjectFactory.cpp">
+      <Filter>SubSystem\Scene\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Program\Application\Application.h">
-      <Filter>Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\Game\Scene\EditScene.h">
-      <Filter>Game\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\Game\Scene\GameScene.h">
-      <Filter>Game\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\Game\Game.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Program\ThirdParty\FMOD\include\fmod.h">
       <Filter>ThirdParty\FMOD</Filter>
     </ClInclude>
@@ -486,40 +411,10 @@
     <ClInclude Include="Program\ThirdParty\FMOD\include\fmod_output.h">
       <Filter>ThirdParty\FMOD</Filter>
     </ClInclude>
-    <ClInclude Include="Program\ThirdParty\imgui\imgui_impl_dx11.h">
-      <Filter>ThirdParty\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\ThirdParty\imgui\imgui_impl_win32.h">
-      <Filter>ThirdParty\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\ThirdParty\imgui\imgui_internal.h">
-      <Filter>ThirdParty\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\ThirdParty\imgui\imstb_rectpack.h">
-      <Filter>ThirdParty\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\ThirdParty\imgui\imstb_textedit.h">
-      <Filter>ThirdParty\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\ThirdParty\imgui\imstb_truetype.h">
-      <Filter>ThirdParty\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\ThirdParty\imgui\imconfig.h">
-      <Filter>ThirdParty\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\ThirdParty\imgui\imgui.h">
-      <Filter>ThirdParty\imgui</Filter>
-    </ClInclude>
     <ClInclude Include="Program\SubSystem\Audio\Audio.h">
       <Filter>SubSystem\Audio</Filter>
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Audio\AudioHelper.h">
-      <Filter>SubSystem\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Audio\AudioListener.h">
-      <Filter>SubSystem\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Audio\AudioSpeaker.h">
       <Filter>SubSystem\Audio</Filter>
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Gui\MyGui.h">
@@ -528,74 +423,14 @@
     <ClInclude Include="Program\SubSystem\Input\Input.h">
       <Filter>SubSystem\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\IOStream\FileStream.h">
-      <Filter>SubSystem\IOStream</Filter>
-    </ClInclude>
     <ClInclude Include="Program\SubSystem\Log\DebugLog.h">
       <Filter>SubSystem\Log</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Math\Vector2.h">
-      <Filter>SubSystem\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Math\Vector3.h">
-      <Filter>SubSystem\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Math\Vector4.h">
-      <Filter>SubSystem\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Math\MathCore.h">
-      <Filter>SubSystem\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Math\MathHelper.h">
-      <Filter>SubSystem\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Math\Matrix.h">
-      <Filter>SubSystem\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Phisics\OBB.h">
-      <Filter>SubSystem\Phisics</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Phisics\Phisics.h">
-      <Filter>SubSystem\Phisics</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Phisics\Body.h">
-      <Filter>SubSystem\Phisics</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Phisics\Collider.h">
-      <Filter>SubSystem\Phisics</Filter>
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Window\Window.h">
       <Filter>SubSystem\Window</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Tools\SpinLock.h">
-      <Filter>SubSystem\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Tools\Tools.h">
-      <Filter>SubSystem\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Tools\COM.h">
-      <Filter>SubSystem\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Tools\Octree.h">
-      <Filter>SubSystem\Tools</Filter>
-    </ClInclude>
     <ClInclude Include="Program\SubSystem\Timer\Timer.h">
       <Filter>SubSystem\Timer</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\ThreadPool\ThreadPool.h">
-      <Filter>SubSystem\ThreadPool</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Scene\SceneManager.h">
-      <Filter>SubSystem\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Scene\Transform.h">
-      <Filter>SubSystem\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Scene\GameObject.h">
-      <Filter>SubSystem\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Scene\Scene.h">
-      <Filter>SubSystem\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Resource\ResourceManager.h">
       <Filter>SubSystem\Resource</Filter>
@@ -747,74 +582,140 @@
     <ClInclude Include="Program\SubSystem\Renderer\Drawings\Effect\Postprocessing.h">
       <Filter>SubSystem\Renderer\Drawings\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Phisics\PhisicsHelper.h">
-      <Filter>SubSystem\Phisics</Filter>
+    <ClInclude Include="Program\SubSystem\Core\Math\MathCore.h">
+      <Filter>SubSystem\Core\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Tools\Chack.h">
-      <Filter>SubSystem\Tools</Filter>
+    <ClInclude Include="Program\SubSystem\Core\Math\MathHelper.h">
+      <Filter>SubSystem\Core\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Game\Scene\TitleScene.h">
-      <Filter>Game\Scene</Filter>
+    <ClInclude Include="Program\SubSystem\Core\Math\Matrix.h">
+      <Filter>SubSystem\Core\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Math\VectorTypes.h">
-      <Filter>SubSystem\Math</Filter>
+    <ClInclude Include="Program\SubSystem\Core\Math\Vector2.h">
+      <Filter>SubSystem\Core\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Math\Vector2T.h">
-      <Filter>SubSystem\Math</Filter>
+    <ClInclude Include="Program\SubSystem\Core\Math\Vector2T.h">
+      <Filter>SubSystem\Core\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Math\Vector3T.h">
-      <Filter>SubSystem\Math</Filter>
+    <ClInclude Include="Program\SubSystem\Core\Math\Vector3.h">
+      <Filter>SubSystem\Core\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Math\Vector4T.h">
-      <Filter>SubSystem\Math</Filter>
+    <ClInclude Include="Program\SubSystem\Core\Math\Vector3T.h">
+      <Filter>SubSystem\Core\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Game\GameObject\IMass.h">
-      <Filter>Game\GameObject\InGame\Mass</Filter>
+    <ClInclude Include="Program\SubSystem\Core\Math\Vector4.h">
+      <Filter>SubSystem\Core\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Game\GameObject\Player.h">
-      <Filter>Game\GameObject\InGame\Mass</Filter>
+    <ClInclude Include="Program\SubSystem\Core\Math\Vector4T.h">
+      <Filter>SubSystem\Core\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Game\GameObject\Message.h">
-      <Filter>Game\GameObject\InGame\Mass</Filter>
+    <ClInclude Include="Program\SubSystem\Core\Math\VectorTypes.h">
+      <Filter>SubSystem\Core\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Game\Component\HitStop.h">
-      <Filter>Game\Component</Filter>
+    <ClInclude Include="Program\SubSystem\Core\IO\FileStream.h">
+      <Filter>SubSystem\Core\I/O</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Game\GameObject\Human.h">
-      <Filter>Game\GameObject\InGame\Mass</Filter>
+    <ClInclude Include="Program\SubSystem\Core\Common\COM.h">
+      <Filter>SubSystem\Core\Common</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Game\GameObject\TitleString.h">
-      <Filter>Game\GameObject\OutGame</Filter>
+    <ClInclude Include="Program\SubSystem\Core\Common\Octree.h">
+      <Filter>SubSystem\Core\Common</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Game\GameObject\Effect.h">
-      <Filter>Game\GameObject</Filter>
+    <ClInclude Include="Program\SubSystem\Core\Common\Tools.h">
+      <Filter>SubSystem\Core\Common</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Game\GameObject\CameraMove.h">
-      <Filter>Game\GameObject\InGame</Filter>
+    <ClInclude Include="Program\SubSystem\Core\Common\Common.h">
+      <Filter>SubSystem\Core\Common</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Game\GameObject\BackGraund.h">
-      <Filter>Game\GameObject\OutGame</Filter>
+    <ClInclude Include="Program\SubSystem\Core\Common\ProjectSettings.h">
+      <Filter>SubSystem\Core\Common</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Game\GameObject\Stage.h">
-      <Filter>Game\GameObject\InGame</Filter>
+    <ClInclude Include="Program\SubSystem\Core\Common\Hash.h">
+      <Filter>SubSystem\Core\Common</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Game\GameObject\TitlePlayer.h">
-      <Filter>Game\GameObject\OutGame</Filter>
+    <ClInclude Include="Program\SubSystem\JobSystem\Async\AsyncJob.h">
+      <Filter>SubSystem\JobSystem\Async</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Game\Scene\SelectScene.h">
-      <Filter>Game\Scene</Filter>
+    <ClInclude Include="Program\SubSystem\JobSystem\Async\AsyncJobSystem.h">
+      <Filter>SubSystem\JobSystem\Async</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Game\GameObject\GameMaster.h">
-      <Filter>Game\GameObject\Common</Filter>
+    <ClInclude Include="Program\SubSystem\JobSystem\Sync\Job.h">
+      <Filter>SubSystem\JobSystem\Sync</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Game\GameObject\EditManager.h">
-      <Filter>Game\GameObject\Common</Filter>
+    <ClInclude Include="Program\SubSystem\JobSystem\Sync\JobSystem.h">
+      <Filter>SubSystem\JobSystem\Sync</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Game\Component\Animator.h">
-      <Filter>Game\Component</Filter>
+    <ClInclude Include="Program\SubSystem\Core\Engine.h">
+      <Filter>SubSystem\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Program\Game\GameObject\UIText.h">
-      <Filter>Game\GameObject\OutGame\UI</Filter>
+    <ClInclude Include="Program\ThirdParty\imgui\imgui_impl_dx11.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\ThirdParty\imgui\imgui_impl_win32.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\ThirdParty\imgui\imgui_internal.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\ThirdParty\imgui\imstb_rectpack.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\ThirdParty\imgui\imstb_textedit.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\ThirdParty\imgui\imstb_truetype.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\ThirdParty\imgui\imconfig.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\ThirdParty\imgui\imgui.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Core\Event\EventManager.h">
+      <Filter>SubSystem\Core\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Core\Event\Event.h">
+      <Filter>SubSystem\Core\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Core\Common\Macro.h">
+      <Filter>SubSystem\Core\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Core\ISubsystem.h">
+      <Filter>SubSystem\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Core\Context.h">
+      <Filter>SubSystem\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Core\Event\EventListener.h">
+      <Filter>SubSystem\Core\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Input\InputEvents.h">
+      <Filter>SubSystem\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Scene\World.h">
+      <Filter>SubSystem\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Scene\Component\IComponent.h">
+      <Filter>SubSystem\Scene\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Scene\Component\Components\AudioListener.h">
+      <Filter>SubSystem\Scene\Component\Conponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Scene\Component\Components\AudioSpeaker.h">
+      <Filter>SubSystem\Scene\Component\Conponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Scene\Component\Components\Transform.h">
+      <Filter>SubSystem\Scene\Component\Conponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Scene\Component\ComponentFactory.h">
+      <Filter>SubSystem\Scene\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Scene\GameObject.h">
+      <Filter>SubSystem\Scene\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Scene\GameObjectFactory.h">
+      <Filter>SubSystem\Scene\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

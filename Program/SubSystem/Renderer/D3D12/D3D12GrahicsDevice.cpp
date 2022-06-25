@@ -31,7 +31,7 @@ bool D3D12GrahicsDevice::Init()
 	// エラーメッセージの取得を行えるようにする
 	HRESULT hr = CreateDXGIFactory2(DXGI_CREATE_FACTORY_DEBUG, IID_PPV_ARGS(factory.ReleaseAndGetAddressOf()));
 #else
-	HRESULT hr = CreateDXGIFactory1(IID_PPV_ARGS(m_factory.ReleaseAndGetAddressOf()));
+	HRESULT hr = CreateDXGIFactory1(IID_PPV_ARGS(factory.ReleaseAndGetAddressOf()));
 #endif // _DEBUG
 	if (FAILED(hr)) {
 		return false;

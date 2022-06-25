@@ -13,7 +13,7 @@
 #include "SubSystem/Renderer/D3D11/D3D11InputLayout.h"
 #include "SubSystem/Renderer/D3D11/D3D11SamplerState.h"
 #include "SubSystem/Resource/Resources/3DModel/Mesh.h"
-#include "SubSystem/Scene/Transform.h"
+#include "SubSystem/Scene/Component/Components/Transform.h"
 
 class SkyBox
 {

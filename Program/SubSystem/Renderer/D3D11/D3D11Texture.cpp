@@ -8,11 +8,11 @@
 
 
 #include "D3D11Texture.h"
-#include "SubSystem/Log/DebugLog.h"
+#include "SubSystem/Core/Common/Common.h"
 
 bool D3D11Texture::Create(const DirectX::Image* images, size_t imageSize, const DirectX::TexMetadata& meta)
 {
-	Chack(images, "引数値 imageに値をいれてください。");
+	ASSERT(images, "引数値 imageに値をいれてください。");
 
 	auto hr = DirectX::CreateShaderResourceView(
 		GetGraphicsDevice()->GetDevice(),

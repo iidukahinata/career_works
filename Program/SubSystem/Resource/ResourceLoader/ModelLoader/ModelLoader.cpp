@@ -152,15 +152,15 @@ std::vector<Texture*> ModelLoader::LoadTextures(aiMaterial* aiMaterial)
 		aiMaterial->GetTexture(aiTextureType_DIFFUSE, i, &str);
 
 		// Ç‹Çæì«Ç›çûÇ‹ÇÍÇƒÇ¢Ç»Ç©Ç¡ÇΩèÍçá
-		if (!ResourceManager::Get().GetResourceByName<Texture>(str.C_Str()))
-		{
-			std::string_view path(str.C_Str());
-
-			std::string filePath(m_textureDirectory);
-			filePath += path.substr(path.find_last_of("\\/"), path.length() - 1);
-
-			textures.push_back(ResourceManager::Get().Load<Texture>(filePath));
-		}
+		//if (!ResourceManager::Get().GetResourceByName<Texture>(str.C_Str()))
+		//{
+		//	std::string_view path(str.C_Str());
+		//
+		//	std::string filePath(m_textureDirectory);
+		//	filePath += path.substr(path.find_last_of("\\/"), path.length() - 1);
+		//
+		//	textures.push_back(ResourceManager::Get().Load<Texture>(filePath));
+		//}
 	}
 
 	return textures;

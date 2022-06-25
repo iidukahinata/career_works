@@ -1,15 +1,13 @@
 /**
 * @file    Window.cpp
-* @brief   ウィンドウ管理クラス
+* @brief
 *
-* @date	   2022/05/28 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/23 2022年度初版
 */
 
 
 #include "Window.h"
 #include "Subsystem/Timer/Timer.h"
-#include "Subsystem/Log/DebugLog.h"
 #include "ThirdParty/imgui/imgui_impl_win32.h"
 
 /** この前方宣言がないと imgui の入力を使用出来ない */
@@ -30,18 +28,17 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lpar
 		switch (wparam)
 		{
 		case VK_ESCAPE:
-			int sts = MessageBoxA(hwnd, "終了しますか?", "終了確認", MB_YESNO);
-			if (sts == IDYES) DestroyWindow(hwnd);
+			DestroyWindow(hwnd);
 			break;
 		}
 		break;
 
 	case WM_ACTIVATE:
-		if (LOWORD(wparam) != WA_INACTIVE) Timer::Get().ResetMeasurement();
+		//if (LOWORD(wparam) != WA_INACTIVE) Timer::Get().ResetMeasurement();
 		break;
 
 	case WM_EXITSIZEMOVE:
-		Timer::Get().ResetMeasurement();
+		//Timer::Get().ResetMeasurement();
 		break;
 
 	default:

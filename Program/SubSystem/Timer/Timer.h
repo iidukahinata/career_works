@@ -2,32 +2,23 @@
  * @file	Timer.h
  * @brief   フレーム管理クラス
  *
- * @date	2022/04/30 2022年度初版
- * @author	飯塚陽太
+ * @date	2022/06/21 2022年度初版
  */
 #pragma once
 
 
 #include <chrono>
+#include "SubSystem/Core/ISubsystem.h"
 
  /*
  * 可変フレームレートで制御出来るクラス
  */
-class Timer
+class Timer : public ISubsystem
 {
-private:
-
-	Timer();
-	Timer(const Timer&) = default;
-	Timer& operator=(const Timer&) = default;
-
+	SUB_CLASS(Timer)
 public:
 
-	static Timer& Get() noexcept
-	{
-		static Timer instance;
-		return instance;
-	}
+	bool Initialize() override;
 
 	/**
 	* 経過時間からフレームの状態を返す

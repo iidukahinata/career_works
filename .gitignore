@@ -1376,3 +1376,9 @@ FodyWeavers.xsd
 /assets/Imqube/UI/GoStageSelect.png
 /assets/Imqube/UI/GoNextStage.png
 /assets/Imqube/Hint/Hint_Window.bin
+/cpp.hint
+/assets/Shader/ColorTexturePS.cso
+/assets/Imqube/UI/Restart.bin
+/assets/Imqube/UI/GoStageSelect.bin
+/assets/Imqube/UI/GoNextStage.bin
+/assets/Imqube/Stage/1_2.bin

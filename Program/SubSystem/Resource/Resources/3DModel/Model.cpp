@@ -10,7 +10,7 @@
 #include "Model.h"
 #include <filesystem>
 #include "SubSystem/Resource/ResourceManager.h"
-#include "SubSystem/ThreadPool/ThreadPool.h"
+//#include "SubSystem/ThreadPool/ThreadPool.h"
 
 Model::Model(const Model& model)
 {
@@ -39,18 +39,18 @@ Model::~Model()
 void Model::Init(const ModelDesc& desc)
 {
 	// 読み込み待ちが起きないよう並列処理で行う
-	ThreadPool::Get().AddTask([this, desc]
-	{
-		if (!desc.modelFilePath.empty())
-		{
-			m_modelData = ResourceManager::Get().Load<ModelData>(desc.modelFilePath);
-		}
-
-		if (!desc.textureFolderPath.empty())
-		{
-			LoadTextures(desc.textureFolderPath);
-		}
-	});
+	//ThreadPool::Get().AddTask([this, desc]
+	//{
+	//	if (!desc.modelFilePath.empty())
+	//	{
+	//		m_modelData = ResourceManager::Get().Load<ModelData>(desc.modelFilePath);
+	//	}
+	//
+	//	if (!desc.textureFolderPath.empty())
+	//	{
+	//		LoadTextures(desc.textureFolderPath);
+	//	}
+	//});
 
 	// 頂点シェーダー生成
 	m_vertexShader.Create(desc.vsShader);

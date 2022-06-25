@@ -2,14 +2,15 @@
  * @file	InputDevice.h
  * @brief   入力制御クラス
  *
- * @date	2022/05/14 2022年度初版
- * @author	飯塚陽太
+ * @date	2022/06/23 2022年度初版
  */
 #pragma once
 
 
 #include <map>
-#include "SubSystem/Math/Vector2.h"
+#include "SubSystem/Core/Math/Vector2.h"
+#include "SubSystem/Core/ISubsystem.h"
+#include "SubSystem/JobSystem/Sync/Job.h"
 
 namespace Button
 {
@@ -43,34 +44,15 @@ namespace Button
 	};
 }
 
-class Input
+class Input : public ISubsystem
 {
-private:
-
-	Input() = default;
-	virtual ~Input() = default;
-	Input(const Input&) = default;
-	Input& operator=(const Input&) = default;
-
+	SUB_CLASS(Input)
 public:
 
-	static Input& Get() noexcept
-	{
-		static Input instance;
-		return instance;
-	}
+	Input();
 
-	void Init();
-	void Update();
-
-	/** この関数を使用しなくてもボタンは追加される */
-	void AddKeyState(Button::KeyAndMouse id) noexcept;
-
-	/** 今指定ボタンが押されているかを返す */
-	bool GetKeyStatePress(Button::KeyAndMouse id) noexcept;
-
-	/** 今の指定ボタンが押されたかを返す */
-	bool GetKeyStateTrigger(Button::KeyAndMouse id) noexcept;
+	bool Initialize() override;
+	void Shutdown() override;
 
 	/** マウス位置をスクリーン座標で返します */
 	const Math::Vector2& GetMousePosition() const noexcept;
@@ -80,10 +62,20 @@ public:
 
 private:
 
+	void Update() noexcept;
+
+	/** この関数を使用しなくてもボタンは追加される */
+	void AddKey(Button::KeyAndMouse id) noexcept;
+
+	/* Event Set 関数 */
+	void PressKey(Button::KeyAndMouse id) const noexcept;
+	void ReleaseKey(Button::KeyAndMouse id) const noexcept;
+
+private:
+
 	// Type -> <キーID、押されたか>
-	std::map<Button::KeyAndMouse, bool> m_currentKeyState;
 	std::map<Button::KeyAndMouse, bool> m_previousKeyState;
 
-	// スクリーン座標値のマウス位置
-	Math::Vector2 m_mousePosition;
+	/* Input Update 登録用 */
+	Job m_job;
 };

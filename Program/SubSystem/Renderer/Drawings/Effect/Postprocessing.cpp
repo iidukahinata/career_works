@@ -8,7 +8,6 @@
 
 
 #include "Postprocessing.h"
-#include "Application/Application.h"
 #include "SubSystem/Window/Window.h"
 
 bool Postprocessing::Init()
