@@ -2,7 +2,7 @@
 * @file    MyGui.cpp
 * @brief   gui管理クラス
 *
-* @date	   2022/06/17 2022年度初版
+* @date	   2022/06/25 2022年度初版
 */
 
 
@@ -12,20 +12,30 @@
 #include "ThirdParty/imgui/imgui_impl_dx11.h"
 #include "ThirdParty/imgui/imgui_impl_win32.h"
 
+void DrawFrameRate()
+{
+	ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiCond_Once);
+	ImGui::SetNextWindowSize(ImVec2(210, 50), ImGuiCond_Once);
+
+	ImGui::Begin("Frame Rate");
+	ImGui::Text(" %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+	ImGui::End();
+}
+
 void MyGui::Init()
 {
-#ifdef _DEBUG
 	ImGui::CreateContext();
 	ImGui_ImplWin32_Init(Window::Get().GetHandle());
 	ImGui_ImplDX11_Init(D3D11GrahicsDevice::Get().GetDevice(), D3D11GrahicsDevice::Get().GetContext());
 
 	ImGui::StyleColorsClassic();
-#endif // _DEBUG
+
+	// fpsタイム描画
+	AddWidget(DrawFrameRate);
 }
 
 void MyGui::Draw()
 {
-#ifdef _DEBUG
 	// start the dear ImGui frame
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
@@ -40,28 +50,21 @@ void MyGui::Draw()
 	// rendering
 	ImGui::Render();
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-#endif // _DEBUG
 }
 
 void MyGui::Exit()
 {
-#ifdef _DEBUG
 	ImGui_ImplDX11_Shutdown();
 	ImGui::DestroyContext();
-#endif // _DEBUG
 }
 
 void MyGui::Clear()
 {
-#ifdef _DEBUG
 	m_widgets.clear();
 	m_widgets.shrink_to_fit();
-#endif // _DEBUG
 }
 
 void MyGui::AddWidget(Widget&& widget) noexcept
 {
-#ifdef _DEBUG
 	m_widgets.emplace_back(widget);
-#endif // _DEBUG
 }

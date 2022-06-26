@@ -2,13 +2,13 @@
 * @file	   D3D11GrahicsDevice.cpp
 * @brief
 *
-* @date	   2022/05/10 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/25 2022年度初版
 */
 
 
 
 #include "D3D11GrahicsDevice.h"
+#include "RenderStates.h"
 #include "SubSystem/Window/Window.h"
 
 bool D3D11GrahicsDevice::Init()
@@ -215,7 +215,7 @@ bool D3D11GrahicsDevice::Init()
 
 	m_context->RSSetViewports(1, &viewport);
 
-	m_renderStates.Init();
+	D3D11RenderStates::Get().Init();
 
 	return true;
 }
@@ -286,9 +286,4 @@ void D3D11GrahicsDevice::SetViewports(UINT numBffers, D3D11_VIEWPORT* viewports)
 ID3D11DepthStencilView* D3D11GrahicsDevice::GetDepthStencil() noexcept
 {
 	return m_depthStencilView.Get();
-}
-
-RenderStates& D3D11GrahicsDevice::GetRenderStates() noexcept
-{
-	return m_renderStates;
 }

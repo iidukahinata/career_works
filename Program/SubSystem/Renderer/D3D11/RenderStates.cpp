@@ -2,15 +2,14 @@
 * @file	   RenderStates.cpp
 * @brief
 *
-* @date	   2022/04/22 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/25 2022年度初版
 */
 
 
 #include "RenderStates.h"
-#include "D3D11/D3D11GrahicsDevice.h"
+#include "D3D11GrahicsDevice.h"
 
-bool RenderStates::Init()
+bool D3D11RenderStates::Init()
 {
 	auto device = D3D11GrahicsDevice::Get().GetDevice();
 	auto context = D3D11GrahicsDevice::Get().GetContext();
@@ -134,13 +133,13 @@ bool RenderStates::Init()
 	SetRasterizerState(m_noCull.Get());
 }
 
-void RenderStates::SetBlendState(ID3D11BlendState* blendState)
+void D3D11RenderStates::SetBlendState(ID3D11BlendState* blendState)
 {
 	float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
 	D3D11GrahicsDevice::Get().GetContext()->OMSetBlendState(blendState, blendFactor, 0xffffffff);
 }
 
-void RenderStates::SetRasterizerState(ID3D11RasterizerState* rasterizerState)
+void D3D11RenderStates::SetRasterizerState(ID3D11RasterizerState* rasterizerState)
 {
 	D3D11GrahicsDevice::Get().GetContext()->RSSetState(rasterizerState);
 }

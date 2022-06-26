@@ -15,7 +15,7 @@ class KeyPressed : public IEvent
 public:
 
 	KeyPressed(uint32_t key);
-	const std::any& GetData() override;
+	std::any GetData() override;
 
 private:
 
@@ -28,7 +28,7 @@ class KeyReleased : public IEvent
 public:
 
 	KeyReleased(uint32_t key);
-	const std::any& GetData() override;
+	std::any GetData() override;
 
 private:
 

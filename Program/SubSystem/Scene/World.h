@@ -29,7 +29,7 @@ public:
 	GameObjectRef GetGameObjectByName(std::string_view name) const noexcept;
 	void RemoveGameObject(GameObject* gameObject) noexcept;
 
-	std::span<const GameObjectPtr> GetGameObjects() const noexcept;
+	std::span<GameObjectPtr> GetGameObjects() noexcept;
 
 private:
 

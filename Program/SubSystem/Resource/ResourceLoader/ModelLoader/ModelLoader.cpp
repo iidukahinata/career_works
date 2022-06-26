@@ -7,27 +7,24 @@
 */
 
 
-#include "ModelLoader.h"
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include <assimp/cimport.h>
 #include <assimp/scene.h>
 #include <filesystem>
-#include "SubSystem/Renderer/D3D11/D3D11GrahicsDevice.h"
+#include "ModelLoader.h"
 #include "SubSystem/Resource/ResourceManager.h" 
 
-std::vector<Mesh<VertexBump3D>> ModelLoader::Load(std::string_view filePath)
+Model ModelLoader::Load(std::string_view filePath)
 {
 	m_aiScene = aiImportFile(
-		filePath.data(), 
+		filePath.data(),
 		aiProcess_ConvertToLeftHanded |
 		aiProcessPreset_TargetRealtime_MaxQuality);
 
-	m_textureDirectory = LookForTextureFolder(filePath);
-
 	ProcessNode(m_aiScene->mRootNode);
 
-	return m_meshes;
+	return m_model;
 }
 
 void ModelLoader::Release() noexcept
@@ -52,17 +49,16 @@ void ModelLoader::ProcessNode(aiNode* node)
 void ModelLoader::LoadMesh(aiMesh* aiMesh)
 {
 	std::vector<VertexBump3D> vertices;
-	std::vector<Texture*> textures;
-	std::vector<UINT> indices;
+	std::vector<uint32_t> indices;
 
 	vertices.resize(aiMesh->mNumVertices);
-	for (int i = 0; i < aiMesh->mNumVertices; ++i) 
+	for (int i = 0; i < aiMesh->mNumVertices; ++i)
 	{
 		// Meshから頂点座標を取得
 		vertices[i].position.x = aiMesh->mVertices[i].x;
 		vertices[i].position.y = aiMesh->mVertices[i].y;
 		vertices[i].position.z = aiMesh->mVertices[i].z;
-		
+
 		// Meshから法線を取得
 		if (aiMesh->HasNormals())
 		{
@@ -81,10 +77,7 @@ void ModelLoader::LoadMesh(aiMesh* aiMesh)
 
 	if (aiMesh->mMaterialIndex >= 0)
 	{
-		aiMaterial* material = m_aiScene->mMaterials[aiMesh->mMaterialIndex];		
-		std::vector<Texture*> diffuseMaps = LoadTextures(material);
-	
-		textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
+		LoadMaterial(m_aiScene->mMaterials[aiMesh->mMaterialIndex]);
 	}
 
 	Math::Vector3 cp[3][3];
@@ -108,7 +101,7 @@ void ModelLoader::LoadMesh(aiMesh* aiMesh)
 			auto V1 = cp[1][i] - cp[0][i];
 			auto V2 = cp[2][i] - cp[1][i];
 			auto ABC = Math::Vector3::Cross(std::move(V1), std::move(V2));
-		
+
 			if (ABC.x == 0.f)
 			{
 				tangent[i] = 0.f;
@@ -133,16 +126,20 @@ void ModelLoader::LoadMesh(aiMesh* aiMesh)
 		}
 	}
 
-	m_meshes.push_back(Mesh(std::move(vertices), std::move(textures), std::move(indices)));
+	m_model.AddMesh(std::move(vertices), std::move(indices));
+}
+
+void ModelLoader::LoadMaterial(aiMaterial* aiMaterial)
+{
+	std::vector<Texture*> textures;
+
+	std::vector<Texture*> diffuseMaps = LoadTextures(aiMaterial);
+
+	textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
 }
 
 std::vector<Texture*> ModelLoader::LoadTextures(aiMaterial* aiMaterial)
 {
-	if (m_textureDirectory.empty())
-	{
-		return std::vector<Texture*>();
-	}
-
 	std::vector<Texture*> textures;
 	// マテリアルからテクスチャ個数を取得し(基本は1個)ループする
 	for (unsigned int i = 0; i < aiMaterial->GetTextureCount(aiTextureType_DIFFUSE); ++i)
@@ -164,20 +161,4 @@ std::vector<Texture*> ModelLoader::LoadTextures(aiMaterial* aiMaterial)
 	}
 
 	return textures;
-}
-
-std::string ModelLoader::LookForTextureFolder(std::string_view path)
-{
-	auto directory = path.substr(0, path.find_last_of("\\/"));
-	for (const auto& entry : std::filesystem::directory_iterator(directory))
-	{
-		// 2022/05/07 時点ではモデルと同じファイル階層に、
-		// テクスチャデータを保持するフォルダを一つだけ持つものとして作成。
-		std::error_code error;
-		if (entry.is_directory(error))
-		{
-			return entry.path().string();
-		}
-	}
-	return std::string();
 }

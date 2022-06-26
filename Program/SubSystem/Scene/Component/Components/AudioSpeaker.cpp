@@ -7,6 +7,7 @@
  */
 
 
+#include <cmath>
 #include "AudioSpeaker.h"
 //#include "Audio.h"
 #include "SubSystem/Resource/Resources/Audio/AudioClip.h"
@@ -17,7 +18,7 @@ AudioSpeaker::~AudioSpeaker()
 {
 	if (m_audioClip)
 	{
-		m_audioClip->SubReneceCount();
+		m_audioClip->SubRef();
 	}
 }
 
@@ -121,22 +122,22 @@ void AudioSpeaker::SetIsLoop(bool isLoop) noexcept
 
 void AudioSpeaker::SetPriority(int priority) noexcept
 {
-	m_priority = std::clamp(m_priority, 0, 256);
+	//m_priority = std::clamp(m_priority, 0, 256);
 }
 
 void AudioSpeaker::SetVolume(float volume) noexcept
 {
-	m_volume = std::clamp(volume, 0.f, 1.f);
+	//m_volume = std::clamp(volume, 0.f, 1.f);
 }
 
 void AudioSpeaker::SetPitch(float pitch) noexcept
 {
-	m_pitch = std::clamp(pitch, 0.f, 2.f);
+	//m_pitch = std::clamp(pitch, 0.f, 2.f);
 }
 
 void AudioSpeaker::SetPan(float pan) noexcept
 {
-	m_pan = std::clamp(pan, -1.f, 1.f);
+	//m_pan = std::clamp(pan, -1.f, 1.f);
 }
 
 void AudioSpeaker::SetIs2DMode(bool is2DMode) noexcept
@@ -154,7 +155,7 @@ void AudioSpeaker::SetOutPutMatrix(float* matrix, int size) noexcept
 	size = std::min(size, 8);
 	for (int i = 0; i < size; ++i)
 	{
-		m_levelMatrix[i] = std::clamp(matrix[i], 0.f, 1.f);
+		//m_levelMatrix[i] = std::clamp(matrix[i], 0.f, 1.f);
 	}
 }
 

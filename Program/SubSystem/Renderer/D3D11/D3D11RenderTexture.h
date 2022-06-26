@@ -2,8 +2,7 @@
 * @file    D3D11RenderTexture.h
 * @brief   
 *
-* @date	   2022/05/10 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/25 2022年度初版
 */
 #pragma once
 
@@ -11,7 +10,6 @@
 #include "D3D11DeviceChild.h"
 #include "D3D11Texture.h"
 #include "SubSystem/Core/Math/Vector4.h"
-#include "SubSystem/Resource/Resources/3DModel/Texture.h"
 
 class D3D11RenderTexture : public D3D11DeviceChild
 {

@@ -22,5 +22,5 @@ public:
 	virtual ~IEvent() = default;
 
 	/** リスナーオブジェクトに渡さす引数データ */
-	virtual const std::any& GetData() = 0;
+	virtual std::any GetData() = 0;
 };

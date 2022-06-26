@@ -2,8 +2,7 @@
 * @file		Texture.h
 * @brief
 *
-* @date		2022/05/11 2022年度初版
-* @author	飯塚陽太
+* @date		2022/06/25 2022年度初版
 */
 #pragma once
 
@@ -30,10 +29,10 @@ public:
 
 	Texture() = default;
 
-	bool Create(DirectX::ScratchImage* image);
-
-	virtual bool Create(const DirectX::Image* images, size_t imageSize, const DirectX::TexMetadata& meta) { return true; };
-	virtual void Bind(UINT slot = 0) {};
+	bool Create(const DirectX::Image* images, size_t imageSize, const DirectX::TexMetadata& meta) 
+	{
+		return true;
+	}
 
 private:
 

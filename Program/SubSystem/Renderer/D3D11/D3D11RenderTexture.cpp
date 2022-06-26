@@ -2,13 +2,11 @@
 * @file    D3D11RenderTexture.cpp
 * @brief   
 *
-* @date	   2022/04/29 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/25 2022年度初版
 */
 
 
 #include "D3D11RenderTexture.h"
-#include "SubSystem/Log/DebugLog.h"
 
 bool D3D11RenderTexture::Create(
 	UINT widthSize,
@@ -17,8 +15,6 @@ bool D3D11RenderTexture::Create(
 	DXGI_FORMAT depthFormat /* = DXGI_FORMAT_D32_FLOAT */
 ) noexcept
 {
-	auto device = GetGraphicsDevice()->GetDevice();
-
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> renderTargetViewTexture;
 	D3D11_TEXTURE2D_DESC renderTargetTextureDesc;
 	ZeroMemory(&renderTargetTextureDesc, sizeof(renderTargetTextureDesc));
@@ -33,7 +29,7 @@ bool D3D11RenderTexture::Create(
 	renderTargetTextureDesc.SampleDesc.Count = 1;
 	renderTargetTextureDesc.SampleDesc.Quality = 0;
 
-	HRESULT hr = device->CreateTexture2D(&renderTargetTextureDesc, nullptr, renderTargetViewTexture.GetAddressOf());
+	HRESULT hr = GetDevice()->CreateTexture2D(&renderTargetTextureDesc, nullptr, renderTargetViewTexture.GetAddressOf());
 	if (FAILED(hr)) {
 		LOG_ERROR("RenderTarget 用テクスチャの生成に失敗しました。");
 		return false;
@@ -46,7 +42,7 @@ bool D3D11RenderTexture::Create(
 	renderTargetViewDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
 
 	// レンダーターゲットビューの生成
-	hr = device->CreateRenderTargetView(renderTargetViewTexture.Get(), &renderTargetViewDesc, m_renderTarget.GetAddressOf());
+	hr = GetDevice()->CreateRenderTargetView(renderTargetViewTexture.Get(), &renderTargetViewDesc, m_renderTarget.GetAddressOf());
 	if (FAILED(hr)) {
 		LOG_ERROR("RenderTargetView の生成に失敗しました。");
 		return false;
@@ -60,7 +56,7 @@ bool D3D11RenderTexture::Create(
 	srvDesc.Texture2D.MipLevels = 1;
 
 	// シェーダリソースビューの生成
-	hr = device->CreateShaderResourceView(renderTargetViewTexture.Get(), &srvDesc, m_texture.GetAddressOfShaderResourceView());
+	hr = GetDevice()->CreateShaderResourceView(renderTargetViewTexture.Get(), &srvDesc, m_texture.GetAddressOfShaderResourceView());
 	if (FAILED(hr)) {
 		LOG_ERROR("ShaderResourceView の生成に失敗しました。");
 		return false;
@@ -82,7 +78,7 @@ bool D3D11RenderTexture::Create(
 	depthStencilTextureDesc.CPUAccessFlags = 0;
 	depthStencilTextureDesc.MiscFlags = 0;
 
-	hr = device->CreateTexture2D(&depthStencilTextureDesc, nullptr, depthStencilTexture.GetAddressOf());
+	hr = GetDevice()->CreateTexture2D(&depthStencilTextureDesc, nullptr, depthStencilTexture.GetAddressOf());
 	if (FAILED(hr)) {
 		LOG_ERROR("深度バッファ用テクスチャの生成に失敗しました。");
 		return false;
@@ -95,7 +91,7 @@ bool D3D11RenderTexture::Create(
 	depthStencilDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 
 	// 深度バッファの生成
-	hr = device->CreateDepthStencilView(depthStencilTexture.Get(), &depthStencilDesc, m_depthStencil.GetAddressOf());
+	hr = GetDevice()->CreateDepthStencilView(depthStencilTexture.Get(), &depthStencilDesc, m_depthStencil.GetAddressOf());
 	if (FAILED(hr)) {
 		LOG_ERROR("深度バッファの生成に失敗しました。");
 		return false;
@@ -114,16 +110,14 @@ bool D3D11RenderTexture::Create(
 
 void D3D11RenderTexture::SetRenderTarget() noexcept
 {
-	auto context = GetGraphicsDevice()->GetContext();
-	context->OMSetRenderTargets(1, m_renderTarget.GetAddressOf(), m_depthStencil.Get());
-	context->RSSetViewports(1, &m_viewport);
+	GetContext()->OMSetRenderTargets(1, m_renderTarget.GetAddressOf(), m_depthStencil.Get());
+	GetContext()->RSSetViewports(1, &m_viewport);
 }
 
 void D3D11RenderTexture::Clear(Math::Vector4 color) noexcept
 {
-	auto context = GetGraphicsDevice()->GetContext();
 	float clearColor[4] = { color.x, color.y, color.z, color.w };
 
-	context->ClearRenderTargetView(m_renderTarget.Get(), clearColor);
-	context->ClearDepthStencilView(m_depthStencil.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0);
+	GetContext()->ClearRenderTargetView(m_renderTarget.Get(), clearColor);
+	GetContext()->ClearDepthStencilView(m_depthStencil.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0);
 }

@@ -2,13 +2,11 @@
 * @file    ID3D11InputLayout.h
 * @brief
 *
-* @date	   2022/04/29 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/25 2022年度初版
 */
 #pragma once
 
 
-#include <wrl/client.h>
 #include "D3D11DeviceChild.h"
 
 class D3D11InputLayout : public D3D11DeviceChild

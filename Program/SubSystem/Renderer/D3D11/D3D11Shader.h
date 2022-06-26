@@ -2,8 +2,7 @@
 * @file    D3D11Shader.h
 * @brief
 *
-* @date	   2022/05/10 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/25 2022年度初版
 * @note
 *						 D3D11Shader
 *						   	 ↓

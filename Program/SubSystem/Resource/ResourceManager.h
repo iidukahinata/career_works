@@ -8,6 +8,7 @@
 
 
 #include <map>
+#include <mutex>
 #include <memory>
 #include "Resources/IResource.h"
 #include "SubSystem/Core/ISubsystem.h"
@@ -61,7 +62,7 @@ inline T* ResourceManager::Load(std::string_view filePath) noexcept
 	// “¯‚¶ƒŠƒ\[ƒX‚ğ“Ç‚İ‚Ü‚È‚¢‚½‚ß‚É•Û‚µ‚Ä‚¢‚é‚©’²‚×‚é
 	if (auto copyResource = GetResourceByName<T>(filePath.data())) 
 	{
-		copyResource->AddRefreneceCount();
+		copyResource->AddRef();
 		return copyResource;
 	}
 
@@ -76,7 +77,7 @@ inline T* ResourceManager::Load(std::string_view filePath) noexcept
 	{
 		if (resource->Load(filePath.data()))
 		{
-			resource->AddRefreneceCount();
+			resource->AddRef();
 			return dynamic_cast<T*>(resource.get());
 		}
 	}

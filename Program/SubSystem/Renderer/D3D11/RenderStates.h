@@ -2,18 +2,26 @@
 * @file	   RenderStates.h
 * @brief
 *
-* @date	   2022/04/22 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/25 2022年度初版
 */
 #pragma once
 
 
 #include <d3d11.h>
 #include <wrl/client.h>
+#include "SubSystem/Core/Common/Macro.h"
 
-class RenderStates
+class D3D11RenderStates
 {
+	D3D11RenderStates() = default;
+	COPY_PROHIBITED(D3D11RenderStates);
 public:
+
+	static D3D11RenderStates& Get() noexcept
+	{
+		static D3D11RenderStates instance;
+		return instance;
+	}
 
 	bool Init();
 

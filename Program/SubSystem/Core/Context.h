@@ -2,7 +2,7 @@
  * @file	Context.h
  * @brief	Subsystemのサービスロケータクラス
  *
- * @date	2022/06/25 2022年度初版
+ * @date	2022/06/26 2022年度初版
  */
 #pragma once
 
@@ -13,10 +13,17 @@
 
 class Context
 {
+	Context() = default;
 	COPY_PROHIBITED(Context)
 public:
 
-	Context() = default;
+	static Context* Get()
+	{
+		static Context instance;
+		return &instance;
+	}
+
+	void Release();
 
 	/** 登録した Subsystem は取得時 指定 Key クラスとして取得するため継承関係になければならない。*/
 	template<class Key>

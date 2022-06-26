@@ -2,14 +2,12 @@
 * @file    IResource.h
 * @brief   リソース抽象クラス
 *
-* @date	   2022/05/06 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/25 2022年度初版
 */
 #pragma once
 
 
-#include <string>
-#include <mutex>
+#include <string_view>
 
 /**
 * このクラスではデータ競合を引き起こさない。
@@ -22,19 +20,23 @@ public:
 
 	virtual ~IResource() {}
 
-	IResource() = default;
+	/** 独自モデルデータとして保存させる。 */
+	virtual void SaveToFile(std::string_view filePath);
 
-	IResource(const IResource&);
-	IResource& operator=(const IResource&);
+	/** 独自モデルデータを読み込みする。 */
+	virtual bool LoadFromFile(std::string_view filePath);
 
-	/** 読み込み前処理を行う */
+	/**
+	* 読み込み前処理を行う 
+	* 次の更新時、ここでは読み込みは行わずにコマンドとして送信のみするように変更する。
+	*/
 	bool Load(std::string_view filePath) noexcept;
 
-	const std::string& GetName() const noexcept;
+	std::string_view GetName() const noexcept;
 
-	void AddRefreneceCount() noexcept;
-	void SubReneceCount() noexcept;
-	size_t GetRefreneceCount() const noexcept;
+	void AddRef() noexcept;
+	void SubRef() noexcept;
+	size_t GetRef() const noexcept;
 
 protected:
 
@@ -51,7 +53,4 @@ private:
 
 	// * 参照カウントで解放等を行うための変数。派生先ではなく使用者側でカウントする必要がある。
 	size_t m_referenceCount = 0;
-
-	// * このクラス内での排他制御実現用
-	std::mutex m_mutex;
 };

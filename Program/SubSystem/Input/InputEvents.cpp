@@ -13,7 +13,7 @@ KeyPressed::KeyPressed(uint32_t key) : m_key(key)
 
 }
 
-const std::any& KeyPressed::GetData()
+std::any KeyPressed::GetData()
 {
 	return m_key;
 }
@@ -24,7 +24,7 @@ KeyReleased::KeyReleased(uint32_t key) : m_key(key)
 }
 
 
-const std::any& KeyReleased::GetData()
+std::any KeyReleased::GetData()
 {
 	return m_key;
 }

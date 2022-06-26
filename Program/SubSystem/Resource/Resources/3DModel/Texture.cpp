@@ -2,39 +2,23 @@
 * @file    Texture.cpp
 * @brief
 *
-* @date	   2022/05/11 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/25 2022年度初版
 */
 
 
 #include "Texture.h"
 #include "SubSystem/Core/IO/FileStream.h"
-#include "SubSystem/Resource/ResourceLoader/TextureLoader/TextureLoader.h"
-
-bool Texture::Create(DirectX::ScratchImage* image)
-{
-	if (image)
-	{
-		return Create(image->GetImages(), image->GetImageCount(), image->GetMetadata());
-	}
-	return false;
-}
 
 bool Texture::Do_Load(std::string_view filePath)
 {
-	// 独自データを調べる
-	if (LoadFromFile(filePath))
-		return true;
+	//TextureLoader loader;
+	//m_image = loader.Load(filePath);
 
-	TextureLoader loader;
-	m_image = loader.Load(filePath);
-
-	Create(m_image);
-
-	// 次回から高速に読み込むために独自データを作成
-	SaveToFile(filePath);
-
-	return true;
+	if (m_image)
+	{
+		return Create(m_image->GetImages(), m_image->GetImageCount(), m_image->GetMetadata());
+	}
+	return false;
 }
 
 void Texture::SaveToFile(std::string_view filePath)

@@ -2,55 +2,54 @@
 * @file    IResource.cpp
 * @brief   リソース抽象クラス
 *
-* @date	   2022/05/06 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/25 2022年度初版
 */
 
 
 #include "IResource.h"
 
-IResource::IResource(const IResource& resource)
+void IResource::SaveToFile(std::string_view filePath)
 {
-	m_filePath = resource.m_filePath;
-	m_referenceCount = resource.m_referenceCount;
 }
 
-IResource& IResource::operator=(const IResource& resource)
+bool IResource::LoadFromFile(std::string_view filePath)
 {
-	m_filePath = resource.m_filePath;
-	m_referenceCount = resource.m_referenceCount;
-	return *this;
+	return false;
 }
 
 bool IResource::Load(std::string_view filePath) noexcept
 {
-	std::unique_lock<std::mutex> lock(m_mutex);
 	m_filePath = filePath;
-	lock.unlock();
 
-	// 実際に読み込む
-	return Do_Load(filePath);
+	if (LoadFromFile(filePath))
+	{
+		return true;
+	}
+
+	if (Do_Load(filePath))
+	{
+		SaveToFile(filePath);
+		return true;
+	}
+	return false;
 }
 
-const std::string& IResource::GetName() const noexcept
+std::string_view IResource::GetName() const noexcept
 {
 	return m_filePath;
 }
 
-void IResource::AddRefreneceCount() noexcept
+void IResource::AddRef() noexcept
 {
-	std::unique_lock<std::mutex> lock(m_mutex);
 	++m_referenceCount;
 }
 
-void IResource::SubReneceCount() noexcept
+void IResource::SubRef() noexcept
 {
-	std::unique_lock<std::mutex> lock(m_mutex);
-	if (m_referenceCount > 0)
-		--m_referenceCount;
+	--m_referenceCount;
 }
 
-size_t IResource::GetRefreneceCount() const noexcept
+size_t IResource::GetRef() const noexcept
 {
 	return m_referenceCount;
 }

@@ -2,8 +2,7 @@
 * @file    D3D11IndexBuffer.h
 * @brief
 *
-* @date	   2022/05/10 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/25 2022年度初版
 */
 #pragma once
 
@@ -24,7 +23,7 @@ public:
 	void Update(const std::vector<UINT>& indices) noexcept;
 
 	/** DXGI_FORMAT_R32_UINT でデバイス設定されます。*/
-	void IASet() noexcept;
+	void IASet() const noexcept;
 
 private:
 

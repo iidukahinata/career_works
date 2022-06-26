@@ -1,68 +1,30 @@
-/**
-* @file    Model.h
-* @brief
-*
-* @date	   2022/05/11 2022年度初版
-* @author  飯塚陽太
-*/
 #pragma once
 
 
-#include "ModelData.h"
-#include "SubSystem/Renderer/D3D11/D3D11Shader.h"
-#include "SubSystem/Renderer/D3D11/D3D11InputLayout.h"
-#include "SubSystem/Renderer/D3D11/D3D11SamplerState.h"
+#include "Mesh.h"
+#include "Material.h"
+#include "../IResource.h"
 
-/** Model の初期化時設定の項目構造体 */
-struct ModelDesc
-{
-	// * 読み込むモデルパスを指定してください。
-	std::string modelFilePath;
-
-	// * テクスチャが入っているフォルダパスを指定してください。
-	std::string textureFolderPath;
-
-	// * null 以外の値である必要があります。
-	D3D11_INPUT_ELEMENT_DESC* layout = nullptr;
-
-	// * layout 配列の要素数を指定してください。
-	UINT layoutSize = 0;
-
-	// * 使用するシェーダーパスを指定してください。
-	const char* vsShader = "assets/Shader/LambertVS.cso";
-	const char* psShader = "assets/Shader/LambertPS.cso";
-};
-
-/** 今後テクスチャデータをマテリアルに分ける実装に変更予定。 */
-class Model
+class Model : public IResource
 {
 public:
 
-	Model() = default;
+	/** 独自モデルデータとして保存させる。 */
+	void SaveToFile(std::string_view filePath) override;
 
-	/** リソースの参照数を変更する必要があるため、コピー関数をオバーライドする。*/
-	Model(const Model& model);
-	Model& operator=(const Model& model);
+	/** 独自モデルデータを読み込みする。 */
+	bool LoadFromFile(std::string_view filePath) override;
 
-	~Model();
-
-	void Init(const ModelDesc& desc);
-	void Draw(const DirectX::XMMATRIX& world);
+	void AddMesh(std::vector<VertexBump3D>&& vertices, std::vector<uint32_t>&& indices);
+	void AddMesh(const std::vector<VertexBump3D>& vertices, const std::vector<uint32_t>& indices);
 
 private:
 
-	/** 指定フォルダ内の全てのテクスチャを読み込む */
-	void LoadTextures(std::string_view textureFolderPath);
+	// IResource
+	bool Do_Load(std::string_view filePath) override;
 
 private:
 
-	ModelData* m_modelData;
-
-	// * shader object
-	D3D11VertexShader m_vertexShader;
-	D3D11PixelShader  m_pixelShader;
-
-	D3D11InputLayout m_inputLayout;
-
-	D3D11SamplerState m_samplerState;
+	std::vector<Mesh> m_meshes;
+	std::vector<Material> m_materials;
 };

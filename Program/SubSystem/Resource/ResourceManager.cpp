@@ -22,7 +22,7 @@ void ResourceManager::FreeUnusedResourceObjects() noexcept
 		[](const auto& resource)
 		{
 			// 参照値が 0 以下の時は使用されていないものとして処理
-			return !resource.second || resource.second->GetRefreneceCount() <= 0;
+			return !resource.second || resource.second->GetRef() <= 0;
 		}
 	);
 }

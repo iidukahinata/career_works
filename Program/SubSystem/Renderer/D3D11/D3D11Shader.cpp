@@ -2,14 +2,12 @@
 * @file    D3D11Shader.cpp
 * @brief
 *
-* @date	   2022/05/10 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/25 2022年度初版
 */
 
 
-#include "D3D11Shader.h"
 #include <d3dcompiler.h>
-#include "SubSystem/Log/DebugLog.h"
+#include "D3D11Shader.h"
 #include "SubSystem/Core/Common/Tools.h"
 
 bool D3D11Shader::CompileFromFile(std::string_view shader, std::string_view entrypoint, std::string_view traget) noexcept

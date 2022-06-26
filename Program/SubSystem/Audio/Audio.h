@@ -11,6 +11,8 @@
 #include "SubSystem/Core/ISubsystem.h"
 #include "SubSystem/JobSystem/Sync/Job.h"
 
+class AudioListener;
+
 class Audio : public ISubsystem
 {
 	SUB_CLASS(Audio)
@@ -25,7 +27,7 @@ public:
 	void Set3DSettings(float dopplerscale, float distancefactor, float rolloffscale) const noexcept;
 
 	/** 3D サウンドを使用する場合は必ず値をセットする必要があります。*/
-	void SetAudioListener(class AudioListener* listener) noexcept;
+	void SetAudioListener(AudioListener* listener) noexcept;
 
 	FMOD::System* GetSystem() const noexcept;
 

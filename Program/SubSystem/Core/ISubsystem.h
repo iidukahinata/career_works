@@ -2,7 +2,7 @@
  * @file	ISubsystem.h
  * @brief
  *
- * @date	2022/06/23 2022年度初版
+ * @date	2022/06/26 2022年度初版
  */
 #pragma once
 
@@ -23,11 +23,5 @@ public:
 	virtual bool Initialize() { return true; }
 	virtual void Shutdown() {}
 
-	/* 遅延セットアップ */
-	void SetContext(Context* context) noexcept;
 	Context* GetContext() const noexcept;
-
-private:
-
-	Context* m_context = nullptr;
 };

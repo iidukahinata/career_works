@@ -2,19 +2,14 @@
  * @file	ISubsystem.cpp
  * @brief
  *
- * @date	2022/06/23 2022年度初版
+ * @date	2022/06/26 2022年度初版
  */
 
 
 #include "ISubsystem.h"
 #include "Context.h"
 
-void ISubsystem::SetContext(Context* context) noexcept
-{
-    if (!m_context) m_context = context;
-}
-
 Context* ISubsystem::GetContext() const noexcept
 {
-    return m_context;
+	return Context::Get();
 }

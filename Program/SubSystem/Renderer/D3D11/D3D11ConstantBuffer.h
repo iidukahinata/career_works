@@ -2,14 +2,12 @@
 * @file    D3D11ConstantBuffer.h
 * @brief   
 *
-* @date	   2022/06/06 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/25 2022年度初版
 */
 #pragma once
 
 
 #include "D3D11DeviceChild.h"
-#include "SubSystem/Core/Common/Common.h"
 #include "SubSystem/Core/Common/Tools.h"
 
 template<class T>
@@ -27,8 +25,8 @@ public:
 	void Update(const T& buffer) noexcept;
 
 	/** デバイス設定するための関数です。*/
-	void VSSet(UINT slot) noexcept;
-	void PSSet(UINT slot) noexcept;
+	void VSSet(UINT slot) const noexcept;
+	void PSSet(UINT slot) const noexcept;
 
 private:
 
@@ -49,7 +47,7 @@ inline bool D3D11ConstantBuffer<T>::Create(UINT bufferSize) noexcept
 	bufferDesc.MiscFlags = 0;
 	bufferDesc.StructureByteStride = 0;
 
-	HRESULT hr = GetGraphicsDevice()->GetDevice()->CreateBuffer(&bufferDesc, nullptr, m_constantBuffer.GetAddressOf());
+	HRESULT hr = GetDevice()->CreateBuffer(&bufferDesc, nullptr, m_constantBuffer.GetAddressOf());
 	if (FAILED(hr))
 	{
 		LOG_ERROR("コンスタントバッファー作成に失敗。");
@@ -61,25 +59,23 @@ inline bool D3D11ConstantBuffer<T>::Create(UINT bufferSize) noexcept
 template<class T>
 inline void D3D11ConstantBuffer<T>::Update(const T& buffer) noexcept
 {
-	auto context = GetGraphicsDevice()->GetContext();
-
 	D3D11_MAPPED_SUBRESOURCE pData;
-	HRESULT hr = context->Map(m_constantBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &pData);
+	HRESULT hr = GetContext()->Map(m_constantBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &pData);
 	if (SUCCEEDED(hr))
 	{
 		memcpy_s(pData.pData, pData.RowPitch, &buffer, sizeof(buffer));
-		context->Unmap(m_constantBuffer.Get(), 0);
+		GetContext()->Unmap(m_constantBuffer.Get(), 0);
 	}
 }
 
 template<class T>
-inline void D3D11ConstantBuffer<T>::VSSet(UINT slot) noexcept
+inline void D3D11ConstantBuffer<T>::VSSet(UINT slot) const noexcept
 {
-	GetGraphicsDevice()->GetContext()->VSSetConstantBuffers(slot, 1, m_constantBuffer.GetAddressOf());
+	GetContext()->VSSetConstantBuffers(slot, 1, m_constantBuffer.GetAddressOf());
 }
 
 template<class T>
-inline void D3D11ConstantBuffer<T>::PSSet(UINT slot) noexcept
+inline void D3D11ConstantBuffer<T>::PSSet(UINT slot) const noexcept
 {
-	GetGraphicsDevice()->GetContext()->PSSetConstantBuffers(slot, 1, m_constantBuffer.GetAddressOf());
+	GetContext()->PSSetConstantBuffers(slot, 1, m_constantBuffer.GetAddressOf());
 }

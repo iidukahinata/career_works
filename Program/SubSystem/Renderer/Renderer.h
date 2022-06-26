@@ -2,30 +2,32 @@
 * @file	   Renderer.h
 * @brief
 *
-* @date	   2022/05/11 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/25 2022年度初版
 */
 #pragma once
 
 
-class Renderer
+#include "SubSystem/Core/ISubsystem.h"
+#include "SubSystem/JobSystem/Sync/Job.h"
+
+class Renderer : public ISubsystem
 {
-private:
-
-	Renderer() = default;
-	Renderer(const Renderer&) = default;
-	Renderer& operator=(const Renderer&) = default;
-
+	SUB_CLASS(Renderer)
 public:
 
-	static Renderer& Get() noexcept
-	{
-		static Renderer instance;
-		return instance;
-	}
+	Renderer();
 
-	void Init();
+	bool Initialize() override;
+	void Shutdown() override;
+
+private:
+
+	void Update() noexcept;
+
 	void BeginFream();
 	void EndFream();
-	void Exit();
+
+private:
+
+	Job m_job;
 };

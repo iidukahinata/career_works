@@ -2,20 +2,18 @@
 * @file    D3D11Texture.cpp
 * @brief
 *
-* @date	   2022/05/11 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/25 2022年度初版
 */
 
 
 #include "D3D11Texture.h"
-#include "SubSystem/Core/Common/Common.h"
 
 bool D3D11Texture::Create(const DirectX::Image* images, size_t imageSize, const DirectX::TexMetadata& meta)
 {
 	ASSERT(images, "引数値 imageに値をいれてください。");
 
 	auto hr = DirectX::CreateShaderResourceView(
-		GetGraphicsDevice()->GetDevice(),
+		GetDevice(),
 		images, imageSize, meta,
 		m_shaderResourceView.ReleaseAndGetAddressOf());
 
@@ -26,9 +24,9 @@ bool D3D11Texture::Create(const DirectX::Image* images, size_t imageSize, const 
 	return true;
 }
 
-void D3D11Texture::Bind(UINT slot /* = 0 */)
+void D3D11Texture::PSSet(UINT slot /* = 0 */) const noexcept
 {
-	GetGraphicsDevice()->GetContext()->PSSetShaderResources(slot, 1, m_shaderResourceView.GetAddressOf());
+	GetContext()->PSSetShaderResources(slot, 1, m_shaderResourceView.GetAddressOf());
 }
 
 void D3D11Texture::SetShaderResourceView(ID3D11ShaderResourceView* shaderResourceView) noexcept

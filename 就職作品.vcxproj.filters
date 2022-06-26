@@ -49,35 +49,17 @@
     <Filter Include="SubSystem\Resource\ResourceLoader\TextureLoader">
       <UniqueIdentifier>{72bc2d25-057b-4167-9f80-735263159eb7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SubSystem\Renderer\Camera">
-      <UniqueIdentifier>{4ac70078-d3d7-45d1-8885-893e5d83d140}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SubSystem\Renderer\D3D11">
       <UniqueIdentifier>{95cad495-08d1-4bee-869d-45a743804919}</UniqueIdentifier>
     </Filter>
     <Filter Include="SubSystem\Renderer\D3D12">
       <UniqueIdentifier>{07c26028-c438-4ccf-98a4-d6ff0dee0571}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SubSystem\Renderer\Drawings">
-      <UniqueIdentifier>{7a574bf5-8a6b-44ed-86b8-070fceaf51a0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SubSystem\Renderer\Geometry">
       <UniqueIdentifier>{17b2c961-e7ef-4c42-8b08-7715a34de3ee}</UniqueIdentifier>
     </Filter>
     <Filter Include="SubSystem\Renderer\Shader">
       <UniqueIdentifier>{d232027f-c82e-4669-8357-317b91104de2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SubSystem\Renderer\Drawings\Effect">
-      <UniqueIdentifier>{8c929dd9-5b7d-44fc-bcec-b9990078db6e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SubSystem\Renderer\Drawings\Light">
-      <UniqueIdentifier>{d4a8add7-0ff4-4d63-9f41-6ef671f8c8fe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SubSystem\Renderer\Drawings\SkyBox">
-      <UniqueIdentifier>{4ffffea8-11e8-4f85-9d3d-943193ad49c3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SubSystem\Renderer\Drawings\Effect\PostEffect">
-      <UniqueIdentifier>{1e07a66c-0f07-47e1-a97c-a1ddac8aca52}</UniqueIdentifier>
     </Filter>
     <Filter Include="SubSystem\Renderer\Shader\Core">
       <UniqueIdentifier>{676e59f5-ce95-4a97-aff3-9b7f6d31b0a8}</UniqueIdentifier>
@@ -93,9 +75,6 @@
     </Filter>
     <Filter Include="SubSystem\Resource\Resources\3DModel">
       <UniqueIdentifier>{c01ae5b3-ac52-4987-afbb-6fd408cf7948}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SubSystem\Resource\Resources\2DSprite">
-      <UniqueIdentifier>{0635a65d-0a8d-4ed0-8f54-9a00d624c53d}</UniqueIdentifier>
     </Filter>
     <Filter Include="SubSystem\Resource\Resources\Audio">
       <UniqueIdentifier>{4e2e722f-2322-48cb-aff9-9ba3deb9ce19}</UniqueIdentifier>
@@ -163,24 +142,6 @@
     <ClCompile Include="Program\SubSystem\Resource\ResourceManager.cpp">
       <Filter>SubSystem\Resource</Filter>
     </ClCompile>
-    <ClCompile Include="Program\SubSystem\Resource\ResourceLoader\ModelLoader\ModelLoader.cpp">
-      <Filter>SubSystem\Resource\ResourceLoader\ModelLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Resource\ResourceLoader\TextureLoader\TextureLoader.cpp">
-      <Filter>SubSystem\Resource\ResourceLoader\TextureLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Resource\Resources\2DSprite\Sprite.cpp">
-      <Filter>SubSystem\Resource\Resources\2DSprite</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Resource\Resources\3DModel\Model.cpp">
-      <Filter>SubSystem\Resource\Resources\3DModel</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Resource\Resources\3DModel\ModelData.cpp">
-      <Filter>SubSystem\Resource\Resources\3DModel</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Resource\Resources\3DModel\Quad.cpp">
-      <Filter>SubSystem\Resource\Resources\3DModel</Filter>
-    </ClCompile>
     <ClCompile Include="Program\SubSystem\Resource\Resources\3DModel\Texture.cpp">
       <Filter>SubSystem\Resource\Resources\3DModel</Filter>
     </ClCompile>
@@ -189,9 +150,6 @@
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Resource\Resources\IResource.cpp">
       <Filter>SubSystem\Resource\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\Camera\Camera.cpp">
-      <Filter>SubSystem\Renderer\Camera</Filter>
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Renderer\D3D11\D3D11ComputeShader.cpp">
       <Filter>SubSystem\Renderer\D3D11</Filter>
@@ -259,41 +217,8 @@
     <ClCompile Include="Program\SubSystem\Renderer\Renderer.cpp">
       <Filter>SubSystem\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\RenderStates.cpp">
-      <Filter>SubSystem\Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="Program\SubSystem\Renderer\TransformCBuffer.cpp">
       <Filter>SubSystem\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\Drawings\SkyBox\SkyBox.cpp">
-      <Filter>SubSystem\Renderer\Drawings\SkyBox</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\Drawings\Light\DirectionalLight.cpp">
-      <Filter>SubSystem\Renderer\Drawings\Light</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\Drawings\Light\LightMap.cpp">
-      <Filter>SubSystem\Renderer\Drawings\Light</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\Drawings\Light\PointLight.cpp">
-      <Filter>SubSystem\Renderer\Drawings\Light</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\Drawings\Light\SpotLight.cpp">
-      <Filter>SubSystem\Renderer\Drawings\Light</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\Drawings\Effect\PostEffect\DepthOfField.cpp">
-      <Filter>SubSystem\Renderer\Drawings\Effect\PostEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\Drawings\Effect\PostEffect\Monotone.cpp">
-      <Filter>SubSystem\Renderer\Drawings\Effect\PostEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\Drawings\Effect\PostEffect\Bloom.cpp">
-      <Filter>SubSystem\Renderer\Drawings\Effect\PostEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\Drawings\Effect\PostEffect\Blur.cpp">
-      <Filter>SubSystem\Renderer\Drawings\Effect\PostEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\Drawings\Effect\Postprocessing.cpp">
-      <Filter>SubSystem\Renderer\Drawings\Effect</Filter>
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Core\Math\Matrix.cpp">
       <Filter>SubSystem\Core\Math</Filter>
@@ -352,9 +277,6 @@
     <ClCompile Include="Program\SubSystem\Core\Event\EventManager.cpp">
       <Filter>SubSystem\Core\Event</Filter>
     </ClCompile>
-    <ClCompile Include="Program\SubSystem\Core\ISubsystem.cpp">
-      <Filter>SubSystem\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Program\SubSystem\Input\InputEvents.cpp">
       <Filter>SubSystem\Input</Filter>
     </ClCompile>
@@ -384,6 +306,30 @@
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Scene\Factory\GameObjectFactory.cpp">
       <Filter>SubSystem\Scene\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D11\RenderStates.cpp">
+      <Filter>SubSystem\Renderer\D3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Scene\Component\Components\RenderObject.cpp">
+      <Filter>SubSystem\Scene\Component\Conponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Resource\Resources\3DModel\Mesh.cpp">
+      <Filter>SubSystem\Resource\Resources\3DModel</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Resource\Resources\3DModel\Material.cpp">
+      <Filter>SubSystem\Resource\Resources\3DModel</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Resource\ResourceLoader\ModelLoader\ModelLoader.cpp">
+      <Filter>SubSystem\Resource\ResourceLoader\ModelLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Resource\Resources\3DModel\Model.cpp">
+      <Filter>SubSystem\Resource\Resources\3DModel</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Core\IO\FileSystem.cpp">
+      <Filter>SubSystem\Core\I/O</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Core\ISubsystem.cpp">
+      <Filter>SubSystem\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -435,30 +381,6 @@
     <ClInclude Include="Program\SubSystem\Resource\ResourceManager.h">
       <Filter>SubSystem\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Resource\ResourceLoader\ModelLoader\ModelLoader.h">
-      <Filter>SubSystem\Resource\ResourceLoader\ModelLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Resource\ResourceLoader\TextureLoader\TextureLoader.h">
-      <Filter>SubSystem\Resource\ResourceLoader\TextureLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Resource\Resources\2DSprite\Sprite.h">
-      <Filter>SubSystem\Resource\Resources\2DSprite</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Resource\Resources\3DModel\Material.h">
-      <Filter>SubSystem\Resource\Resources\3DModel</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Resource\Resources\3DModel\Mesh.h">
-      <Filter>SubSystem\Resource\Resources\3DModel</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Resource\Resources\3DModel\Model.h">
-      <Filter>SubSystem\Resource\Resources\3DModel</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Resource\Resources\3DModel\ModelData.h">
-      <Filter>SubSystem\Resource\Resources\3DModel</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Resource\Resources\3DModel\Quad.h">
-      <Filter>SubSystem\Resource\Resources\3DModel</Filter>
-    </ClInclude>
     <ClInclude Include="Program\SubSystem\Resource\Resources\3DModel\Texture.h">
       <Filter>SubSystem\Resource\Resources\3DModel</Filter>
     </ClInclude>
@@ -467,9 +389,6 @@
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Resource\Resources\IResource.h">
       <Filter>SubSystem\Resource\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\Camera\Camera.h">
-      <Filter>SubSystem\Renderer\Camera</Filter>
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Renderer\D3D11\D3D11ConstantBuffer.h">
       <Filter>SubSystem\Renderer\D3D11</Filter>
@@ -540,9 +459,6 @@
     <ClInclude Include="Program\SubSystem\Renderer\Renderer.h">
       <Filter>SubSystem\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\RenderStates.h">
-      <Filter>SubSystem\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="Program\SubSystem\Renderer\TransformCBuffer.h">
       <Filter>SubSystem\Renderer</Filter>
     </ClInclude>
@@ -554,33 +470,6 @@
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Renderer\Geometry\Vertex.h">
       <Filter>SubSystem\Renderer\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\Drawings\SkyBox\SkyBox.h">
-      <Filter>SubSystem\Renderer\Drawings\SkyBox</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\Drawings\Light\Light.h">
-      <Filter>SubSystem\Renderer\Drawings\Light</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\Drawings\Light\LightMap.h">
-      <Filter>SubSystem\Renderer\Drawings\Light</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\Drawings\Effect\PostEffect\DepthOfField.h">
-      <Filter>SubSystem\Renderer\Drawings\Effect\PostEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\Drawings\Effect\PostEffect\Monotone.h">
-      <Filter>SubSystem\Renderer\Drawings\Effect\PostEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\Drawings\Effect\PostEffect\PostEffect.h">
-      <Filter>SubSystem\Renderer\Drawings\Effect\PostEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\Drawings\Effect\PostEffect\Bloom.h">
-      <Filter>SubSystem\Renderer\Drawings\Effect\PostEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\Drawings\Effect\PostEffect\Blur.h">
-      <Filter>SubSystem\Renderer\Drawings\Effect\PostEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\Drawings\Effect\Postprocessing.h">
-      <Filter>SubSystem\Renderer\Drawings\Effect</Filter>
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Core\Math\MathCore.h">
       <Filter>SubSystem\Core\Math</Filter>
@@ -716,6 +605,27 @@
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Scene\Factory\GameObjectFactory.h">
       <Filter>SubSystem\Scene\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D11\RenderStates.h">
+      <Filter>SubSystem\Renderer\D3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Scene\Component\Components\RenderObject.h">
+      <Filter>SubSystem\Scene\Component\Conponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Resource\Resources\3DModel\Mesh.h">
+      <Filter>SubSystem\Resource\Resources\3DModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Resource\Resources\3DModel\Material.h">
+      <Filter>SubSystem\Resource\Resources\3DModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Resource\ResourceLoader\ModelLoader\ModelLoader.h">
+      <Filter>SubSystem\Resource\ResourceLoader\ModelLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Resource\Resources\3DModel\Model.h">
+      <Filter>SubSystem\Resource\Resources\3DModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Core\IO\FileSystem.h">
+      <Filter>SubSystem\Core\I/O</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

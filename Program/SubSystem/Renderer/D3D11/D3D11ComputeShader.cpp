@@ -2,13 +2,11 @@
 * @file    D3D11ComputeShader.cpp
 * @brief
 *
-* @date	   2022/05/10 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/25 2022年度初版
 */
 
 
 #include "D3D11Shader.h"
-#include "SubSystem/Log/DebugLog.h"
 
 bool D3D11ComputeShader::Create(
 	std::string_view shader,
@@ -23,7 +21,7 @@ bool D3D11ComputeShader::Create(
 	}
 
 	// コンピューターシェーダー生成
-	HRESULT hr = GetGraphicsDevice()->GetDevice()->CreateComputeShader(
+	HRESULT hr = GetDevice()->CreateComputeShader(
 		m_blob->GetBufferPointer(),
 		m_blob->GetBufferSize(),
 		nullptr,

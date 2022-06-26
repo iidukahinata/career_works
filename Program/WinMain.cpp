@@ -2,10 +2,11 @@
 * @file	   WinMain.cpp
 * @brief
 *
-* @date	   2022/06/23 2022年度初版
+* @date	   2022/06/26 2022年度初版
 */
 
 
+#include <memory>
 #include "Subsystem/Core/Engine.h"
 
 std::unique_ptr<Engine> engine;

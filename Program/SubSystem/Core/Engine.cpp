@@ -2,11 +2,12 @@
 * @file    Engine.cpp
 * @brief
 *
-* @date	   2022/06/23 2022年度初版
+* @date	   2022/06/25 2022年度初版
 */
 
 
 #include "Engine.h"
+#include "Context.h"
 #include "Common/ProjectSettings.h"
 #include "Event/EventManager.h"
 #include "SubSystem/Audio/Audio.h"
@@ -14,14 +15,10 @@
 #include "SubSystem/Timer/Timer.h"
 #include "SubSystem/Scene/World.h"
 #include "SubSystem/Window/Window.h"
+#include "SubSystem/Renderer/Renderer.h"
 #include "SubSystem/Resource/ResourceManager.h"
 #include "SubSystem/JobSystem/Sync/JobSystem.h"
 #include "SubSystem/JobSystem/Async/AsyncJobSystem.h"
-
-Engine::Engine()
-{
-	m_context = std::make_unique<Context>();
-}
 
 bool Engine::Initialize(HINSTANCE hInstance)
 {
@@ -56,7 +53,7 @@ long Engine::MainLoop()
 {
 	Window& window = Window::Get();
 	auto& jobSystem = JobSystem::Get();
-	auto timer = m_context->GetSubsystem<Timer>();
+	auto timer = Context::Get()->GetSubsystem<Timer>();
 
 	while (window.Tick())
 	{
@@ -66,8 +63,8 @@ long Engine::MainLoop()
 			jobSystem.Execute(timer->GetDeltaTime(), FunctionType::LateUpdate);
 
 			// renderer thread として分ける予定のため分離している。
-			//jobSystem.Execute(timer->GetDeltaTime(), FunctionType::Render);
-			//jobSystem.Execute(timer->GetDeltaTime(), FunctionType::LateRender);
+			jobSystem.Execute(timer->GetDeltaTime(), FunctionType::Render);
+			jobSystem.Execute(timer->GetDeltaTime(), FunctionType::LateRender);
 		}
 	}
 
@@ -84,7 +81,7 @@ void Engine::Shutdown()
 
 	UnregisterClass("windowClass", m_hInstance);
 
-	m_context.reset();
+	Context::Get()->Release();
 }
 
 bool Engine::StartUpScreen(HINSTANCE hInstance) noexcept
@@ -106,42 +103,45 @@ bool Engine::StartUpScreen(HINSTANCE hInstance) noexcept
 
 void Engine::RegisterSubsystemsToContainer() noexcept
 {
-	m_context->RegisterSubsystem<Timer>(std::make_unique<Timer>());
-	m_context->RegisterSubsystem<Input>(std::make_unique<Input>());
-	m_context->RegisterSubsystem<Audio>(std::make_unique<Audio>());
-	m_context->RegisterSubsystem<ResourceManager>(std::make_unique<ResourceManager>());
-	m_context->RegisterSubsystem<World>(std::make_unique<World>());
-	//m_context->RegisterSubsystem<Renderer>(std::make_unique<Renderer>());
+	auto context = Context::Get();
+	context->RegisterSubsystem<Timer>(std::make_unique<Timer>());
+	context->RegisterSubsystem<Input>(std::make_unique<Input>());
+	context->RegisterSubsystem<Audio>(std::make_unique<Audio>());
+	context->RegisterSubsystem<ResourceManager>(std::make_unique<ResourceManager>());
+	context->RegisterSubsystem<World>(std::make_unique<World>());
+	context->RegisterSubsystem<Renderer>(std::make_unique<Renderer>());
 }
 
 bool Engine::InitializeSubsystems() noexcept
 {
-	if (!m_context->GetSubsystem<Timer>()->Initialize())
+	auto context = Context::Get();
+
+	if (!context->GetSubsystem<Timer>()->Initialize())
 	{
 		return false;
 	}
 	
-	if (!m_context->GetSubsystem<Input>()->Initialize())
+	if (!context->GetSubsystem<Input>()->Initialize())
 	{
 		return false;
 	}
 	
-	if (!m_context->GetSubsystem<Audio>()->Initialize())
+	if (!context->GetSubsystem<Audio>()->Initialize())
 	{
 		return false;
 	}
 
-	if (!m_context->GetSubsystem<ResourceManager>()->Initialize())
+	if (!context->GetSubsystem<ResourceManager>()->Initialize())
 	{
 		return false;
 	}
 	 	 
-	//if (!m_context->GetSubsystem<Renderer>()->Initialize())
-	//{
-	//	return false;
-	//}
+	if (!context->GetSubsystem<Renderer>()->Initialize())
+	{
+		return false;
+	}
 	 
-	if (!m_context->GetSubsystem<World>()->Initialize())
+	if (!context->GetSubsystem<World>()->Initialize())
 	{
 		return false;
 	}

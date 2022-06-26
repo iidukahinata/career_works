@@ -17,5 +17,5 @@ class EventListener
 	SUPER_CLASS(EventListener)
 public:
 
-	virtual void Action(const std::any&) = 0;
+	virtual void Action(std::any) = 0;
 };

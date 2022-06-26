@@ -13,7 +13,7 @@
 #include "D3D12DeviceChild.h"
 #include "SubSystem/Resource/Resources/3DModel/Texture.h"
 
-class D3D12Texture : public Texture, public D3D12DeviceChild
+class D3D12Texture : public D3D12DeviceChild
 {
 public:
 
@@ -22,7 +22,7 @@ public:
 	* @param imageSize [入力] イメージ配列サイズを指定してください。
 	* @param meta [入力] 読み込まれたテクスチャ meta データを指定してください。
 	*/
-	bool Create(const DirectX::Image* images, size_t imageSize, const DirectX::TexMetadata& meta) override;
+	bool Create(const DirectX::Image* images, size_t imageSize, const DirectX::TexMetadata& meta);
 	
 	void SetResource(ID3D12Resource* resource);
 

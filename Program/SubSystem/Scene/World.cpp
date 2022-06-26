@@ -73,7 +73,7 @@ void World::RemoveGameObject(GameObject* gameObject) noexcept
 	m_gameObjects.pop_back();
 }
 
-std::span<const GameObjectPtr> World::GetGameObjects() const noexcept
+std::span<GameObjectPtr> World::GetGameObjects() noexcept
 {
-	return std::span{ m_gameObjects };
+	return m_gameObjects;
 }

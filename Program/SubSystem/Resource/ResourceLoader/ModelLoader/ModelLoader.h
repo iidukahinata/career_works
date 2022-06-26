@@ -9,14 +9,13 @@
 
 
 #include <assimp/scene.h>
-#include "SubSystem/Renderer/Geometry/Vertex.h"
-#include "SubSystem/Resource/Resources/3DModel/Mesh.h"
+#include "SubSystem/Resource/Resources/3DModel/Model.h"
 
 class ModelLoader
 {
 public:
 
-	std::vector<Mesh<VertexBump3D>> Load(std::string_view filePath);
+	Model Load(std::string_view filePath);
 
 private:
 
@@ -24,15 +23,15 @@ private:
 
 	void ProcessNode(aiNode* node);
 	void LoadMesh(aiMesh* aiMesh);
-	std::vector<Texture*> LoadTextures(aiMaterial* aiMaterial);
+	void LoadMaterial(aiMaterial* aiMaterial);
 
-	std::string LookForTextureFolder(std::string_view path);
+	std::vector<Texture*> LoadTextures(aiMaterial* aiMaterial);
 
 private:
 
 	const aiScene* m_aiScene = nullptr;
 
-	std::vector<Mesh<VertexBump3D>> m_meshes;
+	Model m_model;
 
 	std::string m_textureDirectory;
 };

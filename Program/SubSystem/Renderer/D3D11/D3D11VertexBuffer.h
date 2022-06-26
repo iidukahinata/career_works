@@ -2,14 +2,12 @@
 * @file    D3D11VertexBuffer.h
 * @brief
 *
-* @date	   2022/05/10 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/25 2022年度初版
 */
 #pragma once
 
 
 #include "D3D11DeviceChild.h"
-#include "SubSystem/Log/DebugLog.h"
 
 template<class T>
 class D3D11VertexBuffer : public D3D11DeviceChild
@@ -50,7 +48,7 @@ inline bool D3D11VertexBuffer<T>::Create(const std::vector<T>& vertices, D3D11_U
 	ZeroMemory(&initData, sizeof(initData));
 	initData.pSysMem = vertices.data();
 
-	HRESULT hr = GetGraphicsDevice()->GetDevice()->CreateBuffer(&bufferDesc, &initData, m_vertexBuffer.GetAddressOf());
+	HRESULT hr = GetDevice()->CreateBuffer(&bufferDesc, &initData, m_vertexBuffer.GetAddressOf());
 	if (FAILED(hr))
 	{
 		LOG_ERROR("頂点バッファー作成に失敗。");
@@ -62,14 +60,12 @@ inline bool D3D11VertexBuffer<T>::Create(const std::vector<T>& vertices, D3D11_U
 template<class T>
 inline void D3D11VertexBuffer<T>::Update(const std::vector<T>& vertices) const noexcept
 {
-	auto context = GetGraphicsDevice()->GetContext();
-
 	D3D11_MAPPED_SUBRESOURCE pData;
-	HRESULT hr = context->Map(m_vertexBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &pData);
+	HRESULT hr = GetContext()->Map(m_vertexBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &pData);
 	if (SUCCEEDED(hr))
 	{
 		memcpy_s(pData.pData, pData.RowPitch, vertices.data(), sizeof(T) * vertices.size());
-		context->Unmap(m_vertexBuffer.Get(), 0);
+		GetContext()->Unmap(m_vertexBuffer.Get(), 0);
 	}
 }
 
@@ -78,5 +74,5 @@ inline void D3D11VertexBuffer<T>::IASet(UINT slot /* = 0 */) const noexcept
 {
 	const UINT stride = sizeof(T);
 	const UINT offset = 0;
-	GetGraphicsDevice()->GetContext()->IASetVertexBuffers(slot, 1, m_vertexBuffer.GetAddressOf(), &stride, &offset);
+	GetContext()->IASetVertexBuffers(slot, 1, m_vertexBuffer.GetAddressOf(), &stride, &offset);
 }

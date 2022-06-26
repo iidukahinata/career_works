@@ -2,20 +2,20 @@
 * @file    Engine.h
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/06/26 2022年度初版
 */
 #pragma once
 
 
 #include <Windows.h>
-#include "Context.h"
+#include "Common/Macro.h"
 
 class Engine
 {
 	COPY_PROHIBITED(Engine)
 public:
 
-	Engine();
+	Engine() = default;
 
 	/** アプリケーション全体のセットアップを行います。*/
 	bool Initialize(HINSTANCE hInstance);
@@ -43,7 +43,4 @@ private:
 private:
 
 	HINSTANCE m_hInstance;
-
-	// * Subsystem 管理のコンテナクラス
-	std::unique_ptr<Context> m_context;
 };

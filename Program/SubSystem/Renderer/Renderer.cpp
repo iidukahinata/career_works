@@ -2,28 +2,24 @@
 * @file	   Renderer.h
 * @brief
 *
-* @date	   2022/05/11 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/25 2022年度初版
 */
 
 
 #include "Renderer.h"
-#include "SubSystem/Renderer/D3D11/D3D11GrahicsDevice.h"
+#include "SubSystem/JobSystem/Sync/JobSystem.h"
 #include "SubSystem/Renderer/TransformCBuffer.h"
 #include "SubSystem/Gui/MyGui.h"
 #include "ThirdParty/imgui/imgui.h"
+#include "SubSystem/Renderer/D3D11/D3D11GrahicsDevice.h"
 
-void DrawFrameRate()
+Renderer::Renderer()
 {
-	ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiCond_Once);
-	ImGui::SetNextWindowSize(ImVec2(210, 50), ImGuiCond_Once);
-
-	ImGui::Begin("Frame Rate");
-	ImGui::Text(" %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-	ImGui::End();
+	m_job.SetFunction([this](double) { Update(); });
+	JobSystem::Get().RegisterJob(&m_job, FunctionType::Render);
 }
 
-void Renderer::Init()
+bool Renderer::Initialize()
 {
 	D3D11GrahicsDevice::Get().Init();
 
@@ -31,13 +27,21 @@ void Renderer::Init()
 
 	MyGui::Get().Init();
 
-	// fpsタイム描画
-	//MyGui::Get().AddWidget(DrawFrameRate);
+	return true;
+}
+
+void Renderer::Update() noexcept
+{
+	BeginFream();
+
+	// 実際の描画処理記述
+
+	EndFream();
 }
 
 void Renderer::BeginFream()
 {
-	D3D11GrahicsDevice::Get().Clear(Math::Vector4(1.f, 0.67f, 0.24f, 1.f));
+	D3D11GrahicsDevice::Get().Clear(Math::Vector4(0.f, 0.f, 0.f, 1.f));
 }
 
 void Renderer::EndFream()
@@ -47,7 +51,9 @@ void Renderer::EndFream()
 	D3D11GrahicsDevice::Get().Present();
 }
 
-void Renderer::Exit()
+void Renderer::Shutdown()
 {
+	JobSystem::Get().RemoveJob(&m_job);
+
 	MyGui::Get().Exit();
 }

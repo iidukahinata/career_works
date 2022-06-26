@@ -2,16 +2,15 @@
 * @file    D3D11Texture.h
 * @brief
 *
-* @date	   2022/05/11 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/25 2022年度初版
 */
 #pragma once
 
 
 #include "D3D11DeviceChild.h"
-#include "SubSystem/Resource/Resources/3DModel/Texture.h"
+#include "ThirdParty/directxtex/include/DirectXTex.h"
 
-class D3D11Texture : public Texture, public D3D11DeviceChild
+class D3D11Texture : public D3D11DeviceChild
 {
 public:
 
@@ -20,10 +19,10 @@ public:
 	* @param imageSize [入力] イメージ配列サイズを指定してください。
 	* @param meta [入力] 読み込まれたテクスチャ meta データを指定してください。
 	*/
-	bool Create(const DirectX::Image* images, size_t imageSize, const DirectX::TexMetadata& meta) override;
+	bool Create(const DirectX::Image* images, size_t imageSize, const DirectX::TexMetadata& meta);
 
 	/** デバイス設定するための関数です。*/
-	void Bind(UINT slot = 0) override;
+	void PSSet(UINT slot = 0) const noexcept;
 
 	void SetShaderResourceView(ID3D11ShaderResourceView* shaderResourceView) noexcept;
 

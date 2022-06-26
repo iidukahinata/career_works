@@ -2,24 +2,21 @@
 * @file	   D3D11GrahicsDevice.h
 * @brief
 *
-* @date	   2022/05/10 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/25 2022年度初版
 */
 #pragma once
 
 
 #include <vector>
-#include "../RenderStates.h"
+#include <d3d11.h>
+#include <wrl/client.h>
+#include "SubSystem/Core/Common/Macro.h"
 #include "SubSystem/Core/Math/MathCore.h"
 
 class D3D11GrahicsDevice
 {
-private:
-	
 	D3D11GrahicsDevice() = default;
-	D3D11GrahicsDevice(const D3D11GrahicsDevice&) = default;
-	D3D11GrahicsDevice& operator=(const D3D11GrahicsDevice&) = default;
-
+	COPY_PROHIBITED(D3D11GrahicsDevice);
 public:
 
 	static D3D11GrahicsDevice& Get() noexcept
@@ -51,9 +48,6 @@ public:
 	// DepthStencil
 	ID3D11DepthStencilView* GetDepthStencil() noexcept;
 
-	// render state
-	RenderStates& GetRenderStates() noexcept;
-
 private:
 
 	// Direct3D
@@ -65,6 +59,4 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> m_backBuffer;
 	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> m_renderTargetView;
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> m_depthStencilView;
-
-	RenderStates m_renderStates;
 };

@@ -2,25 +2,18 @@
 * @file    MyGui.h
 * @brief   gui管理クラス
 *
-* @date	   2022/06/17 2022年度初版
+* @date	   2022/06/25 2022年度初版
 */
 #pragma once
 
 
 #include <functional>
+#include "SubSystem/Core/Common/Macro.h"
 
-/**
-* デバッグモード時のみ有効。
-* リリースモード時は関数内処理が行われないようになっている。
-*/
 class MyGui
 {
-private:
-
 	MyGui() = default;
-	MyGui(const MyGui&) = default;
-	MyGui& operator=(const MyGui&) = default;
-
+	COPY_PROHIBITED(MyGui);
 public:
 
 	static MyGui& Get() noexcept

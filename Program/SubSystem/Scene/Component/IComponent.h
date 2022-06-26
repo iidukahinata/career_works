@@ -23,6 +23,9 @@ class IComponent
 	friend struct ComponentFactory;
 public:
 
+	virtual void Initialize() {}
+	virtual void Remove() {}
+
 	/** テンプレート型が this と同じ型の時 true を返します。*/
 	template<class T>
 	bool IsSameClass() const noexcept;

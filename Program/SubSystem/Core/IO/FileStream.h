@@ -2,7 +2,7 @@
 * @file    FileStream.h
 * @brief   ファイル操作クラス
 *
-* @data	   2022/06/06 2022年度初版
+* @data	   2022/06/26 2022年度初版
 * @note
 *  書き読み込み速度向上のため c 言語での処理に修正。
 *  fscanf 操作関数は作成していません。
@@ -11,6 +11,7 @@
 #pragma once
 
 
+#include <span>
 #include <fstream>
 #include <vector>
 #include <string>
@@ -64,7 +65,7 @@ public:
 	* string 型はOpenMode によって内部実装が変わるため特殊化されています。
 	*/
 	template<class T>
-	void Write(std::vector<T> data) noexcept;
+	void Write(std::span<T> data) noexcept;
 
 	/**
 	* 指定型 T データサイズ分読み込みます。
@@ -132,7 +133,7 @@ inline void FileStream::Write(T* data, const size_t& size) noexcept
 }
 
 template<class T>
-inline void FileStream::Write(std::vector<T> data) noexcept
+inline void FileStream::Write(std::span<T> data) noexcept
 {
 	if (m_openMode != OpenMode::Write_Mode)
 		return;
@@ -143,7 +144,7 @@ inline void FileStream::Write(std::vector<T> data) noexcept
 }
 
 template<>
-inline void FileStream::Write<std::string>(std::vector<std::string> data) noexcept
+inline void FileStream::Write<std::string>(std::span<std::string> data) noexcept
 {
 	if (m_openMode == OpenMode::Txt_Mode)
 	{
@@ -295,7 +296,7 @@ public:
 	* string 型はOpenMode によって内部実装が変わるため特殊化されています。
 	*/
 	template<class T>
-	void Write(std::vector<T> data) noexcept;
+	void Write(std::span<T> data) noexcept;
 
 	/**
 	* 指定型 T データサイズ分読み込みます。
@@ -363,7 +364,7 @@ inline void FileStream::Write(T* data, const size_t& size) noexcept
 }
 
 template<class T>
-inline void FileStream::Write(std::vector<T> data) noexcept
+inline void FileStream::Write(std::span<T> data) noexcept
 {
 	if (m_openMode != OpenMode::Write_Mode)
 		return;
@@ -374,7 +375,7 @@ inline void FileStream::Write(std::vector<T> data) noexcept
 }
 
 template<>
-inline void FileStream::Write(std::vector<std::string> data) noexcept
+inline void FileStream::Write(std::span<std::string> data) noexcept
 {
 	/** ファイルデータの先頭から一行ずつ書き込み */
 	if (m_openMode == OpenMode::Txt_Mode)

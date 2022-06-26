@@ -2,14 +2,11 @@
 * @file    D3D11VertexShader.cpp
 * @brief
 *
-* @date	   2022/04/29 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/25 2022年度初版
 */
 
 
 #include "D3D11Shader.h"
-#include "D3D11GrahicsDevice.h"
-#include "SubSystem/Log/DebugLog.h"
 
 bool D3D11VertexShader::Create(std::string_view shader, std::string_view entrypoint /* = "main" */, std::string_view target /* = "vs_5_0" */) noexcept
 {
@@ -20,7 +17,7 @@ bool D3D11VertexShader::Create(std::string_view shader, std::string_view entrypo
 	}
 
 	// コンピューターシェーダー生成
-	HRESULT hr = GetGraphicsDevice()->GetDevice()->CreateVertexShader(
+	HRESULT hr = GetDevice()->CreateVertexShader(
 		m_blob->GetBufferPointer(),
 		m_blob->GetBufferSize(),
 		nullptr,
@@ -36,5 +33,5 @@ bool D3D11VertexShader::Create(std::string_view shader, std::string_view entrypo
 
 void D3D11VertexShader::VSSet() const noexcept
 {
-	GetGraphicsDevice()->GetContext()->VSSetShader(m_vertexShader.Get(), nullptr, 0);
+	GetContext()->VSSetShader(m_vertexShader.Get(), nullptr, 0);
 }
