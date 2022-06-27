@@ -11,6 +11,7 @@
 
 class Camera : public IComponent
 {
+	SUB_CLASS(Camera)
 public:
 
 	void Initialize() override;

@@ -19,6 +19,9 @@ void World::LoadScene(std::string_view sceneName, bool isAsync /* = false */) no
 	auto camera = CreateAndAddGameObject();
 	camera.lock()->AddComponent("Camera");
 
+	auto directionalLight = CreateAndAddGameObject();
+	camera.lock()->AddComponent("Light");
+
 	auto obj = CreateAndAddGameObject();
 	obj.lock()->AddComponent("MeshRender");
 }

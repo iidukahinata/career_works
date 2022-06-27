@@ -340,6 +340,9 @@
     <ClCompile Include="Program\SubSystem\Scene\Component\Components\Light.cpp">
       <Filter>SubSystem\Scene\Component\Conponents</Filter>
     </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\LightMap.cpp">
+      <Filter>SubSystem\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\ThirdParty\FMOD\include\fmod.h">
@@ -644,6 +647,9 @@
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Scene\Component\Components\Light.h">
       <Filter>SubSystem\Scene\Component\Conponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\LightMap.h">
+      <Filter>SubSystem\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -9,6 +9,9 @@
 #include "ComponentFactory.h"
 #include "../Component/Components/Camera.h"
 #include "../Component/Components/RenderObject.h"
+#include "../Component/Components/Light.h"
+#include "../Component/Components/AudioListener.h"
+#include "../Component/Components/AudioSpeaker.h"
 
 #define CASE_CREATE_COMPONENT(CLASS, COMPONENT) case GET_HASH(CLASS): COMPONENT = std::make_shared<CLASS>(); break;
 
@@ -19,8 +22,11 @@ ComponentPtr ComponentFactory::Create(GameObject* gameObject, std::string_view n
 
     switch (type.Hash)
     {
-    CASE_CREATE_COMPONENT(Camera, component);
-    CASE_CREATE_COMPONENT(MeshRender, component);
+    CASE_CREATE_COMPONENT(Camera        , component);
+    CASE_CREATE_COMPONENT(MeshRender    , component);
+    CASE_CREATE_COMPONENT(Light         , component);
+    CASE_CREATE_COMPONENT(AudioListener , component);
+    CASE_CREATE_COMPONENT(AudioSpeaker  , component);
     default: break;
     }
 

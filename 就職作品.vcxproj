@@ -61,6 +61,7 @@
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12RootSignature.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Shader.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Texture.cpp" />
+    <ClCompile Include="Program\SubSystem\Renderer\LightMap.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\Renderer.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\TransformCBuffer.cpp" />
     <ClCompile Include="Program\SubSystem\Resource\ResourceLoader\ModelLoader\ModelLoader.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="Program\SubSystem\Renderer\Geometry\Cube.h" />
     <ClInclude Include="Program\SubSystem\Renderer\Geometry\Plane.h" />
     <ClInclude Include="Program\SubSystem\Renderer\Geometry\Vertex.h" />
+    <ClInclude Include="Program\SubSystem\Renderer\LightMap.h" />
     <ClInclude Include="Program\SubSystem\Renderer\Renderer.h" />
     <ClInclude Include="Program\SubSystem\Renderer\TransformCBuffer.h" />
     <ClInclude Include="Program\SubSystem\Resource\ResourceLoader\ModelLoader\ModelLoader.h" />

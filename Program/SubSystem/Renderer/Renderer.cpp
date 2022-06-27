@@ -26,6 +26,8 @@ bool Renderer::Initialize()
 
 	TransformCBuffer::Get().Init();
 
+	m_lightMap.Initialize();
+
 	MyGui::Get().Init();
 
 	return true;
@@ -46,7 +48,9 @@ void Renderer::Update() noexcept
 
 void Renderer::BeginFream()
 {
-	D3D11GrahicsDevice::Get().Clear(Math::Vector4(1.f, 0.f, 0.f, 1.f));
+	D3D11GrahicsDevice::Get().Clear(Math::Vector4(0.8f, 0.8f, 0.8f, 1.f));
+
+	m_lightMap.Update();
 }
 
 void Renderer::EndFream()
@@ -78,4 +82,9 @@ void Renderer::RemoveRenderObject(RenderObject* rederObject) noexcept
 			break;
 		}
 	}
+}
+
+LightMap& Renderer::GetLightMap()
+{
+	return m_lightMap;
 }

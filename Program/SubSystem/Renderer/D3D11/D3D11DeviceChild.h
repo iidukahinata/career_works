@@ -17,12 +17,6 @@ class D3D11DeviceChild
 {
 public:
 
-	D3D11DeviceChild() 
-	{
-		m_d3dDevice = D3D11GrahicsDevice::Get().GetDevice();
-		m_d3dContext = D3D11GrahicsDevice::Get().GetContext();
-	}
-
 	virtual ~D3D11DeviceChild() 
 	{
 
@@ -30,16 +24,11 @@ public:
 	
 	ID3D11Device* GetDevice() const
 	{
-		return m_d3dDevice;
+		return D3D11GrahicsDevice::Get().GetDevice();
 	}
 
 	ID3D11DeviceContext* GetContext() const
 	{
-	 	return m_d3dContext;
+	 	return D3D11GrahicsDevice::Get().GetContext();
 	}
-
-private:
-
-	ID3D11Device* m_d3dDevice;
-	ID3D11DeviceContext* m_d3dContext;
 };

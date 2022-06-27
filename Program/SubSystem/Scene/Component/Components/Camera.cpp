@@ -12,10 +12,6 @@
 
 void Camera::Initialize()
 {
-	TransformCBuffer::Get().Init();
-
-	GetTransform().SetPosition(Math::Vector3(0.f, 3.f, -10.f));
-
 	m_fov = DirectX::XMConvertToRadians(45.0f);
 	m_width = Window::Get().GetWindowWidth();
 	m_height = Window::Get().GetWindowHeight();
@@ -26,6 +22,9 @@ void Camera::Initialize()
 	// create matrix
 	CreateProjectionMatrix();
 	CreateOrthographicMatrix();
+
+	GetTransform().SetPosition(Math::Vector3(0.f, 3.f, -8.f));
+	GetTransform().LockAt(Math::Vector3::Zero);
 
 	TransformCBuffer::Get().SetProjection(GetProjectionMatrixXM());
 	TransformCBuffer::Get().SetView(GetViewMatrixXM());

@@ -2,23 +2,15 @@
 * @file		AudioSpeaker.h
 * @brief
 *
-* @date		2022/06/09 2022年度初版
-* @author	飯塚陽太
+* @date		2022/06/27 2022年度初版
 */
 #pragma once
 
 
 #include <fmod.hpp>
-#include "SubSystem/Core/Math/Vector3.h"
+#include "../IComponent.h"
 
-/**
-* AudioClip クラスの 3D 処理、play 時設定を管理処理するクラスです。
-* また 3D 処理を使用しないサウンドの場合は、AudioClip、Transform をセットする必要はありません。
-*
-* @note
-* 2022/05/09 時点ではこのクラスは ChannelGroup 等は未使用のため実装はしていない。
-*/
-class AudioSpeaker
+class AudioSpeaker : public IComponent
 {
 public:
 

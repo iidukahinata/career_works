@@ -8,10 +8,12 @@
 
 
 #include "../IComponent.h"
-#include "SubSystem/Resource/Resources/3DModel/Model.h"
+
+class Model;
 
 class RenderObject : public IComponent
 {
+	SUB_CLASS(RenderObject)
 public:
 
 	virtual void Initialize() override;
@@ -22,6 +24,7 @@ public:
 
 class MeshRender : public RenderObject
 {
+	SUB_CLASS(MeshRender)
 public:
 
 	void Initialize() override;

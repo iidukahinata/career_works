@@ -7,6 +7,7 @@
 #pragma once
 
 
+#include "LightMap.h"
 #include "SubSystem/Core/ISubsystem.h"
 #include "SubSystem/JobSystem/Sync/Job.h"
 
@@ -25,6 +26,8 @@ public:
 	void RegisterRenderObject(RenderObject* rederObject) noexcept;
 	void RemoveRenderObject(RenderObject* rederObject) noexcept;
 
+	LightMap& GetLightMap();
+
 private:
 
 	void Update() noexcept;
@@ -35,6 +38,8 @@ private:
 private:
 
 	Job m_job;
+
+	LightMap m_lightMap;
 
 	std::vector<RenderObject*> m_renderObjects;
 };

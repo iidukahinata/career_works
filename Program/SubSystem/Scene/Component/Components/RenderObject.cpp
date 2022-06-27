@@ -10,6 +10,7 @@
 #include "SubSystem/Renderer/Renderer.h"
 #include "SubSystem/Resource/ResourceManager.h"
 #include "SubSystem/Renderer/TransformCBuffer.h"
+#include "SubSystem/Resource/Resources/3DModel/Model.h"
 
 void RenderObject::Initialize()
 {
@@ -27,7 +28,6 @@ void MeshRender::Initialize()
 
 	// デバッグ用仮素材
 	SetModel("Renault.model");
-	GetTransform().SetPosition(Math::Vector3(0, 0.5, 0));
 	GetTransform().SetScale(Math::Vector3(0.01f));
 }
 

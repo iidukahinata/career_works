@@ -86,7 +86,7 @@ void Engine::Shutdown()
 bool Engine::StartUpScreen(HINSTANCE hInstance) noexcept
 {
 	// 第４引数 : フルスクリーンモード指定
-	if (!Window::Get().CreateWindowClass(hInstance, 640, 480, "Test", false))
+	if (!Window::Get().CreateWindowClass(hInstance, 1280, 720, "Test", false))
 	{
 		return false;
 	}
