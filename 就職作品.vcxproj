@@ -64,6 +64,7 @@
     <ClCompile Include="Program\SubSystem\Renderer\Renderer.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\TransformCBuffer.cpp" />
     <ClCompile Include="Program\SubSystem\Resource\ResourceLoader\ModelLoader\ModelLoader.cpp" />
+    <ClCompile Include="Program\SubSystem\Resource\ResourceLoader\TextureLoader\TextureLoader.cpp" />
     <ClCompile Include="Program\SubSystem\Resource\ResourceManager.cpp" />
     <ClCompile Include="Program\SubSystem\Resource\Resources\3DModel\Mesh.cpp" />
     <ClCompile Include="Program\SubSystem\Resource\Resources\3DModel\Material.cpp" />
@@ -73,6 +74,8 @@
     <ClCompile Include="Program\SubSystem\Resource\Resources\IResource.cpp" />
     <ClCompile Include="Program\SubSystem\Scene\Component\Components\AudioListener.cpp" />
     <ClCompile Include="Program\SubSystem\Scene\Component\Components\AudioSpeaker.cpp" />
+    <ClCompile Include="Program\SubSystem\Scene\Component\Components\Camera.cpp" />
+    <ClCompile Include="Program\SubSystem\Scene\Component\Components\Light.cpp" />
     <ClCompile Include="Program\SubSystem\Scene\Component\Components\RenderObject.cpp" />
     <ClCompile Include="Program\SubSystem\Scene\Component\IComponent.cpp" />
     <ClCompile Include="Program\SubSystem\Scene\Component\Transform.cpp" />
@@ -158,6 +161,7 @@
     <ClInclude Include="Program\SubSystem\Renderer\Renderer.h" />
     <ClInclude Include="Program\SubSystem\Renderer\TransformCBuffer.h" />
     <ClInclude Include="Program\SubSystem\Resource\ResourceLoader\ModelLoader\ModelLoader.h" />
+    <ClInclude Include="Program\SubSystem\Resource\ResourceLoader\TextureLoader\TextureLoader.h" />
     <ClInclude Include="Program\SubSystem\Resource\ResourceManager.h" />
     <ClInclude Include="Program\SubSystem\Resource\Resources\3DModel\Mesh.h" />
     <ClInclude Include="Program\SubSystem\Resource\Resources\3DModel\Material.h" />
@@ -167,6 +171,8 @@
     <ClInclude Include="Program\SubSystem\Resource\Resources\IResource.h" />
     <ClInclude Include="Program\SubSystem\Scene\Component\Components\AudioListener.h" />
     <ClInclude Include="Program\SubSystem\Scene\Component\Components\AudioSpeaker.h" />
+    <ClInclude Include="Program\SubSystem\Scene\Component\Components\Camera.h" />
+    <ClInclude Include="Program\SubSystem\Scene\Component\Components\Light.h" />
     <ClInclude Include="Program\SubSystem\Scene\Component\Components\RenderObject.h" />
     <ClInclude Include="Program\SubSystem\Scene\Component\IComponent.h" />
     <ClInclude Include="Program\SubSystem\Scene\Component\Transform.h" />
@@ -420,6 +426,9 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>

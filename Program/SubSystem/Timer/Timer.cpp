@@ -7,7 +7,6 @@
 
 
 #include "Timer.h"
-#include "SubSystem/Core/Context.h"
 
 bool Timer::Initialize()
 {

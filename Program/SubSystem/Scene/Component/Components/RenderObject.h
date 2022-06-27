@@ -2,26 +2,34 @@
 * @file    RenderObject.h
 * @brief
 *
-* @date	   2022/06/26 2022年度初版
+* @date	   2022/06/27 2022年度初版
 */
 #pragma once
 
 
 #include "../IComponent.h"
-#include "SubSystem/Resource/Resources/3DModel/Mesh.h"
-#include "SubSystem/Resource/Resources/3DModel/Material.h"
+#include "SubSystem/Resource/Resources/3DModel/Model.h"
 
 class RenderObject : public IComponent
 {
 public:
 
-	void Initialize() override;
-	void Remove() override;
+	virtual void Initialize() override;
+	virtual void Remove() override;
+
+	virtual void Render() = 0;
 };
 
 class MeshRender : public RenderObject
 {
 public:
 
+	void Initialize() override;
+
+	void SetModel(std::string_view name) noexcept;
+	void Render() override;
+
 private:
+
+	Model* m_model;
 };

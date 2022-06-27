@@ -30,7 +30,7 @@ public:
 	template<class T>
 	bool IsSameClass() const noexcept;
 
-	const Transform& GetTransform() const noexcept;
+	Transform& GetTransform() const noexcept;
 
 	GameObject* GetOwner() const noexcept;
 	World* GetWorld() const noexcept;

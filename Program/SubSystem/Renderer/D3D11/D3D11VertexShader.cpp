@@ -21,7 +21,7 @@ bool D3D11VertexShader::Create(std::string_view shader, std::string_view entrypo
 		m_blob->GetBufferPointer(),
 		m_blob->GetBufferSize(),
 		nullptr,
-		m_vertexShader.GetAddressOf());
+		m_vertexShader.ReleaseAndGetAddressOf());
 
 	if (FAILED(hr))
 	{

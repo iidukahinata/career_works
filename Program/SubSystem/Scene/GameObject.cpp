@@ -16,6 +16,8 @@ IComponent* GameObject::AddComponent(std::string_view name) noexcept
 
 	if (auto component = ComponentFactory::Create(this, name))
 	{
+		component->Initialize();
+
 		auto hash = component->GetTypeData().Hash;
 		m_components[hash] = component;
 		result = component.get();
@@ -30,6 +32,7 @@ void GameObject::RemoveComponent(IComponent* component) noexcept
 	{
 		if (it->second.get() == component)
 		{
+			component->Remove();
 			m_components.erase(it);
 			break;
 		}
@@ -71,7 +74,7 @@ std::string_view GameObject::GetName() const noexcept
 }
 
 
-const Transform& GameObject::GetTransform() const noexcept
+Transform& GameObject::GetTransform() const noexcept
 {
 	return m_transform;
 }

@@ -7,6 +7,7 @@
 
 
 #include "IResource.h"
+#include "SubSystem/Core/Context.h"
 
 void IResource::SaveToFile(std::string_view filePath)
 {
@@ -34,22 +35,12 @@ bool IResource::Load(std::string_view filePath) noexcept
 	return false;
 }
 
-std::string_view IResource::GetName() const noexcept
+const std::string& IResource::GetName() const noexcept
 {
 	return m_filePath;
 }
 
-void IResource::AddRef() noexcept
+Context* IResource::GetContext() const noexcept
 {
-	++m_referenceCount;
-}
-
-void IResource::SubRef() noexcept
-{
-	--m_referenceCount;
-}
-
-size_t IResource::GetRef() const noexcept
-{
-	return m_referenceCount;
+	return &Context::Get();
 }

@@ -1382,3 +1382,8 @@ FodyWeavers.xsd
 /assets/Imqube/UI/GoStageSelect.bin
 /assets/Imqube/UI/GoNextStage.bin
 /assets/Imqube/Stage/1_2.bin
+/assets/Resource/Texture/Renault_SmoothMetallic.texture
+/assets/Resource/Texture/Renault_Normal.texture
+/assets/Resource/Texture/Renault_BaseColor.texture
+/assets/Resource/Model/Renault.model
+/assets/Resource/Material/Renault.material

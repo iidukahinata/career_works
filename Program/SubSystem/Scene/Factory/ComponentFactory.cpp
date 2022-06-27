@@ -2,11 +2,13 @@
 * @file    ComponentFactory.cpp
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/06/27 2022年度初版
 */
 
 
 #include "ComponentFactory.h"
+#include "../Component/Components/Camera.h"
+#include "../Component/Components/RenderObject.h"
 
 #define CASE_CREATE_COMPONENT(CLASS, COMPONENT) case GET_HASH(CLASS): COMPONENT = std::make_shared<CLASS>(); break;
 
@@ -17,9 +19,15 @@ ComponentPtr ComponentFactory::Create(GameObject* gameObject, std::string_view n
 
     switch (type.Hash)
     {
+    CASE_CREATE_COMPONENT(Camera, component);
+    CASE_CREATE_COMPONENT(MeshRender, component);
     default: break;
     }
 
-    component->m_owner = gameObject;
+    if (component)
+    {
+        component->m_owner = gameObject;
+    }
+
     return component;
 }

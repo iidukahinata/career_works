@@ -26,7 +26,7 @@ bool D3D11InputLayout::Create(D3D11_INPUT_ELEMENT_DESC* layout, UINT layoutSize,
 		layoutSize,
 		blob->GetBufferPointer(),
 		blob->GetBufferSize(),
-		m_inputLayout.GetAddressOf());
+		m_inputLayout.ReleaseAndGetAddressOf());
 
 	if (FAILED(hr)) {
 		LOG_ERROR("InputLayoutì¬‚É¸”sB");

@@ -10,12 +10,17 @@
 
 bool World::Initialize()
 {
+	LoadScene("");
 	return true;
 }
 
 void World::LoadScene(std::string_view sceneName, bool isAsync /* = false */) noexcept
 {
+	auto camera = CreateAndAddGameObject();
+	camera.lock()->AddComponent("Camera");
 
+	auto obj = CreateAndAddGameObject();
+	obj.lock()->AddComponent("MeshRender");
 }
 
 void World::SaveScene(std::string_view sceneName) noexcept

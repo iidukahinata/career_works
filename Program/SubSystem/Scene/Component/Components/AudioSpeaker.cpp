@@ -16,10 +16,6 @@
 
 AudioSpeaker::~AudioSpeaker()
 {
-	if (m_audioClip)
-	{
-		m_audioClip->SubRef();
-	}
 }
 
 void AudioSpeaker::Update() noexcept

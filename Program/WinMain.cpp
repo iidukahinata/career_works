@@ -9,23 +9,23 @@
 #include <memory>
 #include "Subsystem/Core/Engine.h"
 
-std::unique_ptr<Engine> engine;
+std::unique_ptr<Engine> g_engine;
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	engine = std::make_unique<Engine>();
+	g_engine = std::make_unique<Engine>();
 
 	struct AutoEngineFinish
 	{
-		~AutoEngineFinish() { engine->Shutdown(); }
+		~AutoEngineFinish() { g_engine->Shutdown(); }
 	} autoEngineFinish;
 
-	if (!engine->Initialize(hInstance))
+	if (!g_engine->Initialize(hInstance))
 	{
 		return -1;
 	}
 	
-	long ret = engine->MainLoop();
+	long ret = g_engine->MainLoop();
 
 	return ret;
 }

@@ -10,6 +10,8 @@
 #include "SubSystem/Core/ISubsystem.h"
 #include "SubSystem/JobSystem/Sync/Job.h"
 
+class RenderObject;
+
 class Renderer : public ISubsystem
 {
 	SUB_CLASS(Renderer)
@@ -19,6 +21,9 @@ public:
 
 	bool Initialize() override;
 	void Shutdown() override;
+
+	void RegisterRenderObject(RenderObject* rederObject) noexcept;
+	void RemoveRenderObject(RenderObject* rederObject) noexcept;
 
 private:
 
@@ -30,4 +35,6 @@ private:
 private:
 
 	Job m_job;
+
+	std::vector<RenderObject*> m_renderObjects;
 };

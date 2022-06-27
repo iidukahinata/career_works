@@ -11,7 +11,6 @@
 #pragma once
 
 
-#include <span>
 #include <fstream>
 #include <vector>
 #include <string>
@@ -65,7 +64,7 @@ public:
 	* string 型はOpenMode によって内部実装が変わるため特殊化されています。
 	*/
 	template<class T>
-	void Write(std::span<T> data) noexcept;
+	void Write(std::vector<T> data) noexcept;
 
 	/**
 	* 指定型 T データサイズ分読み込みます。
@@ -133,7 +132,7 @@ inline void FileStream::Write(T* data, const size_t& size) noexcept
 }
 
 template<class T>
-inline void FileStream::Write(std::span<T> data) noexcept
+inline void FileStream::Write(std::vector<T> data) noexcept
 {
 	if (m_openMode != OpenMode::Write_Mode)
 		return;
@@ -144,7 +143,7 @@ inline void FileStream::Write(std::span<T> data) noexcept
 }
 
 template<>
-inline void FileStream::Write<std::string>(std::span<std::string> data) noexcept
+inline void FileStream::Write<std::string>(std::vector<std::string> data) noexcept
 {
 	if (m_openMode == OpenMode::Txt_Mode)
 	{
@@ -296,7 +295,7 @@ public:
 	* string 型はOpenMode によって内部実装が変わるため特殊化されています。
 	*/
 	template<class T>
-	void Write(std::span<T> data) noexcept;
+	void Write(std::vector<T> data) noexcept;
 
 	/**
 	* 指定型 T データサイズ分読み込みます。
@@ -364,7 +363,7 @@ inline void FileStream::Write(T* data, const size_t& size) noexcept
 }
 
 template<class T>
-inline void FileStream::Write(std::span<T> data) noexcept
+inline void FileStream::Write(std::vector<T> data) noexcept
 {
 	if (m_openMode != OpenMode::Write_Mode)
 		return;
@@ -375,7 +374,7 @@ inline void FileStream::Write(std::span<T> data) noexcept
 }
 
 template<>
-inline void FileStream::Write(std::span<std::string> data) noexcept
+inline void FileStream::Write(std::vector<std::string> data) noexcept
 {
 	/** ファイルデータの先頭から一行ずつ書き込み */
 	if (m_openMode == OpenMode::Txt_Mode)

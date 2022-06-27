@@ -2,12 +2,11 @@
 * @file    Engine.cpp
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/06/26 2022年度初版
 */
 
 
 #include "Engine.h"
-#include "Context.h"
 #include "Common/ProjectSettings.h"
 #include "Event/EventManager.h"
 #include "SubSystem/Audio/Audio.h"
@@ -53,7 +52,7 @@ long Engine::MainLoop()
 {
 	Window& window = Window::Get();
 	auto& jobSystem = JobSystem::Get();
-	auto timer = Context::Get()->GetSubsystem<Timer>();
+	auto timer = Context::Get().GetSubsystem<Timer>();
 
 	while (window.Tick())
 	{
@@ -81,7 +80,7 @@ void Engine::Shutdown()
 
 	UnregisterClass("windowClass", m_hInstance);
 
-	Context::Get()->Release();
+	Context::Get().Release();
 }
 
 bool Engine::StartUpScreen(HINSTANCE hInstance) noexcept
@@ -103,45 +102,46 @@ bool Engine::StartUpScreen(HINSTANCE hInstance) noexcept
 
 void Engine::RegisterSubsystemsToContainer() noexcept
 {
-	auto context = Context::Get();
-	context->RegisterSubsystem<Timer>(std::make_unique<Timer>());
-	context->RegisterSubsystem<Input>(std::make_unique<Input>());
-	context->RegisterSubsystem<Audio>(std::make_unique<Audio>());
-	context->RegisterSubsystem<ResourceManager>(std::make_unique<ResourceManager>());
-	context->RegisterSubsystem<World>(std::make_unique<World>());
-	context->RegisterSubsystem<Renderer>(std::make_unique<Renderer>());
+	auto& context = Context::Get();
+
+	context.RegisterSubsystem<Timer>(std::make_unique<Timer>());
+	context.RegisterSubsystem<Input>(std::make_unique<Input>());
+	context.RegisterSubsystem<Audio>(std::make_unique<Audio>());
+	context.RegisterSubsystem<ResourceManager>(std::make_unique<ResourceManager>());
+	context.RegisterSubsystem<World>(std::make_unique<World>());
+	context.RegisterSubsystem<Renderer>(std::make_unique<Renderer>());
 }
 
 bool Engine::InitializeSubsystems() noexcept
 {
-	auto context = Context::Get();
+	auto& context = Context::Get();
 
-	if (!context->GetSubsystem<Timer>()->Initialize())
+	if (!context.GetSubsystem<Timer>()->Initialize())
 	{
 		return false;
 	}
 	
-	if (!context->GetSubsystem<Input>()->Initialize())
+	if (!context.GetSubsystem<Input>()->Initialize())
 	{
 		return false;
 	}
 	
-	if (!context->GetSubsystem<Audio>()->Initialize())
+	if (!context.GetSubsystem<Audio>()->Initialize())
 	{
 		return false;
 	}
 
-	if (!context->GetSubsystem<ResourceManager>()->Initialize())
+	if (!context.GetSubsystem<ResourceManager>()->Initialize())
 	{
 		return false;
 	}
 	 	 
-	if (!context->GetSubsystem<Renderer>()->Initialize())
+	if (!context.GetSubsystem<Renderer>()->Initialize())
 	{
 		return false;
 	}
 	 
-	if (!context->GetSubsystem<World>()->Initialize())
+	if (!context.GetSubsystem<World>()->Initialize())
 	{
 		return false;
 	}

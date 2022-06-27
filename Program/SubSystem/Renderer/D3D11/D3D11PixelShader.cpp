@@ -25,7 +25,7 @@ bool D3D11PixelShader::Create(
 		m_blob->GetBufferPointer(),
 		m_blob->GetBufferSize(),
 		nullptr,
-		m_pixelShader.GetAddressOf());
+		m_pixelShader.ReleaseAndGetAddressOf());
 
 	if (FAILED(hr))
 	{

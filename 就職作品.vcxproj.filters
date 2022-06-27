@@ -331,6 +331,15 @@
     <ClCompile Include="Program\SubSystem\Core\ISubsystem.cpp">
       <Filter>SubSystem\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Program\SubSystem\Resource\ResourceLoader\TextureLoader\TextureLoader.cpp">
+      <Filter>SubSystem\Resource\ResourceLoader\TextureLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Scene\Component\Components\Camera.cpp">
+      <Filter>SubSystem\Scene\Component\Conponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Scene\Component\Components\Light.cpp">
+      <Filter>SubSystem\Scene\Component\Conponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\ThirdParty\FMOD\include\fmod.h">
@@ -626,6 +635,15 @@
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Core\IO\FileSystem.h">
       <Filter>SubSystem\Core\I/O</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Resource\ResourceLoader\TextureLoader\TextureLoader.h">
+      <Filter>SubSystem\Resource\ResourceLoader\TextureLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Scene\Component\Components\Camera.h">
+      <Filter>SubSystem\Scene\Component\Conponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Scene\Component\Components\Light.h">
+      <Filter>SubSystem\Scene\Component\Conponents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

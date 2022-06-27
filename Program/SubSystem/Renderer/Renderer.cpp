@@ -12,6 +12,7 @@
 #include "SubSystem/Gui/MyGui.h"
 #include "ThirdParty/imgui/imgui.h"
 #include "SubSystem/Renderer/D3D11/D3D11GrahicsDevice.h"
+#include "SubSystem/Scene/Component/Components/RenderObject.h"
 
 Renderer::Renderer()
 {
@@ -35,13 +36,17 @@ void Renderer::Update() noexcept
 	BeginFream();
 
 	// ŽÀÛ‚Ì•`‰æˆ—‹Lq
+	for (auto renderObject : m_renderObjects)
+	{
+		renderObject->Render();
+	}
 
 	EndFream();
 }
 
 void Renderer::BeginFream()
 {
-	D3D11GrahicsDevice::Get().Clear(Math::Vector4(0.f, 0.f, 0.f, 1.f));
+	D3D11GrahicsDevice::Get().Clear(Math::Vector4(1.f, 0.f, 0.f, 1.f));
 }
 
 void Renderer::EndFream()
@@ -56,4 +61,21 @@ void Renderer::Shutdown()
 	JobSystem::Get().RemoveJob(&m_job);
 
 	MyGui::Get().Exit();
+}
+
+void Renderer::RegisterRenderObject(RenderObject* rederObject) noexcept
+{
+	m_renderObjects.emplace_back(rederObject);
+}
+
+void Renderer::RemoveRenderObject(RenderObject* rederObject) noexcept
+{
+	for (auto it = m_renderObjects.begin(); it != m_renderObjects.end(); it++)
+	{
+		if (*it == rederObject)
+		{
+			m_renderObjects.erase(it);
+			break;
+		}
+	}
 }

@@ -2,8 +2,7 @@
 * @file		ModelLoader.cpp
 * @brief
 *
-* @date		2022/05/06 2022年度初版
-* @author	飯塚陽太
+* @date		2022/06/27 2022年度初版
 */
 
 
@@ -11,25 +10,34 @@
 #include <assimp/postprocess.h>
 #include <assimp/cimport.h>
 #include <assimp/scene.h>
-#include <filesystem>
 #include "ModelLoader.h"
-#include "SubSystem/Resource/ResourceManager.h" 
+#include "SubSystem/Core/Context.h"
+#include "SubSystem/Core/IO/FileSystem.h"
+#include "SubSystem/Resource/ResourceManager.h"
 
-Model ModelLoader::Load(std::string_view filePath)
+bool ModelLoader::Load(Model* model, std::string_view filePath)
 {
-	m_aiScene = aiImportFile(
-		filePath.data(),
-		aiProcess_ConvertToLeftHanded |
-		aiProcessPreset_TargetRealtime_MaxQuality);
+	m_model = model;
+
+	m_aiScene = aiImportFile(filePath.data(), aiProcess_ConvertToLeftHanded | aiProcessPreset_TargetRealtime_MaxQuality);
+	if (!m_aiScene)
+	{
+		return false;
+	}
 
 	ProcessNode(m_aiScene->mRootNode);
+	Release();
 
-	return m_model;
+	return true;
 }
 
 void ModelLoader::Release() noexcept
 {
-	aiReleaseImport(m_aiScene);
+	if (m_aiScene)
+	{
+		aiReleaseImport(m_aiScene);
+		m_aiScene = nullptr;
+	}
 }
 
 void ModelLoader::ProcessNode(aiNode* node)
@@ -73,11 +81,6 @@ void ModelLoader::LoadMesh(aiMesh* aiMesh)
 			vertices[i].tex.x = aiMesh->mTextureCoords[0][i].x;
 			vertices[i].tex.y = aiMesh->mTextureCoords[0][i].y;
 		}
-	}
-
-	if (aiMesh->mMaterialIndex >= 0)
-	{
-		LoadMaterial(m_aiScene->mMaterials[aiMesh->mMaterialIndex]);
 	}
 
 	Math::Vector3 cp[3][3];
@@ -126,20 +129,30 @@ void ModelLoader::LoadMesh(aiMesh* aiMesh)
 		}
 	}
 
-	m_model.AddMesh(std::move(vertices), std::move(indices));
+	if (aiMesh->mMaterialIndex >= 0)
+	{
+		LoadMaterial(m_aiScene->mMaterials[aiMesh->mMaterialIndex]);
+	}
+
+	m_model->AddMesh(std::move(vertices), std::move(indices));
 }
 
 void ModelLoader::LoadMaterial(aiMaterial* aiMaterial)
 {
-	std::vector<Texture*> textures;
+	auto resourceManager = Context::Get().GetSubsystem<ResourceManager>();
+	Material* material = resourceManager->Load<Material>(aiMaterial->GetName().C_Str());
 
-	std::vector<Texture*> diffuseMaps = LoadTextures(aiMaterial);
-
-	textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
+	for (auto textures = LoadTextures(aiMaterial); auto texture : textures)
+	{
+		material->AddTexture(texture);
+	}
+	m_model->AddMaterial(material);
 }
 
 std::vector<Texture*> ModelLoader::LoadTextures(aiMaterial* aiMaterial)
 {
+	auto resourceManager = Context::Get().GetSubsystem<ResourceManager>();
+
 	std::vector<Texture*> textures;
 	// マテリアルからテクスチャ個数を取得し(基本は1個)ループする
 	for (unsigned int i = 0; i < aiMaterial->GetTextureCount(aiTextureType_DIFFUSE); ++i)
@@ -148,16 +161,11 @@ std::vector<Texture*> ModelLoader::LoadTextures(aiMaterial* aiMaterial)
 		// マテリアルからｉ番目のテクスチャファイル名を取得する
 		aiMaterial->GetTexture(aiTextureType_DIFFUSE, i, &str);
 
-		// まだ読み込まれていなかった場合
-		//if (!ResourceManager::Get().GetResourceByName<Texture>(str.C_Str()))
-		//{
-		//	std::string_view path(str.C_Str());
-		//
-		//	std::string filePath(m_textureDirectory);
-		//	filePath += path.substr(path.find_last_of("\\/"), path.length() - 1);
-		//
-		//	textures.push_back(ResourceManager::Get().Load<Texture>(filePath));
-		//}
+		std::string_view path(str.C_Str());
+		path = path.substr(path.find_last_of("\\/"), path.length() - 1);
+		auto filePath = FileSystem::Canonical(path);
+
+		textures.push_back(resourceManager->Load<Texture>(filePath));
 	}
 
 	return textures;

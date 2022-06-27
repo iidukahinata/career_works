@@ -11,6 +11,8 @@
 #include <vector>
 #include "../IResource.h"
 #include "SubSystem/Renderer/Geometry/Vertex.h"
+#include "SubSystem/Renderer/D3D11/D3D11IndexBuffer.h"
+#include "SubSystem/Renderer/D3D11/D3D11VertexBuffer.h"
 
 class Mesh : public IResource
 {
@@ -20,15 +22,11 @@ public:
 	Mesh(std::vector<VertexBump3D>&& vertices, std::vector<uint32_t>&& indices);
 	Mesh(const std::vector<VertexBump3D>& vertices, const std::vector<uint32_t>& indices);
 
-	/** 独自モデルデータとして保存させる。 */
-	virtual void SaveToFile(std::string_view filePath) override;
-
-	/** 独自モデルデータを読み込みする。 */
-	virtual bool LoadFromFile(std::string_view filePath) override;
-
 	/** アクセス */
-	std::span<VertexBump3D> GetVertices() noexcept;
-	std::span<uint32_t> GetIndices() noexcept;
+	const std::vector<VertexBump3D>& GetVertices() noexcept;
+	const std::vector<uint32_t>& GetIndices() noexcept;
+
+	void Render() const noexcept;
 
 protected:
 
@@ -36,6 +34,13 @@ protected:
 
 private:
 
+	bool SetUp() noexcept;
+
+private:
+
 	std::vector<VertexBump3D> m_vertices;
 	std::vector<uint32_t> m_indices;
+
+	D3D11VertexBuffer<VertexBump3D> m_vertexBuffer;
+	D3D11IndexBuffer m_indexBuffer;
 };

@@ -9,7 +9,9 @@
 
 #include <map>
 #include <memory>
-#include "ISubsystem.h"
+#include "SubSystem/Core/ISubsystem.h"
+
+class ISubsystem;
 
 class Context
 {
@@ -17,10 +19,10 @@ class Context
 	COPY_PROHIBITED(Context)
 public:
 
-	static Context* Get()
+	static Context& Get()
 	{
 		static Context instance;
-		return &instance;
+		return instance;
 	}
 
 	void Release();

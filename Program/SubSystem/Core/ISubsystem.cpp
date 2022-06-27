@@ -11,5 +11,5 @@
 
 Context* ISubsystem::GetContext() const noexcept
 {
-	return Context::Get();
+	return &Context::Get();
 }

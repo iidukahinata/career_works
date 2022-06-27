@@ -2,8 +2,7 @@
 * @file		ModelLoader.h
 * @brief
 *
-* @date		2022/05/06 2022年度初版
-* @author	飯塚陽太
+* @date		2022/06/26 2022年度初版
 */
 #pragma once
 
@@ -15,7 +14,7 @@ class ModelLoader
 {
 public:
 
-	Model Load(std::string_view filePath);
+	bool Load(Model* model, std::string_view filePath);
 
 private:
 
@@ -31,7 +30,5 @@ private:
 
 	const aiScene* m_aiScene = nullptr;
 
-	Model m_model;
-
-	std::string m_textureDirectory;
+	Model* m_model;
 };

@@ -8,22 +8,31 @@
 
 
 #include <string_view>
+#include "SubSystem/Core/Context.h"
 
-/**
-* このクラスではデータ競合を引き起こさない。
-* 抽象クラスとして特殊実装ではあるが、並列でのアクセスに対応出来るよう排他制御を行う。
-* また、派生先で mutex のコピー禁止の影響を無くすために代入演算子をオーバーロードしている。
-*/
+class RefCounter
+{
+public:
+	void AddRef() noexcept { ++m_referenceCount; }
+	void Release() noexcept { --m_referenceCount; }
+	size_t GetRef() const noexcept { return m_referenceCount; }
+
+private:
+
+	// * 参照カウントで解放等を行うための変数。派生先ではなく使用者側でカウントする必要がある。
+	size_t m_referenceCount = 0;
+};
+
 class IResource
 {
 public:
 
 	virtual ~IResource() {}
 
-	/** 独自モデルデータとして保存させる。 */
+	/** 独自モデルデータとして保存させる。*/
 	virtual void SaveToFile(std::string_view filePath);
 
-	/** 独自モデルデータを読み込みする。 */
+	/** 独自モデルデータを読み込みする。*/
 	virtual bool LoadFromFile(std::string_view filePath);
 
 	/**
@@ -32,11 +41,9 @@ public:
 	*/
 	bool Load(std::string_view filePath) noexcept;
 
-	std::string_view GetName() const noexcept;
+	const std::string& GetName() const noexcept;
 
-	void AddRef() noexcept;
-	void SubRef() noexcept;
-	size_t GetRef() const noexcept;
+	Context* GetContext() const noexcept;
 
 protected:
 
@@ -50,7 +57,4 @@ private:
 
 	// * 同じリソースかをリソース名から判断するため
 	std::string m_filePath;
-
-	// * 参照カウントで解放等を行うための変数。派生先ではなく使用者側でカウントする必要がある。
-	size_t m_referenceCount = 0;
 };
