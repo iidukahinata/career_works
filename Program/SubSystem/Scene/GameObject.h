@@ -2,7 +2,7 @@
 * @file    GameObject.h
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/06/29 2022年度初版
 */
 #pragma once
 
@@ -14,6 +14,8 @@
 
 class GameObject
 {
+	CLASS_DATA(GameObject)
+
 	friend struct GameObjectFactory;
 public:
 
@@ -30,9 +32,11 @@ public:
 	/** 指定名コンポーネントを保持する場合、そのアドレスを返す。*/
 	IComponent* FindComponent(std::string_view name) const noexcept;
 
+	void Active(bool active) noexcept;
+
 	/** 各GameObject識別用に使用。*/
 	void SetName(std::string_view name) noexcept;
-	std::string_view GetName() const noexcept;
+	const std::string& GetName() const noexcept;
 
 	/** Worldクラスで以外で使用されると、場合によってはScene終了時までメモリが解放されず残り続けます。*/
 	void SetID(uint32_t id) noexcept;
@@ -45,14 +49,14 @@ public:
 
 private:
 
-	/* 所属ワールドクラスを保持。*/
+	// * 所属ワールドクラスを保持。
 	World* m_owner;
 
 	// * WorldクラスでのID値
 	uint32_t m_id;
 
-	// * Worldクラスで探索時等に使用される
-	std::string_view m_name;
+	// * Worldクラスで探索時等に使用される。
+	std::string m_name;
 
 	mutable Transform m_transform;
 
@@ -63,12 +67,5 @@ private:
 template<class T>
 FORCEINLINE T* GameObject::GetComponent()
 {
-	for (const auto& component : m_components)
-	{
-		if (component.second->IsSameClass<T>())
-		{
-			return dynamic_cast<T*>(component.second.get());
-		}
-	}
-	return nullptr;
+	return dynamic_cast<T*>(FindComponent(T::TypeData.Name));
 }

@@ -2,30 +2,37 @@
 * @file    AudioListener.cpp
 * @brief
 *
-* @date	   2022/06/27 2022年度初版
+* @date	   2022/06/29 2022年度初版
 */
 
 
 #include "AudioListener.h"
+#include "SubSystem/Core/Context.h"
+#include "SubSystem/Audio/Audio.h"
 
-AudioListener::~AudioListener()
+void AudioListener::Initialize()
 {
+	m_audio = GetContext()->GetSubsystem<Audio>();
 
+	RegisterToAudioSystem();
 }
 
-FMOD_VECTOR AudioListener::GetPosition() const noexcept
+void AudioListener::Remove()
 {
-	return FMOD_VECTOR();
+	UnRegisterFromAudioSystem();
 }
 
-FMOD_VECTOR AudioListener::GetForward() const noexcept
+void AudioListener::Active(bool active)
 {
-	return FMOD_VECTOR();
-}
-
-FMOD_VECTOR AudioListener::GetUp() const noexcept
-{
-	return FMOD_VECTOR();
+	IComponent::Active(active);
+	if (active)
+	{
+		RegisterToAudioSystem();
+	}
+	else
+	{
+		UnRegisterFromAudioSystem();
+	}
 }
 
 void AudioListener::SetVelocity(const Math::Vector3& velocity) noexcept
@@ -33,7 +40,17 @@ void AudioListener::SetVelocity(const Math::Vector3& velocity) noexcept
 	m_velocity = velocity;
 }
 
-FMOD_VECTOR AudioListener::GetVelocity() const noexcept
+const Math::Vector3& AudioListener::GetVelocity() const noexcept
 {
-	return FMOD_VECTOR(m_velocity.x, m_velocity.y, m_velocity.z);
+	return m_velocity;
+}
+
+void AudioListener::RegisterToAudioSystem()
+{
+	m_audio->SetAudioListener(this);
+}
+
+void AudioListener::UnRegisterFromAudioSystem()
+{
+	m_audio->SetAudioListener(nullptr);
 }

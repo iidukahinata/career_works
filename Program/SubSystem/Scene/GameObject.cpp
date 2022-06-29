@@ -2,7 +2,7 @@
 * @file    GameObject.cpp
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/06/29 2022年度初版
 */
 
 
@@ -52,6 +52,11 @@ IComponent* GameObject::FindComponent(std::string_view name) const noexcept
 	return nullptr;
 }
 
+void GameObject::Active(bool active) noexcept
+{
+
+}
+
 uint32_t GameObject::GetID() const noexcept
 {
 	return m_id;
@@ -68,7 +73,7 @@ void GameObject::SetName(std::string_view name) noexcept
 	m_name = name;
 }
 
-std::string_view GameObject::GetName() const noexcept
+const std::string& GameObject::GetName() const noexcept
 {
 	return m_name;
 }

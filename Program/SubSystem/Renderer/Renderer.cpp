@@ -2,11 +2,12 @@
 * @file	   Renderer.h
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/06/29 2022年度初版
 */
 
 
 #include "Renderer.h"
+#include "LightMap.h"
 #include "SubSystem/JobSystem/Sync/JobSystem.h"
 #include "SubSystem/Renderer/TransformCBuffer.h"
 #include "SubSystem/Gui/MyGui.h"
@@ -16,8 +17,8 @@
 
 Renderer::Renderer()
 {
-	m_job.SetFunction([this](double) { Update(); });
-	JobSystem::Get().RegisterJob(&m_job, FunctionType::Render);
+	m_job.SetFunction([this](double) { Update(); }, FunctionType::Render);
+	JobSystem::Get().RegisterJob(&m_job);
 }
 
 bool Renderer::Initialize()
@@ -26,7 +27,8 @@ bool Renderer::Initialize()
 
 	TransformCBuffer::Get().Init();
 
-	m_lightMap.Initialize();
+	m_lightMap = std::make_unique<LightMap>();
+	m_lightMap->Initialize();
 
 	MyGui::Get().Init();
 
@@ -50,7 +52,7 @@ void Renderer::BeginFream()
 {
 	D3D11GrahicsDevice::Get().Clear(Math::Vector4(0.8f, 0.8f, 0.8f, 1.f));
 
-	m_lightMap.Update();
+	m_lightMap->Update();
 }
 
 void Renderer::EndFream()
@@ -84,7 +86,12 @@ void Renderer::RemoveRenderObject(RenderObject* rederObject) noexcept
 	}
 }
 
-LightMap& Renderer::GetLightMap()
+void Renderer::AddLight(Light* light) noexcept
 {
-	return m_lightMap;
+	m_lightMap->AddLight(light);
+}
+
+void Renderer::RemoveLight(Light* light) noexcept
+{
+	m_lightMap->RemoveLight(light);
 }

@@ -2,7 +2,7 @@
 * @file		JobSystem.cpp
 * @brief
 *
-* @date		2022/06/16 2022年度初版
+* @date		2022/06/29 2022年度初版
 */
 
 
@@ -10,24 +10,12 @@
 
 void JobSystem::JobContainer::Register(Job* const job) noexcept
 {
-	m_jobs.push_back(job);
-
-	job->SetPointer(this);
-	job->SetId(m_jobs.size() - 1);
+	m_jobs.insert(job);
 }
 
 void JobSystem::JobContainer::Remove(Job* const job) noexcept
 {
-	// 末端 Job データを指定 Job データ位置に挿入
-	m_jobs[job->GetId()] = m_jobs.back();
-	m_jobs[job->GetId()]->SetId(job->GetId()); // ID も入れ替える
-
-	m_jobs.pop_back();
-	m_jobs.shrink_to_fit();
-
-	// Remove した Job のデータを予期せぬバグを防ぐため初期化しておく。
-	job->SetPointer(nullptr);
-	job->SetId(-1);
+	m_jobs.erase(job);
 }
 
 auto JobSystem::JobContainer::begin() noexcept
@@ -46,11 +34,6 @@ void JobSystem::Execute(double deletaTime) noexcept
 	{
 		for (auto job : container.second)
 		{
-			if (!job)
-			{
-				continue;
-			}
-
 			job->Execute(deletaTime);
 		}
 	}
@@ -60,31 +43,39 @@ void JobSystem::Execute(double deletaTime, FunctionType mode) noexcept
 {
 	for (auto job : m_containers[mode])
 	{
-		if (!job)
-		{
-			continue;
-		}
-
 		job->Execute(deletaTime);
 	}
 }
 
-void JobSystem::RegisterJob(Job* const job, FunctionType mode) noexcept
+bool JobSystem::RegisterJob(Job* const job) noexcept
 {
+	if (job->m_funcType == FunctionType::None)
+	{
+		LOG_ERROR("FunctionTypeを指定してください。");
+		return false;
+	}
+
 	std::unique_lock<std::mutex> lock(m_mutex);
 
-	m_containers[mode].Register(job);
+	job->m_funcType = job->m_funcType;
+	m_containers[job->m_funcType].Register(job);
+	return true;
 }
 
 void JobSystem::RemoveJob(Job* const job) noexcept
 {
 	std::unique_lock<std::mutex> lock(m_mutex);
 
-	for (auto& container : m_containers)
+	if (job->m_funcType == FunctionType::None)
 	{
-		if (&container.second == job->GetPointer())
-		{
-			container.second.Remove(job);
-		}
+		return;
+	}
+
+	if (m_containers.contains(job->m_funcType))
+	{
+		m_containers[job->m_funcType].Remove(job);
+
+		// Remove した Job のデータを予期せぬバグを防ぐため初期化しておく。
+		job->m_funcType = FunctionType::None;
 	}
 }

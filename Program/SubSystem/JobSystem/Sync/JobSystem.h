@@ -2,26 +2,16 @@
 * @file		JobSystem.h
 * @brief
 *
-* @date		2022/06/25 2022年度初版
+* @date		2022/06/29 2022年度初版
 */
 #pragma once
 
 
+#include <set>
 #include <map>
 #include <mutex>
 #include "Job.h"
 #include "SubSystem/Core/Common/Macro.h"
-
-enum FunctionType
-{
-	Update,
-
-	LateUpdate,
-
-	Render,
-
-	LateRender,
-};
 
 class JobSystem
 {
@@ -42,7 +32,7 @@ private:
 
 	private:
 
-		std::vector<Job*> m_jobs;
+		std::set<Job*> m_jobs;
 	};
 
 public:
@@ -62,7 +52,7 @@ public:
 	void Execute(double deletaTime, FunctionType mode) noexcept;
 
 	/** Thread Safe な関数です。*/
-	void RegisterJob(Job* job, FunctionType mode) noexcept;
+	bool RegisterJob(Job* job) noexcept;
 	void RemoveJob(Job* job) noexcept;
 
 private:

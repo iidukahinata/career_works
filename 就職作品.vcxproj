@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program\SubSystem\Audio\Audio.cpp" />
+    <ClCompile Include="Program\SubSystem\Audio\FMOD\FMODAudio.cpp" />
     <ClCompile Include="Program\SubSystem\Core\Common\COM.cpp" />
     <ClCompile Include="Program\SubSystem\Core\Common\Tools.cpp" />
     <ClCompile Include="Program\SubSystem\Core\Context.cpp" />
@@ -100,6 +101,7 @@
   <ItemGroup>
     <ClInclude Include="Program\SubSystem\Audio\Audio.h" />
     <ClInclude Include="Program\SubSystem\Audio\AudioHelper.h" />
+    <ClInclude Include="Program\SubSystem\Audio\FMOD\FMODAudio.h" />
     <ClInclude Include="Program\SubSystem\Core\Common\COM.h" />
     <ClInclude Include="Program\SubSystem\Core\Common\Common.h" />
     <ClInclude Include="Program\SubSystem\Core\Common\Hash.h" />

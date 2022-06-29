@@ -7,9 +7,10 @@
 
 
 #include "Engine.h"
+#include "Context.h"
 #include "Common/ProjectSettings.h"
 #include "Event/EventManager.h"
-#include "SubSystem/Audio/Audio.h"
+#include "SubSystem/Audio/FMOD/FMODAudio.h"
 #include "SubSystem/Input/Input.h"
 #include "SubSystem/Timer/Timer.h"
 #include "SubSystem/Scene/World.h"
@@ -106,7 +107,7 @@ void Engine::RegisterSubsystemsToContainer() noexcept
 
 	context.RegisterSubsystem<Timer>(std::make_unique<Timer>());
 	context.RegisterSubsystem<Input>(std::make_unique<Input>());
-	context.RegisterSubsystem<Audio>(std::make_unique<Audio>());
+	context.RegisterSubsystem<Audio>(std::make_unique<FMODAudio>());
 	context.RegisterSubsystem<ResourceManager>(std::make_unique<ResourceManager>());
 	context.RegisterSubsystem<World>(std::make_unique<World>());
 	context.RegisterSubsystem<Renderer>(std::make_unique<Renderer>());

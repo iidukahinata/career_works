@@ -12,8 +12,8 @@
 void EventManager::Initialize()
 {
 	// メインスレッドジョブとしてイベントループを登録しているが、他スレッドで処理し処理分担してもいいかもしれない。
-	m_job.SetFunction([this](double) { Tick(); });
-	JobSystem::Get().RegisterJob(&m_job, FunctionType::Update);
+	m_job.SetFunction([this](double) { Tick(); }, FunctionType::Update);
+	JobSystem::Get().RegisterJob(&m_job);
 }
 
 void EventManager::Exit()

@@ -2,7 +2,7 @@
 * @file    Transform.cpp
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/06/29 2022年度初版
 */
 
 
@@ -15,7 +15,9 @@ Transform::Transform() :
 	m_right(1.f, 0.f, 0.f),
 	m_up(0.f, 1.f, 0.f),
 	m_forward(0.f, 0.f, 1.f)
-{}
+{
+
+}
 
 void Transform::SetPosition(const Math::Vector3& position) noexcept
 {
@@ -88,11 +90,6 @@ Math::Matrix Transform::GetLocalMatrix() const
 	return Math::Matrix(m_localPosition, m_localRotation, m_localScale);
 }
 
-DirectX::XMMATRIX Transform::GetLocalMatrixXM() const
-{
-	return GetLocalMatrix().ToMatrixXM();
-}
-
 Math::Matrix Transform::GetWorldMatrix() const
 {
 	auto result = GetLocalMatrix();
@@ -103,11 +100,6 @@ Math::Matrix Transform::GetWorldMatrix() const
 		parent = parent->m_parent;
 	}
 	return result;
-}
-
-DirectX::XMMATRIX Transform::GetWorldMatrixXM() const
-{
-	return GetWorldMatrix().ToMatrixXM();
 }
 
 const Math::Vector3& Transform::GetRight() const noexcept

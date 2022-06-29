@@ -14,8 +14,8 @@
 
 Input::Input()
 {
-	m_job.SetFunction([this](double) { Update(); });
-	JobSystem::Get().RegisterJob(&m_job, FunctionType::Update);
+	m_job.SetFunction([this](double) { Update(); }, FunctionType::Update);
+	JobSystem::Get().RegisterJob(&m_job);
 }
 
 bool Input::Initialize()

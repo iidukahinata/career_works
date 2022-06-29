@@ -2,13 +2,15 @@
 * @file    Light.h
 * @brief
 *
-* @date	   2022/06/27 2022年度初版
+* @date	   2022/06/29 2022年度初版
 */
 #pragma once
 
 
 #include "../IComponent.h"
 #include "SubSystem/Core/Math/MathCore.h"
+
+class Renderer;
 
 class Light : public IComponent
 {
@@ -25,6 +27,8 @@ public:
 
 	void Initialize() override;
 	void Remove() override;
+
+	void Active(bool active) override;
 
 	void SetLightType(LightType lightType);
 	LightType GetLightType();
@@ -43,6 +47,11 @@ public:
 
 private:
 
+	void RegisterToLightMap() noexcept;
+	void UnRegisterFromLightMap() noexcept;
+
+private:
+
 	LightType m_lightType;
 
 	Math::Vector4 m_color;
@@ -55,4 +64,6 @@ private:
 
 	// * スポットライトの射出方向
 	float m_angle;
+
+	Renderer* m_renderer;
 };

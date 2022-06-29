@@ -2,7 +2,7 @@
 * @file    World.cpp
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/06/29 2022年度初版
 */
 
 
@@ -18,6 +18,7 @@ void World::LoadScene(std::string_view sceneName, bool isAsync /* = false */) no
 {
 	auto camera = CreateAndAddGameObject();
 	camera.lock()->AddComponent("Camera");
+	camera.lock()->AddComponent("AudioListener");
 
 	auto directionalLight = CreateAndAddGameObject();
 	camera.lock()->AddComponent("Light");
@@ -81,7 +82,7 @@ void World::RemoveGameObject(GameObject* gameObject) noexcept
 	m_gameObjects.pop_back();
 }
 
-std::span<GameObjectPtr> World::GetGameObjects() noexcept
+const std::vector<GameObjectPtr>& World::GetGameObjects() noexcept
 {
 	return m_gameObjects;
 }

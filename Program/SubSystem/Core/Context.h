@@ -11,8 +11,6 @@
 #include <memory>
 #include "SubSystem/Core/ISubsystem.h"
 
-class ISubsystem;
-
 class Context
 {
 	Context() = default;

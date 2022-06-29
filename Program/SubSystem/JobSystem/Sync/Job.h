@@ -2,21 +2,35 @@
 * @file		Job.h
 * @brief
 *
-* @date		2022/06/23 2022年度初版
+* @date		2022/06/29 2022年度初版
 */
 #pragma once
 
 
 #include <functional>
 
+enum FunctionType
+{
+	Update,
+
+	LateUpdate,
+
+	Render,
+
+	LateRender,
+
+	None,
+};
+
 class Job
 {
+	friend class JobSystem;
+
 	typedef std::function<void(double)> Task;
-	typedef void* Pointer;
 public:
 
 	Job() = default;
-	Job(Task&& task) noexcept;
+	Job(Task&& task, FunctionType type) noexcept;
 
 	~Job();
 
@@ -27,13 +41,7 @@ public:
 	* @note
 	*  引数には double 型を受け取る必要があります。
 	*/
-	void SetFunction(Task&& task) noexcept;
-
-	/** 所属コンテナで使用される関数軍です。*/
-	void SetPointer(Pointer jobContainer) noexcept;
-	Pointer GetPointer() const noexcept;
-	void SetId(uint32_t id) noexcept;
-	uint32_t GetId() const noexcept;
+	void SetFunction(Task&& task, FunctionType fincType) noexcept;
 
 private:
 
@@ -41,8 +49,5 @@ private:
 	Task m_task;
 
 	// * 検索用に所属コンテナのポインタを保持します。
-	Pointer m_jobContainer = nullptr;
-
-	// * コンテナでの配列の要素位置を保持します。
-	uint32_t m_id = -1;
+	FunctionType m_funcType = FunctionType::None;
 };

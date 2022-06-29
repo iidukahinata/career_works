@@ -32,15 +32,15 @@ public:
 	/** 並列処理で実行される処理の追加。*/
 	void AddTask(AsyncJob* job) noexcept;
 
-	/** CPU最大使用可能スレッド数を返す */
+	/** CPU最大使用可能スレッド数を返す。*/
 	int GetMaxThreadCount() const noexcept;
 
 private:
 
-	/** インスタンスの解放時に実行される */
+	/** インスタンスの解放時に実行される。*/
 	void Stop() noexcept;
 
-	/** 生成された各 thread が処理する Task 実行を行う関数 */
+	/** 生成された各 thread が処理する Task 実行を行う関数。*/
 	void ThreadLoop() noexcept;
 
 private:

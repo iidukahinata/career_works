@@ -43,7 +43,7 @@ void MeshRender::Render()
 	rot.y += 0.01f;
 	GetTransform().SetRotation(rot);
 
-	TransformCBuffer::Get().Bind(GetTransform().GetWorldMatrixXM());
+	TransformCBuffer::Get().Bind(GetTransform().GetWorldMatrix().ToMatrixXM());
 
 	m_model->Render();
 }

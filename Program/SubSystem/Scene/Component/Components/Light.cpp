@@ -2,18 +2,19 @@
 * @file    Light.h
 * @brief
 *
-* @date	   2022/06/27 2022年度初版
+* @date	   2022/06/29 2022年度初版
 */
 
 
 #include "Light.h"
 #include "SubSystem/Core/Context.h"
 #include "SubSystem/Renderer/Renderer.h"
-#include "SubSystem/Renderer/LightMap.h"
 
 void Light::Initialize() 
 {
-	GetContext()->GetSubsystem<Renderer>()->GetLightMap().AddLight(this);
+	m_renderer = GetContext()->GetSubsystem<Renderer>();
+
+	RegisterToLightMap();
 
 	m_lightType = LightType::DirectionalLight;
 	m_color = Math::Vector4(1, 1, 1, 1);
@@ -26,7 +27,20 @@ void Light::Initialize()
 
 void Light::Remove()
 {
-	GetContext()->GetSubsystem<Renderer>()->GetLightMap().RemoveLight(this);
+	UnRegisterFromLightMap();
+}
+
+void Light::Active(bool active)
+{
+	IComponent::Active(active);
+	if (active)
+	{
+		RegisterToLightMap();
+	}
+	else
+	{
+		UnRegisterFromLightMap();
+	}
 }
 
 void Light::SetLightType(Light::LightType lightType)
@@ -77,4 +91,16 @@ void Light::SetAngle(float angle)
 float Light::GetAngle()
 {
 	return m_angle;
+}
+
+void Light::RegisterToLightMap() noexcept
+{
+	ASSERT(m_renderer);
+	m_renderer->AddLight(this);
+}
+
+void Light::UnRegisterFromLightMap() noexcept
+{
+	ASSERT(m_renderer);
+	m_renderer->RemoveLight(this);
 }

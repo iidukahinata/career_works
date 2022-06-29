@@ -2,7 +2,7 @@
 * @file    Camera.cpp
 * @brief
 *
-* @date	   2022/06/27 2022年度初版
+* @date	   2022/06/29 2022年度初版
 */
 
 
@@ -26,12 +26,14 @@ void Camera::Initialize()
 	GetTransform().SetPosition(Math::Vector3(0.f, 3.f, -8.f));
 	GetTransform().LockAt(Math::Vector3::Zero);
 
+	// 更新処理がないためここに初期化時に書いている。
 	TransformCBuffer::Get().SetProjection(GetProjectionMatrixXM());
-	TransformCBuffer::Get().SetView(GetViewMatrixXM());
+	TransformCBuffer::Get().SetView(GetViewMatrix().ToMatrixXM());
 }
 
 void Camera::Remove()
 {
+
 }
 
 float Camera::GetAspect() const
@@ -102,9 +104,9 @@ void Camera::SetFar(float farClip)
 	CreateOrthographicMatrix();
 }
 
-DirectX::XMMATRIX Camera::GetViewMatrixXM()
+Math::Matrix Camera::GetViewMatrix()
 {
-	return DirectX::XMMatrixInverse(nullptr, GetTransform().GetWorldMatrixXM());
+	return GetTransform().GetWorldMatrix().Inverse();
 }
 
 DirectX::XMMATRIX Camera::GetProjectionMatrixXM()

@@ -2,12 +2,17 @@
 * @file    IComponent.cpp
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/06/29 2022年度初版
 */
 
 
 #include "IComponent.h"
 #include "../GameObject.h"
+
+void IComponent::Active(bool active)
+{
+	m_active = active;
+}
 
 Transform& IComponent::GetTransform() const noexcept
 {

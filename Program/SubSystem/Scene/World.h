@@ -2,7 +2,7 @@
 * @file    World.h
 * @brief
 *
-* @date	   2022/06/24 2022年度初版
+* @date	   2022/06/29 2022年度初版
 */
 #pragma once
 
@@ -29,7 +29,7 @@ public:
 	GameObjectRef GetGameObjectByName(std::string_view name) const noexcept;
 	void RemoveGameObject(GameObject* gameObject) noexcept;
 
-	std::span<GameObjectPtr> GetGameObjects() noexcept;
+	const std::vector<GameObjectPtr>& GetGameObjects() noexcept;
 
 private:
 

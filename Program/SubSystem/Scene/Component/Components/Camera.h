@@ -2,7 +2,7 @@
 * @file    Camera.h
 * @brief
 *
-* @date	   2022/06/27 2022年度初版
+* @date	   2022/06/29 2022年度初版
 */
 #pragma once
 
@@ -32,7 +32,7 @@ public:
 	float GetFar() const;
 	void SetFar(float farClip);
 
-	DirectX::XMMATRIX GetViewMatrixXM();
+	Math::Matrix GetViewMatrix();
 	DirectX::XMMATRIX GetProjectionMatrixXM();
 	DirectX::XMMATRIX GetOrthographicMatrixXM();
 

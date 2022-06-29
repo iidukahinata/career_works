@@ -112,6 +112,9 @@
     <Filter Include="SubSystem\Scene\Factory">
       <UniqueIdentifier>{fe75741e-2c2d-49d1-8bc6-b584a0cdfe0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SubSystem\Audio\FMOD">
+      <UniqueIdentifier>{530113f8-792c-495e-9900-300583077fc2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program\WinMain.cpp" />
@@ -342,6 +345,9 @@
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Renderer\LightMap.cpp">
       <Filter>SubSystem\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Audio\FMOD\FMODAudio.cpp">
+      <Filter>SubSystem\Audio\FMOD</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -650,6 +656,9 @@
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Renderer\LightMap.h">
       <Filter>SubSystem\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Audio\FMOD\FMODAudio.h">
+      <Filter>SubSystem\Audio\FMOD</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

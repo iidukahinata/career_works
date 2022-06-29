@@ -2,7 +2,7 @@
 * @file    IComponent.h
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/06/29 2022年度初版
 */
 #pragma once
 
@@ -26,6 +26,8 @@ public:
 	virtual void Initialize() {}
 	virtual void Remove() {}
 
+	virtual void Active(bool active);
+
 	/** テンプレート型が this と同じ型の時 true を返します。*/
 	template<class T>
 	bool IsSameClass() const noexcept;
@@ -37,6 +39,8 @@ public:
 	Context* GetContext() const noexcept;
 
 private:
+
+	bool m_active;
 
 	GameObject* m_owner;
 };

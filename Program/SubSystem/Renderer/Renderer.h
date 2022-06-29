@@ -2,15 +2,16 @@
 * @file	   Renderer.h
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/06/29 2022年度初版
 */
 #pragma once
 
 
-#include "LightMap.h"
 #include "SubSystem/Core/ISubsystem.h"
 #include "SubSystem/JobSystem/Sync/Job.h"
 
+class Light;
+class LightMap;
 class RenderObject;
 
 class Renderer : public ISubsystem
@@ -26,7 +27,8 @@ public:
 	void RegisterRenderObject(RenderObject* rederObject) noexcept;
 	void RemoveRenderObject(RenderObject* rederObject) noexcept;
 
-	LightMap& GetLightMap();
+	void AddLight(Light* light) noexcept;
+	void RemoveLight(Light* light) noexcept;
 
 private:
 
@@ -39,7 +41,7 @@ private:
 
 	Job m_job;
 
-	LightMap m_lightMap;
+	std::unique_ptr<LightMap> m_lightMap;
 
 	std::vector<RenderObject*> m_renderObjects;
 };

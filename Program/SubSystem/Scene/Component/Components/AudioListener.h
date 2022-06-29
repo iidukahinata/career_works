@@ -2,32 +2,36 @@
 * @file    AudioListener.h
 * @brief
 *
-* @date	   2022/06/27 2022年度初版
+* @date	   2022/06/29 2022年度初版
 */
 #pragma once
 
 
-#include <fmod.hpp>
 #include "../IComponent.h"
 
-/**
-* 3D サウンドを使用する場合は必ず使用する必要があります。
-*/
+class Audio;
+
 class AudioListener : public IComponent
 {
 	SUB_CLASS(AudioListener)
 public:
 
-	~AudioListener();
+	void Initialize() override;
+	void Remove() override;
 
-	FMOD_VECTOR GetPosition() const noexcept;
-	FMOD_VECTOR GetForward() const noexcept;
-	FMOD_VECTOR GetUp() const noexcept;
+	void Active(bool active) override;
 
 	void SetVelocity(const Math::Vector3& velocity) noexcept;
-	FMOD_VECTOR GetVelocity() const noexcept;
+	const Math::Vector3& GetVelocity() const noexcept;
+
+private:
+
+	void RegisterToAudioSystem();
+	void UnRegisterFromAudioSystem();
 
 private:
 
 	Math::Vector3 m_velocity;
+
+	Audio* m_audio;
 };

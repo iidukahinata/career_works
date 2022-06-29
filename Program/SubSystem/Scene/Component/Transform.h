@@ -2,7 +2,7 @@
 * @file    Transform.h
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/06/29 2022年度初版
 */
 #pragma once
 
@@ -30,9 +30,7 @@ public:
 	const Math::Vector3& GetScale() const noexcept;
 
 	Math::Matrix GetLocalMatrix() const;
-	DirectX::XMMATRIX GetLocalMatrixXM() const;
 	Math::Matrix GetWorldMatrix() const;
-	DirectX::XMMATRIX GetWorldMatrixXM() const;
 
 	const Math::Vector3& GetRight() const noexcept;
 	const Math::Vector3& GetUp() const noexcept;
