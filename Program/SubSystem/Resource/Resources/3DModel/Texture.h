@@ -2,12 +2,11 @@
 * @file		Texture.h
 * @brief
 *
-* @date		2022/06/26 2022年度初版
+* @date		2022/06/29 2022年度初版
 */
 #pragma once
 
 
-#include <any>
 #include "../IResource.h"
 #include "ThirdParty/directxtex/include/DirectXTex.h"
 #include "SubSystem/Renderer/D3D11/D3D11Texture.h"
@@ -27,6 +26,7 @@ struct TextureData
 */
 class Texture : public IResource
 {
+	SUB_CLASS(Texture)
 public:
 
 	Texture() = default;

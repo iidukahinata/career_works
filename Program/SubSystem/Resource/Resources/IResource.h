@@ -7,24 +7,18 @@
 #pragma once
 
 
-#include <string_view>
 #include "SubSystem/Core/Context.h"
 
-class RefCounter
+enum ResourceType
 {
-public:
-	void AddRef() noexcept { ++m_referenceCount; }
-	void Release() noexcept { --m_referenceCount; }
-	size_t GetRef() const noexcept { return m_referenceCount; }
+	STATIC,
 
-private:
-
-	// * 参照カウントで解放等を行うための変数。派生先ではなく使用者側でカウントする必要がある。
-	size_t m_referenceCount = 0;
+	DYNAMIC,
 };
 
-class IResource : public RefCounter
+class IResource
 {
+	SUPER_CLASS(IResource)
 public:
 
 	virtual ~IResource() {}

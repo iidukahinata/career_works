@@ -28,26 +28,20 @@ IComponent* GameObject::AddComponent(std::string_view name) noexcept
 
 void GameObject::RemoveComponent(IComponent* component) noexcept
 {
-	for (auto it = m_components.begin(); it != m_components.end(); it++)
+	auto hash = component->GetTypeData().Hash;
+	if (m_components.contains(hash))
 	{
-		if (it->second.get() == component)
-		{
-			component->Remove();
-			m_components.erase(it);
-			break;
-		}
+		component->Remove();
+		m_components.erase(hash);
 	}
 }
 
-IComponent* GameObject::FindComponent(std::string_view name) const noexcept
+IComponent* GameObject::FindComponent(std::string_view name) noexcept
 {
 	const ComponentType type(name);
-	for (const auto& component : m_components)
+	if (m_components.contains(type.Hash))
 	{
-		if (component.second->GetTypeData() == type)
-		{
-			return component.second.get();
-		}
+		return m_components[type.Hash].get();
 	}
 	return nullptr;
 }

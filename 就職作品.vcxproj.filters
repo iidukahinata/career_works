@@ -28,9 +28,6 @@
     <Filter Include="SubSystem\Renderer">
       <UniqueIdentifier>{6e0b70b8-019c-401b-a309-e48adaeac6c0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SubSystem\Resource">
-      <UniqueIdentifier>{994b5407-09a6-4b77-a937-a7ff952e7d20}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SubSystem\Scene">
       <UniqueIdentifier>{97fa475a-e3bf-4d5f-9e7d-a9c3f3f41934}</UniqueIdentifier>
     </Filter>
@@ -39,15 +36,6 @@
     </Filter>
     <Filter Include="SubSystem\Window">
       <UniqueIdentifier>{cf390bbc-9dd6-471e-ad1e-b523c8209bf7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SubSystem\Resource\ResourceLoader">
-      <UniqueIdentifier>{85ade1d6-5613-4c82-a5e0-859c3924aa22}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SubSystem\Resource\ResourceLoader\ModelLoader">
-      <UniqueIdentifier>{a46b9be4-770d-4bdb-9b76-a9c83eda8eaa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SubSystem\Resource\ResourceLoader\TextureLoader">
-      <UniqueIdentifier>{72bc2d25-057b-4167-9f80-735263159eb7}</UniqueIdentifier>
     </Filter>
     <Filter Include="SubSystem\Renderer\D3D11">
       <UniqueIdentifier>{95cad495-08d1-4bee-869d-45a743804919}</UniqueIdentifier>
@@ -69,15 +57,6 @@
     </Filter>
     <Filter Include="SubSystem\JobSystem">
       <UniqueIdentifier>{529c6c42-84ab-4d39-ab6a-95e62f6c7ae8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SubSystem\Resource\Resources">
-      <UniqueIdentifier>{16da4491-7f17-42e6-98f1-d544cfbb8462}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SubSystem\Resource\Resources\3DModel">
-      <UniqueIdentifier>{c01ae5b3-ac52-4987-afbb-6fd408cf7948}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SubSystem\Resource\Resources\Audio">
-      <UniqueIdentifier>{4e2e722f-2322-48cb-aff9-9ba3deb9ce19}</UniqueIdentifier>
     </Filter>
     <Filter Include="SubSystem\JobSystem\Async">
       <UniqueIdentifier>{aa6cecbe-b05f-4547-b8e8-9f0e7304f4f5}</UniqueIdentifier>
@@ -114,6 +93,27 @@
     </Filter>
     <Filter Include="SubSystem\Audio\FMOD">
       <UniqueIdentifier>{530113f8-792c-495e-9900-300583077fc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Resource">
+      <UniqueIdentifier>{994b5407-09a6-4b77-a937-a7ff952e7d20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Resource\ResourceLoader">
+      <UniqueIdentifier>{85ade1d6-5613-4c82-a5e0-859c3924aa22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Resource\ResourceLoader\ModelLoader">
+      <UniqueIdentifier>{a46b9be4-770d-4bdb-9b76-a9c83eda8eaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Resource\ResourceLoader\TextureLoader">
+      <UniqueIdentifier>{72bc2d25-057b-4167-9f80-735263159eb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Resource\Resources">
+      <UniqueIdentifier>{16da4491-7f17-42e6-98f1-d544cfbb8462}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Resource\Resources\3DModel">
+      <UniqueIdentifier>{c01ae5b3-ac52-4987-afbb-6fd408cf7948}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Resource\Resources\Audio">
+      <UniqueIdentifier>{4e2e722f-2322-48cb-aff9-9ba3deb9ce19}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

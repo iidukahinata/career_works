@@ -2,7 +2,7 @@
 * @file    Mesh.h
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/06/29 2022年度初版
 */
 #pragma once
 
@@ -16,6 +16,7 @@
 
 class Mesh : public IResource
 {
+	SUB_CLASS(Mesh)
 public:
 
 	Mesh() = default;

@@ -18,6 +18,7 @@ class FMODAudio;
 */
 class AudioClip : public IResource
 {
+	SUB_CLASS(AudioClip)
 public:
 
 	~AudioClip();

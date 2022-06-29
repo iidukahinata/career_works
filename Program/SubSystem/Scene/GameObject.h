@@ -30,7 +30,7 @@ public:
 	T* GetComponent();
 
 	/** 指定名コンポーネントを保持する場合、そのアドレスを返す。*/
-	IComponent* FindComponent(std::string_view name) const noexcept;
+	IComponent* FindComponent(std::string_view name) noexcept;
 
 	void Active(bool active) noexcept;
 

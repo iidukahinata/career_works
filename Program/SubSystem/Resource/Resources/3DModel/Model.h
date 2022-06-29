@@ -13,6 +13,7 @@
 
 class Model : public IResource
 {
+	SUB_CLASS(Model)
 public:
 
 	/** 独自モデルデータとして保存させる。*/

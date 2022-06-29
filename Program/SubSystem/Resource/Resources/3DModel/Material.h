@@ -15,6 +15,7 @@
 
 class Material : public IResource
 {
+	SUB_CLASS(Material)
 public:
 
 	Material();
