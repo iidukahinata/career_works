@@ -43,7 +43,7 @@ public:
 	void SetID(uint32_t id) noexcept;
 	uint32_t GetID() const noexcept;
 
-	Transform& GetTransform() const noexcept;
+	Transform& GetTransform() noexcept;
 
 	World* GetOwner() const noexcept;
 	Context* GetContext() const noexcept;
@@ -59,7 +59,7 @@ private:
 	// * Worldクラスで探索時等に使用される。
 	std::string m_name;
 
-	mutable Transform m_transform;
+	Transform m_transform;
 
 	// * -> ハッシュ値 : 各コンポーネントオブジェクト
 	std::map<uint32_t, std::unique_ptr<IComponent>> m_components;

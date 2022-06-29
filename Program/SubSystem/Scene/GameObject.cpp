@@ -25,10 +25,17 @@ IComponent* GameObject::AddComponent(std::string_view name) noexcept
 
 void GameObject::AddComponent(IComponent* component) noexcept
 {
-	auto hash = component->GetTypeData().Hash;
+	const auto hash = component->GetTypeData().Hash;
 
-	component->Initialize();
-	m_components.emplace(hash, component);
+	if (m_components.contains(hash))
+	{
+		LOG_ERROR("既に同じHash値のコンポーネントが存在しています。");
+	}
+	else
+	{
+		component->Initialize();
+		m_components.emplace(hash, component);
+	}
 }
 
 void GameObject::RemoveComponent(IComponent* component) noexcept
@@ -78,7 +85,7 @@ const std::string& GameObject::GetName() const noexcept
 }
 
 
-Transform& GameObject::GetTransform() const noexcept
+Transform& GameObject::GetTransform() noexcept
 {
 	return m_transform;
 }
