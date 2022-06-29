@@ -2,11 +2,12 @@
 * @file    RenderObject.cpp
 * @brief
 *
-* @date	   2022/06/26 2022年度初版
+* @date	   2022/06/29 2022年度初版
 */
 
 
 #include "RenderObject.h"
+#include "SubSystem/Core/Common/Common.h"
 #include "SubSystem/Renderer/Renderer.h"
 #include "SubSystem/Resource/ResourceManager.h"
 #include "SubSystem/Renderer/TransformCBuffer.h"
@@ -14,18 +15,52 @@
 
 void RenderObject::Initialize()
 {
-	GetContext()->GetSubsystem<Renderer>()->RegisterRenderObject(this);
+	m_renderer = GetContext()->GetSubsystem<Renderer>();
+
+	RegisterToRenderer();
+
+	Do_Initialize();
 }
 
 void RenderObject::Remove()
 {
-	GetContext()->GetSubsystem<Renderer>()->RemoveRenderObject(this);
+	UnRegisterFromRenderer();
+
+	Do_Remove();
 }
 
-void MeshRender::Initialize()
+void RenderObject::Active(bool active)
 {
-	RenderObject::Initialize();
+	if (IsActive() == active)
+	{
+		return;
+	}
 
+	IComponent::Active(active);
+	if (active)
+	{
+		RegisterToRenderer();
+	}
+	else
+	{
+		UnRegisterFromRenderer();
+	}
+}
+
+void RenderObject::RegisterToRenderer()
+{
+	ASSERT(m_renderer);
+	m_renderer->RegisterRenderObject(this);
+}
+
+void RenderObject::UnRegisterFromRenderer()
+{
+	ASSERT(m_renderer);
+	m_renderer->RemoveRenderObject(this);
+}
+
+void MeshRender::Do_Initialize()
+{
 	// デバッグ用仮素材
 	SetModel("Renault.model");
 	GetTransform().SetScale(Math::Vector3(0.01f));

@@ -61,7 +61,7 @@ private:
 	mutable Transform m_transform;
 
 	// * -> ハッシュ値 : 各コンポーネントオブジェクト
-	std::map<uint32_t, std::shared_ptr<IComponent>> m_components;
+	std::map<uint32_t, std::unique_ptr<IComponent>> m_components;
 };
 
 template<class T>

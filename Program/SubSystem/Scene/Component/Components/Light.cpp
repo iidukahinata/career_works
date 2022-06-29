@@ -32,6 +32,11 @@ void Light::Remove()
 
 void Light::Active(bool active)
 {
+	if (IsActive() == active)
+	{
+		return;
+	}
+
 	IComponent::Active(active);
 	if (active)
 	{

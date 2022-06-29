@@ -2,16 +2,13 @@
 * @file		AudioClip.cpp
 * @brief
 *
-* @date		2022/05/28 2022年度初版
-* @author	飯塚陽太
+* @date		2022/06/29 2022年度初版
 */
 
 
 #include "AudioClip.h"
-#include "SubSystem/Audio/Audio.h"
+#include "SubSystem/Audio/FMOD/FMODAudio.h"
 #include "SubSystem/Audio/AudioHelper.h"
-#include "SubSystem/Core/Common/Common.h"
-
 
 AudioClip::~AudioClip()
 {
@@ -29,8 +26,8 @@ void AudioClip::Play(FMOD::ChannelGroup* channelgroup /* = nullptr */) noexcept
 {
 	ASSERT(m_sound);
 
-	//auto result = Audio::Get().GetSystem()->playSound(m_sound, channelgroup, false, &m_channel);
-	//AUDIO_EORROR_CHECK(result);
+	auto result = m_audio->GetSystem()->playSound(m_sound, channelgroup, false, &m_channel);
+	AUDIO_EORROR_CHECK(result);
 }
 
 void AudioClip::Pause() const noexcept
@@ -177,12 +174,16 @@ void AudioClip::Release() const noexcept
 
 bool AudioClip::Do_Load(std::string_view filePath) noexcept
 {
-	//auto result = Audio::Get().GetSystem()->createSound(filePath.data(), FMOD_3D | FMOD_LOOP_NORMAL, nullptr, &m_sound);
-	//
-	//if (result != FMOD_OK) 
-	//{
-	//	AUDIO_EORROR_CHECK(result);
-	//	return false;
-	//}
+	m_audio = dynamic_cast<FMODAudio*>(GetContext()->GetSubsystem<Audio>());
+
+	ASSERT(m_audio);
+
+	auto result = m_audio->GetSystem()->createSound(filePath.data(), FMOD_3D | FMOD_LOOP_NORMAL, nullptr, &m_sound);
+	
+	if (result != FMOD_OK) 
+	{
+		AUDIO_EORROR_CHECK(result);
+		return false;
+	}
 	return true;
 }

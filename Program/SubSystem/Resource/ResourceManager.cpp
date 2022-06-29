@@ -18,17 +18,17 @@ void ResourceManager::AddResource(ResourcePtr resource, std::string_view filePat
 	ASSERT(!m_resources.contains(filePath.data()));
 
 	std::unique_lock<std::mutex> lock(m_mutex);
-	m_resources[filePath.data()] = resource;
+	m_resources[filePath.data()].swap(resource);
 }
 
-ResourceRef ResourceManager::GetResourceByName(std::string_view filePath) noexcept
+IResource* ResourceManager::GetResourceByName(std::string_view filePath) noexcept
 {
 	// 配列外にアクセスしないための判定
 	if (m_resources.contains(filePath.data()))
 	{
-		return m_resources[filePath.data()];
+		return m_resources[filePath.data()].get();
 	}
-	return ResourceRef();
+	return nullptr;
 }
 
 void ResourceManager::FreeUnusedResourceObjects() noexcept

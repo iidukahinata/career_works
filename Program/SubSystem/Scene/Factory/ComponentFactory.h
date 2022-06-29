@@ -10,8 +10,7 @@
 #include <memory>
 #include "../Component/IComponent.h"
 
-typedef std::weak_ptr<IComponent> ComponentRef;
-typedef std::shared_ptr<IComponent> ComponentPtr;
+typedef std::unique_ptr<IComponent> ComponentPtr;
 
 /**
 * コンポーネントの生成をシステムから分離させるために作成。

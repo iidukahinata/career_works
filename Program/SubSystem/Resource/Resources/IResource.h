@@ -2,7 +2,7 @@
 * @file    IResource.h
 * @brief   リソース抽象クラス
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/06/29 2022年度初版
 */
 #pragma once
 
@@ -23,7 +23,7 @@ private:
 	size_t m_referenceCount = 0;
 };
 
-class IResource
+class IResource : public RefCounter
 {
 public:
 

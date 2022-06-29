@@ -380,13 +380,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\assimp\include;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\directxtex\include;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\FMOD\include;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\bullet\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\assimp\lib;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\directxtex\lib\x64\debug;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\FMOD\lib\x64;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\bullet\lib\debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>.\Program\ThirdParty\assimp\include;.\Program\ThirdParty\directxtex\include;.\Program\ThirdParty\FMOD\include;.\Program\ThirdParty\bullet\include;$(IncludePath)</IncludePath>
+    <LibraryPath>.\Program\ThirdParty\assimp\lib;.\Program\ThirdParty\directxtex\lib\x64\debug;.\Program\ThirdParty\FMOD\lib\x64;.\Program\ThirdParty\bullet\lib\debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\assimp\include;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\directxtex\include;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\FMOD\include;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\bullet\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\assimp\lib;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\directxtex\lib\x64\release;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\FMOD\lib\x64;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program\ThirdParty\bullet\lib\release;$(LibraryPath)</LibraryPath>
+    <IncludePath>.\Program\ThirdParty\assimp\include;.\Program\ThirdParty\directxtex\include;.\Program\ThirdParty\FMOD\include;.\Program\ThirdParty\bullet\include;$(IncludePath)</IncludePath>
+    <LibraryPath>.\Program\ThirdParty\assimp\lib;.\Program\ThirdParty\directxtex\lib\x64\release;.\Program\ThirdParty\FMOD\lib\x64;.\Program\ThirdParty\bullet\lib\release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -423,7 +423,7 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program;C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Program;.\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -443,7 +443,7 @@
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\hinan\OneDrive\デスクトップ\就職\就職作品\Program</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Program;.\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>

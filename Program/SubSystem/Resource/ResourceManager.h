@@ -13,8 +13,7 @@
 #include "Resources/IResource.h"
 #include "SubSystem/Core/ISubsystem.h"
 
-typedef std::weak_ptr<IResource> ResourceRef;
-typedef std::shared_ptr<IResource> ResourcePtr;
+typedef std::unique_ptr<IResource> ResourcePtr;
 
 /**
 * このクラスではデータ競合を引き起こさない。
@@ -25,8 +24,6 @@ class ResourceManager : public ISubsystem
 public:
 
 	void Shutdown() override;
-
-	void AddResource(ResourcePtr resource, std::string_view filePath) noexcept;
 
 	/**
 	* 同じリソースを読み込まないために実装
@@ -43,12 +40,14 @@ public:
 	* @return 指定名が保持するリソースの場合そのポインタを返す。
 	*		  指定名のリソースデータがない場合 nullptrを返す。
 	*/
-	ResourceRef GetResourceByName(std::string_view filePath) noexcept;
+	IResource* GetResourceByName(std::string_view filePath) noexcept;
 
 	/** 2022/04/17 Sceneを跨いで使用されるリソースデータを解放しないために実装 */
 	void FreeUnusedResourceObjects() noexcept;
 
 	void Clear() noexcept;
+
+	void AddResource(ResourcePtr resource, std::string_view filePath) noexcept;
 
 private:
 
@@ -63,19 +62,19 @@ template<class T>
 FORCEINLINE T* ResourceManager::Load(std::string_view filePath) noexcept
 {
 	// 同じリソースを読み込まないために保持しているか調べる
-	if (auto copyResource = GetResourceByName(filePath).lock())
+	if (auto copyResource = GetResourceByName(filePath))
 	{
-		return dynamic_cast<T*>(copyResource.get());
+		return dynamic_cast<T*>(copyResource);
 	}
 
 	// 読み込み時間中に同じリソースを生成しないようにするために先に登録
-	AddResource(std::make_shared<T>(), filePath);
+	AddResource(std::make_unique<T>(), filePath);
 
-	if (auto resource = GetResourceByName(filePath).lock())
+	if (auto resource = GetResourceByName(filePath))
 	{
 		if (resource->Load(filePath))
 		{
-			return dynamic_cast<T*>(resource.get());
+			return dynamic_cast<T*>(resource);
 		}
 	}
 

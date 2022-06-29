@@ -2,14 +2,15 @@
 * @file		AudioClip.h
 * @brief
 *
-* @date		2022/05/10 2022年度初版
-* @author	飯塚陽太
+* @date		2022/06/29 2022年度初版
 */
 #pragma once
 
 
 #include <fmod.hpp>
 #include "../IResource.h"
+
+class FMODAudio;
 
 /**
 * オーディオ再生するたびに、呼び出し側で Channel 設定を変更する必要がある。
@@ -50,6 +51,8 @@ private:
 	bool Do_Load(std::string_view filePath) noexcept;
 
 private:
+
+	FMODAudio* m_audio;
 
 	//* サウンドデータを保持。
 	FMOD::Sound* m_sound = nullptr;

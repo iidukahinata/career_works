@@ -14,6 +14,11 @@ void IComponent::Active(bool active)
 	m_active = active;
 }
 
+bool IComponent::IsActive() const noexcept
+{
+	return m_active;
+}
+
 Transform& IComponent::GetTransform() const noexcept
 {
 	ASSERT(m_owner);

@@ -2,7 +2,7 @@
 * @file    ComponentFactory.cpp
 * @brief
 *
-* @date	   2022/06/27 2022年度初版
+* @date	   2022/06/29 2022年度初版
 */
 
 
@@ -13,7 +13,7 @@
 #include "../Component/Components/AudioListener.h"
 #include "../Component/Components/AudioSpeaker.h"
 
-#define CASE_CREATE_COMPONENT(CLASS, COMPONENT) case GET_HASH(CLASS): COMPONENT = std::make_shared<CLASS>(); break;
+#define CASE_CREATE_COMPONENT(CLASS, COMPONENT) case GET_HASH(CLASS): COMPONENT = std::make_unique<CLASS>(); break;
 
 ComponentPtr ComponentFactory::Create(GameObject* gameObject, std::string_view name) noexcept
 {

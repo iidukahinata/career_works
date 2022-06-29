@@ -27,6 +27,7 @@ public:
 	virtual void Remove() {}
 
 	virtual void Active(bool active);
+	bool IsActive() const noexcept;
 
 	/** テンプレート型が this と同じ型の時 true を返します。*/
 	template<class T>

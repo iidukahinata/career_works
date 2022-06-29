@@ -19,7 +19,7 @@ IComponent* GameObject::AddComponent(std::string_view name) noexcept
 		component->Initialize();
 
 		auto hash = component->GetTypeData().Hash;
-		m_components[hash] = component;
+		m_components.emplace(hash, component.release());
 		result = component.get();
 	}
 

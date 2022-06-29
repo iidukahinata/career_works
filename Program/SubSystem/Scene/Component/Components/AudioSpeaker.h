@@ -25,9 +25,6 @@ public:
 	void UnPause() const noexcept;
 	void Stop() noexcept;
 
-	/* 3D 処理で使用される Transform をセットします。*/
-	void SetParent(class Transform* parent) noexcept;
-
 	void SetAudioClip(class AudioClip* clip, bool playOnAwake = false) noexcept;
 
 	void SetMute(bool mute) noexcept;
@@ -64,6 +61,7 @@ private:
 
 	// * 自身の移動速度をフレーム間差分から求めるため使用。2D の場合は未使用。
 	Math::Vector3 m_oldPos;
+	Math::Vector3 m_velocity;
 
 	// * 位置等の 3D 処理の値更新される。
 	class AudioClip* m_audioClip = nullptr;
