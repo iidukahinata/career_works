@@ -16,19 +16,24 @@ IComponent* GameObject::AddComponent(std::string_view name) noexcept
 
 	if (auto component = ComponentFactory::Create(this, name))
 	{
-		component->Initialize();
-
-		auto hash = component->GetTypeData().Hash;
-		m_components.emplace(hash, component.release());
 		result = component.get();
+		AddComponent(component.release());
 	}
 
 	return result;
 }
 
-void GameObject::RemoveComponent(IComponent* component) noexcept
+void GameObject::AddComponent(IComponent* component) noexcept
 {
 	auto hash = component->GetTypeData().Hash;
+
+	component->Initialize();
+	m_components.emplace(hash, component);
+}
+
+void GameObject::RemoveComponent(IComponent* component) noexcept
+{
+	const auto hash = component->GetTypeData().Hash;
 	if (m_components.contains(hash))
 	{
 		component->Remove();
