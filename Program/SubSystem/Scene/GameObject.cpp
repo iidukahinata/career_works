@@ -68,6 +68,16 @@ uint32_t GameObject::GetID() const noexcept
 	return m_id;
 }
 
+void GameObject::AddTickComponent(IComponent* component) noexcept
+{
+
+}
+
+void GameObject::RemoveTickComponent(IComponent* component) noexcept
+{
+
+}
+
 void GameObject::SetID(uint32_t id) noexcept
 {
 	ASSERT(id >= 0);

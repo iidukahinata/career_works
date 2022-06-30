@@ -2,21 +2,26 @@
 * @file    World.h
 * @brief
 *
-* @date	   2022/06/29 2022年度初版
+* @date	   2022/06/30 2022年度初版
 */
 #pragma once
 
 
 #include <span>
 #include <vector>
-#include "Factory/GameObjectFactory.h"
+#include "GameObject.h"
 #include "SubSystem/Core/ISubsystem.h"
+#include "SubSystem/JobSystem/Sync/Job.h"
+
+typedef std::weak_ptr<GameObject> GameObjectRef;
+typedef std::shared_ptr<GameObject> GameObjectPtr;
 
 class World : public ISubsystem
 {
 	SUB_CLASS(World)
 public:
 
+	World();
 	bool Initialize() override;
 
 	/** 未実装メソッド */
@@ -32,6 +37,8 @@ public:
 	const std::vector<GameObjectPtr>& GetGameObjects() noexcept;
 
 private:
+
+	Job m_job;
 
 	std::vector<GameObjectPtr> m_gameObjects;
 };

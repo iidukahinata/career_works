@@ -349,6 +349,15 @@
     <ClCompile Include="Program\SubSystem\Audio\FMOD\FMODAudio.cpp">
       <Filter>SubSystem\Audio\FMOD</Filter>
     </ClCompile>
+    <ClCompile Include="Program\SubSystem\Scene\TickFunction.cpp">
+      <Filter>SubSystem\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Scene\TickManager.cpp">
+      <Filter>SubSystem\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Scene\Component\Components\MeshRender.cpp">
+      <Filter>SubSystem\Scene\Component\Conponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\ThirdParty\FMOD\include\fmod.h">
@@ -659,6 +668,12 @@
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Audio\FMOD\FMODAudio.h">
       <Filter>SubSystem\Audio\FMOD</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Scene\TickFunction.h">
+      <Filter>SubSystem\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Scene\TickManager.h">
+      <Filter>SubSystem\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

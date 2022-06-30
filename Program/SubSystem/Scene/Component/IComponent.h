@@ -8,6 +8,7 @@
 
 
 #include "Transform.h"
+#include "../TickFunction.h"
 #include "SubSystem/Core/Common/Macro.h"
 
 class Context;
@@ -23,8 +24,12 @@ class IComponent
 	friend struct ComponentFactory;
 public:
 
+	IComponent();
+
 	virtual void Initialize() {}
 	virtual void Remove() {}
+
+	virtual void Update(double deltaTime) {}
 
 	virtual void Active(bool active);
 	bool IsActive() const noexcept;
@@ -41,9 +46,11 @@ public:
 
 private:
 
-	bool m_active;
-
 	GameObject* m_owner;
+
+	TickComponentFunction m_tickFunction;
+
+	bool m_active;
 };
 
 template<class T>

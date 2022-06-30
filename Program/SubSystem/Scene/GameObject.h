@@ -43,6 +43,9 @@ public:
 	void SetID(uint32_t id) noexcept;
 	uint32_t GetID() const noexcept;
 
+	void AddTickComponent(IComponent* component) noexcept;
+	void RemoveTickComponent(IComponent* component) noexcept;
+
 	Transform& GetTransform() noexcept;
 
 	World* GetOwner() const noexcept;

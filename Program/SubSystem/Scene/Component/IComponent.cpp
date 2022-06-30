@@ -9,6 +9,16 @@
 #include "IComponent.h"
 #include "../GameObject.h"
 
+void TickComponentFunction::Tick(double deltaTime)
+{
+	m_component->Update(deltaTime);
+}
+
+IComponent::IComponent()
+{
+	m_tickFunction.m_component = this;
+}
+
 void IComponent::Active(bool active)
 {
 	m_active = active;

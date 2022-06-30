@@ -2,11 +2,20 @@
 * @file    World.cpp
 * @brief
 *
-* @date	   2022/06/29 2022年度初版
+* @date	   2022/06/30 2022年度初版
 */
 
 
 #include "World.h"
+#include "TickManager.h"
+#include "Factory/GameObjectFactory.h"
+#include "SubSystem/JobSystem/Sync/JobSystem.h"
+
+World::World()
+{
+	m_job.SetFunction([](double deltaTime) { TickManager::Get().Tick(deltaTime); }, FunctionType::Update);
+	JobSystem::Get().RegisterJob(&m_job);
+}
 
 bool World::Initialize()
 {
