@@ -2,23 +2,22 @@
 * @file    EventManager.cpp
 * @brief
 *
-* @date	   2022/06/23 2022年度初版
+* @date	   2022/06/30 2022年度初版
 */
 
 
 #include "EventManager.h"
-#include "SubSystem/JobSystem/Sync/JobSystem.h"
 
 void EventManager::Initialize()
 {
 	// メインスレッドジョブとしてイベントループを登録しているが、他スレッドで処理し処理分担してもいいかもしれない。
 	m_job.SetFunction([this](double) { Tick(); }, FunctionType::Update);
-	JobSystem::Get().RegisterJob(&m_job);
+	m_job.RegisterToJobSystem();
 }
 
 void EventManager::Exit()
 {
-	JobSystem::Get().RemoveJob(&m_job);
+	m_job.UnRegisterFromJobSystem();
 
 	m_eventListeners.clear();
 	m_eventQueues->clear();

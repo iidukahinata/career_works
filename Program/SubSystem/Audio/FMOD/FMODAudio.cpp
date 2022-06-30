@@ -2,14 +2,13 @@
 * @file    FMODAudio.cpp
 * @brief
 *
-* @date	   2022/06/28 2022年度初版
+* @date	   2022/06/30 2022年度初版
 */
 
 
 #include "FMODAudio.h"
 #include "../AudioHelper.h"
 #include "Subsystem/Scene/Component/Components/AudioListener.h"
-#include "SubSystem/JobSystem/Sync/JobSystem.h"
 
 FMOD_VECTOR ToFMODVector(const Math::Vector3& v)
 {

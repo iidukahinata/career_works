@@ -2,13 +2,12 @@
 * @file	   Renderer.h
 * @brief
 *
-* @date	   2022/06/29 2022年度初版
+* @date	   2022/06/30 2022年度初版
 */
 
 
 #include "Renderer.h"
 #include "LightMap.h"
-#include "SubSystem/JobSystem/Sync/JobSystem.h"
 #include "SubSystem/Renderer/TransformCBuffer.h"
 #include "SubSystem/Gui/MyGui.h"
 #include "ThirdParty/imgui/imgui.h"

@@ -9,7 +9,6 @@
 #include "World.h"
 #include "TickManager.h"
 #include "Factory/GameObjectFactory.h"
-#include "SubSystem/JobSystem/Sync/JobSystem.h"
 
 World::World()
 {
