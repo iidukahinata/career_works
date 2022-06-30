@@ -14,7 +14,7 @@
 World::World()
 {
 	m_job.SetFunction([](double deltaTime) { TickManager::Get().Tick(deltaTime); }, FunctionType::Update);
-	JobSystem::Get().RegisterJob(&m_job);
+	m_job.RegisterToJobSystem();
 }
 
 bool World::Initialize()
@@ -34,6 +34,7 @@ void World::LoadScene(std::string_view sceneName, bool isAsync /* = false */) no
 
 	auto obj = CreateAndAddGameObject();
 	obj.lock()->AddComponent("MeshRender");
+	obj.lock()->AddComponent("AudioSpeaker");
 }
 
 void World::SaveScene(std::string_view sceneName) noexcept

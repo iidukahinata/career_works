@@ -19,7 +19,7 @@ FMOD_VECTOR ToFMODVector(const Math::Vector3& v)
 FMODAudio::FMODAudio()
 {
 	m_job.SetFunction([this](double) { Update(); }, FunctionType::Update);
-	JobSystem::Get().RegisterJob(&m_job);
+	m_job.RegisterToJobSystem();
 }
 
 bool FMODAudio::Initialize()

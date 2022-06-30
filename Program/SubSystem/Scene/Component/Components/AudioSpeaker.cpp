@@ -2,7 +2,7 @@
  * @file	AudioSpeaker.cpp
  * @brief
  *
- * @date	2022/06/29 2022年度初版
+ * @date	2022/06/30 2022年度初版
  */
 
 
@@ -10,12 +10,17 @@
 #include "SubSystem/Resource/Resources/Audio/AudioClip.h"
 #include "AudioSpeaker.h"
 
-AudioSpeaker::~AudioSpeaker()
+void AudioSpeaker::Initialize()
 {
-
+	m_tickFunction.RegisterToTickManager();
 }
 
-void AudioSpeaker::Update() noexcept
+void AudioSpeaker::Remove()
+{
+	m_tickFunction.UnRegisterFromTickManager();
+}
+
+void AudioSpeaker::Update(double deltaTime)
 {
 	Math::Vector3 worldPos = GetTransform().GetWoldPosition();
 	m_velocity = worldPos - m_oldPos;

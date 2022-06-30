@@ -11,17 +11,47 @@
 
 void TickFunction::RegisterToTickManager() noexcept
 {
-	TickManager::Get().AddTickFunction(this);
+	if (!IsRegistered())
+	{
+		m_isRegistered = true;
+		TickManager::Get().RegisterTickFunction(this);
+	}
 }
 
 void TickFunction::UnRegisterFromTickManager() noexcept
 {
-	TickManager::Get().RemoveTickFunction(this);
+	if (IsRegistered())
+	{
+		m_isRegistered = false;
+		TickManager::Get().UnRegisterTickFunction(this);
+	}
 }
 
-bool TickFunction::IsRegistered() noexcept
+bool TickFunction::IsRegistered() const noexcept
 {
-	return TickManager::Get().HasTickFunction(this);
+	return m_isRegistered;
+}
+
+void TickFunction::SetEnable(bool enable) noexcept
+{
+	if (m_isEnabled == enable)
+		return;
+
+	if (IsRegistered())
+	{
+		TickManager::Get().RemoveTickFunction(this);
+		m_isEnabled = enable;
+		TickManager::Get().AddTickFunction(this);
+	}
+	else
+	{
+		m_isEnabled = enable;
+	}
+}
+
+bool TickFunction::GetEnable() noexcept
+{
+	return m_isEnabled;
 }
 
 void TickFunction::SetPriority(uint32_t priority) noexcept
@@ -31,14 +61,17 @@ void TickFunction::SetPriority(uint32_t priority) noexcept
 
 	if (IsRegistered())
 	{
-		UnRegisterFromTickManager();
-
+		TickManager::Get().RemoveTickFunction(this);
 		m_priority = priority;
-
-		RegisterToTickManager();
+		TickManager::Get().AddTickFunction(this);
 	}
 	else
 	{
 		m_priority = priority;
 	}
+}
+
+uint32_t TickFunction::GetPriority() const noexcept
+{
+	return m_priority;
 }

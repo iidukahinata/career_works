@@ -13,11 +13,7 @@ enum FunctionType
 {
 	Update,
 
-	LateUpdate,
-
 	Render,
-
-	LateRender,
 
 	None,
 };
@@ -43,7 +39,17 @@ public:
 	*/
 	void SetFunction(Task&& task, FunctionType fincType) noexcept;
 
+	/** 更新処理を行うためには、一度実行しなければならない。*/
+	void RegisterToJobSystem() noexcept;
+
+	/** TickManager に登録した場合、呼び出す必要があります。*/
+	void UnRegisterFromJobSystem() noexcept;
+
+	bool IsRegistered() const noexcept;
+
 private:
+
+	bool m_isRegistered = false;
 
 	// * JobSystem セット後実行させる関数
 	Task m_task;

@@ -7,6 +7,7 @@
 
 
 #include "TickManager.h"
+#include "SubSystem/Core/Common/Common.h"
 
 void TickManager::Tick(double deltaTime) noexcept
 {
@@ -19,23 +20,46 @@ void TickManager::Tick(double deltaTime) noexcept
 	}
 }
 
+void TickManager::RegisterTickFunction(TickFunction* function) noexcept
+{
+	ASSERT(!m_allTickFunctions.contains(function));
+
+	AddTickFunction(function);
+	m_allTickFunctions.insert(function);
+}
+
+void TickManager::UnRegisterTickFunction(TickFunction* function) noexcept
+{
+	RemoveTickFunction(function);
+	m_allTickFunctions.erase(function);
+}
+
 void TickManager::AddTickFunction(TickFunction* function) noexcept
 {
-	const auto id = function->GetPriority();
-	m_tickContainers[id].insert(function);
+	ASSERT(function->IsRegistered());
+
+	if (function->GetEnable())
+	{
+		const auto id = function->GetPriority();
+		m_tickContainers[id].insert(function);
+	}
 }
 
 void TickManager::RemoveTickFunction(TickFunction* function) noexcept
 {
-	const auto id = function->GetPriority();
-	if (m_tickContainers.contains(id))
+	ASSERT(function->IsRegistered());
+
+	if (function->GetEnable())
 	{
-		m_tickContainers[id].erase(function);
+		const auto id = function->GetPriority();
+		if (m_tickContainers.contains(id))
+		{
+			m_tickContainers[id].erase(function);
+		}
 	}
 }
 
 bool TickManager::HasTickFunction(TickFunction* function) noexcept
 {
-	const auto id = function->GetPriority();
-	return m_tickContainers.contains(id) && m_tickContainers[id].contains(function);
+	return m_allTickFunctions.contains(function);
 }

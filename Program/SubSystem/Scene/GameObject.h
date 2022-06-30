@@ -2,7 +2,7 @@
 * @file    GameObject.h
 * @brief
 *
-* @date	   2022/06/29 2022年度初版
+* @date	   2022/06/30 2022年度初版
 */
 #pragma once
 
@@ -32,8 +32,6 @@ public:
 
 	/** 指定名コンポーネントを保持する場合、そのアドレスを返す。*/
 	IComponent* FindComponent(std::string_view name) noexcept;
-
-	void Active(bool active) noexcept;
 
 	/** 各GameObject識別用に使用。*/
 	void SetName(std::string_view name) noexcept;

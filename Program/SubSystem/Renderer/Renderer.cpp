@@ -18,7 +18,7 @@
 Renderer::Renderer()
 {
 	m_job.SetFunction([this](double) { Update(); }, FunctionType::Render);
-	JobSystem::Get().RegisterJob(&m_job);
+	m_job.RegisterToJobSystem();
 }
 
 bool Renderer::Initialize()

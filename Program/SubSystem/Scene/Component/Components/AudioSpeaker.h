@@ -2,7 +2,7 @@
 * @file		AudioSpeaker.h
 * @brief
 *
-* @date		2022/06/29 2022年度初版
+* @date		2022/06/30 2022年度初版
 */
 #pragma once
 
@@ -12,12 +12,13 @@
 
 class AudioSpeaker : public IComponent
 {
+	SUB_CLASS(AudioSpeaker)
 public:
 
-	~AudioSpeaker();
+	void Initialize() override;
+	void Remove() override;
 
-	/* 3D 処理を使用しない場合は使用する必要はありません。*/
-	void Update() noexcept;
+	void Update(double deltaTime) override;
 
 	void Play() noexcept;
 	void PlayOneShot(class AudioClip* clip, float volume = 1.f) const noexcept;

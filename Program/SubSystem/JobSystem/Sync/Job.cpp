@@ -36,3 +36,26 @@ void Job::SetFunction(Task&& task, FunctionType fincType) noexcept
 	m_funcType = fincType;
 	m_task = std::forward<Task>(task);
 }
+
+void Job::RegisterToJobSystem() noexcept
+{
+	if (IsRegistered())
+	{
+		m_isRegistered = true;
+		JobSystem::Get().RegisterJob(this);
+	}
+}
+
+void Job::UnRegisterFromJobSystem() noexcept
+{
+	if (IsRegistered())
+	{
+		m_isRegistered = false;
+		JobSystem::Get().RemoveJob(this);
+	}
+}
+
+bool Job::IsRegistered() const noexcept
+{
+	return m_isRegistered;
+}

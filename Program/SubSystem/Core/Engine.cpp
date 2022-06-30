@@ -60,11 +60,9 @@ long Engine::MainLoop()
 		if (timer->ReachedNextFrame())
 		{
 			jobSystem.Execute(timer->GetDeltaTime(), FunctionType::Update);
-			jobSystem.Execute(timer->GetDeltaTime(), FunctionType::LateUpdate);
 
 			// renderer thread ‚Æ‚µ‚Ä•ª‚¯‚é—\’è‚Ì‚½‚ß•ª—£‚µ‚Ä‚¢‚éB
 			jobSystem.Execute(timer->GetDeltaTime(), FunctionType::Render);
-			jobSystem.Execute(timer->GetDeltaTime(), FunctionType::LateRender);
 		}
 	}
 
