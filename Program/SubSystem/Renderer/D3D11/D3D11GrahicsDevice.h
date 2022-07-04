@@ -25,7 +25,7 @@ public:
 		return instance;
 	}
 
-	bool Init();
+	bool Init(HWND hWnd, UINT screenWidth, UINT screenheight, bool isFullscreen);
 
 	/** ‰æ–ÊƒNƒŠƒA */
 	void Clear(const Math::Vector4& color);

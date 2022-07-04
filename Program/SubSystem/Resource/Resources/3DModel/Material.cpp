@@ -2,7 +2,7 @@
 * @file    Material.cpp
 * @brief
 *
-* @date	   2022/06/27 2022年度初版
+* @date	   2022/07/01 2022年度初版
 */
 
 
@@ -14,8 +14,8 @@
 Material::Material()
 {
 	// 仮設定
-	SetVSShader("assets/Shader/PBR_VS.cso");
-	SetPSShader("assets/Shader/PBR_PS.cso");
+	SetVSShader("assets/Resource/Shader/PBR_VS.cso");
+	SetPSShader("assets/Resource/Shader/PBR_PS.cso");
 
 	// サンプラー生成
 	m_samplerState.Create(
@@ -27,10 +27,7 @@ Material::Material()
 
 void Material::SaveToFile(std::string_view filePath)
 {
-	if (m_textures.size() == 0)
-		return;
-
-	auto path = ConvertProprietaryFormat(filePath);
+	const auto path = ConvertProprietaryFormat(filePath);
 
 	FileStream fileStream;
 	if (!fileStream.CreateFileAndLoad(path, OpenMode::Write_Mode))
@@ -45,7 +42,7 @@ void Material::SaveToFile(std::string_view filePath)
 
 bool Material::LoadFromFile(std::string_view filePath)
 {
-	auto path = ConvertProprietaryFormat(filePath);
+	const auto path = ConvertProprietaryFormat(filePath);
 
 	FileStream fileStream(path, OpenMode::Read_Mode);
 	if (!fileStream.IsOpen())
@@ -60,11 +57,15 @@ bool Material::LoadFromFile(std::string_view filePath)
 		fileStream.Read(&path);
 	};
 
-	auto resoureManager = GetContext()->GetSubsystem<ResourceManager>();
-	for (auto& path : texturePaths)
+	fileStream.Close();
+
+	if (const auto resoureManager = GetContext()->GetSubsystem<ResourceManager>())
 	{
-		AddTexture(resoureManager->Load<Texture>(path));
-	}
+		for (auto& path : texturePaths)
+		{
+			AddTexture(resoureManager->Load<Texture>(path));
+		}
+	};
 
 	return m_textures.empty() == false;
 }
@@ -85,13 +86,13 @@ void Material::SetVSShader(std::string_view name)
 		{ "BINORMAL" , 0, DXGI_FORMAT_R32G32B32_FLOAT   , 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 	};
 
-	m_vertexShader.Create(name);
+	m_vertexShader.Create(name, nullptr);
 	m_inputLayout.Create(vertexDesc, ARRAYSIZE(vertexDesc), m_vertexShader.GetBlob());
 }
 
 void Material::SetPSShader(std::string_view name)
 {
-	m_pixelShader.Create(name);
+	m_pixelShader.Create(name, nullptr);
 }
 
 void Material::ShaderSet() noexcept

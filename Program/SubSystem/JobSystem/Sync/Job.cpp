@@ -13,10 +13,7 @@
 Job::~Job()
 {
 	// クライアント側で Remove されていなかった場合
-	if (m_funcType != FunctionType::None)
-	{
-		JobSystem::Get().RemoveJob(this);
-	}
+	UnRegisterFromJobSystem();
 }
 
 Job::Job(Task&& task, FunctionType type) noexcept
@@ -39,7 +36,7 @@ void Job::SetFunction(Task&& task, FunctionType fincType) noexcept
 
 void Job::RegisterToJobSystem() noexcept
 {
-	if (IsRegistered())
+	if (!IsRegistered())
 	{
 		m_isRegistered = true;
 		JobSystem::Get().RegisterJob(this);

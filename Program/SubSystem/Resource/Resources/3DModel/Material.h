@@ -2,7 +2,7 @@
 * @file    Material.h
 * @brief
 *
-* @date	   2022/06/27 2022年度初版
+* @date	   2022/07/01 2022年度初版
 */
 #pragma once
 
@@ -28,6 +28,7 @@ public:
 
 	void AddTexture(Texture* texture) noexcept;
 
+	/** 各シェーダー設定の変更。*/
 	void SetVSShader(std::string_view name);
 	void SetPSShader(std::string_view name);
 

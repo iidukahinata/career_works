@@ -22,11 +22,17 @@ bool World::Initialize()
 	return true;
 }
 
+void World::Shutdown()
+{
+	m_job.UnRegisterFromJobSystem();
+}
+
 void World::LoadScene(std::string_view sceneName, bool isAsync /* = false */) noexcept
 {
 	auto camera = CreateAndAddGameObject();
 	camera.lock()->AddComponent("Camera");
 	camera.lock()->AddComponent("AudioListener");
+	camera.lock()->AddComponent("PostProcessEffect");
 
 	auto directionalLight = CreateAndAddGameObject();
 	camera.lock()->AddComponent("Light");

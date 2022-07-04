@@ -29,9 +29,7 @@ void RenderObject::Remove()
 void RenderObject::Active(bool active)
 {
 	if (IsActive() == active)
-	{
 		return;
-	}
 
 	IComponent::Active(active);
 	if (active)

@@ -1,4 +1,4 @@
-#include "Core.hlsli"
+#include "../Core/Core.hlsli"
 #include "Blur.hlsli"
 
 VS_OUT main(VS_IN input)

@@ -99,6 +99,8 @@ bool Input::Initialize()
 
 void Input::Shutdown()
 {
+	m_job.UnRegisterFromJobSystem();
+
 	m_previousKeyState.clear();
 }
 

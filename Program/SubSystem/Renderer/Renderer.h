@@ -2,15 +2,18 @@
 * @file	   Renderer.h
 * @brief
 *
-* @date	   2022/06/29 2022年度初版
+* @date	   2022/07/01 2022年度初版
 */
 #pragma once
 
 
+#include <set>
 #include "SubSystem/Core/ISubsystem.h"
 #include "SubSystem/JobSystem/Sync/Job.h"
+#include "Geometry/Quad.h"
 
 class Light;
+class GBuffer;
 class LightMap;
 class RenderObject;
 
@@ -34,14 +37,17 @@ private:
 
 	void Update() noexcept;
 
-	void BeginFream();
-	void EndFream();
+	void FirstPass();
+	void SecondPass();
 
 private:
 
 	Job m_job;
 
+	Quad m_quad;
+
+	std::unique_ptr<GBuffer> m_gbuffer;
 	std::unique_ptr<LightMap> m_lightMap;
 
-	std::vector<RenderObject*> m_renderObjects;
+	std::set<RenderObject*> m_renderObjects;
 };

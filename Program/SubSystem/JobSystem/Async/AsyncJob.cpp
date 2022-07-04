@@ -2,11 +2,12 @@
 * @file		AsyncJob.cpp
 * @brief
 *
-* @date		2022/06/16 2022年度初版
+* @date		2022/06/30 2022年度初版
 */
 
 
 #include "AsyncJob.h"
+#include "AsyncJobSystem.h"
 #include "SubSystem/Core/Common/Common.h"
 
 void AsyncJob::Execute() noexcept
@@ -26,4 +27,9 @@ void AsyncJob::SetFunction(Task&& task) noexcept
 bool AsyncJob::IsTaskFinish() const noexcept
 {
 	return m_finish;
+}
+
+void AsyncJob::AddToJobSystem()
+{
+	AsyncJobSystem::Get().AddTask(this);
 }

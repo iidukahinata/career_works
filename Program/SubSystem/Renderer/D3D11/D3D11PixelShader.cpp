@@ -10,12 +10,13 @@
 
 bool D3D11PixelShader::Create(
 	std::string_view shader,
+	D3D_SHADER_MACRO* macro,
 	std::string_view entrypoint /* = "main" */,
 	std::string_view target /* = "ps_5_0" */
 ) noexcept
 {
 	// shader compile
-	if (!CompileFromFile(shader, entrypoint, target))
+	if (!CompileFromFile(shader, macro, entrypoint, target))
 	{
 		return false;
 	}

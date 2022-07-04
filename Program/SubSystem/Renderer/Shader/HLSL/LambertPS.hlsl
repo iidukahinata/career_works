@@ -1,5 +1,5 @@
-#include "Light.hlsli"
-#include "Core.hlsli"
+#include "Core/Core.hlsli"
+#include "Core/Light.hlsli"
 
 Texture2D g_texture;
 sampler g_sampler;

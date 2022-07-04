@@ -2,7 +2,7 @@
 * @file    Model.cpp
 * @brief
 *
-* @date	   2022/06/27 2022年度初版
+* @date	   2022/07/01 2022年度初版
 */
 
 
@@ -21,22 +21,18 @@ void Model::SaveToFile(std::string_view filePath)
 	if (!fileStream.IsOpen())
 		return;
 
+	// Mesh 書き込み
 	fileStream.Write(m_meshes.size());
 	for (auto& mesh : m_meshes)
 	{
-		fileStream.Write(mesh.GetVertices());
-		fileStream.Write(mesh.GetIndices());
+		fileStream.Write(mesh->GetName());
 	};
 
+	// Material 書き込み
 	fileStream.Write(m_materials.size());
 	for (auto& material : m_materials)
 	{
 		fileStream.Write(material->GetName());
-	};
-
-	for (auto& material : m_materials)
-	{
-		material->SaveToFile(material->GetName());
 	};
 }
 
@@ -48,46 +44,47 @@ bool Model::LoadFromFile(std::string_view filePath)
 	if (!fileStream.IsOpen())
 		return false;
 
-	size_t numMesh;
+	// Mesh 読み込み
+	size_t numMesh = 0;
 	fileStream.Read(&numMesh);
 
-	for (int i = 0; i < numMesh; ++i)
+	std::vector<std::string> meshPaths(numMesh);
+	for (auto& path : meshPaths)
 	{
-		std::vector<VertexBump3D> vertices;
-		std::vector<uint32_t> indices;
-
-		fileStream.Read(&vertices);
-		fileStream.Read(&indices);
-
-		AddMesh(std::move(vertices), std::move(indices));
+		fileStream.Read(&path);
 	}
 
-	size_t numMaterial;
+	// Material 読み込み
+	size_t numMaterial = 0;
 	fileStream.Read(&numMaterial);
 
-	std::vector<std::string> names(numMaterial);
-	for (int i = 0; i < numMaterial; ++i)
+	std::vector<std::string> materialPaths(numMaterial);
+	for (auto& path : materialPaths)
 	{
-		fileStream.Read(&names[i]);
+		fileStream.Read(&path);
 	}
 
-	auto resoureManager = GetContext()->GetSubsystem<ResourceManager>();
-	for (int i = 0; i < numMaterial; ++i)
+	fileStream.Close();
+
+	if (const auto resoureManager = GetContext()->GetSubsystem<ResourceManager>())
 	{
-		AddMaterial(resoureManager->Load<Material>(names[i]));
+		for (auto& path : meshPaths)
+		{
+			AddMesh(resoureManager->Load<Mesh>(path));
+		}
+
+		for (auto& path : materialPaths)
+		{
+			AddMaterial(resoureManager->Load<Material>(path));
+		}
 	}
 
 	return m_meshes.empty() == false;
 }
 
-void Model::AddMesh(std::vector<VertexBump3D>&& vertices, std::vector<uint32_t>&& indices)
+void Model::AddMesh(Mesh* mesh) noexcept
 {
-	m_meshes.push_back(Mesh(vertices, indices));
-}
-
-void Model::AddMesh(const std::vector<VertexBump3D>& vertices, const std::vector<uint32_t>& indices)
-{
-	m_meshes.push_back(Mesh(vertices, indices));
+	m_meshes.emplace_back(mesh);
 }
 
 void Model::AddMaterial(Material* material) noexcept
@@ -104,9 +101,9 @@ void Model::Render()
 
 	for (auto& mesh : m_meshes)
 	{
-		mesh.Render();
-
-		context->DrawIndexed(static_cast<UINT>(mesh.GetIndices().size()), 0, 0);
+		mesh->Render();
+	
+		context->DrawIndexed(static_cast<UINT>(mesh->GetIndices().size()), 0, 0);
 	}
 }
 

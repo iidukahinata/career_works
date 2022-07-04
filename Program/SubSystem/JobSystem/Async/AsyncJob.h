@@ -2,7 +2,7 @@
 * @file		AsyncJob.h
 * @brief
 *
-* @date		2022/06/25 2022年度初版
+* @date		2022/06/30 2022年度初版
 */
 #pragma once
 
@@ -24,6 +24,9 @@ public:
 	void SetFunction(T* ptr, Func task) noexcept;
 
 	bool IsTaskFinish() const noexcept;
+
+	/** 実行する処理をタスクに追加。*/
+	void AddToJobSystem();
 
 private:
 

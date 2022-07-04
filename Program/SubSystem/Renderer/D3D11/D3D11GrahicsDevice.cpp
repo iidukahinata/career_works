@@ -2,22 +2,16 @@
 * @file	   D3D11GrahicsDevice.cpp
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/07/01 2022年度初版
 */
 
 
 
 #include "D3D11GrahicsDevice.h"
 #include "RenderStates.h"
-#include "SubSystem/Window/Window.h"
 
-bool D3D11GrahicsDevice::Init()
+bool D3D11GrahicsDevice::Init(HWND hWnd, UINT screenWidth, UINT screenHeight, bool isFullscreen)
 {
-	auto hWnd = Window::Get().GetHandle();
-
-	auto screenWidth = Window::Get().GetWindowWidth();
-	auto screenHeight = Window::Get().GetWindowHeight();
-
 	HRESULT  hr;
 	Microsoft::WRL::ComPtr<IDXGIFactory> factory;
 	Microsoft::WRL::ComPtr<IDXGIAdapter> adapter;
@@ -143,7 +137,7 @@ bool D3D11GrahicsDevice::Init()
 
 	sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 
-	if (Window::Get().IsFullscreen()) {
+	if (isFullscreen) {
 		sd.Windowed = FALSE;
 	}
 	else {

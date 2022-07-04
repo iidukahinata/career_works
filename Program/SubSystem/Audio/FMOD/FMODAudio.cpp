@@ -41,6 +41,8 @@ void FMODAudio::Shutdown()
 		m_system->close();
 		m_system->release();
 	}
+
+	m_job.UnRegisterFromJobSystem();
 }
 
 void FMODAudio::Update() const noexcept

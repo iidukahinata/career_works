@@ -22,15 +22,15 @@ public:
 	void Initialize() override;
 	void Remove() override;
 
+	/** 各描画処理を記述。*/
+	virtual void Render() = 0;
+
 	virtual void Active(bool active) override;
 
 protected:
 
 	virtual void Do_Initialize() {}
 	virtual void Do_Remove() {}
-
-	/** 各描画処理を記述。*/
-	virtual void Render() = 0;
 
 	void RegisterToRenderer();
 	void UnRegisterFromRenderer();
@@ -45,12 +45,13 @@ class MeshRender : public RenderObject
 	SUB_CLASS(MeshRender)
 public:
 
+	void Render() override;
+
 	void SetModel(std::string_view name) noexcept;
 
 private:
 
 	void Do_Initialize() override;
-	void Render() override;
 
 private:
 

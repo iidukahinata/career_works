@@ -9,8 +9,8 @@
 */
 
 
-#include "Core.hlsli"
-#include "Light.hlsli"
+#include "Core/Core.hlsli"
+#include "Core/Light.hlsli"
 
 Texture2D g_texture : register(t0);
 Texture2D g_normalMap : register(t1);

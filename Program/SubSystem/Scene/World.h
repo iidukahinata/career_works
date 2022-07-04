@@ -22,7 +22,9 @@ class World : public ISubsystem
 public:
 
 	World();
+
 	bool Initialize() override;
+	void Shutdown() override;
 
 	/** –¢À‘•ƒƒ\ƒbƒh */
 	void LoadScene(std::string_view sceneName, bool isAsync = false) noexcept;

@@ -2,7 +2,7 @@
 * @file    Model.h
 * @brief
 *
-* @date	   2022/06/27 2022年度初版
+* @date	   2022/07/01 2022年度初版
 */
 #pragma once
 
@@ -22,9 +22,7 @@ public:
 	/** 独自モデルデータを読み込みする。*/
 	bool LoadFromFile(std::string_view filePath) override;
 
-	void AddMesh(std::vector<VertexBump3D>&& vertices, std::vector<uint32_t>&& indices);
-	void AddMesh(const std::vector<VertexBump3D>& vertices, const std::vector<uint32_t>& indices);
-
+	void AddMesh(Mesh* mesh) noexcept;
 	void AddMaterial(Material* material) noexcept;
 
 	void Render();
@@ -38,6 +36,7 @@ private:
 
 private:
 
-	std::vector<Mesh> m_meshes;
+	Mesh m_mesh;
+	std::vector<Mesh*> m_meshes;
 	std::vector<Material*> m_materials;
 };

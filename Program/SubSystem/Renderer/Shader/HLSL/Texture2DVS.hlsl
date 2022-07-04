@@ -1,4 +1,4 @@
-#include "Core.hlsli"
+#include "Core/Core.hlsli"
 
 struct VS_IN {
 	float4 pos : POSITION;
@@ -15,9 +15,6 @@ VS_OUT main(VS_IN input)
 	VS_OUT output;
 
 	output.pos = mul(input.pos, world);
-	output.pos = mul(output.pos, view);
-	output.pos = mul(output.pos, projection);
-
 	output.tex = input.tex;
 
 	return output;

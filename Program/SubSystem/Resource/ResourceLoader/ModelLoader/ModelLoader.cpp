@@ -2,7 +2,7 @@
 * @file		ModelLoader.cpp
 * @brief
 *
-* @date		2022/06/27 2022年度初版
+* @date		2022/07/01 2022年度初版
 */
 
 
@@ -14,6 +14,11 @@
 #include "SubSystem/Core/Context.h"
 #include "SubSystem/Core/IO/FileSystem.h"
 #include "SubSystem/Resource/ResourceManager.h"
+
+ModelLoader::ModelLoader()
+{
+	m_resourceManager = Context::Get().GetSubsystem<ResourceManager>();
+}
 
 bool ModelLoader::Load(Model* model, std::string_view filePath)
 {
@@ -129,18 +134,19 @@ void ModelLoader::LoadMesh(aiMesh* aiMesh)
 		}
 	}
 
+	Mesh* mesh = m_resourceManager->Load<Mesh>(aiMesh->mName.C_Str());
+	mesh->Construct(std::move(vertices), std::move(indices));
+	m_model->AddMesh(mesh);
+
 	if (aiMesh->mMaterialIndex >= 0)
 	{
 		LoadMaterial(m_aiScene->mMaterials[aiMesh->mMaterialIndex]);
 	}
-
-	m_model->AddMesh(std::move(vertices), std::move(indices));
 }
 
 void ModelLoader::LoadMaterial(aiMaterial* aiMaterial)
 {
-	auto resourceManager = Context::Get().GetSubsystem<ResourceManager>();
-	Material* material = resourceManager->Load<Material>(aiMaterial->GetName().C_Str());
+	Material* material = m_resourceManager->Load<Material>(aiMaterial->GetName().C_Str());
 
 	for (auto textures = LoadTextures(aiMaterial); auto texture : textures)
 	{
@@ -151,8 +157,6 @@ void ModelLoader::LoadMaterial(aiMaterial* aiMaterial)
 
 std::vector<Texture*> ModelLoader::LoadTextures(aiMaterial* aiMaterial)
 {
-	auto resourceManager = Context::Get().GetSubsystem<ResourceManager>();
-
 	std::vector<Texture*> textures;
 	// マテリアルからテクスチャ個数を取得し(基本は1個)ループする
 	for (unsigned int i = 0; i < aiMaterial->GetTextureCount(aiTextureType_DIFFUSE); ++i)
@@ -165,7 +169,7 @@ std::vector<Texture*> ModelLoader::LoadTextures(aiMaterial* aiMaterial)
 		path = path.substr(path.find_last_of("\\/"), path.length() - 1);
 		auto filePath = FileSystem::Canonical(path);
 
-		textures.push_back(resourceManager->Load<Texture>(filePath));
+		textures.push_back(m_resourceManager->Load<Texture>(filePath));
 	}
 
 	return textures;

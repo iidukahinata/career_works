@@ -2,14 +2,18 @@
 * @file    ComponentFactory.cpp
 * @brief
 *
-* @date	   2022/06/29 2022年度初版
+* @date	   2022/07/01 2022年度初版
 */
 
 
 #include "ComponentFactory.h"
+
+// Rendering
 #include "../Component/Components/Camera.h"
-#include "../Component/Components/RenderObject.h"
 #include "../Component/Components/Light.h"
+#include "../Component/Components/RenderObject.h"
+
+// Audio
 #include "../Component/Components/AudioListener.h"
 #include "../Component/Components/AudioSpeaker.h"
 
@@ -22,11 +26,11 @@ ComponentPtr ComponentFactory::Create(GameObject* gameObject, std::string_view n
 
     switch (type.Hash)
     {
-    CASE_CREATE_COMPONENT(Camera        , component);
-    CASE_CREATE_COMPONENT(MeshRender    , component);
-    CASE_CREATE_COMPONENT(Light         , component);
-    CASE_CREATE_COMPONENT(AudioListener , component);
-    CASE_CREATE_COMPONENT(AudioSpeaker  , component);
+    CASE_CREATE_COMPONENT(Light             , component);
+    CASE_CREATE_COMPONENT(Camera            , component);
+    CASE_CREATE_COMPONENT(MeshRender        , component);
+    CASE_CREATE_COMPONENT(AudioListener     , component);
+    CASE_CREATE_COMPONENT(AudioSpeaker      , component);
     default: break;
     }
 

@@ -8,10 +8,10 @@
 
 #include "D3D11Shader.h"
 
-bool D3D11VertexShader::Create(std::string_view shader, std::string_view entrypoint /* = "main" */, std::string_view target /* = "vs_5_0" */) noexcept
+bool D3D11VertexShader::Create(std::string_view shader, D3D_SHADER_MACRO* macro, std::string_view entrypoint /* = "main" */, std::string_view target /* = "vs_5_0" */) noexcept
 {
 	// shader compile
-	if (!CompileFromFile(shader, entrypoint, target))
+	if (!CompileFromFile(shader, macro, entrypoint, target))
 	{
 		return false;
 	}

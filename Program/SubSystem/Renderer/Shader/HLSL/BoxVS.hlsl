@@ -1,4 +1,4 @@
-#include "Core.hlsli"
+#include "Core/Core.hlsli"
 
 struct VS_IN {
 	float4 pos : POSITION;

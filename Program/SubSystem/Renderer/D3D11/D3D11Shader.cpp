@@ -10,7 +10,7 @@
 #include "D3D11Shader.h"
 #include "SubSystem/Core/Common/Tools.h"
 
-bool D3D11Shader::CompileFromFile(std::string_view shader, std::string_view entrypoint, std::string_view traget) noexcept
+bool D3D11Shader::CompileFromFile(std::string_view shader, D3D_SHADER_MACRO* macro, std::string_view entrypoint, std::string_view traget) noexcept
 {
 	UINT flags = D3DCOMPILE_ENABLE_STRICTNESS;
 #if defined( DEBUG ) || defined( _DEBUG )
@@ -34,7 +34,7 @@ bool D3D11Shader::CompileFromFile(std::string_view shader, std::string_view entr
 		Microsoft::WRL::ComPtr<ID3DBlob> errorBlob;
 		hr = D3DCompileFromFile(
 			ToWstring(shader).data(),
-			nullptr,
+			macro,
 			D3D_COMPILE_STANDARD_FILE_INCLUDE,
 			entrypoint.data(),
 			traget.data(),
