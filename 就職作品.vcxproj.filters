@@ -238,9 +238,6 @@
     <ClCompile Include="Program\SubSystem\Core\IO\FileStream.cpp">
       <Filter>SubSystem\Core\I/O</Filter>
     </ClCompile>
-    <ClCompile Include="Program\SubSystem\Core\Common\COM.cpp">
-      <Filter>SubSystem\Core\Common</Filter>
-    </ClCompile>
     <ClCompile Include="Program\SubSystem\Core\Common\Tools.cpp">
       <Filter>SubSystem\Core\Common</Filter>
     </ClCompile>
@@ -372,6 +369,9 @@
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Core\Common\Memory.cpp">
       <Filter>SubSystem\Core\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\JobSystem\Async\COM.cpp">
+      <Filter>SubSystem\JobSystem\Async</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -540,12 +540,6 @@
     <ClInclude Include="Program\SubSystem\Core\IO\FileStream.h">
       <Filter>SubSystem\Core\I/O</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Core\Common\COM.h">
-      <Filter>SubSystem\Core\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Core\Common\Octree.h">
-      <Filter>SubSystem\Core\Common</Filter>
-    </ClInclude>
     <ClInclude Include="Program\SubSystem\Core\Common\Tools.h">
       <Filter>SubSystem\Core\Common</Filter>
     </ClInclude>
@@ -695,6 +689,9 @@
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Core\Common\Memory.h">
       <Filter>SubSystem\Core\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\JobSystem\Async\COM.h">
+      <Filter>SubSystem\JobSystem\Async</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
