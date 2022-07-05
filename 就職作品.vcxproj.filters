@@ -373,6 +373,9 @@
     <ClCompile Include="Program\SubSystem\JobSystem\Async\COM.cpp">
       <Filter>SubSystem\JobSystem\Async</Filter>
     </ClCompile>
+    <ClCompile Include="Program\SubSystem\Core\Common\Allocator.cpp">
+      <Filter>SubSystem\Core\Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\ThirdParty\FMOD\include\fmod.h">
@@ -692,6 +695,9 @@
     </ClInclude>
     <ClInclude Include="Program\SubSystem\JobSystem\Async\COM.h">
       <Filter>SubSystem\JobSystem\Async</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Core\Common\Allocator.h">
+      <Filter>SubSystem\Core\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

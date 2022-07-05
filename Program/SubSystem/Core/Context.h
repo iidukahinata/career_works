@@ -8,7 +8,8 @@
 
 
 #include <map>
-#include <memory>
+//#include <memory>
+#include "Common/Memory.h"
 #include "SubSystem/Core/ISubsystem.h"
 
 class Context
@@ -26,8 +27,8 @@ public:
 	void Release();
 
 	/** 登録した Subsystem は取得時 指定 Key クラスとして取得するため継承関係になければならない。*/
-	template<class Key>
-	void RegisterSubsystem(std::unique_ptr<ISubsystem> subsystem) noexcept;
+	template<class Key, class Subsystem>
+	void RegisterSubsystem(UniquePtr<Subsystem> subsystem) noexcept;
 
 	/**
 	* コンテナから指定サブシステムの取得
@@ -46,13 +47,13 @@ private:
 private:
 
 	// * Type -> <ハッシュ、システムオブジェクト>
-	std::map<uint32_t, std::unique_ptr<ISubsystem>> m_subsystems;
+	std::map<uint32_t, UniquePtr<ISubsystem>> m_subsystems;
 };
 
-template<class Key>
-FORCEINLINE void Context::RegisterSubsystem(std::unique_ptr<ISubsystem> subsystem) noexcept
+template<class Key, class Subsystem>
+FORCEINLINE void Context::RegisterSubsystem(UniquePtr<Subsystem> subsystem) noexcept
 {
-	RegisterSubsystem(Key::TypeData.Hash, subsystem.release());
+	RegisterSubsystem(Key::TypeData.Hash, subsystem.Release());
 }
 
 template<class Key>

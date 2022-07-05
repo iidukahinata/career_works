@@ -1,10 +1,23 @@
+/**
+* @file    Tools.h
+* @brief   ï÷óòä÷êî
+*
+* @date	   2022/06/25 2022îNìxèâî≈
+*/
+
+
 #include "Memory.h"
+#include "Allocator.h"
 
-void* Malloc(uint32_t size) noexcept
+namespace Memory
 {
-    return nullptr;
-}
+	void* Malloc(uint32_t size) noexcept
+	{
+		return nullptr;
+	}
 
-void Free(void* ptr) noexcept
-{
+	void Free(void* ptr) noexcept
+	{
+	}
+
 }

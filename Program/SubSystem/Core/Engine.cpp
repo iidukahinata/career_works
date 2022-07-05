@@ -103,12 +103,12 @@ void Engine::RegisterSubsystemsToContainer() noexcept
 {
 	auto& context = Context::Get();
 
-	context.RegisterSubsystem<Timer>(std::make_unique<Timer>());
-	context.RegisterSubsystem<Input>(std::make_unique<Input>());
-	context.RegisterSubsystem<Audio>(std::make_unique<FMODAudio>());
-	context.RegisterSubsystem<ResourceManager>(std::make_unique<ResourceManager>());
-	context.RegisterSubsystem<World>(std::make_unique<World>());
-	context.RegisterSubsystem<Renderer>(std::make_unique<Renderer>());
+	context.RegisterSubsystem<Timer>(MakeUnique<Timer>());
+	context.RegisterSubsystem<Input>(MakeUnique<Input>());
+	context.RegisterSubsystem<Audio>(MakeUnique<FMODAudio>());
+	context.RegisterSubsystem<ResourceManager>(MakeUnique<ResourceManager>());
+	context.RegisterSubsystem<World>(MakeUnique<World>());
+	context.RegisterSubsystem<Renderer>(MakeUnique<Renderer>());
 }
 
 bool Engine::InitializeSubsystems() noexcept

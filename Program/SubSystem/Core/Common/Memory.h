@@ -1,15 +1,24 @@
+/**
+* @file    Tools.h
+* @brief   ï÷óòä÷êî
+*
+* @date	   2022/06/25 2022îNìxèâî≈
+*/
 #pragma once
 
 
 #include "Macro.h"
 
-void* Malloc(uint32_t size) noexcept;
-void Free(void* ptr) noexcept;
+namespace Memory
+{
+	void* Malloc(uint32_t size) noexcept;
+	void Free(void* ptr) noexcept;
+}
 
 template<class T, class ...Args>
 T* NewObject(Args... args)
 {
-	void* ptr = Malloc(sizeof(T));
+	void* ptr = Memory::Malloc(sizeof(T));
 	return new (ptr) T(args...);
 }
 
@@ -17,7 +26,7 @@ template<class T>
 void DeleteObject(T* ptr)
 {
 	ptr->~T();
-	Free(ptr);
+	Memory::Free(ptr);
 }
 
 template<class T>
@@ -70,7 +79,7 @@ public:
 	{
 		if (m_data)
 		{
-			FreeObject(m_data);
+			DeleteObject(m_data);
 		}
 
 		m_data = ptr;
