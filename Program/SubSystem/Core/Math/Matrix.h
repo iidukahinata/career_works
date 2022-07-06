@@ -168,7 +168,7 @@ namespace Math
 			return DirectX::XMLoadFloat4x4(this);
 		}
 
-		std::string_view ToString() const noexcept
+		String ToString() const noexcept
 		{
 			char buffer[256];
 			// 自身のデータを文字列に変換する

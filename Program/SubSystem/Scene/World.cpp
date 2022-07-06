@@ -27,7 +27,7 @@ void World::Shutdown()
 	m_job.UnRegisterFromJobSystem();
 }
 
-void World::LoadScene(std::string_view sceneName, bool isAsync /* = false */) noexcept
+void World::LoadScene(String_View sceneName, bool isAsync /* = false */) noexcept
 {
 	auto camera = CreateAndAddGameObject();
 	camera.lock()->AddComponent("Camera");
@@ -42,7 +42,7 @@ void World::LoadScene(std::string_view sceneName, bool isAsync /* = false */) no
 	obj.lock()->AddComponent("AudioSpeaker");
 }
 
-void World::SaveScene(std::string_view sceneName) noexcept
+void World::SaveScene(String_View sceneName) noexcept
 {
 
 }
@@ -63,7 +63,7 @@ void World::AddGameObject(GameObjectPtr gameObject) noexcept
 	}
 }
 
-GameObjectRef World::GetGameObjectByName(std::string_view name) const noexcept
+GameObjectRef World::GetGameObjectByName(String_View name) const noexcept
 {
 	for (const auto& gameObject : m_gameObjects)
 	{
@@ -97,7 +97,7 @@ void World::RemoveGameObject(GameObject* gameObject) noexcept
 	m_gameObjects.pop_back();
 }
 
-const std::vector<GameObjectPtr>& World::GetGameObjects() noexcept
+const Vector<GameObjectPtr>& World::GetGameObjects() noexcept
 {
 	return m_gameObjects;
 }

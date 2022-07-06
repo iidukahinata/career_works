@@ -2,12 +2,11 @@
 * @file    Material.h
 * @brief
 *
-* @date	   2022/07/01 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
 
-#include <string_view>
 #include "Texture.h"
 #include "SubSystem/Renderer/D3D11/D3D11Shader.h"
 #include "SubSystem/Renderer/D3D11/D3D11InputLayout.h"
@@ -21,28 +20,28 @@ public:
 	Material();
 
 	/** 独自モデルデータとして保存させる。*/
-	void SaveToFile(std::string_view filePath) override;
+	void SaveToFile(String_View filePath) override;
 
 	/** 独自モデルデータを読み込みする。*/
-	bool LoadFromFile(std::string_view filePath) override;
+	bool LoadFromFile(String_View filePath) override;
 
 	void AddTexture(Texture* texture) noexcept;
 
 	/** 各シェーダー設定の変更。*/
-	void SetVSShader(std::string_view name);
-	void SetPSShader(std::string_view name);
+	void SetVSShader(String_View name);
+	void SetPSShader(String_View name);
 
 	void ShaderSet() noexcept;
 
 protected:
 
-	bool Do_Load(std::string_view filePath) override { return true; };
+	bool Do_Load(String_View filePath) override { return true; };
 
-	std::string ConvertProprietaryFormat(std::string_view filePath) const noexcept;
+	std::string ConvertProprietaryFormat(String_View filePath) const noexcept;
 
 private:
 
-	std::vector<Texture*> m_textures;
+	Vector<Texture*> m_textures;
 
 	// * shader object
 	D3D11VertexShader m_vertexShader;

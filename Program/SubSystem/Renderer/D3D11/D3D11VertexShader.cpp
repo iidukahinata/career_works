@@ -2,13 +2,13 @@
 * @file    D3D11VertexShader.cpp
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 
 
 #include "D3D11Shader.h"
 
-bool D3D11VertexShader::Create(std::string_view shader, D3D_SHADER_MACRO* macro, std::string_view entrypoint /* = "main" */, std::string_view target /* = "vs_5_0" */) noexcept
+bool D3D11VertexShader::Create(String_View shader, D3D_SHADER_MACRO* macro, String_View entrypoint /* = "main" */, String_View target /* = "vs_5_0" */) noexcept
 {
 	// shader compile
 	if (!CompileFromFile(shader, macro, entrypoint, target))
@@ -25,7 +25,7 @@ bool D3D11VertexShader::Create(std::string_view shader, D3D_SHADER_MACRO* macro,
 
 	if (FAILED(hr))
 	{
-		LOG_ERROR(std::string(shader) + " : VertexShader作成に失敗。");
+		LOG_ERROR(String(shader) + " : VertexShader作成に失敗。");
 		return false;
 	}
 	return true;

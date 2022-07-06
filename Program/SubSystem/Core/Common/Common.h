@@ -10,15 +10,6 @@
 #include "Hash.h"
 #include "SubSystem/Log/DebugLog.h"
 
-// libファイルをまとめて管理する。
-#pragma comment(lib, "dxgi.lib")
-#pragma comment(lib, "d3d11.lib")
-#pragma comment(lib, "d3d12.lib")
-#pragma comment(lib, "d3dcompiler.lib")
-#pragma comment(lib, "DirectXTex.lib")
-#pragma comment(lib, "assimp-vc141-mtd.lib")
-#pragma comment(lib, "fmodL_vc.lib")
-
 
 #ifdef _DEBUG
 #ifdef _M_IX86 || _M_IX86_FP

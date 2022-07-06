@@ -2,14 +2,13 @@
 * @file    IComponent.h
 * @brief
 *
-* @date	   2022/06/30 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
 
 #include "Transform.h"
 #include "../TickFunction.h"
-#include "SubSystem/Core/Common/Macro.h"
 
 class Context;
 class World;

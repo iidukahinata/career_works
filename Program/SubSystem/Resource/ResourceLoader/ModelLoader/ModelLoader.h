@@ -2,7 +2,7 @@
 * @file		ModelLoader.h
 * @brief
 *
-* @date		2022/07/01 2022年度初版
+* @date		2022/07/06 2022年度初版
 */
 #pragma once
 
@@ -15,7 +15,7 @@ class ModelLoader
 public:
 
 	ModelLoader();
-	bool Load(Model* model, std::string_view filePath);
+	bool Load(Model* model, String_View filePath);
 
 private:
 
@@ -25,7 +25,7 @@ private:
 	void LoadMesh(aiMesh* aiMesh);
 	void LoadMaterial(aiMaterial* aiMaterial);
 
-	std::vector<Texture*> LoadTextures(aiMaterial* aiMaterial);
+	Vector<Texture*> LoadTextures(aiMaterial* aiMaterial);
 
 private:
 

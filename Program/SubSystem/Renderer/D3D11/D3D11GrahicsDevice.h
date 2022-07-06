@@ -2,16 +2,13 @@
 * @file	   D3D11GrahicsDevice.h
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
 
-#include <vector>
 #include <d3d11.h>
 #include <wrl/client.h>
-#include "SubSystem/Core/Common/Macro.h"
-#include "SubSystem/Core/Math/MathCore.h"
 
 class D3D11GrahicsDevice
 {

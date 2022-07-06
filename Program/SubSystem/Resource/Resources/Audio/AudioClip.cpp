@@ -2,11 +2,12 @@
 * @file		AudioClip.cpp
 * @brief
 *
-* @date		2022/06/29 2022年度初版
+* @date		2022/07/06 2022年度初版
 */
 
 
 #include "AudioClip.h"
+#include "SubSystem/Core/Context.h"
 #include "SubSystem/Audio/FMOD/FMODAudio.h"
 #include "SubSystem/Audio/AudioHelper.h"
 
@@ -172,7 +173,7 @@ void AudioClip::Release() const noexcept
 	AUDIO_EORROR_CHECK(result);
 }
 
-bool AudioClip::Do_Load(std::string_view filePath) noexcept
+bool AudioClip::Do_Load(String_View filePath) noexcept
 {
 	m_audio = dynamic_cast<FMODAudio*>(GetContext()->GetSubsystem<Audio>());
 

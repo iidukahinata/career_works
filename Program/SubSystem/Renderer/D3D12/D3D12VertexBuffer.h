@@ -2,8 +2,7 @@
 * @file    D3D12VertexBuffer.h
 * @brief
 *
-* @date	   2022/05/13 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
@@ -17,9 +16,9 @@ class D3D12VertexBuffer : public D3D12DeviceChild
 {
 public:
 
-	bool Create(const std::vector<T>& vertices) noexcept;
+	bool Create(const Vector<T>& vertices) noexcept;
 
-	void Update(const std::vector<T>& vertices) noexcept;
+	void Update(const Vector<T>& vertices) noexcept;
 
 	void IASet(UINT slot = 0) noexcept;
 
@@ -35,7 +34,7 @@ private:
 };
 
 template<class T>
-inline bool D3D12VertexBuffer<T>::Create(const std::vector<T>& vertices) noexcept
+inline bool D3D12VertexBuffer<T>::Create(const Vector<T>& vertices) noexcept
 {
 	const UINT size = sizeof(T) * vertices.size();
 	const UINT stride = sizeof(T);
@@ -70,7 +69,7 @@ inline bool D3D12VertexBuffer<T>::Create(const std::vector<T>& vertices) noexcep
 }
 
 template<class T>
-inline void D3D12VertexBuffer<T>::Update(const std::vector<T>& vertices) noexcept
+inline void D3D12VertexBuffer<T>::Update(const Vector<T>& vertices) noexcept
 {
 	T* pData;
 	HRESULT hr = m_buffer->Map(0, nullptr, reinterpret_cast<void**>(&pData));

@@ -7,8 +7,6 @@
 #pragma once
 
 
-#include "Common/Macro.h"
-
 class Context;
 
 class ISubsystem

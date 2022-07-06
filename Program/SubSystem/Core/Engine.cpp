@@ -8,7 +8,6 @@
 
 #include "Engine.h"
 #include "Context.h"
-#include "Common/ProjectSettings.h"
 #include "Event/EventManager.h"
 #include "SubSystem/Audio/FMOD/FMODAudio.h"
 #include "SubSystem/Input/Input.h"

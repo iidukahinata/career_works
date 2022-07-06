@@ -2,8 +2,7 @@
 * @file    D3D12GrahicsDevice.cpp
 * @brief
 *
-* @date	   2022/04/22 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/07/06 2022年度初版
 */
 
 
@@ -250,9 +249,9 @@ void D3D12GrahicsDevice::ResourceBarrier(ID3D12Resource* const pResource, D3D12_
 	m_commandContext.GetCommandList()->ResourceBarrier(1, &barriers);
 }
 
-std::vector<IDXGIAdapter*> D3D12GrahicsDevice::GetAvailableAdapters(IDXGIFactory6* factory) const
+Vector<IDXGIAdapter*> D3D12GrahicsDevice::GetAvailableAdapters(IDXGIFactory6* factory) const
 {
-	std::vector<IDXGIAdapter*> adapters;
+	Vector<IDXGIAdapter*> adapters;
 	IDXGIAdapter* adapter = nullptr;
 	for (int i = 0; factory->EnumAdapters(i, &adapter) != DXGI_ERROR_NOT_FOUND; ++i)
 	{
@@ -289,17 +288,17 @@ IDXGIAdapter* D3D12GrahicsDevice::GetAdapterWithTheHighestVRAM(IDXGIFactory6* fa
 	return resultAdapter;
 }
 
-IDXGIAdapter* D3D12GrahicsDevice::GetAdapterByName(const std::wstring& adapterName, IDXGIFactory6* factory) const
+IDXGIAdapter* D3D12GrahicsDevice::GetAdapterByName(const Wstring& adapterName, IDXGIFactory6* factory) const
 {
-	std::vector<IDXGIAdapter*> adapters = GetAvailableAdapters(factory);
+	Vector<IDXGIAdapter*> adapters = GetAvailableAdapters(factory);
 
 	DXGI_ADAPTER_DESC adesc = {};
 	for (auto adapter : adapters)
 	{
 		adapter->GetDesc(&adesc);
-		std::wstring strDesc(adesc.Description);
+		Wstring strDesc(adesc.Description);
 
-		if (strDesc.find(adapterName.data()) != std::string::npos)
+		if (strDesc.find(adapterName.data()) != String::npos)
 		{
 			return adapter;
 		}

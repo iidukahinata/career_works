@@ -9,7 +9,7 @@
 #pragma once
 
 
-#include "SubSystem/Core/Common/TypeDef.h"
+#include "TypeDef.h"
 
 constexpr uint32_t CRC_TABLE[256] = {
 			 0,   79764919,  159529838,  222504665,

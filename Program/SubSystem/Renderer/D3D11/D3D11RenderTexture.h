@@ -2,14 +2,13 @@
 * @file    D3D11RenderTexture.h
 * @brief   
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
 
 #include "D3D11DeviceChild.h"
 #include "D3D11Texture.h"
-#include "SubSystem/Core/Math/Vector4.h"
 
 class D3D11RenderTexture : public D3D11DeviceChild
 {

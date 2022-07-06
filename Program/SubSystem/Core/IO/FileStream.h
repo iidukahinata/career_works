@@ -2,7 +2,7 @@
 * @file    FileStream.h
 * @brief   ファイル操作クラス
 *
-* @data	   2022/06/26 2022年度初版
+* @data	   2022/07/06 2022年度初版
 * @note
 *  書き読み込み速度向上のため c 言語での処理に修正。
 *  fscanf 操作関数は作成していません。
@@ -12,8 +12,6 @@
 
 
 #include <fstream>
-#include <vector>
-#include <string>
 #include "../Common/Macro.h"
 
 enum class OpenMode
@@ -32,17 +30,17 @@ class FileStream
 public:
 
 	FileStream() = default;
-	FileStream(std::string_view filePath, OpenMode mode);
+	FileStream(String_View filePath, OpenMode mode);
 
 	~FileStream();
 
-	bool Load(std::string_view filePath, OpenMode mode) noexcept;
+	bool Load(String_View filePath, OpenMode mode) noexcept;
 
 	/** もし同じ名前のFileがある場合はデータを上書きして作成する。*/
-	bool CreateFile(std::string_view filePath, OpenMode mode) noexcept;
+	bool CreateFile(String_View filePath, OpenMode mode) noexcept;
 
 	/** もし同じ名前のFileがある場合はデータを上書きして作成する。*/
-	bool CreateFileAndLoad(std::string_view filePath, OpenMode mode) noexcept;
+	bool CreateFileAndLoad(String_View filePath, OpenMode mode) noexcept;
 
 	/**
 	* 指定型 T データサイズ分書き込みます。
@@ -64,7 +62,7 @@ public:
 	* string 型はOpenMode によって内部実装が変わるため特殊化されています。
 	*/
 	template<class T>
-	void Write(std::vector<T> data) noexcept;
+	void Write(Vector<T> data) noexcept;
 
 	/**
 	* 指定型 T データサイズ分読み込みます。
@@ -83,7 +81,7 @@ public:
 	* string 型は OpenMode によって処理が違うため特殊化されています。
 	*/
 	template<class T>
-	void Read(std::vector<T>* data) noexcept;
+	void Read(Vector<T>* data) noexcept;
 
 	void Close() noexcept;
 
@@ -108,7 +106,7 @@ inline void FileStream::Write(T data) noexcept
 }
 
 template<>
-inline void FileStream::Write(std::string data) noexcept
+inline void FileStream::Write(String data) noexcept
 {
 	if (m_openMode == OpenMode::Txt_Mode)
 	{
@@ -132,7 +130,7 @@ inline void FileStream::Write(T* data, const size_t& size) noexcept
 }
 
 template<class T>
-inline void FileStream::Write(std::vector<T> data) noexcept
+inline void FileStream::Write(Vector<T> data) noexcept
 {
 	if (m_openMode != OpenMode::Write_Mode)
 		return;
@@ -143,7 +141,7 @@ inline void FileStream::Write(std::vector<T> data) noexcept
 }
 
 template<>
-inline void FileStream::Write<std::string>(std::vector<std::string> data) noexcept
+inline void FileStream::Write<String>(Vector<String> data) noexcept
 {
 	if (m_openMode == OpenMode::Txt_Mode)
 	{
@@ -177,7 +175,7 @@ inline void FileStream::Read(T* data) noexcept
 }
 
 template<>
-inline void FileStream::Read<std::string>(std::string* data) noexcept
+inline void FileStream::Read<String>(String* data) noexcept
 {
 	if (m_openMode == OpenMode::Txt_Mode)
 	{
@@ -209,7 +207,7 @@ inline void FileStream::Read(T* data, const size_t& size) noexcept
 }
 
 template<class T>
-inline void FileStream::Read(std::vector<T>* data) noexcept
+inline void FileStream::Read(Vector<T>* data) noexcept
 {
 	if (m_openMode != OpenMode::Read_Mode)
 		return;
@@ -222,7 +220,7 @@ inline void FileStream::Read(std::vector<T>* data) noexcept
 }
 
 template<>
-inline void FileStream::Read<std::string>(std::vector<std::string>* data) noexcept
+inline void FileStream::Read<String>(Vector<String>* data) noexcept
 {
 	if (m_openMode == OpenMode::Txt_Mode)
 	{
@@ -263,17 +261,17 @@ class FileStream
 public:
 
 	FileStream() = default;
-	FileStream(std::string_view filePath, OpenMode mode);
+	FileStream(String_View filePath, OpenMode mode);
 
 	~FileStream();
 
-	bool Load(std::string_view filePath, OpenMode mode) noexcept;
+	bool Load(String_View filePath, OpenMode mode) noexcept;
 
 	/** もし同じ名前のFileがある場合はデータを上書きして作成する。*/
-	bool CreateFile(std::string_view filePath, OpenMode mode) noexcept;
+	bool CreateFile(String_View filePath, OpenMode mode) noexcept;
 
 	/** もし同じ名前のFileがある場合はデータを上書きして作成する。*/
-	bool CreateFileAndLoad(std::string_view filePath, OpenMode mode) noexcept;
+	bool CreateFileAndLoad(String_View filePath, OpenMode mode) noexcept;
 
 	/**
 	* 指定型 T データサイズ分書き込みます。
@@ -295,7 +293,7 @@ public:
 	* string 型はOpenMode によって内部実装が変わるため特殊化されています。
 	*/
 	template<class T>
-	void Write(std::vector<T> data) noexcept;
+	void Write(Vector<T> data) noexcept;
 
 	/**
 	* 指定型 T データサイズ分読み込みます。
@@ -314,7 +312,7 @@ public:
 	* string 型は OpenMode によって処理が違うため特殊化されています。
 	*/
 	template<class T>
-	void Read(std::vector<T>* data) noexcept;
+	void Read(Vector<T>* data) noexcept;
 
 	void Close() noexcept;
 
@@ -339,7 +337,7 @@ inline void FileStream::Write(T data) noexcept
 }
 
 template<>
-inline void FileStream::Write<std::string>(std::string data) noexcept
+inline void FileStream::Write<String>(String data) noexcept
 {
 	if (m_openMode == OpenMode::Txt_Mode)
 	{
@@ -363,7 +361,7 @@ inline void FileStream::Write(T* data, const size_t& size) noexcept
 }
 
 template<class T>
-inline void FileStream::Write(std::vector<T> data) noexcept
+inline void FileStream::Write(Vector<T> data) noexcept
 {
 	if (m_openMode != OpenMode::Write_Mode)
 		return;
@@ -374,7 +372,7 @@ inline void FileStream::Write(std::vector<T> data) noexcept
 }
 
 template<>
-inline void FileStream::Write(std::vector<std::string> data) noexcept
+inline void FileStream::Write(Vector<std::string> data) noexcept
 {
 	/** ファイルデータの先頭から一行ずつ書き込み */
 	if (m_openMode == OpenMode::Txt_Mode)
@@ -408,7 +406,7 @@ inline void FileStream::Read(T* data) noexcept
 }
 
 template<>
-inline void FileStream::Read<std::string>(std::string* data) noexcept
+inline void FileStream::Read<String>(String* data) noexcept
 {
 	if (m_openMode != OpenMode::Read_Mode)
 		return;
@@ -430,7 +428,7 @@ inline void FileStream::Read(T* data, const size_t& size) noexcept
 }
 
 template<class T>
-inline void FileStream::Read(std::vector<T>* data) noexcept
+inline void FileStream::Read(Vector<T>* data) noexcept
 {
 	if (m_openMode != OpenMode::Read_Mode)
 		return;
@@ -443,7 +441,7 @@ inline void FileStream::Read(std::vector<T>* data) noexcept
 }
 
 template<>
-inline void FileStream::Read<std::string>(std::vector<std::string>* data) noexcept
+inline void FileStream::Read<String>(Vector<String>* data) noexcept
 {
 	if (m_openMode == OpenMode::Txt_Mode)
 	{
@@ -453,7 +451,7 @@ inline void FileStream::Read<std::string>(std::vector<std::string>* data) noexce
 		// 終端チェック
 		while (!m_fp.eof())
 		{
-			std::string buf;
+			String buf;
 			std::getline(m_fp, buf);
 			buf += "\n";
 			data->push_back(std::move(buf));

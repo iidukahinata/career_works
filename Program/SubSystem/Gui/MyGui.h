@@ -2,13 +2,10 @@
 * @file    MyGui.h
 * @brief   gui管理クラス
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
-
-#include <functional>
-#include "SubSystem/Core/Common/Macro.h"
 
 class MyGui
 {
@@ -27,7 +24,7 @@ public:
 	void Exit();
 	void Clear();
 
-	typedef std::function<void()> Widget;
+	typedef Function<void()> Widget;
 
 	/**
 	* GUI描画時に処理される処理の追加
@@ -39,5 +36,5 @@ public:
 private:
 
 	// * imgui用描画 function 関数配列
-	std::vector<Widget> m_widgets;
+	Vector<Widget> m_widgets;
 };

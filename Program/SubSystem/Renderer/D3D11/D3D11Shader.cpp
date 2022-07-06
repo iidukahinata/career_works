@@ -2,7 +2,7 @@
 * @file    D3D11Shader.cpp
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 
 
@@ -10,7 +10,7 @@
 #include "D3D11Shader.h"
 #include "SubSystem/Core/Common/Tools.h"
 
-bool D3D11Shader::CompileFromFile(std::string_view shader, D3D_SHADER_MACRO* macro, std::string_view entrypoint, std::string_view traget) noexcept
+bool D3D11Shader::CompileFromFile(String_View shader, D3D_SHADER_MACRO* macro, String_View entrypoint, String_View traget) noexcept
 {
 	UINT flags = D3DCOMPILE_ENABLE_STRICTNESS;
 #if defined( DEBUG ) || defined( _DEBUG )

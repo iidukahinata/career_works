@@ -2,7 +2,7 @@
 * @file    FileStream.cpp
 * @brief   ファイル操作クラス
 *
-* @data	   2022/06/06 2022年度初版
+* @data	   2022/07/06 2022年度初版
 */
 
 
@@ -11,7 +11,7 @@
 #include "SubSystem/Core/Common/Common.h"
 
 #if 1
-FileStream::FileStream(std::string_view filePath, OpenMode mode)
+FileStream::FileStream(String_View filePath, OpenMode mode)
 {
 	Load(filePath, mode);
 }
@@ -21,7 +21,7 @@ FileStream::~FileStream()
 	Close();
 }
 
-bool FileStream::Load(std::string_view filePath, OpenMode mode) noexcept
+bool FileStream::Load(String_View filePath, OpenMode mode) noexcept
 {
 	if (IsOpen())
 	{
@@ -49,10 +49,10 @@ bool FileStream::Load(std::string_view filePath, OpenMode mode) noexcept
 		// 開かなかったことは 戻り値で判断出来るため外す。
 		if(error != 2)
 		{
-			std::string buf;
+			String buf;
 			buf.resize(128);
 			strerror_s(buf.data(), buf.size(), static_cast<int>(error));
-			LOG_ERROR("error :" + std::string(buf));
+			LOG_ERROR("error :" + String(buf));
 		}
 
 		m_openMode = OpenMode::Not_Mode;
@@ -62,7 +62,7 @@ bool FileStream::Load(std::string_view filePath, OpenMode mode) noexcept
 	return IsOpen();
 }
 
-bool FileStream::CreateFile(std::string_view filePath, OpenMode mode) noexcept
+bool FileStream::CreateFile(String_View filePath, OpenMode mode) noexcept
 {
 	FILE* fp = nullptr;
 	errno_t error = 0;
@@ -85,14 +85,14 @@ bool FileStream::CreateFile(std::string_view filePath, OpenMode mode) noexcept
 		return true;
 	}
 
-	std::string buf;
+	String buf;
 	buf.resize(128);
 	strerror_s(buf.data(), buf.size(), static_cast<int>(error));
-	LOG_ERROR("error :" + std::string(buf));
+	LOG_ERROR("error :" + String(buf));
 	return false;
 }
 
-bool FileStream::CreateFileAndLoad(std::string_view filePath, OpenMode mode) noexcept
+bool FileStream::CreateFileAndLoad(String_View filePath, OpenMode mode) noexcept
 {
 	if (CreateFile(filePath, mode))
 	{
@@ -122,7 +122,7 @@ bool FileStream::IsEof() const noexcept
 	return feof(m_fp) != 0;
 }
 #else
-FileStream::FileStream(std::string_view filePath, OpenMode mode)
+FileStream::FileStream(String_View filePath, OpenMode mode)
 {
 	Load(filePath, mode);
 }
@@ -132,7 +132,7 @@ FileStream::~FileStream()
 	Close();
 }
 
-bool FileStream::Load(std::string_view filePath, OpenMode mode) noexcept
+bool FileStream::Load(String_View filePath, OpenMode mode) noexcept
 {
 	if (IsOpen())
 	{
@@ -157,7 +157,7 @@ bool FileStream::Load(std::string_view filePath, OpenMode mode) noexcept
 	return IsOpen();
 }
 
-bool FileStream::CreateFile(std::string_view filePath, OpenMode mode) noexcept
+bool FileStream::CreateFile(String_View filePath, OpenMode mode) noexcept
 {
 	std::ofstream createFile;
 
@@ -181,7 +181,7 @@ bool FileStream::CreateFile(std::string_view filePath, OpenMode mode) noexcept
 	return false;
 }
 
-bool FileStream::CreateFileAndLoad(std::string_view filePath, OpenMode mode) noexcept
+bool FileStream::CreateFileAndLoad(String_View filePath, OpenMode mode) noexcept
 {
 	if (CreateFile(filePath, mode))
 	{

@@ -2,13 +2,12 @@
 * @file		AsyncJob.cpp
 * @brief
 *
-* @date		2022/06/30 2022年度初版
+* @date		2022/07/06 2022年度初版
 */
 
 
 #include "AsyncJob.h"
 #include "AsyncJobSystem.h"
-#include "SubSystem/Core/Common/Common.h"
 
 void AsyncJob::Execute() noexcept
 {

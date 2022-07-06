@@ -2,7 +2,7 @@
 * @file		TextureLoader.h
 * @brief
 *
-* @date		2022/06/26 2022年度初版
+* @date		2022/07/06 2022年度初版
 */
 #pragma once
 
@@ -14,10 +14,10 @@ class TextureLoader
 {
 public:
 
-	bool Load(Texture* texture, std::string_view filePath) noexcept;
+	bool Load(Texture* texture, String_View filePath) noexcept;
 
 private:
 
-	bool LoadFromFile(std::string_view ext, std::wstring_view path, DirectX::TexMetadata* meta, DirectX::ScratchImage& image) noexcept;
+	bool LoadFromFile(String_View ext, std::wstring_view path, DirectX::TexMetadata* meta, DirectX::ScratchImage& image) noexcept;
 	bool CreateFromData(Texture* texture, DirectX::TexMetadata& meta, DirectX::ScratchImage* image) noexcept;
 };

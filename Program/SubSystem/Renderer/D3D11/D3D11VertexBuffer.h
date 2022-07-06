@@ -2,7 +2,7 @@
 * @file    D3D11VertexBuffer.h
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
@@ -18,10 +18,10 @@ public:
 	* @param indices [入力] 初期頂点データ
 	* @param usage [入力] D3D11_USAGE_DYNAMIC 以外の値の場合は D3D11_USAGE_DEFAULT になります。
 	*/
-	bool Create(const std::vector<T>& vertices, D3D11_USAGE usage = D3D11_USAGE_DEFAULT) noexcept;
+	bool Create(const Vector<T>& vertices, D3D11_USAGE usage = D3D11_USAGE_DEFAULT) noexcept;
 
 	/** GPU データを更新します。 */
-	void Update(const std::vector<T>& vertices) const noexcept;
+	void Update(const Vector<T>& vertices) const noexcept;
 
 	/** デバイス設定するための関数です。*/
 	void IASet(UINT slot = 0) const noexcept;
@@ -32,7 +32,7 @@ private:
 };
 
 template<class T>
-inline bool D3D11VertexBuffer<T>::Create(const std::vector<T>& vertices, D3D11_USAGE usage /* = D3D11_USAGE_DEFAULT */) noexcept
+inline bool D3D11VertexBuffer<T>::Create(const Vector<T>& vertices, D3D11_USAGE usage /* = D3D11_USAGE_DEFAULT */) noexcept
 {
 	// 頂点バッファ用意
 	D3D11_BUFFER_DESC bufferDesc;
@@ -58,7 +58,7 @@ inline bool D3D11VertexBuffer<T>::Create(const std::vector<T>& vertices, D3D11_U
 }
 
 template<class T>
-inline void D3D11VertexBuffer<T>::Update(const std::vector<T>& vertices) const noexcept
+inline void D3D11VertexBuffer<T>::Update(const Vector<T>& vertices) const noexcept
 {
 	D3D11_MAPPED_SUBRESOURCE pData;
 	HRESULT hr = GetContext()->Map(m_vertexBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &pData);

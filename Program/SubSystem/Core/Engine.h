@@ -8,7 +8,6 @@
 
 
 #include <Windows.h>
-#include "SubSystem/Core/Common/Macro.h"
 
 class Engine
 {

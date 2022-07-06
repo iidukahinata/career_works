@@ -2,18 +2,16 @@
 * @file    ResourceManager.h
 * @brief
 *
-* @date	   2022/06/27 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
 
-#include <map>
 #include <mutex>
-#include "SubSystem/Core/Common/Memory.h"
 #include "Resources/IResource.h"
 #include "SubSystem/Core/ISubsystem.h"
 
-typedef std::unique_ptr<IResource> ResourcePtr;
+typedef UniquePtr<IResource> ResourcePtr;
 
 /**
 * このクラスではデータ競合を引き起こさない。
@@ -32,7 +30,7 @@ public:
 	*		  指定名のリソース読み込みに失敗すると nullptrを返す。
 	*/
 	template<class T>
-	T* Load(std::string_view filePath) noexcept;
+	T* Load(String_View filePath) noexcept;
 
 	/**
 	* 保持しているデータに指定名のリソースがあるか調べる
@@ -40,26 +38,26 @@ public:
 	* @return 指定名が保持するリソースの場合そのポインタを返す。
 	*		  指定名のリソースデータがない場合 nullptrを返す。
 	*/
-	IResource* GetResourceByName(std::string_view filePath) noexcept;
+	IResource* GetResourceByName(String_View filePath) noexcept;
 
 	/** 2022/04/17 Sceneを跨いで使用されるリソースデータを解放しないために実装 */
 	void FreeUnusedResourceObjects() noexcept;
 
 	void Clear() noexcept;
 
-	void AddResource(ResourcePtr resource, std::string_view filePath) noexcept;
+	void AddResource(ResourcePtr resource, String_View filePath) noexcept;
 
 private:
 
 	// * Type -> <ファイル名、リソースオブジェクト>
-	std::map<std::string, ResourcePtr> m_resources;
+	Map<String, ResourcePtr> m_resources;
 
 	// * このクラス内での排他制御実現用
 	std::mutex m_mutex;
 };
 
 template<class T>
-FORCEINLINE T* ResourceManager::Load(std::string_view filePath) noexcept
+FORCEINLINE T* ResourceManager::Load(String_View filePath) noexcept
 {
 	// 同じリソースを読み込まないために保持しているか調べる
 	if (auto copyResource = GetResourceByName(filePath))
@@ -68,7 +66,7 @@ FORCEINLINE T* ResourceManager::Load(std::string_view filePath) noexcept
 	}
 
 	// 読み込み時間中に同じリソースを生成しないようにするために先に登録
-	AddResource(std::make_unique<T>(), filePath);
+	AddResource(MakeUnique<T>(), filePath);
 
 	if (auto resource = GetResourceByName(filePath))
 	{

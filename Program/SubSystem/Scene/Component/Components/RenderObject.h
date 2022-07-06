@@ -47,7 +47,7 @@ public:
 
 	void Render() override;
 
-	void SetModel(std::string_view name) noexcept;
+	void SetModel(String_View name) noexcept;
 
 private:
 

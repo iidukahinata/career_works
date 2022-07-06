@@ -2,7 +2,7 @@
 * @file		ModelLoader.cpp
 * @brief
 *
-* @date		2022/07/01 2022年度初版
+* @date		2022/07/06 2022年度初版
 */
 
 
@@ -20,7 +20,7 @@ ModelLoader::ModelLoader()
 	m_resourceManager = Context::Get().GetSubsystem<ResourceManager>();
 }
 
-bool ModelLoader::Load(Model* model, std::string_view filePath)
+bool ModelLoader::Load(Model* model, String_View filePath)
 {
 	m_model = model;
 
@@ -61,8 +61,8 @@ void ModelLoader::ProcessNode(aiNode* node)
 
 void ModelLoader::LoadMesh(aiMesh* aiMesh)
 {
-	std::vector<VertexBump3D> vertices;
-	std::vector<uint32_t> indices;
+	Vector<VertexBump3D> vertices;
+	Vector<uint32_t> indices;
 
 	vertices.resize(aiMesh->mNumVertices);
 	for (int i = 0; i < aiMesh->mNumVertices; ++i)
@@ -155,9 +155,9 @@ void ModelLoader::LoadMaterial(aiMaterial* aiMaterial)
 	m_model->AddMaterial(material);
 }
 
-std::vector<Texture*> ModelLoader::LoadTextures(aiMaterial* aiMaterial)
+Vector<Texture*> ModelLoader::LoadTextures(aiMaterial* aiMaterial)
 {
-	std::vector<Texture*> textures;
+	Vector<Texture*> textures;
 	// マテリアルからテクスチャ個数を取得し(基本は1個)ループする
 	for (unsigned int i = 0; i < aiMaterial->GetTextureCount(aiTextureType_DIFFUSE); ++i)
 	{
@@ -165,7 +165,7 @@ std::vector<Texture*> ModelLoader::LoadTextures(aiMaterial* aiMaterial)
 		// マテリアルからｉ番目のテクスチャファイル名を取得する
 		aiMaterial->GetTexture(aiTextureType_DIFFUSE, i, &str);
 
-		std::string_view path(str.C_Str());
+		String_View path(str.C_Str());
 		path = path.substr(path.find_last_of("\\/"), path.length() - 1);
 		auto filePath = FileSystem::Canonical(path);
 

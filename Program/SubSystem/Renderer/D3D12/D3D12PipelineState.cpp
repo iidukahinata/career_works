@@ -2,8 +2,7 @@
 * @file    D3D12PipelineState.cpp
 * @brief
 *
-* @date	   2022/05/13 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/06/07 2022年度初版
 */
 
 

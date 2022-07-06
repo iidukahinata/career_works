@@ -2,26 +2,22 @@
 * @file    D3D12GrahicsDevice.h
 * @brief
 *
-* @date	   2022/04/22 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
 
-#include <vector>
 #include <d3d12.h>
 #include <dxgi1_6.h>
 #include <wrl/client.h>
 #include "D3D12CommandContext.h"
-#include "SubSystem/Core/Math/MathCore.h"
 
 class D3D12GrahicsDevice
 {
 private:
 
 	D3D12GrahicsDevice() = default;
-	D3D12GrahicsDevice(const D3D12GrahicsDevice&) = default;
-	D3D12GrahicsDevice& operator=(const D3D12GrahicsDevice&) = default;
+	COPY_PROHIBITED(D3D12GrahicsDevice)
 
 public:
 
@@ -54,9 +50,9 @@ private:
 
 	void ResourceBarrier(ID3D12Resource* const pResource, D3D12_RESOURCE_STATES stateBefore, D3D12_RESOURCE_STATES stateAfter);
 
-	std::vector<IDXGIAdapter*> GetAvailableAdapters(IDXGIFactory6* factory) const;
+	Vector<IDXGIAdapter*> GetAvailableAdapters(IDXGIFactory6* factory) const;
 	IDXGIAdapter* GetAdapterWithTheHighestVRAM(IDXGIFactory6* factory) const;
-	IDXGIAdapter* GetAdapterByName(const std::wstring& adapterName, IDXGIFactory6* factory) const;
+	IDXGIAdapter* GetAdapterByName(const Wstring& adapterName, IDXGIFactory6* factory) const;
 
 private:
 
@@ -66,7 +62,7 @@ private:
 
 	// swap chain objects
 	Microsoft::WRL::ComPtr<IDXGISwapChain4>             m_swapchain;
-	std::vector<Microsoft::WRL::ComPtr<ID3D12Resource>> m_renderTargets;
+	Vector<Microsoft::WRL::ComPtr<ID3D12Resource>>		m_renderTargets;
 	Microsoft::WRL::ComPtr<ID3D12Resource>              m_depthStencil;
 
 	// fence object

@@ -2,7 +2,7 @@
 * @file    Model.h
 * @brief
 *
-* @date	   2022/07/01 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
@@ -17,10 +17,10 @@ class Model : public IResource
 public:
 
 	/** 独自モデルデータとして保存させる。*/
-	void SaveToFile(std::string_view filePath) override;
+	void SaveToFile(String_View filePath) override;
 
 	/** 独自モデルデータを読み込みする。*/
-	bool LoadFromFile(std::string_view filePath) override;
+	bool LoadFromFile(String_View filePath) override;
 
 	void AddMesh(Mesh* mesh) noexcept;
 	void AddMaterial(Material* material) noexcept;
@@ -30,13 +30,13 @@ public:
 private:
 
 	// IResource
-	bool Do_Load(std::string_view filePath) override;
+	bool Do_Load(String_View filePath) override;
 
-	std::string ConvertProprietaryFormat(std::string_view filePath) const noexcept;
+	String ConvertProprietaryFormat(String_View filePath) const noexcept;
 
 private:
 
 	Mesh m_mesh;
-	std::vector<Mesh*> m_meshes;
-	std::vector<Material*> m_materials;
+	Vector<Mesh*> m_meshes;
+	Vector<Material*> m_materials;
 };

@@ -2,13 +2,12 @@
 * @file		Event.h
 * @brief
 *
-* @date		2022/06/23 2022年度初版
+* @date		2022/07/06 2022年度初版
 */
 #pragma once
 
 
 #include <any>
-#include "../Common/Macro.h"
 
 typedef ClassTypeData EventType;
 

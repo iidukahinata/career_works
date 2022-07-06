@@ -2,13 +2,11 @@
 * @file    GameObject.h
 * @brief
 *
-* @date	   2022/06/30 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
 
-#include <map>
-#include "SubSystem/Core/Common/Memory.h"
 #include "Component/IComponent.h"
 #include "Component/Transform.h"
 
@@ -20,7 +18,7 @@ class GameObject
 public:
 
 	/** 指定名コンポーネントの追加。指定名が存在しない等の場合、null を返す。*/
-	IComponent* AddComponent(std::string_view name) noexcept;
+	IComponent* AddComponent(String_View name) noexcept;
 	void AddComponent(IComponent* component) noexcept;
 
 	/** 保持するコンポーネントを消去するため、そのアドレスを引数とする。*/
@@ -31,11 +29,11 @@ public:
 	T* GetComponent();
 
 	/** 指定名コンポーネントを保持する場合、そのアドレスを返す。*/
-	IComponent* FindComponent(std::string_view name) noexcept;
+	IComponent* FindComponent(String_View name) noexcept;
 
 	/** 各GameObject識別用に使用。*/
-	void SetName(std::string_view name) noexcept;
-	const std::string& GetName() const noexcept;
+	void SetName(String_View name) noexcept;
+	const String& GetName() const noexcept;
 
 	/** Worldクラスで以外で使用されると、場合によってはScene終了時までメモリが解放されず残り続けます。*/
 	void SetID(uint32_t id) noexcept;
@@ -63,7 +61,7 @@ private:
 	Transform m_transform;
 
 	// * -> ハッシュ値 : 各コンポーネントオブジェクト
-	std::map<uint32_t, std::unique_ptr<IComponent>> m_components;
+	Map<uint32_t, UniquePtr<IComponent>> m_components;
 };
 
 template<class T>

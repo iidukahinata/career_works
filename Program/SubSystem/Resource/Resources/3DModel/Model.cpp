@@ -2,17 +2,18 @@
 * @file    Model.cpp
 * @brief
 *
-* @date	   2022/07/01 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 
 
 #include "Model.h"
+#include "SubSystem/Core/Context.h"
 #include "SubSystem/Core/IO/FileStream.h"
 #include "SubSystem/Core/IO/FileSystem.h"
 #include "SubSystem/Resource/ResourceManager.h"
 #include "SubSystem/Resource/ResourceLoader/ModelLoader/ModelLoader.h"
 
-void Model::SaveToFile(std::string_view filePath)
+void Model::SaveToFile(String_View filePath)
 {
 	auto path = ConvertProprietaryFormat(filePath);
 
@@ -36,7 +37,7 @@ void Model::SaveToFile(std::string_view filePath)
 	};
 }
 
-bool Model::LoadFromFile(std::string_view filePath)
+bool Model::LoadFromFile(String_View filePath)
 {
 	auto path = ConvertProprietaryFormat(filePath);
 
@@ -48,7 +49,7 @@ bool Model::LoadFromFile(std::string_view filePath)
 	size_t numMesh = 0;
 	fileStream.Read(&numMesh);
 
-	std::vector<std::string> meshPaths(numMesh);
+	Vector<String> meshPaths(numMesh);
 	for (auto& path : meshPaths)
 	{
 		fileStream.Read(&path);
@@ -58,7 +59,7 @@ bool Model::LoadFromFile(std::string_view filePath)
 	size_t numMaterial = 0;
 	fileStream.Read(&numMaterial);
 
-	std::vector<std::string> materialPaths(numMaterial);
+	Vector<String> materialPaths(numMaterial);
 	for (auto& path : materialPaths)
 	{
 		fileStream.Read(&path);
@@ -107,20 +108,20 @@ void Model::Render()
 	}
 }
 
-bool Model::Do_Load(std::string_view filePath)
+bool Model::Do_Load(String_View filePath)
 {
 	ModelLoader modelLoader;
 	return modelLoader.Load(this, filePath);
 }
 
-std::string Model::ConvertProprietaryFormat(std::string_view filePath) const noexcept
+String Model::ConvertProprietaryFormat(String_View filePath) const noexcept
 {
-	std::string path = "assets/Resource/Model/";
+	String path = "assets/Resource/Model/";
 
 	// ファイル拡張子を独自ファイル用に変更
 	path += FileSystem::GetFilePath(filePath);
 
-	std::string_view sub(path);
+	String_View sub(path);
 	path = sub.substr(0, sub.find("."));
 	path += ".model";
 

@@ -543,9 +543,6 @@
     <ClInclude Include="Program\SubSystem\Core\Math\Vector4T.h">
       <Filter>SubSystem\Core\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Core\Math\VectorTypes.h">
-      <Filter>SubSystem\Core\Math</Filter>
-    </ClInclude>
     <ClInclude Include="Program\SubSystem\Core\IO\FileStream.h">
       <Filter>SubSystem\Core\I/O</Filter>
     </ClInclude>

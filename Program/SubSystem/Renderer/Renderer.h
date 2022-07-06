@@ -2,15 +2,14 @@
 * @file	   Renderer.h
 * @brief
 *
-* @date	   2022/07/01 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
 
-#include <set>
+#include "Geometry/Quad.h"
 #include "SubSystem/Core/ISubsystem.h"
 #include "SubSystem/JobSystem/Sync/Job.h"
-#include "Geometry/Quad.h"
 
 class Light;
 class GBuffer;
@@ -46,8 +45,8 @@ private:
 
 	Quad m_quad;
 
-	std::unique_ptr<GBuffer> m_gbuffer;
-	std::unique_ptr<LightMap> m_lightMap;
+	UniquePtr<GBuffer> m_gbuffer;
+	UniquePtr<LightMap> m_lightMap;
 
-	std::set<RenderObject*> m_renderObjects;
+	Set<RenderObject*> m_renderObjects;
 };

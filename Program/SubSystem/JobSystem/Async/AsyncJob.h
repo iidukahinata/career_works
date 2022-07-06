@@ -2,16 +2,14 @@
 * @file		AsyncJob.h
 * @brief
 *
-* @date		2022/06/30 2022年度初版
+* @date		2022/07/06 2022年度初版
 */
 #pragma once
 
 
-#include <functional>
-
 class AsyncJob
 {
-	typedef std::function<void()> Task;
+	typedef Function<void()> Task;
 public:
 
 	void Execute() noexcept;

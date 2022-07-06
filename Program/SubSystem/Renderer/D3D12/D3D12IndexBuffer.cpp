@@ -2,8 +2,7 @@
 * @file    D3D12IndexBuffer.cpp
 * @brief
 *
-* @date	   2022/05/13 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/07/06 2022年度初版
 */
 
 
@@ -11,7 +10,7 @@
 #include "D3D12GrahicsDevice.h"
 #include "ThirdParty/directxtex/include/d3dx12.h"
 
-bool D3D12IndexBuffer::Create(const std::vector<UINT>& indices) noexcept
+bool D3D12IndexBuffer::Create(const Vector<UINT>& indices) noexcept
 {
 	UINT bytesSize = sizeof(UINT) * indices.size();
 
@@ -41,11 +40,11 @@ bool D3D12IndexBuffer::Create(const std::vector<UINT>& indices) noexcept
 	return true;
 }
 
-void D3D12IndexBuffer::Update(const std::vector<UINT>& indices) noexcept
+void D3D12IndexBuffer::Update(const Vector<UINT>& indices) noexcept
 {
 	UINT* pData;
 	HRESULT hr = m_buffer->Map(0, nullptr, reinterpret_cast<void**>(&pData));
-	if (SUCCEEDED(hr)) 
+	if (SUCCEEDED(hr))
 	{
 		memcpy_s(pData, m_bytesSize, indices.data(), sizeof(UINT) * indices.size());
 		m_buffer->Unmap(0, nullptr);

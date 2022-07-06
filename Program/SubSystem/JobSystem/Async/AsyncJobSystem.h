@@ -2,7 +2,7 @@
 * @file    AsyncJobSystem.h
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
@@ -10,7 +10,6 @@
 #include <queue>
 #include <mutex>
 #include "AsyncJob.h"
-#include "SubSystem/Core/Common/Macro.h"
 
 class AsyncJobSystem
 {
@@ -55,7 +54,7 @@ private:
 	std::queue<AsyncJob*> m_tasks;
 
 	// * ユーザー指定数で thread 数を変更するために可変長配列で管理
-	std::vector<std::thread> m_threads;
+	Vector<std::thread> m_threads;
 
 	// * このクラス内での排他制御実現用
 	std::mutex m_mutex;

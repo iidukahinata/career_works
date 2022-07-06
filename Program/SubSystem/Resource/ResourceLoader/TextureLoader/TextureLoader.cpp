@@ -2,7 +2,7 @@
 * @file		TextureLoader.cpp
 * @brief
 *
-* @date		2022/06/26 2022年度初版
+* @date		2022/07/06 2022年度初版
 */
 
 
@@ -10,9 +10,8 @@
 #include <DDSTextureLoader.h>
 #include "TextureLoader.h"
 #include "SubSystem/Core/Common/Tools.h"
-#include "SubSystem/Core/Common/Common.h"
 
-bool TextureLoader::Load(Texture* texture, std::string_view filePath) noexcept
+bool TextureLoader::Load(Texture* texture, String_View filePath) noexcept
 {
 	DirectX::TexMetadata meta;
 	auto image = std::make_unique<DirectX::ScratchImage>();
@@ -29,7 +28,7 @@ bool TextureLoader::Load(Texture* texture, std::string_view filePath) noexcept
 	return false;
 }
 
-bool TextureLoader::LoadFromFile(std::string_view ext, std::wstring_view path, DirectX::TexMetadata* meta, DirectX::ScratchImage& image) noexcept
+bool TextureLoader::LoadFromFile(String_View ext, Wstring_View path, DirectX::TexMetadata* meta, DirectX::ScratchImage& image) noexcept
 {
 	HRESULT hr = S_FALSE;
 

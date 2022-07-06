@@ -2,7 +2,7 @@
 * @file    D3D11Shader.h
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/07/06 2022年度初版
 * @note
 *						 D3D11Shader
 *						   	 ↓
@@ -26,7 +26,7 @@ public:
 	* @param entrypoint [入力] 指定シェーダーの開始位置
 	* @param traget [入力] シェーダー種類を指定
 	*/
-	bool CompileFromFile(std::string_view shader, D3D_SHADER_MACRO* macro, std::string_view entrypoint, std::string_view traget) noexcept;
+	bool CompileFromFile(String_View shader, D3D_SHADER_MACRO* macro, String_View entrypoint, String_View traget) noexcept;
 
 	/** アクセス */
 	ID3DBlob* GetBlob() const noexcept;
@@ -46,7 +46,7 @@ public:
 	* @param entrypoint [入力] 何かしらの文字列である必要があります。
 	* @param traget [入力] 何かしらの文字列である必要があります。
 	*/
-	bool Create(std::string_view shader, D3D_SHADER_MACRO* macro, std::string_view entrypoint = "main", std::string_view target = "vs_5_0") noexcept;
+	bool Create(String_View shader, D3D_SHADER_MACRO* macro, String_View entrypoint = "main", String_View target = "vs_5_0") noexcept;
 
 	/** デバイス設定するための関数です。*/
 	void VSSet() const noexcept;
@@ -65,7 +65,7 @@ public:
 	* @param entrypoint [入力] 何かしらの文字列である必要があります。
 	* @param traget [入力] 何かしらの文字列である必要があります。
 	*/
-	bool Create(std::string_view shader, D3D_SHADER_MACRO* macro, std::string_view entrypoint = "main", std::string_view target = "ps_5_0") noexcept;
+	bool Create(String_View shader, D3D_SHADER_MACRO* macro, String_View entrypoint = "main", String_View target = "ps_5_0") noexcept;
 
 	/** デバイス設定するための関数です。*/
 	void PSSet() const noexcept;
@@ -84,7 +84,7 @@ public:
 	* @param entrypoint [入力] 何かしらの文字列である必要があります。
 	* @param traget [入力] 何かしらの文字列である必要があります。
 	*/
-	bool Create(std::string_view shader, D3D_SHADER_MACRO* macro, std::string_view entrypoint = "main", std::string_view target = "gs_5_0") noexcept;
+	bool Create(String_View shader, D3D_SHADER_MACRO* macro, String_View entrypoint = "main", String_View target = "gs_5_0") noexcept;
 
 private:
 

@@ -2,8 +2,7 @@
 * @file    D3D12Shader.h
 * @brief
 *
-* @date	   2022/05/13 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
@@ -16,7 +15,7 @@ class D3D12Shader : public D3D12DeviceChild
 {
 public:
 
-	void Compile(const char* filePath, const char* entryPoint, const char* traget) noexcept;
+	void Compile(String_View filePath, String_View entryPoint, String_View traget) noexcept;
 
 	ID3DBlob* GetBlob() const noexcept { return m_blob.Get(); };
 

@@ -2,8 +2,7 @@
 * @file    D3D12PipelineState.h
 * @brief
 *
-* @date	   2022/05/13 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 

@@ -7,8 +7,6 @@
 #pragma once
 
 
-#include "TypeDef.h"
-
 /**
 * •¶Žš—ñ‚©‚ç wstring Œ^‚Ö‚Ì•ÏŠ·
 *

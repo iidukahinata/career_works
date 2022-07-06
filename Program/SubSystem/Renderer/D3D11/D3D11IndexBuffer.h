@@ -2,7 +2,7 @@
 * @file    D3D11IndexBuffer.h
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
@@ -17,10 +17,10 @@ public:
 	* @param indices [入力] 初期インデックスデータ
 	* @param usage [入力] D3D11_USAGE_DYNAMIC 以外の値の場合は D3D11_USAGE_DEFAULT になります。
 	*/
-	bool Create(const std::vector<UINT>& indices, D3D11_USAGE usage = D3D11_USAGE_DEFAULT) noexcept;
+	bool Create(const Vector<UINT>& indices, D3D11_USAGE usage = D3D11_USAGE_DEFAULT) noexcept;
 
 	/** GPU データを更新します。 */
-	void Update(const std::vector<UINT>& indices) noexcept;
+	void Update(const Vector<UINT>& indices) noexcept;
 
 	/** DXGI_FORMAT_R32_UINT でデバイス設定されます。*/
 	void IASet() const noexcept;

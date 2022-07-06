@@ -1,8 +1,8 @@
 #pragma once
 
-#include <stdint.h>
+
 #include "Macro.h"
+#include "Memory.h"
 #include "TypeDef.h"
-#include "ProjectSettings.h"
 
 #include "SubSystem/Core/Math/MathCore.h"

@@ -2,23 +2,23 @@
 * @file    IResource.cpp
 * @brief   リソース抽象クラス
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 
 
 #include "IResource.h"
 #include "SubSystem/Core/Context.h"
 
-void IResource::SaveToFile(std::string_view filePath)
+void IResource::SaveToFile(String_View filePath)
 {
 }
 
-bool IResource::LoadFromFile(std::string_view filePath)
+bool IResource::LoadFromFile(String_View filePath)
 {
 	return false;
 }
 
-bool IResource::Load(std::string_view filePath) noexcept
+bool IResource::Load(String_View filePath) noexcept
 {
 	m_filePath = filePath;
 
@@ -35,7 +35,7 @@ bool IResource::Load(std::string_view filePath) noexcept
 	return false;
 }
 
-const std::string& IResource::GetName() const noexcept
+const String& IResource::GetName() const noexcept
 {
 	return m_filePath;
 }

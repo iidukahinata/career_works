@@ -2,17 +2,15 @@
 * @file    D3D12Shader.cpp
 * @brief
 *
-* @date	   2022/04/22 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/07/06 2022年度初版
 */
 
 
 #include "D3D12Shader.h"
 #include <d3dcompiler.h>
 #include "SubSystem/Core/Common/Tools.h"
-#include "SubSystem/Core/Common/Common.h"
 
-void D3D12Shader::Compile(const char* filePath, const char* entryPoint, const char* traget) noexcept
+void D3D12Shader::Compile(String_View filePath, String_View entryPoint, String_View traget) noexcept
 {
 #ifdef _DEBUG
 	UINT compileFlags = D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION;
@@ -25,7 +23,7 @@ void D3D12Shader::Compile(const char* filePath, const char* entryPoint, const ch
 		ToWstring(filePath).data(),
 		nullptr,
 		D3D_COMPILE_STANDARD_FILE_INCLUDE,
-		entryPoint, traget,
+		entryPoint.data(), traget.data(),
 		compileFlags, 0,
 		m_blob.ReleaseAndGetAddressOf(),
 		errorBlob.ReleaseAndGetAddressOf());

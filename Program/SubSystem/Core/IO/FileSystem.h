@@ -2,7 +2,7 @@
 * @file    FileSystem.h
 * @brief
 *
-* @date	   2022/06/27 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
@@ -17,7 +17,7 @@ class FileSystem
 {
 public:
 
-	static std::string Canonical(std::string_view filePath) noexcept;
+	static String Canonical(String_View filePath) noexcept;
 
-	static std::string GetFilePath(std::string_view filePath) noexcept;
+	static String GetFilePath(String_View filePath) noexcept;
 };

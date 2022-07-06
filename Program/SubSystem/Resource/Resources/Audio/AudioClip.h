@@ -2,7 +2,7 @@
 * @file		AudioClip.h
 * @brief
 *
-* @date		2022/06/29 2022年度初版
+* @date		2022/07/06 2022年度初版
 */
 #pragma once
 
@@ -49,7 +49,7 @@ private:
 	void Release() const noexcept;
 
 	// IResource
-	bool Do_Load(std::string_view filePath) noexcept;
+	bool Do_Load(String_View filePath) noexcept;
 
 private:
 

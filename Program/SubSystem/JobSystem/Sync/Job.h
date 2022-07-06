@@ -2,12 +2,10 @@
 * @file		Job.h
 * @brief
 *
-* @date		2022/06/29 2022年度初版
+* @date		2022/07/06 2022年度初版
 */
 #pragma once
 
-
-#include <functional>
 
 enum FunctionType
 {
@@ -22,7 +20,7 @@ class Job
 {
 	friend class JobSystem;
 
-	typedef std::function<void(double)> Task;
+	typedef Function<void(double)> Task;
 public:
 
 	Job() = default;

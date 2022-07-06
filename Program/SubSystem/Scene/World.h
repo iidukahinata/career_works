@@ -2,13 +2,12 @@
 * @file    World.h
 * @brief
 *
-* @date	   2022/06/30 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
 
 #include <span>
-#include <vector>
 #include "GameObject.h"
 #include "SubSystem/Core/ISubsystem.h"
 #include "SubSystem/JobSystem/Sync/Job.h"
@@ -27,20 +26,20 @@ public:
 	void Shutdown() override;
 
 	/** 未実装メソッド */
-	void LoadScene(std::string_view sceneName, bool isAsync = false) noexcept;
-	void SaveScene(std::string_view sceneName) noexcept;
+	void LoadScene(String_View sceneName, bool isAsync = false) noexcept;
+	void SaveScene(String_View sceneName) noexcept;
 
 	/** GameObject Function */
 	GameObjectRef CreateAndAddGameObject() noexcept;
 	void AddGameObject(GameObjectPtr gameObject) noexcept;
-	GameObjectRef GetGameObjectByName(std::string_view name) const noexcept;
+	GameObjectRef GetGameObjectByName(String_View name) const noexcept;
 	void RemoveGameObject(GameObject* gameObject) noexcept;
 
-	const std::vector<GameObjectPtr>& GetGameObjects() noexcept;
+	const Vector<GameObjectPtr>& GetGameObjects() noexcept;
 
 private:
 
 	Job m_job;
 
-	std::vector<GameObjectPtr> m_gameObjects;
+	Vector<GameObjectPtr> m_gameObjects;
 };

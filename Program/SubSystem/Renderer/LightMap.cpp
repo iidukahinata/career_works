@@ -67,7 +67,6 @@ void LightMap::Update() noexcept
 
 	// ˆê’UŒˆ‚ß‘Å‚¿
 	buffer.eyePos = Math::Vector4(0.f, 3.f, -9.f, 0);
-	//buffer.eyePos = Math::Vector4(cameraPos, 0.f);
 
 	buffer.ambientLight = m_ambientLight;
 	buffer.pointLightCount = pointLightCount;

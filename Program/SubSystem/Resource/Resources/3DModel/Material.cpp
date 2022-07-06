@@ -2,11 +2,12 @@
 * @file    Material.cpp
 * @brief
 *
-* @date	   2022/07/01 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 
 
 #include "Material.h"
+#include "SubSystem/Core/Context.h"
 #include "SubSystem/Core/IO/FileStream.h"
 #include "SubSystem/Core/IO/FileSystem.h"
 #include "SubSystem/Resource/ResourceManager.h"
@@ -25,7 +26,7 @@ Material::Material()
 		D3D11_TEXTURE_ADDRESS_WRAP);
 }
 
-void Material::SaveToFile(std::string_view filePath)
+void Material::SaveToFile(String_View filePath)
 {
 	const auto path = ConvertProprietaryFormat(filePath);
 
@@ -40,7 +41,7 @@ void Material::SaveToFile(std::string_view filePath)
 	};
 }
 
-bool Material::LoadFromFile(std::string_view filePath)
+bool Material::LoadFromFile(String_View filePath)
 {
 	const auto path = ConvertProprietaryFormat(filePath);
 
@@ -51,7 +52,7 @@ bool Material::LoadFromFile(std::string_view filePath)
 	size_t numTexture = 0;
 	fileStream.Read(&numTexture);
 
-	std::vector<std::string> texturePaths(numTexture);
+	Vector<String> texturePaths(numTexture);
 	for (auto& path : texturePaths)
 	{
 		fileStream.Read(&path);
@@ -75,7 +76,7 @@ void Material::AddTexture(Texture* texture) noexcept
 	m_textures.emplace_back(texture);
 }
 
-void Material::SetVSShader(std::string_view name)
+void Material::SetVSShader(String_View name)
 {
 	// 頂点レイアウト作成
 	D3D11_INPUT_ELEMENT_DESC vertexDesc[] = {
@@ -90,7 +91,7 @@ void Material::SetVSShader(std::string_view name)
 	m_inputLayout.Create(vertexDesc, ARRAYSIZE(vertexDesc), m_vertexShader.GetBlob());
 }
 
-void Material::SetPSShader(std::string_view name)
+void Material::SetPSShader(String_View name)
 {
 	m_pixelShader.Create(name, nullptr);
 }
@@ -114,14 +115,14 @@ void Material::ShaderSet() noexcept
 	}
 }
 
-std::string Material::ConvertProprietaryFormat(std::string_view filePath) const noexcept
+String Material::ConvertProprietaryFormat(String_View filePath) const noexcept
 {
-	std::string path = "assets/Resource/Material/";
+	String path = "assets/Resource/Material/";
 
 	// ファイル拡張子を独自ファイル用に変更
 	path += FileSystem::GetFilePath(filePath);
 
-	std::string_view sub(path);
+	String_View sub(path);
 	path = sub.substr(0, sub.find("."));
 	path += ".material";
 

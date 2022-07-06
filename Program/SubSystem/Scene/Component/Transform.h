@@ -2,17 +2,11 @@
 * @file    Transform.h
 * @brief
 *
-* @date	   2022/06/29 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
 
-#include "SubSystem/Core/Math/Matrix.h"
-#include "SubSystem/Core/Math/Vector3.h"
-
-/**
-* 変換系はDirectXMathを使用して計算を行っている
-*/
 class Transform
 {
 public:

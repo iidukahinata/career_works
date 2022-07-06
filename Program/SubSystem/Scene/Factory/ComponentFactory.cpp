@@ -2,7 +2,7 @@
 * @file    ComponentFactory.cpp
 * @brief
 *
-* @date	   2022/07/01 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 
 
@@ -17,9 +17,9 @@
 #include "../Component/Components/AudioListener.h"
 #include "../Component/Components/AudioSpeaker.h"
 
-#define CASE_CREATE_COMPONENT(CLASS, COMPONENT) case GET_HASH(CLASS): COMPONENT = std::make_unique<CLASS>(); break;
+#define CASE_CREATE_COMPONENT(CLASS, COMPONENT) case GET_HASH(CLASS): COMPONENT = MakeUnique<CLASS>(); break;
 
-ComponentPtr ComponentFactory::Create(GameObject* gameObject, std::string_view name) noexcept
+ComponentPtr ComponentFactory::Create(GameObject* gameObject, String_View name) noexcept
 {
     ComponentPtr component;
     const ComponentType type(name);
@@ -39,5 +39,5 @@ ComponentPtr ComponentFactory::Create(GameObject* gameObject, std::string_view n
         component->m_owner = gameObject;
     }
 
-    return component;
+    return component.Release();
 }

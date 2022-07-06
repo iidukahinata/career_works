@@ -2,8 +2,7 @@
 * @file    D3D12Texture.h
 * @brief
 *
-* @date	   2022/05/13 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
@@ -11,7 +10,7 @@
 #include <d3d12.h>
 #include <wrl/client.h>
 #include "D3D12DeviceChild.h"
-#include "SubSystem/Resource/Resources/3DModel/Texture.h"
+#include "ThirdParty/directxtex/include/DirectXTex.h"
 
 class D3D12Texture : public D3D12DeviceChild
 {

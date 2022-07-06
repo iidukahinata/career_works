@@ -2,14 +2,12 @@
 * @file    D3D12RootSignature.cpp
 * @brief
 *
-* @date	   2022/05/13 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/07/06 2022年度初版
 */
 
 
 #include "D3D12RootSignature.h"
 #include "D3D12GrahicsDevice.h"
-#include "SubSystem/Log/DebugLog.h"
 #include "ThirdParty/directxtex/include/d3dx12.h"
 
 bool D3D12RootSignature::Create(

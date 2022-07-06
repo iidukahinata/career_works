@@ -2,14 +2,12 @@
 * @file    MathHelper.h
 * @brief
 *
-* @date	   2022/06/01 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
 
-#include <string_view>
 #include <DirectXMath.h>
-#include "SubSystem/Core/Common/Common.h"
 
 #define PI 3.14159265359f
 #define PI_2 6.28318530718f

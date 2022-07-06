@@ -238,7 +238,7 @@ namespace Math
 				&& fabs(dis.z) <= tolerance && fabs(dis.w) <= tolerance;
 		}
 
-		std::string_view ToString() const noexcept
+		String ToString() const noexcept
 		{
 			char buffer[128];
 			// 自身のデータを文字列に変換する

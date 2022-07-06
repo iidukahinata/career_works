@@ -2,12 +2,11 @@
 * @file    GameObjectFactory.h
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
 
-#include "SubSystem/Core/Common/Memory.h"
 #include "../GameObject.h"
 
 typedef std::weak_ptr<GameObject> GameObjectRef;

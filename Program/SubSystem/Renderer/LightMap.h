@@ -2,12 +2,11 @@
 * @file    LightMap.h
 * @brief
 *
-* @date	   2022/06/27 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
 
-#include "SubSystem/Core/Math/MathCore.h"
 #include "SubSystem/Renderer/D3D11/D3D11ConstantBuffer.h"
 
 #define MAX_LIGHT_COUNT 64
@@ -32,7 +31,7 @@ public:
 private:
 
 	// * Sceneにセットされている全てのLightオブジェクト
-	std::vector<Light*> m_lights;
+	Vector<Light*> m_lights;
 
 	// * 環境光カラー
 	Math::Vector4 m_ambientLight;
@@ -73,8 +72,8 @@ private:
 		Math::Vector4 eyePos;
 		Math::Vector4 ambientLight;
 		DirectionalLightDate directionalLight;
-		PointLightDate pointLights[MAX_LIGHT_COUNT];
-		SpotLightDate spotLights[MAX_LIGHT_COUNT];
+		Array<PointLightDate, MAX_LIGHT_COUNT> pointLights;
+		Array<SpotLightDate, MAX_LIGHT_COUNT> spotLights;
 
 		float pointLightCount;
 		float spotLightCount;

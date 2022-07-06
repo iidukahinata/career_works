@@ -2,18 +2,16 @@
 * @file    TickManager.h
 * @brief
 *
-* @date	   2022/06/30 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
 
-#include <map>
-#include <set>
 #include "TickFunction.h"
 
 class TickManager
 {
-	typedef std::set<TickFunction*> TickContainer;
+	typedef Set<TickFunction*> TickContainer;
 public:
 
 	static TickManager& Get()
@@ -40,8 +38,8 @@ public:
 private:
 
 	// * enable 設定問わず更新処理を行う可能性がある TickFunction を保持。
-	std::set<TickFunction*> m_allTickFunctions;
+	Set<TickFunction*> m_allTickFunctions;
 
 	// * -> 優先度 : コンテナ (enable 設定されている TickFunction のみ保持)
-	std::map<uint32_t, TickContainer> m_tickContainers;
+	Map<uint32_t, TickContainer> m_tickContainers;
 };

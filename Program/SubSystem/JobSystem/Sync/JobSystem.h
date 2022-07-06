@@ -2,16 +2,13 @@
 * @file		JobSystem.h
 * @brief
 *
-* @date		2022/06/29 2022年度初版
+* @date		2022/07/06 2022年度初版
 */
 #pragma once
 
 
-#include <set>
-#include <map>
 #include <mutex>
 #include "Job.h"
-#include "SubSystem/Core/Common/Macro.h"
 
 class JobSystem
 {
@@ -32,7 +29,7 @@ private:
 
 	private:
 
-		std::set<Job*> m_jobs;
+		Set<Job*> m_jobs;
 	};
 
 public:
@@ -60,5 +57,5 @@ private:
 	std::mutex m_mutex;
 
 	// * Type -> <タイプID、コンテナ>
-	std::map<FunctionType, JobContainer> m_containers;
+	Map<FunctionType, JobContainer> m_containers;
 };

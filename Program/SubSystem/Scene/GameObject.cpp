@@ -2,7 +2,7 @@
 * @file    GameObject.cpp
 * @brief
 *
-* @date	   2022/06/30 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 
 
@@ -10,14 +10,14 @@
 #include "World.h"
 #include "Factory/ComponentFactory.h"
 
-IComponent* GameObject::AddComponent(std::string_view name) noexcept
+IComponent* GameObject::AddComponent(String_View name) noexcept
 {
 	IComponent* result = nullptr;
 
 	if (auto component = ComponentFactory::Create(this, name))
 	{
-		result = component.get();
-		AddComponent(component.release());
+		result = component.Get();
+		AddComponent(component.Release());
 	}
 
 	return result;
@@ -48,12 +48,12 @@ void GameObject::RemoveComponent(IComponent* component) noexcept
 	}
 }
 
-IComponent* GameObject::FindComponent(std::string_view name) noexcept
+IComponent* GameObject::FindComponent(String_View name) noexcept
 {
 	const ComponentType type(name);
 	if (m_components.contains(type.Hash))
 	{
-		return m_components[type.Hash].get();
+		return m_components[type.Hash].Get();
 	}
 	return nullptr;
 }
@@ -79,16 +79,15 @@ void GameObject::SetID(uint32_t id) noexcept
 	m_id = id;
 }
 
-void GameObject::SetName(std::string_view name) noexcept
+void GameObject::SetName(String_View name) noexcept
 {
 	m_name = name;
 }
 
-const std::string& GameObject::GetName() const noexcept
+const String& GameObject::GetName() const noexcept
 {
 	return m_name;
 }
-
 
 Transform& GameObject::GetTransform() noexcept
 {

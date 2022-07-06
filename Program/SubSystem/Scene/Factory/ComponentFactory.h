@@ -2,15 +2,14 @@
 * @file    ComponentFactory.h
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
 
-#include "SubSystem/Core/Common/Memory.h"
 #include "../Component/IComponent.h"
 
-typedef std::unique_ptr<IComponent> ComponentPtr;
+typedef UniquePtr<IComponent> ComponentPtr;
 
 /**
 * コンポーネントの生成をシステムから分離させるために作成。
@@ -19,5 +18,5 @@ typedef std::unique_ptr<IComponent> ComponentPtr;
 */
 struct ComponentFactory
 {
-	static ComponentPtr Create(GameObject* gameObject, std::string_view name) noexcept;
+	static ComponentPtr Create(GameObject* gameObject, String_View name) noexcept;
 };

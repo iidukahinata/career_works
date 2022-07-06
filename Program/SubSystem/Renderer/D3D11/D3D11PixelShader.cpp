@@ -2,14 +2,14 @@
 * @file    D3D11PixelShader.cpp
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 
 
 #include "D3D11Shader.h"
 
 bool D3D11PixelShader::Create(
-	std::string_view shader,
+	String_View shader,
 	D3D_SHADER_MACRO* macro,
 	std::string_view entrypoint /* = "main" */,
 	std::string_view target /* = "ps_5_0" */
@@ -30,7 +30,7 @@ bool D3D11PixelShader::Create(
 
 	if (FAILED(hr))
 	{
-		LOG_ERROR(std::string(shader) + " : PixelShader作成に失敗。");
+		LOG_ERROR(String(shader) + " : PixelShader作成に失敗。");
 		return false;
 	}
 	return true;

@@ -2,21 +2,22 @@
 * @file		Texture.h
 * @brief
 *
-* @date		2022/06/29 2022年度初版
+* @date		2022/07/06 2022年度初版
 */
 #pragma once
 
 
 #include "../IResource.h"
-#include "ThirdParty/directxtex/include/DirectXTex.h"
 #include "SubSystem/Renderer/D3D11/D3D11Texture.h"
+
+class DirectX::Image;
 
 struct TextureData
 {
 	size_t m_imageCount;
 	size_t m_rowPitch;
 	size_t m_slicePitch;
-	std::vector<uint8_t> m_pixels;
+	Vector<uint8_t> m_pixels;
 
 	DirectX::TexMetadata m_meta;
 };
@@ -32,10 +33,10 @@ public:
 	Texture() = default;
 
 	/** 独自テクスチャデータとして保存させる。*/
-	void SaveToFile(std::string_view filePath) override;
+	void SaveToFile(String_View filePath) override;
 
 	/** 独自テクスチャデータを読み込みする。*/
-	bool LoadFromFile(std::string_view filePath) override;
+	bool LoadFromFile(String_View filePath) override;
 
 	bool Create(TextureData& textureData) noexcept;
 	bool Create(const DirectX::Image* images, size_t imageSize, const DirectX::TexMetadata& meta);
@@ -45,15 +46,15 @@ public:
 private:
 
 	// IResource
-	bool Do_Load(std::string_view filePath) override;
+	bool Do_Load(String_View filePath) override;
 
-	std::string ConvertProprietaryFormat(std::string_view filePath) const noexcept;
+	String ConvertProprietaryFormat(String_View filePath) const noexcept;
 
 private:
 
 	//* 独自データがない場合しか使用されない。
 	//* もっといい実装があると思うので今後変更予定。
-	std::unique_ptr<TextureData> m_textureData;
+	UniquePtr<TextureData> m_textureData;
 
 	D3D11Texture m_d3d11Texture;
 };

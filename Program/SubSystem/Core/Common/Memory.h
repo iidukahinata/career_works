@@ -23,8 +23,11 @@ T* NewObject(Args... args)
 template<class T>
 void DeleteObject(T* ptr)
 {
-	ptr->~T();
-	Memory::Free(ptr);
+	if (ptr)
+	{
+		ptr->~T();
+		Memory::Free(ptr);
+	}
 }
 
 template<class T>
@@ -37,9 +40,22 @@ public:
 	UniquePtr() : m_data(nullptr) {}
 	UniquePtr(T* ptr) : m_data(ptr) {}
 
+	template<class U>
+	UniquePtr(UniquePtr<U>&& ptr) : m_data(nullptr)
+	{
+		Reset(ptr.Release());
+	}
+
 	~UniquePtr() noexcept
 	{
 		Reset();
+	}
+
+	template<class U>
+	UniquePtr<T>& operator=(UniquePtr<U>&& uptr) noexcept
+	{
+		Reset(uptr.Release());
+		return *this;
 	}
 
 	UniquePtr<T>& operator=(UniquePtr<T>&& uptr) noexcept

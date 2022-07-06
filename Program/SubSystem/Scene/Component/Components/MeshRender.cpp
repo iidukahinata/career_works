@@ -7,6 +7,7 @@
 
 
 #include "RenderObject.h"
+#include "SubSystem/Core/Context.h"
 #include "SubSystem/Resource/ResourceManager.h"
 #include "SubSystem/Renderer/TransformCBuffer.h"
 #include "SubSystem/Resource/Resources/3DModel/Model.h"
@@ -18,7 +19,7 @@ void MeshRender::Do_Initialize()
 	GetTransform().SetScale(Math::Vector3(0.01f));
 }
 
-void MeshRender::SetModel(std::string_view name) noexcept
+void MeshRender::SetModel(String_View name) noexcept
 {
 	m_model = GetContext()->GetSubsystem<ResourceManager>()->Load<Model>(name);
 }

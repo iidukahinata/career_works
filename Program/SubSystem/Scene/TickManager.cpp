@@ -2,12 +2,11 @@
 * @file    TickManager.cpp
 * @brief
 *
-* @date	   2022/06/30 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 
 
 #include "TickManager.h"
-#include "SubSystem/Core/Common/Common.h"
 
 void TickManager::Tick(double deltaTime) noexcept
 {

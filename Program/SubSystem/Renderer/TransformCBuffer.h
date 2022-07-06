@@ -2,8 +2,7 @@
 * @file	   TransformCBuffer.h
 * @brief
 *
-* @date	   2022/06/06 2022年度初版
-* @author  飯塚陽太
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
@@ -12,12 +11,8 @@
 
 class TransformCBuffer
 {
-private:
-
 	TransformCBuffer() = default;
-	TransformCBuffer(const TransformCBuffer&) = default;
-	TransformCBuffer& operator=(const TransformCBuffer&) = default;
-
+	COPY_PROHIBITED(TransformCBuffer)
 public:
 
 	static TransformCBuffer& Get() noexcept

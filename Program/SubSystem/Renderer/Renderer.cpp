@@ -2,7 +2,7 @@
 * @file	   Renderer.h
 * @brief
 *
-* @date	   2022/06/30 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 
 
@@ -34,10 +34,10 @@ bool Renderer::Initialize()
 	m_quad.Create(width, height);
 
 	// Set Up
-	m_gbuffer = std::make_unique<GBuffer>();
+	m_gbuffer = MakeUnique<GBuffer>();
 	m_gbuffer->Initialize(width, height);
 
-	m_lightMap = std::make_unique<LightMap>();
+	m_lightMap = MakeUnique<LightMap>();
 	m_lightMap->Initialize();
 
 	// あとあといらない。

@@ -137,7 +137,6 @@
     <ClInclude Include="Program\SubSystem\Core\Math\Vector3T.h" />
     <ClInclude Include="Program\SubSystem\Core\Math\Vector4.h" />
     <ClInclude Include="Program\SubSystem\Core\Math\Vector4T.h" />
-    <ClInclude Include="Program\SubSystem\Core\Math\VectorTypes.h" />
     <ClInclude Include="Program\SubSystem\Gui\MyGui.h" />
     <ClInclude Include="Program\SubSystem\Input\Input.h" />
     <ClInclude Include="Program\SubSystem\Input\InputEvents.h" />

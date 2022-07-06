@@ -2,13 +2,11 @@
  * @file	InputDevice.h
  * @brief   入力制御クラス
  *
- * @date	2022/06/25 2022年度初版
+ * @date	2022/07/06 2022年度初版
  */
 #pragma once
 
 
-#include <map>
-#include "SubSystem/Core/Math/Vector2.h"
 #include "SubSystem/Core/ISubsystem.h"
 #include "SubSystem/JobSystem/Sync/Job.h"
 
@@ -74,7 +72,7 @@ private:
 private:
 
 	// Type -> <キーID、押されたか>
-	std::map<Button::KeyAndMouse, bool> m_previousKeyState;
+	Map<Button::KeyAndMouse, bool> m_previousKeyState;
 
 	// * Input Update 登録用
 	Job m_job;

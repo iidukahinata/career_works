@@ -2,13 +2,13 @@
 * @file    D3D11IndexBuffer.cpp
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 
 
 #include "D3D11IndexBuffer.h"
 
-bool D3D11IndexBuffer::Create(const std::vector<UINT>& indices, D3D11_USAGE usage /* = D3D11_USAGE_DEFAULT */) noexcept
+bool D3D11IndexBuffer::Create(const Vector<UINT>& indices, D3D11_USAGE usage /* = D3D11_USAGE_DEFAULT */) noexcept
 {
 	D3D11_BUFFER_DESC bufferDesc;
 	ZeroMemory(&bufferDesc, sizeof(bufferDesc));
@@ -30,7 +30,7 @@ bool D3D11IndexBuffer::Create(const std::vector<UINT>& indices, D3D11_USAGE usag
 	return true;
 }
 
-void D3D11IndexBuffer::Update(const std::vector<UINT>& indices) noexcept
+void D3D11IndexBuffer::Update(const Vector<UINT>& indices) noexcept
 {
 	D3D11_MAPPED_SUBRESOURCE pData;
 	HRESULT hr = GetContext()->Map(m_indexBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &pData);
