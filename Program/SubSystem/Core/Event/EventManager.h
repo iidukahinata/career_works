@@ -29,7 +29,7 @@ public:
 	void Exit();
 
 	/** イベントを次フレーム処理用キューに追加 */
-	bool AddToQueue(std::shared_ptr<IEvent> eventBase) noexcept;
+	bool AddToQueue(UniquePtr<IEvent> eventBase) noexcept;
 
 	/**
 	* 先頭にある指定イベントタイプの消去
@@ -51,7 +51,7 @@ private:
 	static const int MAX_EVENT_QUEUE = 2;
 
 	// * キューが一つの場合イベントがイベント呼び出し処理が終わらない可能性があるため複数用意する
-	List<std::shared_ptr<IEvent>> m_eventQueues[MAX_EVENT_QUEUE];
+	List<UniquePtr<IEvent>> m_eventQueues[MAX_EVENT_QUEUE];
 
 	// * -> ハッシュ値 : リスナーポインタ配列
 	Map<uint32_t, Set<EventListener*>> m_eventListeners;

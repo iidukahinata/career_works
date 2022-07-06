@@ -2,7 +2,7 @@
 * @file    GameObjectFactory.cpp
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 
 
@@ -10,7 +10,7 @@
 
 GameObjectPtr GameObjectFactory::Create(World* world)
 {
-	GameObjectPtr gameObject = std::make_shared<GameObject>();
+	GameObjectPtr gameObject = MakeUnique<GameObject>();
 	gameObject->m_owner = world;
 	gameObject->m_id = 0;
 	gameObject->m_name = "GameObject";

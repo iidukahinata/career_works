@@ -2,7 +2,7 @@
 * @file    Input.cpp
 * @brief
 *
-* @date	   2022/06/23 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 
 
@@ -147,10 +147,10 @@ void Input::AddKey(Button::KeyAndMouse id) noexcept
 
 void Input::PressKey(Button::KeyAndMouse id) const noexcept
 {
-	EventManager::Get().AddToQueue(std::make_shared<KeyPressed>(id));
+	EventManager::Get().AddToQueue(MakeUnique<KeyPressed>(id));
 }
 
 void Input::ReleaseKey(Button::KeyAndMouse id) const noexcept
 {
-	EventManager::Get().AddToQueue(std::make_shared<KeyReleased>(id));
+	EventManager::Get().AddToQueue(MakeUnique<KeyReleased>(id));
 }

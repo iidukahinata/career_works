@@ -30,16 +30,16 @@ void World::Shutdown()
 void World::LoadScene(String_View sceneName, bool isAsync /* = false */) noexcept
 {
 	auto camera = CreateAndAddGameObject();
-	camera.lock()->AddComponent("Camera");
-	camera.lock()->AddComponent("AudioListener");
-	camera.lock()->AddComponent("PostProcessEffect");
+	camera->AddComponent("Camera");
+	camera->AddComponent("AudioListener");
+	camera->AddComponent("PostProcessEffect");
 
 	auto directionalLight = CreateAndAddGameObject();
-	camera.lock()->AddComponent("Light");
+	camera->AddComponent("Light");
 
 	auto obj = CreateAndAddGameObject();
-	obj.lock()->AddComponent("MeshRender");
-	obj.lock()->AddComponent("AudioSpeaker");
+	obj->AddComponent("MeshRender");
+	obj->AddComponent("AudioSpeaker");
 }
 
 void World::SaveScene(String_View sceneName) noexcept
@@ -47,11 +47,10 @@ void World::SaveScene(String_View sceneName) noexcept
 
 }
 
-GameObjectRef World::CreateAndAddGameObject() noexcept
+GameObject* World::CreateAndAddGameObject() noexcept
 {
-	auto gameObject = GameObjectFactory::Create(this);
-	AddGameObject(gameObject);
-	return gameObject;
+	AddGameObject(GameObjectFactory::Create(this));
+	return m_gameObjects.back().Get();
 }
 
 void World::AddGameObject(GameObjectPtr gameObject) noexcept
@@ -59,20 +58,20 @@ void World::AddGameObject(GameObjectPtr gameObject) noexcept
 	if (gameObject)
 	{
 		gameObject->SetID(m_gameObjects.size());
-		m_gameObjects.emplace_back(gameObject);
+		m_gameObjects.emplace_back(gameObject.Release());
 	}
 }
 
-GameObjectRef World::GetGameObjectByName(String_View name) const noexcept
+GameObject* World::GetGameObjectByName(String_View name) const noexcept
 {
 	for (const auto& gameObject : m_gameObjects)
 	{
 		if (gameObject->GetName() == name)
 		{
-			return gameObject;
+			return gameObject.Get();
 		}
 	}
-	return GameObjectRef();
+	return nullptr;
 }
 
 void World::RemoveGameObject(GameObject* gameObject) noexcept
@@ -90,7 +89,7 @@ void World::RemoveGameObject(GameObject* gameObject) noexcept
 
 	// O(1)でのデータ入れ替え処理
 	m_gameObjects.back()->SetID(id);
-	m_gameObjects[id].swap(m_gameObjects.back());
+	m_gameObjects[id].Reset(m_gameObjects.back().Release());
 
 	// メモリ取得、解放が連続で起きるようなゲームにした場合、
 	// 下記の処理をPopではなくGameObjectのデータクリアに変更し、再利用出来る様な仕様に変更するべき

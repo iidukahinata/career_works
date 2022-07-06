@@ -9,8 +9,7 @@
 
 #include "../GameObject.h"
 
-typedef std::weak_ptr<GameObject> GameObjectRef;
-typedef std::shared_ptr<GameObject> GameObjectPtr;
+typedef UniquePtr<GameObject> GameObjectPtr;
 
 /**
 * ゲームオブジェクトの生成をシステムから分離させるために作成。

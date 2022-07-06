@@ -7,13 +7,11 @@
 #pragma once
 
 
-#include <span>
 #include "GameObject.h"
 #include "SubSystem/Core/ISubsystem.h"
 #include "SubSystem/JobSystem/Sync/Job.h"
 
-typedef std::weak_ptr<GameObject> GameObjectRef;
-typedef std::shared_ptr<GameObject> GameObjectPtr;
+typedef UniquePtr<GameObject> GameObjectPtr;
 
 class World : public ISubsystem
 {
@@ -30,9 +28,9 @@ public:
 	void SaveScene(String_View sceneName) noexcept;
 
 	/** GameObject Function */
-	GameObjectRef CreateAndAddGameObject() noexcept;
+	GameObject* CreateAndAddGameObject() noexcept;
 	void AddGameObject(GameObjectPtr gameObject) noexcept;
-	GameObjectRef GetGameObjectByName(String_View name) const noexcept;
+	GameObject* GetGameObjectByName(String_View name) const noexcept;
 	void RemoveGameObject(GameObject* gameObject) noexcept;
 
 	const Vector<GameObjectPtr>& GetGameObjects() noexcept;

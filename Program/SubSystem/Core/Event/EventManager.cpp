@@ -24,7 +24,7 @@ void EventManager::Exit()
 	m_numActiveQueue = 0;
 }
 
-bool EventManager::AddToQueue(std::shared_ptr<IEvent> eventBase) noexcept
+bool EventManager::AddToQueue(UniquePtr<IEvent> eventBase) noexcept
 {
 	auto& eventType = eventBase->GetTypeData();
 
@@ -38,7 +38,7 @@ bool EventManager::AddToQueue(std::shared_ptr<IEvent> eventBase) noexcept
 	if (m_eventListeners.contains(eventType.Hash))
 	{
 		std::unique_lock<std::mutex> lock(m_mutex);
-		m_eventQueues[m_numActiveQueue].push_back(eventBase);
+		m_eventQueues[m_numActiveQueue].push_back(eventBase.Release());
 		return true;
 	}
 	return false;

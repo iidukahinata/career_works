@@ -12,7 +12,6 @@
 
 
 #include <fstream>
-#include "../Common/Macro.h"
 
 enum class OpenMode
 {
