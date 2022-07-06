@@ -6,14 +6,14 @@
 */
 
 
-#include <memory>
+#include "SubSystem/Core/Common/Memory.h"
 #include "Subsystem/Core/Engine.h"
 
-std::unique_ptr<Engine> g_engine;
+UniquePtr<Engine> g_engine;
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	g_engine = std::make_unique<Engine>();
+	g_engine = MakeUnique<Engine>();
 
 	struct AutoEngineFinish
 	{

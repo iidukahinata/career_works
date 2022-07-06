@@ -1,13 +1,11 @@
 /**
-* @file    Tools.h
-* @brief   便利関数
+* @file    Memory.h
+* @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
-
-#include "Macro.h"
 
 namespace Memory
 {
@@ -32,7 +30,8 @@ void DeleteObject(T* ptr)
 template<class T>
 class UniquePtr
 {
-	COPY_PROHIBITED(UniquePtr)
+	UniquePtr(const UniquePtr<T>&) = delete;
+	UniquePtr& operator=(const UniquePtr<T>&) = delete;
 public:
 
 	UniquePtr() : m_data(nullptr) {}

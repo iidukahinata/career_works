@@ -9,12 +9,12 @@
 #include <Windows.h>
 #include "Tools.h"
 
-std::wstring ToWstring(std::string_view str) noexcept
+Wstring ToWstring(String_View str) noexcept
 {
 	// •ÏŠ·Œã‚Ì•¶Žš—ñ‚Ì’·‚³‚ðŽæ“¾
 	int lenght = MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED | MB_ERR_INVALID_CHARS, str.data(), -1, nullptr, 0);
 
-	std::wstring wstr;
+	Wstring wstr;
 	wstr.reserve(lenght);
 
 	// •¶Žš—ñ•ÏŠ·
@@ -23,12 +23,12 @@ std::wstring ToWstring(std::string_view str) noexcept
 	return wstr;
 }
 
-std::string ToString(std::wstring_view str) noexcept
+String ToString(Wstring_View str) noexcept
 {
 	// •ÏŠ·Œã‚Ì•¶Žš—ñ‚Ì’·‚³‚ðŽæ“¾
 	int lenght = WideCharToMultiByte(CP_OEMCP, 0, str.data(), -1, (char*)NULL, 0, NULL, NULL);
 
-	std::string ret;
+	String ret;
 	ret.resize(lenght);
 
 	// •¶Žš—ñ•ÏŠ·
@@ -37,13 +37,13 @@ std::string ToString(std::wstring_view str) noexcept
 	return ret;
 }
 
-std::string GetExt(std::string_view filePath) noexcept
+String GetExt(String_View filePath) noexcept
 {
 	auto ext_i = filePath.find_last_of(".");
-	if (ext_i == std::string_view::npos)
+	if (ext_i == String_View::npos)
 	{
-		return std::string();
+		return String();
 	}
 
-	return std::string(filePath.substr(ext_i + 1, filePath.size() - ext_i));
+	return String(filePath.substr(ext_i + 1, filePath.size() - ext_i));
 }

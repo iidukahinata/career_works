@@ -1,8 +1,8 @@
 /**
-* @file    Tools.h
-* @brief   便利関数
+* @file    Allocator.h
+* @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/07/05 2022年度初版
 */
 
 
@@ -17,6 +17,7 @@ struct TLSFMemoryHeader
 
     TLSFMemoryHeader() : memorySize(0), isUse(false), prev(nullptr), next(nullptr)
     {
+
     }
 };
 
@@ -34,34 +35,41 @@ public:
         WriteEndTag();
     }
 
-    void* GetPointer() {
+    void* GetPointer() noexcept
+    {
         return reinterpret_cast<void*>(reinterpret_cast<char*>(this) + sizeof(BoundaryBlock));
     }
 
-    uint32_t GetMemorySize() const {
+    uint32_t GetMemorySize() const noexcept
+    {
         return m_header.memorySize;
     }
 
-    uint32_t GetBlockSize() const {
+    uint32_t GetBlockSize() const noexcept
+    {
         return sizeof(BoundaryBlock) + GetMemorySize() + GetEndTagSize();
     }
 
-    BoundaryBlock* Prev() {
+    BoundaryBlock* Prev() noexcept
+    {
         uint32_t* preSize = reinterpret_cast<uint32_t*>(reinterpret_cast<char*>(this) - GetEndTagSize());
         return reinterpret_cast<BoundaryBlock*>(reinterpret_cast<char*>(this) - *preSize);
     }
 
-    BoundaryBlock* Next() {
+    BoundaryBlock* Next() noexcept
+    {
         return reinterpret_cast<BoundaryBlock*>(reinterpret_cast<char*>(this) + GetBlockSize());
     }
 
-    void Marge() {
+    void Marge() noexcept
+    {
         const uint32_t newSize = GetBlockSize() + Next()->GetMemorySize();
         m_header.memorySize = newSize;
         WriteEndTag();
     }
 
-    BoundaryBlock* Split(uint32_t size) {
+    BoundaryBlock* Split(uint32_t size) noexcept
+    {
         const uint32_t splitBlockSize = sizeof(BoundaryBlock) + size + GetEndTagSize();
         if (splitBlockSize > GetMemorySize())
             return nullptr;
@@ -76,26 +84,28 @@ public:
         return next;
     }
 
-    bool EnableSplit(uint32_t size) const {
+    bool EnableSplit(uint32_t size) const noexcept
+    {
         return sizeof(BoundaryBlock) + size + GetEndTagSize() <= GetMemorySize();
     }
 
 private:
 
-    uint32_t GetEndTagSize() const {
+    uint32_t GetEndTagSize() const noexcept
+    {
         return sizeof(EndTag);
     }
 
-    void WriteEndTag() {
+    void WriteEndTag() noexcept
+    {
         new(reinterpret_cast<char*>(Next()) - GetEndTagSize()) EndTag(GetBlockSize());
     }
 };
 
-void Allocator::Initialize()
+Allocator::Allocator(uint32_t memorySize) : m_maxMemorySize(memorySize)
 {
     m_numOfDivisions = powf(2, N);
 
-    uint32_t memorySize = 0x100000;
     m_memory = malloc(memorySize);
 
     BoundaryBlock* block = new (m_memory) BoundaryBlock(memorySize - (sizeof(TLSFMemoryHeader) + sizeof(uint32_t)));
@@ -140,6 +150,8 @@ void Allocator::Deallocate(void* ptr) noexcept
 {
     BoundaryBlock* block = reinterpret_cast<BoundaryBlock*>(reinterpret_cast<char*>(ptr) - sizeof(BoundaryBlock));
 
+    // フリーの隣接ブロックがある場合、ブロックをマージする。
+    // 範囲外アクセスしないように先頭ポインタだけを考慮。
     if (block == m_memory)
     {
         if (!(block->Next()->m_header.isUse))
@@ -203,6 +215,7 @@ BoundaryBlock* Allocator::GetFreeList(uint32_t fli, uint32_t sli) const noexcept
 {
     uint32_t ret = 0;
 
+    // for分を使わない第二カテゴリの調査
     ret = GetFreeListToCategory(sli, m_freeListBits[fli]);
     if (ret != uint8_t(-1))
     {
@@ -210,6 +223,7 @@ BoundaryBlock* Allocator::GetFreeList(uint32_t fli, uint32_t sli) const noexcept
     }
     else
     {
+        // より大きなカテゴリが存在を調査
         ret = GetFreeListToCategory(fli, m_globalFLI);
         if (ret != uint8_t(-1))
         {
@@ -262,14 +276,14 @@ void Allocator::RemoveFromFreeList(BoundaryBlock* block) noexcept
     const auto prev = block->m_header.prev;
     const auto next = block->m_header.next;
 
-    // 指定 Block が中間の場合
+    // 指定 Block がフリーリストの中間の場合
     if (prev && next)
     {
         prev->m_header.next = next;
         next->m_header.prev = prev;
     }
 
-    // 指定 Block が先頭の場合
+    // 指定 Block がフリーリストの先頭の場合
     else if (next)
     {
         next->m_header.prev = nullptr;
@@ -281,13 +295,13 @@ void Allocator::RemoveFromFreeList(BoundaryBlock* block) noexcept
         m_freeLists[index] = prev;
     }
 
-    // 指定 Block が末端の場合
+    // 指定 Block がフリーリストの末端の場合
     else if (prev)
     {
         prev->m_header.next = nullptr;
     }
 
-    // 指定 Block が一つだけの場合、リストから消去
+    // フリーリストに指定 Block が一つだけの場合
     else
     {
         const uint32_t fli = GetMsb(block->GetMemorySize());

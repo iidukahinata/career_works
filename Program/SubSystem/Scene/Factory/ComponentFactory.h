@@ -7,7 +7,7 @@
 #pragma once
 
 
-#include <memory>
+#include "SubSystem/Core/Common/Memory.h"
 #include "../Component/IComponent.h"
 
 typedef std::unique_ptr<IComponent> ComponentPtr;

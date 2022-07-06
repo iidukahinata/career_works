@@ -118,6 +118,9 @@
     <Filter Include="SubSystem\Renderer\Shader\HLSL\PostEffect">
       <UniqueIdentifier>{241629f5-a90c-4fd3-8adc-24ddf0ee6349}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SubSystem\Core\Common\Memory">
+      <UniqueIdentifier>{c528e8a5-5b40-4784-befe-ec27ac542172}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program\WinMain.cpp" />
@@ -367,13 +370,16 @@
     <ClCompile Include="Program\SubSystem\Renderer\Shader\Shader.cpp">
       <Filter>SubSystem\Renderer\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="Program\SubSystem\Core\Common\Memory.cpp">
-      <Filter>SubSystem\Core\Common</Filter>
-    </ClCompile>
     <ClCompile Include="Program\SubSystem\JobSystem\Async\COM.cpp">
       <Filter>SubSystem\JobSystem\Async</Filter>
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Core\Common\Allocator.cpp">
+      <Filter>SubSystem\Core\Common\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Core\Common\Memory.cpp">
+      <Filter>SubSystem\Core\Common\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Core\Common\pch.cpp">
       <Filter>SubSystem\Core\Common</Filter>
     </ClCompile>
   </ItemGroup>
@@ -690,13 +696,19 @@
     <ClInclude Include="Program\SubSystem\Renderer\Shader\Shader.h">
       <Filter>SubSystem\Renderer\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Core\Common\Memory.h">
-      <Filter>SubSystem\Core\Common</Filter>
-    </ClInclude>
     <ClInclude Include="Program\SubSystem\JobSystem\Async\COM.h">
       <Filter>SubSystem\JobSystem\Async</Filter>
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Core\Common\Allocator.h">
+      <Filter>SubSystem\Core\Common\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Core\Common\Memory.h">
+      <Filter>SubSystem\Core\Common\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Core\Common\TypeDef.h">
+      <Filter>SubSystem\Core\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Core\Common\pch.h">
       <Filter>SubSystem\Core\Common</Filter>
     </ClInclude>
   </ItemGroup>

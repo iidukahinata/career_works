@@ -1,8 +1,8 @@
 /**
-* @file    Tools.h
-* @brief   便利関数
+* @file    Memory.h
+* @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 
 
@@ -11,13 +11,15 @@
 
 namespace Memory
 {
+	static Allocator g_allocator(0x1000000U);
+
 	void* Malloc(uint32_t size) noexcept
 	{
-		return nullptr;
+		return g_allocator.Allocate(size);
 	}
 
 	void Free(void* ptr) noexcept
 	{
+		g_allocator.Deallocate(ptr);
 	}
-
 }

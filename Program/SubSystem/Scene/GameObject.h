@@ -8,7 +8,7 @@
 
 
 #include <map>
-#include <memory>
+#include "SubSystem/Core/Common/Memory.h"
 #include "Component/IComponent.h"
 #include "Component/Transform.h"
 

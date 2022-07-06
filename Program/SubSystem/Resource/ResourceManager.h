@@ -9,7 +9,7 @@
 
 #include <map>
 #include <mutex>
-#include <memory>
+#include "SubSystem/Core/Common/Memory.h"
 #include "Resources/IResource.h"
 #include "SubSystem/Core/ISubsystem.h"
 

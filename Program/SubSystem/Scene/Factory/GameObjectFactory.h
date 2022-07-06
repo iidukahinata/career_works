@@ -7,7 +7,7 @@
 #pragma once
 
 
-#include <memory>
+#include "SubSystem/Core/Common/Memory.h"
 #include "../GameObject.h"
 
 typedef std::weak_ptr<GameObject> GameObjectRef;

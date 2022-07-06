@@ -7,7 +7,7 @@
 #pragma once
 
 
-#include <string_view>
+#include "TypeDef.h"
 
 /**
 * 文字列から wstring 型への変換
@@ -15,7 +15,7 @@
 * @param str [入力] 何かしらの文字列である必要があります。
 *					null 指定は想定していない。
 */
-std::wstring ToWstring(std::string_view str) noexcept;
+Wstring ToWstring(String_View str) noexcept;
 
 /**
 * wstring 型から string 型への変換
@@ -23,14 +23,14 @@ std::wstring ToWstring(std::string_view str) noexcept;
 * @param str [入力] 何かしらの文字列である必要があります。
 *					null 指定は想定していない。
 */
-std::string ToString(std::wstring_view str) noexcept;
+String ToString(Wstring_View str) noexcept;
 
 /**
 * パスから拡張子取得
 *
 * @param filePath [入力] 何かしらのファイル名である必要があります。
 */
-std::string GetExt(std::string_view filePath) noexcept;
+String GetExt(String_View filePath) noexcept;
 
 /**
 * 値を指定倍数に切り上げ調整

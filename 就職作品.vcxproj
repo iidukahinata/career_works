@@ -23,6 +23,7 @@
     <ClCompile Include="Program\SubSystem\Audio\FMOD\FMODAudio.cpp" />
     <ClCompile Include="Program\SubSystem\Core\Common\Allocator.cpp" />
     <ClCompile Include="Program\SubSystem\Core\Common\Memory.cpp" />
+    <ClCompile Include="Program\SubSystem\Core\Common\pch.cpp" />
     <ClCompile Include="Program\SubSystem\Core\Common\Tools.cpp" />
     <ClCompile Include="Program\SubSystem\Core\Context.cpp" />
     <ClCompile Include="Program\SubSystem\Core\Engine.cpp" />
@@ -115,8 +116,10 @@
     <ClInclude Include="Program\SubSystem\Core\Common\Hash.h" />
     <ClInclude Include="Program\SubSystem\Core\Common\Macro.h" />
     <ClInclude Include="Program\SubSystem\Core\Common\Memory.h" />
+    <ClInclude Include="Program\SubSystem\Core\Common\pch.h" />
     <ClInclude Include="Program\SubSystem\Core\Common\ProjectSettings.h" />
     <ClInclude Include="Program\SubSystem\Core\Common\Tools.h" />
+    <ClInclude Include="Program\SubSystem\Core\Common\TypeDef.h" />
     <ClInclude Include="Program\SubSystem\Core\Context.h" />
     <ClInclude Include="Program\SubSystem\Core\Engine.h" />
     <ClInclude Include="Program\SubSystem\Core\Event\Event.h" />
@@ -382,6 +385,10 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>.\Program;.\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>Program/Subsystem/Core/Common/pch.h</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -402,6 +409,10 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>.\Program;.\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>Program/Subsystem/Core/Common/pch.h</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
