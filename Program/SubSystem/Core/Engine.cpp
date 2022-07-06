@@ -14,7 +14,7 @@
 #include "SubSystem/Timer/Timer.h"
 #include "SubSystem/Scene/World.h"
 #include "SubSystem/Window/Window.h"
-#include "SubSystem/Renderer/Renderer.h"
+#include "SubSystem/Renderer/Forward/ForwardRenderer.h"
 #include "SubSystem/Resource/ResourceManager.h"
 #include "SubSystem/JobSystem/Sync/JobSystem.h"
 #include "SubSystem/JobSystem/Async/AsyncJobSystem.h"
@@ -110,7 +110,7 @@ void Engine::RegisterSubsystemsToContainer() noexcept
 	m_context->RegisterSubsystem<Audio>(MakeUnique<FMODAudio>());
 	m_context->RegisterSubsystem<ResourceManager>(MakeUnique<ResourceManager>());
 	m_context->RegisterSubsystem<World>(MakeUnique<World>());
-	m_context->RegisterSubsystem<Renderer>(MakeUnique<Renderer>());
+	m_context->RegisterSubsystem<Renderer>(MakeUnique<ForwardRenderer>());
 }
 
 bool Engine::InitializeSubsystems() noexcept

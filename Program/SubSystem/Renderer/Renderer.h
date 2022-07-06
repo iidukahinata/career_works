@@ -7,46 +7,56 @@
 #pragma once
 
 
-#include "Geometry/Quad.h"
+#include "LightMap.h"
 #include "SubSystem/Core/ISubsystem.h"
-#include "SubSystem/JobSystem/Sync/Job.h"
 
 class Light;
-class GBuffer;
-class LightMap;
+class Camera;
 class RenderObject;
+class PostProcessEffect;
 
+/**
+* Renderer抽象クラス
+* このクラスではインターフェースのみを実装。
+* 派生クラスで初期化等の関数を実装する。
+*/
 class Renderer : public ISubsystem
 {
 	SUB_CLASS(Renderer)
 public:
 
-	Renderer();
+	virtual bool Initialize() override { return true; }
+	virtual void Shutdown() override {}
 
-	bool Initialize() override;
-	void Shutdown() override;
-
-	void RegisterRenderObject(RenderObject* rederObject) noexcept;
-	void RemoveRenderObject(RenderObject* rederObject) noexcept;
-
+	/** Light メソッド */
 	void AddLight(Light* light) noexcept;
 	void RemoveLight(Light* light) noexcept;
 
-private:
+	/** Camera メソッド */
+	void AddCamera(Camera* camera) noexcept;
+	void RemoveCamera(Camera* camera) noexcept;
+	Camera* GetMainCamera() const noexcept;
 
-	void Update() noexcept;
+	/** Render Object メソッド */
+	void AddRenderObject(RenderObject* rederObject) noexcept;
+	void RemoveRenderObject(RenderObject* rederObject) noexcept;
 
-	void FirstPass();
-	void SecondPass();
+	/** Post Process Effect メソッド */
+	void RegisterPostProcess(PostProcessEffect* postProcess) noexcept;
+	void OnRegisterPostProcess(PostProcessEffect* postProcess) noexcept;
 
-private:
+protected:
 
-	Job m_job;
-
-	Quad m_quad;
-
-	UniquePtr<GBuffer> m_gbuffer;
+	// * ライト管理のためのマップクラス
 	UniquePtr<LightMap> m_lightMap;
 
+	// * Sceneに設置された描画オブジェクト配列。
 	Set<RenderObject*> m_renderObjects;
+
+	Camera* m_mainCamera = nullptr;
+
+	// * 配列にするのは後にレイヤーなどでUIなどの描画を制御させていくため。
+	Set<Camera*> m_cameras;
+
+	PostProcessEffect* m_postProcessEffect = nullptr;
 };

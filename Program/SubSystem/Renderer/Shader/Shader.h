@@ -1,28 +1,23 @@
+/**
+* @file	   Shader.h
+* @brief
+*
+* @date	   2022/07/06 2022年度初版
+*/
 #pragma once
 
 
 #include "../D3D11/D3D11Shader.h"
 #include "../D3D11/D3D11InputLayout.h"
 
-/**
-* Type は Geometry で定義されているもののみ用意。
-* 右の代入値は要素数を表す。
-*/
-enum InputLayoutType
-{
-	Vertex2D = 2U,
-
-	Vertex3D = 3U,
-
-	VertexBump3D = 5U,
-};
-
 class Shader
 {
 public:
 
-	bool SetShader(String_View name) noexcept;
-	bool SetInputLayout(InputLayoutType layoutType) noexcept;
+	bool SetPSShader(String_View name) noexcept;
+	bool SetVSShader(String_View name) noexcept;
+
+	bool SetInputLayout(D3D11_INPUT_ELEMENT_DESC* layout, UINT layoutSize) noexcept;
 
 	void AddMacro(String_View name, String_View value) noexcept;
 

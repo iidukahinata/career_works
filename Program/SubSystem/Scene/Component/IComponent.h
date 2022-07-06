@@ -36,8 +36,10 @@ public:
 	*/
 	virtual void Active(bool active);
 
-	/** 更新処理設定 */
+	/** true の場合、更新処理が有効になります。*/
 	void SetTickEnable(bool enable) noexcept;
+
+	/** 指定優先度を元に更新順序を変更します。最大値 : 0 */
 	void SetTickPriority(uint32_t priority) noexcept;
 
 	/** テンプレート型が this と同じ型の時 true を返します。*/

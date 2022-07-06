@@ -11,6 +11,11 @@
 
 class AudioListener;
 
+/**
+* Audio抽象クラス
+* このクラスではインターフェースのみを実装。
+* 派生クラスで初期化等の関数を実装する。
+*/
 class Audio : public ISubsystem
 {
 	SUB_CLASS(Audio)

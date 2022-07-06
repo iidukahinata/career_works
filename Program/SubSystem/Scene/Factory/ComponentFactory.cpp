@@ -12,11 +12,13 @@
 #include "../Component/Components/Camera.h"
 #include "../Component/Components/Light.h"
 #include "../Component/Components/RenderObject.h"
+#include "../Component/Components/PostProcessEffect.h"
 
 // Audio
 #include "../Component/Components/AudioListener.h"
 #include "../Component/Components/AudioSpeaker.h"
 
+#define CASE_CREATE_ISA_COMPONENT(CLASS, NAME, COMPONENT) case GetHashFromCRC(NAME): COMPONENT = MakeUnique<CLASS>(); break;
 #define CASE_CREATE_COMPONENT(CLASS, COMPONENT) case GET_HASH(CLASS): COMPONENT = MakeUnique<CLASS>(); break;
 
 ComponentPtr ComponentFactory::Create(GameObject* gameObject, String_View name) noexcept
@@ -31,6 +33,7 @@ ComponentPtr ComponentFactory::Create(GameObject* gameObject, String_View name) 
     CASE_CREATE_COMPONENT(MeshRender        , component);
     CASE_CREATE_COMPONENT(AudioListener     , component);
     CASE_CREATE_COMPONENT(AudioSpeaker      , component);
+    CASE_CREATE_COMPONENT(PostProcessEffect , component);
     default: break;
     }
 

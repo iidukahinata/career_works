@@ -45,7 +45,7 @@ void RenderObject::Active(bool active)
 void RenderObject::RegisterToRenderer()
 {
 	ASSERT(m_renderer);
-	m_renderer->RegisterRenderObject(this);
+	m_renderer->AddRenderObject(this);
 }
 
 void RenderObject::UnRegisterFromRenderer()

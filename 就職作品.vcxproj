@@ -65,7 +65,9 @@
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12RootSignature.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Shader.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Texture.cpp" />
-    <ClCompile Include="Program\SubSystem\Renderer\GBuffer.cpp" />
+    <ClCompile Include="Program\SubSystem\Renderer\Deferred\DeferredRenderer.cpp" />
+    <ClCompile Include="Program\SubSystem\Renderer\Deferred\GBuffer.cpp" />
+    <ClCompile Include="Program\SubSystem\Renderer\Forward\ForwardRenderer.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\Geometry\Quad.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\LightMap.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\Renderer.cpp" />
@@ -85,6 +87,7 @@
     <ClCompile Include="Program\SubSystem\Scene\Component\Components\Camera.cpp" />
     <ClCompile Include="Program\SubSystem\Scene\Component\Components\Light.cpp" />
     <ClCompile Include="Program\SubSystem\Scene\Component\Components\MeshRender.cpp" />
+    <ClCompile Include="Program\SubSystem\Scene\Component\Components\PostProcessEffect.cpp" />
     <ClCompile Include="Program\SubSystem\Scene\Component\Components\RenderObject.cpp" />
     <ClCompile Include="Program\SubSystem\Scene\Component\IComponent.cpp" />
     <ClCompile Include="Program\SubSystem\Scene\Component\Transform.cpp" />
@@ -168,7 +171,9 @@
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12Shader.h" />
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12Texture.h" />
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12VertexBuffer.h" />
-    <ClInclude Include="Program\SubSystem\Renderer\GBuffer.h" />
+    <ClInclude Include="Program\SubSystem\Renderer\Deferred\DeferredRenderer.h" />
+    <ClInclude Include="Program\SubSystem\Renderer\Deferred\GBuffer.h" />
+    <ClInclude Include="Program\SubSystem\Renderer\Forward\ForwardRenderer.h" />
     <ClInclude Include="Program\SubSystem\Renderer\Geometry\Quad.h" />
     <ClInclude Include="Program\SubSystem\Renderer\Geometry\Vertex.h" />
     <ClInclude Include="Program\SubSystem\Renderer\LightMap.h" />
@@ -188,6 +193,7 @@
     <ClInclude Include="Program\SubSystem\Scene\Component\Components\AudioSpeaker.h" />
     <ClInclude Include="Program\SubSystem\Scene\Component\Components\Camera.h" />
     <ClInclude Include="Program\SubSystem\Scene\Component\Components\Light.h" />
+    <ClInclude Include="Program\SubSystem\Scene\Component\Components\PostProcessEffect.h" />
     <ClInclude Include="Program\SubSystem\Scene\Component\Components\RenderObject.h" />
     <ClInclude Include="Program\SubSystem\Scene\Component\IComponent.h" />
     <ClInclude Include="Program\SubSystem\Scene\Component\Transform.h" />

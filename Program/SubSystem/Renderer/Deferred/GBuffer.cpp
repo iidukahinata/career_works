@@ -7,7 +7,7 @@
 
 
 #include "GBuffer.h"
-#include "D3D11/D3D11GrahicsDevice.h"
+#include "../D3D11/D3D11GrahicsDevice.h"
 
 void GBuffer::Initialize(uint32_t wight, uint32_t height) noexcept
 {

@@ -121,6 +121,12 @@
     <Filter Include="SubSystem\Core\Common\Memory">
       <UniqueIdentifier>{c528e8a5-5b40-4784-befe-ec27ac542172}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SubSystem\Renderer\Deferred">
+      <UniqueIdentifier>{26482f45-1bc7-4772-9eb8-669b1661d93e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Renderer\Forward">
+      <UniqueIdentifier>{c76a9570-729d-4d4b-ad1f-4b7a4920c2ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program\WinMain.cpp" />
@@ -358,9 +364,6 @@
     <ClCompile Include="Program\SubSystem\Scene\Component\Components\MeshRender.cpp">
       <Filter>SubSystem\Scene\Component\Conponents</Filter>
     </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\GBuffer.cpp">
-      <Filter>SubSystem\Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="Program\SubSystem\Renderer\Geometry\Quad.cpp">
       <Filter>SubSystem\Renderer\Geometry</Filter>
     </ClCompile>
@@ -381,6 +384,18 @@
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Core\Common\Tools.cpp">
       <Filter>SubSystem\Core\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Scene\Component\Components\PostProcessEffect.cpp">
+      <Filter>SubSystem\Scene\Component\Conponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\Deferred\DeferredRenderer.cpp">
+      <Filter>SubSystem\Renderer\Deferred</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\Deferred\GBuffer.cpp">
+      <Filter>SubSystem\Renderer\Deferred</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\Forward\ForwardRenderer.cpp">
+      <Filter>SubSystem\Renderer\Forward</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -669,9 +684,6 @@
     <ClInclude Include="Program\SubSystem\Scene\TickManager.h">
       <Filter>SubSystem\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\GBuffer.h">
-      <Filter>SubSystem\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="Program\SubSystem\Renderer\Geometry\Quad.h">
       <Filter>SubSystem\Renderer\Geometry</Filter>
     </ClInclude>
@@ -704,6 +716,18 @@
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Core\Common\TypeDef.h">
       <Filter>SubSystem\Core\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Scene\Component\Components\PostProcessEffect.h">
+      <Filter>SubSystem\Scene\Component\Conponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\Deferred\DeferredRenderer.h">
+      <Filter>SubSystem\Renderer\Deferred</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\Deferred\GBuffer.h">
+      <Filter>SubSystem\Renderer\Deferred</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\Forward\ForwardRenderer.h">
+      <Filter>SubSystem\Renderer\Forward</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
