@@ -1,6 +1,6 @@
 #include "Shader.h"
 
-bool Shader::SetShader(std::string_view name) noexcept
+bool Shader::SetShader(String_View name) noexcept
 {
 	if (m_vertexShader.Create(name, m_macros.data(), "VSMain"))
 	{
@@ -26,7 +26,7 @@ bool Shader::SetInputLayout(InputLayoutType layoutType) noexcept
 	return true;
 }
 
-void Shader::AddMacro(std::string_view name, std::string_view value) noexcept
+void Shader::AddMacro(String_View name, String_View value) noexcept
 {
 	m_macros.emplace_back(D3D_SHADER_MACRO(name.data(), value.data()));
 }

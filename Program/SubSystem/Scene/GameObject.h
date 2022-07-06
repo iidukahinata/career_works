@@ -56,7 +56,7 @@ private:
 	uint32_t m_id;
 
 	// * Worldクラスで探索時等に使用される。
-	std::string m_name;
+	String m_name;
 
 	Transform m_transform;
 

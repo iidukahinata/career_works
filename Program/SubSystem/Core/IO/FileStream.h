@@ -372,7 +372,7 @@ inline void FileStream::Write(Vector<T> data) noexcept
 }
 
 template<>
-inline void FileStream::Write(Vector<std::string> data) noexcept
+inline void FileStream::Write(Vector<String> data) noexcept
 {
 	/** ファイルデータの先頭から一行ずつ書き込み */
 	if (m_openMode == OpenMode::Txt_Mode)

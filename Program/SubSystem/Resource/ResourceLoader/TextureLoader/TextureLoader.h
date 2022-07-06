@@ -18,6 +18,6 @@ public:
 
 private:
 
-	bool LoadFromFile(String_View ext, std::wstring_view path, DirectX::TexMetadata* meta, DirectX::ScratchImage& image) noexcept;
+	bool LoadFromFile(String_View ext, Wstring_View path, DirectX::TexMetadata* meta, DirectX::ScratchImage& image) noexcept;
 	bool CreateFromData(Texture* texture, DirectX::TexMetadata& meta, DirectX::ScratchImage* image) noexcept;
 };

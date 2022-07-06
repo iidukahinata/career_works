@@ -23,7 +23,7 @@ bool TextureLoader::Load(Texture* texture, String_View filePath) noexcept
 		}
 	}
 
-	LOG_ERROR(std::string(filePath) + "‚ª“Ç‚İ‚ß‚Ü‚¹‚ñ‚Å‚µ‚½B");
+	LOG_ERROR(String(filePath) + "‚ª“Ç‚İ‚ß‚Ü‚¹‚ñ‚Å‚µ‚½B");
 	return false;
 }
 

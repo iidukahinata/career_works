@@ -11,8 +11,8 @@
 bool D3D11ComputeShader::Create(
 	String_View shader,
 	D3D_SHADER_MACRO* macro,
-	std::string_view entrypoint /* = "main" */,
-	std::string_view target /* = "gs_5_0" */
+	String_View entrypoint /* = "main" */,
+	String_View target /* = "gs_5_0" */
 ) noexcept
 {
 	// shader compile

@@ -37,7 +37,7 @@ protected:
 
 	bool Do_Load(String_View filePath) override { return true; };
 
-	std::string ConvertProprietaryFormat(String_View filePath) const noexcept;
+	String ConvertProprietaryFormat(String_View filePath) const noexcept;
 
 private:
 

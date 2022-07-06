@@ -54,14 +54,14 @@ struct ClassTypeData
 {
 public:
 
-	const std::string_view Name = nullptr;
+	const String_View Name = nullptr;
 
 	const size_t Hash = 0;
 
-	constexpr ClassTypeData(std::string_view name, size_t hash) : Name(name), Hash(hash)
+	constexpr ClassTypeData(String_View name, size_t hash) : Name(name), Hash(hash)
 	{}
 
-	constexpr ClassTypeData(std::string_view name) : Name(name), Hash(GetHashFromCRC(name))
+	constexpr ClassTypeData(String_View name) : Name(name), Hash(GetHashFromCRC(name))
 	{}
 
 	constexpr bool operator==(const ClassTypeData& typeData) const noexcept

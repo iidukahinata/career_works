@@ -36,7 +36,7 @@ void D3D12Shader::Compile(String_View filePath, String_View entryPoint, String_V
 		}
 		if (errorBlob) 
 		{
-			std::string error;
+			String error;
 			error.resize(errorBlob->GetBufferSize());
 			std::copy_n((char*)errorBlob->GetBufferPointer(), errorBlob->GetBufferSize(), error.begin());
 			error += "\n";

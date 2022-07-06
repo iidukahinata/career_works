@@ -38,7 +38,7 @@ private:
 private:
 
 	// * Type -> <ハッシュ、システムオブジェクト>
-	std::map<uint32_t, UniquePtr<ISubsystem>> m_subsystems;
+	Map<uint32_t, UniquePtr<ISubsystem>> m_subsystems;
 };
 
 template<class Key, class Subsystem>

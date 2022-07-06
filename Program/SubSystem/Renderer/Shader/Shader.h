@@ -21,10 +21,10 @@ class Shader
 {
 public:
 
-	bool SetShader(std::string_view name) noexcept;
+	bool SetShader(String_View name) noexcept;
 	bool SetInputLayout(InputLayoutType layoutType) noexcept;
 
-	void AddMacro(std::string_view name, std::string_view value) noexcept;
+	void AddMacro(String_View name, String_View value) noexcept;
 
 private:
 
@@ -33,5 +33,5 @@ private:
 
 	D3D11InputLayout m_inputLayout;
 
-	std::vector<D3D_SHADER_MACRO> m_macros;
+	Vector<D3D_SHADER_MACRO> m_macros;
 };
