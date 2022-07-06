@@ -9,8 +9,11 @@
 #include "IResource.h"
 #include "SubSystem/Core/Context.h"
 
+extern Context* g_context;
+
 void IResource::SaveToFile(String_View filePath)
 {
+
 }
 
 bool IResource::LoadFromFile(String_View filePath)
@@ -42,5 +45,5 @@ const String& IResource::GetName() const noexcept
 
 Context* IResource::GetContext() const noexcept
 {
-	return &Context::Get();
+	return g_context;
 }

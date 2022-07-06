@@ -2,12 +2,13 @@
 * @file    Engine.h
 * @brief
 *
-* @date	   2022/06/26 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
 
 #include <Windows.h>
+#include "Context.h"
 
 class Engine
 {
@@ -42,4 +43,6 @@ private:
 private:
 
 	HINSTANCE m_hInstance;
+
+	UniquePtr<Context> m_context;
 };

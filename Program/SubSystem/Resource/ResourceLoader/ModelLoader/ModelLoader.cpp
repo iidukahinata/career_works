@@ -15,9 +15,11 @@
 #include "SubSystem/Core/IO/FileSystem.h"
 #include "SubSystem/Resource/ResourceManager.h"
 
+extern Context* g_context;
+
 ModelLoader::ModelLoader()
 {
-	m_resourceManager = Context::Get().GetSubsystem<ResourceManager>();
+	m_resourceManager = g_context->GetSubsystem<ResourceManager>();
 }
 
 bool ModelLoader::Load(Model* model, String_View filePath)

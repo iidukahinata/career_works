@@ -2,12 +2,12 @@
 * @file    Engine.cpp
 * @brief
 *
-* @date	   2022/06/26 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 
 
 #include "Engine.h"
-#include "Context.h"
+#include "Common/ProjectSettings.h"
 #include "Event/EventManager.h"
 #include "SubSystem/Audio/FMOD/FMODAudio.h"
 #include "SubSystem/Input/Input.h"
@@ -19,9 +19,14 @@
 #include "SubSystem/JobSystem/Sync/JobSystem.h"
 #include "SubSystem/JobSystem/Async/AsyncJobSystem.h"
 
+Context* g_context = nullptr;
+
 bool Engine::Initialize(HINSTANCE hInstance)
 {
 	bool ret = false;
+
+	m_context = MakeUnique<Context>();
+	g_context = m_context.Get();
 
 	ret = StartUpScreen(hInstance);
 	if (!ret) {
@@ -52,14 +57,14 @@ long Engine::MainLoop()
 {
 	Window& window = Window::Get();
 	auto& jobSystem = JobSystem::Get();
-	auto timer = Context::Get().GetSubsystem<Timer>();
-
+	auto timer = m_context->GetSubsystem<Timer>();
+	
 	while (window.Tick())
 	{
 		if (timer->ReachedNextFrame())
 		{
 			jobSystem.Execute(timer->GetDeltaTime(), FunctionType::Update);
-
+	
 			// renderer thread として分ける予定のため分離している。
 			jobSystem.Execute(timer->GetDeltaTime(), FunctionType::Render);
 		}
@@ -78,7 +83,7 @@ void Engine::Shutdown()
 
 	UnregisterClass("windowClass", m_hInstance);
 
-	Context::Get().Release();
+	m_context->Release();
 }
 
 bool Engine::StartUpScreen(HINSTANCE hInstance) noexcept
@@ -100,46 +105,42 @@ bool Engine::StartUpScreen(HINSTANCE hInstance) noexcept
 
 void Engine::RegisterSubsystemsToContainer() noexcept
 {
-	auto& context = Context::Get();
-
-	context.RegisterSubsystem<Timer>(MakeUnique<Timer>());
-	context.RegisterSubsystem<Input>(MakeUnique<Input>());
-	context.RegisterSubsystem<Audio>(MakeUnique<FMODAudio>());
-	context.RegisterSubsystem<ResourceManager>(MakeUnique<ResourceManager>());
-	context.RegisterSubsystem<World>(MakeUnique<World>());
-	context.RegisterSubsystem<Renderer>(MakeUnique<Renderer>());
+	m_context->RegisterSubsystem<Timer>(MakeUnique<Timer>());
+	m_context->RegisterSubsystem<Input>(MakeUnique<Input>());
+	m_context->RegisterSubsystem<Audio>(MakeUnique<FMODAudio>());
+	m_context->RegisterSubsystem<ResourceManager>(MakeUnique<ResourceManager>());
+	m_context->RegisterSubsystem<World>(MakeUnique<World>());
+	m_context->RegisterSubsystem<Renderer>(MakeUnique<Renderer>());
 }
 
 bool Engine::InitializeSubsystems() noexcept
 {
-	auto& context = Context::Get();
-
-	if (!context.GetSubsystem<Timer>()->Initialize())
+	if (!m_context->GetSubsystem<Timer>()->Initialize())
 	{
 		return false;
 	}
 	
-	if (!context.GetSubsystem<Input>()->Initialize())
+	if (!m_context->GetSubsystem<Input>()->Initialize())
 	{
 		return false;
 	}
 	
-	if (!context.GetSubsystem<Audio>()->Initialize())
+	if (!m_context->GetSubsystem<Audio>()->Initialize())
 	{
 		return false;
 	}
-
-	if (!context.GetSubsystem<ResourceManager>()->Initialize())
+	
+	if (!m_context->GetSubsystem<ResourceManager>()->Initialize())
 	{
 		return false;
 	}
 	 	 
-	if (!context.GetSubsystem<Renderer>()->Initialize())
+	if (!m_context->GetSubsystem<Renderer>()->Initialize())
 	{
 		return false;
 	}
 	 
-	if (!context.GetSubsystem<World>()->Initialize())
+	if (!m_context->GetSubsystem<World>()->Initialize())
 	{
 		return false;
 	}
