@@ -8,7 +8,6 @@
 
 #include "D3D12Shader.h"
 #include <d3dcompiler.h>
-#include "SubSystem/Core/Common/Tools.h"
 
 void D3D12Shader::Compile(String_View filePath, String_View entryPoint, String_View traget) noexcept
 {

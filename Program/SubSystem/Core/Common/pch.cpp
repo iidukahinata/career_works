@@ -1,3 +1,11 @@
+/**
+* @file    pch.cpp
+* @brief
+*
+* @date	   2022/07/06 2022年度初版
+*/
+
+
 #include "pch.h"
 
 // libファイルをまとめて管理する。

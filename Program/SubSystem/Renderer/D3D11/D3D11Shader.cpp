@@ -8,7 +8,6 @@
 
 #include <d3dcompiler.h>
 #include "D3D11Shader.h"
-#include "SubSystem/Core/Common/Tools.h"
 
 bool D3D11Shader::CompileFromFile(String_View shader, D3D_SHADER_MACRO* macro, String_View entrypoint, String_View traget) noexcept
 {

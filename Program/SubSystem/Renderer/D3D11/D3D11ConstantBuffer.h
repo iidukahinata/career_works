@@ -2,13 +2,12 @@
 * @file    D3D11ConstantBuffer.h
 * @brief   
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
 
 #include "D3D11DeviceChild.h"
-#include "SubSystem/Core/Common/Tools.h"
 
 template<class T>
 class D3D11ConstantBuffer : public D3D11DeviceChild

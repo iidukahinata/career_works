@@ -2,12 +2,11 @@
 * @file    D3D11SamplerState.cpp
 * @brief
 *
-* @date	   2022/06/25 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 
 
 #include "D3D11SamplerState.h"
-#include "SubSystem/Core/Common/Tools.h"
 
 bool D3D11SamplerState::Create(
 	D3D11_FILTER filter /* = D3D11_FILTER_MIN_MAG_MIP_LINEAR */,

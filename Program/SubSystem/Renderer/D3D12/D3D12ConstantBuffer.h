@@ -9,7 +9,6 @@
 
 #include "D3D12DeviceChild.h"
 #include "D3D12GrahicsDevice.h"
-#include "SubSystem/Core/Common/Tools.h"
 #include "ThirdParty/directxtex/include/d3dx12.h"
 
 template<class T>

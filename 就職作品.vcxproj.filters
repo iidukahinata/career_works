@@ -241,9 +241,6 @@
     <ClCompile Include="Program\SubSystem\Core\IO\FileStream.cpp">
       <Filter>SubSystem\Core\I/O</Filter>
     </ClCompile>
-    <ClCompile Include="Program\SubSystem\Core\Common\Tools.cpp">
-      <Filter>SubSystem\Core\Common</Filter>
-    </ClCompile>
     <ClCompile Include="Program\SubSystem\JobSystem\Async\AsyncJob.cpp">
       <Filter>SubSystem\JobSystem\Async</Filter>
     </ClCompile>
@@ -373,13 +370,16 @@
     <ClCompile Include="Program\SubSystem\JobSystem\Async\COM.cpp">
       <Filter>SubSystem\JobSystem\Async</Filter>
     </ClCompile>
-    <ClCompile Include="Program\SubSystem\Core\Common\Allocator.cpp">
+    <ClCompile Include="Program\SubSystem\Core\Common\Memory\Allocator.cpp">
       <Filter>SubSystem\Core\Common\Memory</Filter>
     </ClCompile>
-    <ClCompile Include="Program\SubSystem\Core\Common\Memory.cpp">
+    <ClCompile Include="Program\SubSystem\Core\Common\Memory\Memory.cpp">
       <Filter>SubSystem\Core\Common\Memory</Filter>
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Core\Common\pch.cpp">
+      <Filter>SubSystem\Core\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Core\Common\Tools.cpp">
       <Filter>SubSystem\Core\Common</Filter>
     </ClCompile>
   </ItemGroup>
@@ -516,9 +516,6 @@
     <ClInclude Include="Program\SubSystem\Renderer\Geometry\Vertex.h">
       <Filter>SubSystem\Renderer\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Core\Math\MathCore.h">
-      <Filter>SubSystem\Core\Math</Filter>
-    </ClInclude>
     <ClInclude Include="Program\SubSystem\Core\Math\MathHelper.h">
       <Filter>SubSystem\Core\Math</Filter>
     </ClInclude>
@@ -546,16 +543,7 @@
     <ClInclude Include="Program\SubSystem\Core\IO\FileStream.h">
       <Filter>SubSystem\Core\I/O</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Core\Common\Tools.h">
-      <Filter>SubSystem\Core\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Core\Common\Common.h">
-      <Filter>SubSystem\Core\Common</Filter>
-    </ClInclude>
     <ClInclude Include="Program\SubSystem\Core\Common\ProjectSettings.h">
-      <Filter>SubSystem\Core\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Core\Common\Hash.h">
       <Filter>SubSystem\Core\Common</Filter>
     </ClInclude>
     <ClInclude Include="Program\SubSystem\JobSystem\Async\AsyncJob.h">
@@ -602,9 +590,6 @@
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Core\Event\Event.h">
       <Filter>SubSystem\Core\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Core\Common\Macro.h">
-      <Filter>SubSystem\Core\Common</Filter>
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Core\ISubsystem.h">
       <Filter>SubSystem\Core</Filter>
@@ -696,16 +681,28 @@
     <ClInclude Include="Program\SubSystem\JobSystem\Async\COM.h">
       <Filter>SubSystem\JobSystem\Async</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Core\Common\Allocator.h">
+    <ClInclude Include="Program\SubSystem\Core\Common\Memory\Allocator.h">
       <Filter>SubSystem\Core\Common\Memory</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Core\Common\Memory.h">
+    <ClInclude Include="Program\SubSystem\Core\Common\Memory\Memory.h">
       <Filter>SubSystem\Core\Common\Memory</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Core\Common\TypeDef.h">
+    <ClInclude Include="Program\SubSystem\Core\Common\Common.h">
+      <Filter>SubSystem\Core\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Core\Common\Hash.h">
+      <Filter>SubSystem\Core\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Core\Common\Macro.h">
       <Filter>SubSystem\Core\Common</Filter>
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Core\Common\pch.h">
+      <Filter>SubSystem\Core\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Core\Common\Tools.h">
+      <Filter>SubSystem\Core\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Core\Common\TypeDef.h">
       <Filter>SubSystem\Core\Common</Filter>
     </ClInclude>
   </ItemGroup>

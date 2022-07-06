@@ -21,8 +21,8 @@
   <ItemGroup>
     <ClCompile Include="Program\SubSystem\Audio\Audio.cpp" />
     <ClCompile Include="Program\SubSystem\Audio\FMOD\FMODAudio.cpp" />
-    <ClCompile Include="Program\SubSystem\Core\Common\Allocator.cpp" />
-    <ClCompile Include="Program\SubSystem\Core\Common\Memory.cpp" />
+    <ClCompile Include="Program\SubSystem\Core\Common\Memory\Allocator.cpp" />
+    <ClCompile Include="Program\SubSystem\Core\Common\Memory\Memory.cpp" />
     <ClCompile Include="Program\SubSystem\Core\Common\pch.cpp" />
     <ClCompile Include="Program\SubSystem\Core\Common\Tools.cpp" />
     <ClCompile Include="Program\SubSystem\Core\Context.cpp" />
@@ -111,11 +111,11 @@
     <ClInclude Include="Program\SubSystem\Audio\Audio.h" />
     <ClInclude Include="Program\SubSystem\Audio\AudioHelper.h" />
     <ClInclude Include="Program\SubSystem\Audio\FMOD\FMODAudio.h" />
-    <ClInclude Include="Program\SubSystem\Core\Common\Allocator.h" />
     <ClInclude Include="Program\SubSystem\Core\Common\Common.h" />
     <ClInclude Include="Program\SubSystem\Core\Common\Hash.h" />
     <ClInclude Include="Program\SubSystem\Core\Common\Macro.h" />
-    <ClInclude Include="Program\SubSystem\Core\Common\Memory.h" />
+    <ClInclude Include="Program\SubSystem\Core\Common\Memory\Allocator.h" />
+    <ClInclude Include="Program\SubSystem\Core\Common\Memory\Memory.h" />
     <ClInclude Include="Program\SubSystem\Core\Common\pch.h" />
     <ClInclude Include="Program\SubSystem\Core\Common\ProjectSettings.h" />
     <ClInclude Include="Program\SubSystem\Core\Common\Tools.h" />
@@ -128,7 +128,6 @@
     <ClInclude Include="Program\SubSystem\Core\IO\FileSystem.h" />
     <ClInclude Include="Program\SubSystem\Core\ISubsystem.h" />
     <ClInclude Include="Program\SubSystem\Core\IO\FileStream.h" />
-    <ClInclude Include="Program\SubSystem\Core\Math\MathCore.h" />
     <ClInclude Include="Program\SubSystem\Core\Math\MathHelper.h" />
     <ClInclude Include="Program\SubSystem\Core\Math\Matrix.h" />
     <ClInclude Include="Program\SubSystem\Core\Math\Vector2.h" />
