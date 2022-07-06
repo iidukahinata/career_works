@@ -7,9 +7,10 @@
 #pragma once
 
 
-#include "Mesh.h"
-#include "Material.h"
 #include "../IResource.h"
+
+class Mesh;
+class Material;
 
 class Model : public IResource
 {
@@ -36,7 +37,6 @@ private:
 
 private:
 
-	Mesh m_mesh;
 	Vector<Mesh*> m_meshes;
 	Vector<Material*> m_materials;
 };

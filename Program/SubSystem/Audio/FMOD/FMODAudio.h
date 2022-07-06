@@ -2,14 +2,18 @@
 * @file    FMODAudio.h
 * @brief
 *
-* @date	   2022/06/28 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 #pragma once
 
 
-#include <fmod.hpp>
 #include "../Audio.h"
 #include "SubSystem/JobSystem/Sync/Job.h"
+
+namespace FMOD
+{
+	class System;
+}
 
 class FMODAudio : public Audio
 {

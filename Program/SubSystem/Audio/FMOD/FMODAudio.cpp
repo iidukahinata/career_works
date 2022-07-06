@@ -2,10 +2,11 @@
 * @file    FMODAudio.cpp
 * @brief
 *
-* @date	   2022/06/30 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 
 
+#include <fmod.hpp>
 #include "FMODAudio.h"
 #include "../AudioHelper.h"
 #include "Subsystem/Scene/Component/Components/AudioListener.h"

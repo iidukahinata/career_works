@@ -7,7 +7,7 @@
 #pragma once
 
 
-#include "TickFunction.h"
+class TickFunction;
 
 class TickManager
 {

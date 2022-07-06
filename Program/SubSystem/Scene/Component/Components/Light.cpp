@@ -48,12 +48,12 @@ void Light::Active(bool active)
 	}
 }
 
-void Light::SetLightType(Light::LightType lightType)
+void Light::SetLightType(LightType lightType)
 {
 	m_lightType = lightType;
 }
 
-Light::LightType Light::GetLightType()
+LightType Light::GetLightType()
 {
 	return m_lightType;
 }

@@ -9,7 +9,8 @@
 
 #include <queue>
 #include <mutex>
-#include "AsyncJob.h"
+
+class AsyncJob;
 
 class AsyncJobSystem
 {

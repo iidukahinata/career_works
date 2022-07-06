@@ -7,6 +7,7 @@
 
 
 #include "TickManager.h"
+#include "TickFunction.h"
 
 void TickManager::Tick(double deltaTime) noexcept
 {

@@ -2,11 +2,12 @@
 * @file		JobSystem.cpp
 * @brief
 *
-* @date		2022/06/29 2022年度初版
+* @date		2022/07/06 2022年度初版
 */
 
 
 #include "JobSystem.h"
+#include "Job.h"
 
 void JobSystem::JobContainer::Register(Job* const job) noexcept
 {

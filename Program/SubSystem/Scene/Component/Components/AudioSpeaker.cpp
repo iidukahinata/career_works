@@ -6,6 +6,7 @@
  */
 
 
+#include <fmod.hpp>
 #include <algorithm>
 #include "SubSystem/Resource/Resources/Audio/AudioClip.h"
 #include "AudioSpeaker.h"
@@ -181,7 +182,7 @@ void AudioSpeaker::MakeAudioSettingsTheSame(AudioClip* const clip) const noexcep
 	clip->SetMode(GetModeFromSettings());
 }
 
-FMOD_MODE AudioSpeaker::GetModeFromSettings() const noexcept
+uint32_t AudioSpeaker::GetModeFromSettings() const noexcept
 {
 	FMOD_MODE mode = FMOD_DEFAULT;
 

@@ -36,13 +36,13 @@ void LightMap::Update() noexcept
 
 		switch (light->GetLightType())
 		{
-		case Light::LightType::DirectionalLight:
+		case LightType::DirectionalLight:
 			buffer.directionalLight.direction = direction;
 			buffer.directionalLight.color = light->GetColor();
 			buffer.directionalLight.intensity = light->GetIntensity();
 			break;
 
-		case Light::LightType::PointLight:
+		case LightType::PointLight:
 			buffer.pointLights[pointLightCount].position = position;
 			buffer.pointLights[pointLightCount].color = light->GetColor();
 			buffer.pointLights[pointLightCount].intensity = light->GetIntensity();
@@ -50,7 +50,7 @@ void LightMap::Update() noexcept
 			++pointLightCount;
 			break;
 
-		case Light::LightType::SpotLight:
+		case LightType::SpotLight:
 			buffer.spotLights[pointLightCount].position = position;
 			buffer.spotLights[pointLightCount].direction = direction;
 			buffer.spotLights[pointLightCount].color = light->GetColor();

@@ -8,9 +8,9 @@
 
 
 // System
+#include "TypeDef.h"
 #include "Macro.h"
 #include "Tools.h"
-#include "TypeDef.h"
 #include "Memory/Memory.h"
 
 // Math System

@@ -8,8 +8,10 @@
 
 
 #include <mutex>
-#include "EventListener.h"
+#include "Event.h"
 #include "SubSystem/JobSystem/Sync/Job.h"
+
+class EventListener;
 
 class EventManager
 {
@@ -48,10 +50,8 @@ private:
 
 private:
 
-	static const int MAX_EVENT_QUEUE = 2;
-
 	// * キューが一つの場合イベントがイベント呼び出し処理が終わらない可能性があるため複数用意する
-	List<UniquePtr<IEvent>> m_eventQueues[MAX_EVENT_QUEUE];
+	Array<List<UniquePtr<IEvent>>, 2> m_eventQueues;
 
 	// * -> ハッシュ値 : リスナーポインタ配列
 	Map<uint32_t, Set<EventListener*>> m_eventListeners;

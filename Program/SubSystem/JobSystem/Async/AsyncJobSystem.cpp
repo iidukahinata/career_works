@@ -2,11 +2,12 @@
 * @file    AsyncJobSystem.cpp
 * @brief
 *
-* @date	   2022/07/05 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 
 
 #include "AsyncJobSystem.h"
+#include "AsyncJob.h"
 #include "COM.h"
 
 AsyncJobSystem::~AsyncJobSystem()

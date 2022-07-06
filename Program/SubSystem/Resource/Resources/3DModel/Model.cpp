@@ -7,6 +7,8 @@
 
 
 #include "Model.h"
+#include "Mesh.h"
+#include "Material.h"
 #include "SubSystem/Core/Context.h"
 #include "SubSystem/Core/IO/FileStream.h"
 #include "SubSystem/Core/IO/FileSystem.h"

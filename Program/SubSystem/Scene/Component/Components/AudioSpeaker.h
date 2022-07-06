@@ -2,13 +2,14 @@
 * @file		AudioSpeaker.h
 * @brief
 *
-* @date		2022/06/30 2022年度初版
+* @date		2022/07/06 2022年度初版
 */
 #pragma once
 
 
-#include <fmod.hpp>
 #include "../IComponent.h"
+
+class AudioClip;
 
 class AudioSpeaker : public IComponent
 {
@@ -21,12 +22,12 @@ public:
 	void Update(double deltaTime) override;
 
 	void Play() noexcept;
-	void PlayOneShot(class AudioClip* clip, float volume = 1.f) const noexcept;
+	void PlayOneShot(AudioClip* clip, float volume = 1.f) const noexcept;
 	void Pause() const noexcept;
 	void UnPause() const noexcept;
 	void Stop() noexcept;
 
-	void SetAudioClip(class AudioClip* clip, bool playOnAwake = false) noexcept;
+	void SetAudioClip(AudioClip* clip, bool playOnAwake = false) noexcept;
 
 	void SetMute(bool mute) noexcept;
 	void SetIsLoop(bool isLoop) noexcept;
@@ -55,8 +56,8 @@ public:
 
 private:
 
-	void MakeAudioSettingsTheSame(class AudioClip* clip) const noexcept;
-	FMOD_MODE GetModeFromSettings() const noexcept;
+	void MakeAudioSettingsTheSame(AudioClip* clip) const noexcept;
+	uint32_t GetModeFromSettings() const noexcept;
 
 private:
 
@@ -65,7 +66,7 @@ private:
 	Math::Vector3 m_velocity;
 
 	// * 位置等の 3D 処理の値更新される。
-	class AudioClip* m_audioClip = nullptr;
+	AudioClip* m_audioClip = nullptr;
 
 	// * Audio 設定
 	bool  m_mute           = false;

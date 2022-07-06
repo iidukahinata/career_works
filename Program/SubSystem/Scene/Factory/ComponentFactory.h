@@ -9,8 +9,6 @@
 
 #include "../Component/IComponent.h"
 
-typedef UniquePtr<IComponent> ComponentPtr;
-
 /**
 * コンポーネントの生成をシステムから分離させるために作成。
 * このクラスを使用しない場合、GameObjectポインタを保持しないオブジェクトデータになります。
@@ -18,5 +16,5 @@ typedef UniquePtr<IComponent> ComponentPtr;
 */
 struct ComponentFactory
 {
-	static ComponentPtr Create(GameObject* gameObject, String_View name) noexcept;
+	static UniquePtr<IComponent> Create(GameObject* gameObject, String_View name) noexcept;
 };

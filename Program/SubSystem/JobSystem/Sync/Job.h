@@ -7,14 +7,7 @@
 #pragma once
 
 
-enum FunctionType
-{
-	Update,
-
-	Render,
-
-	None,
-};
+#include "JobHelper.h"
 
 class Job
 {

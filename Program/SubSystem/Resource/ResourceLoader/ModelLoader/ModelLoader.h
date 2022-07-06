@@ -7,8 +7,14 @@
 #pragma once
 
 
-#include <assimp/scene.h>
-#include "SubSystem/Resource/Resources/3DModel/Model.h"
+struct aiNode;
+struct aiMesh;
+struct aiMaterial;
+struct aiScene;
+
+class Model;
+class Texture;
+class ResourceManager;
 
 class ModelLoader
 {
@@ -33,5 +39,5 @@ private:
 
 	Model* m_model;
 
-	class ResourceManager* m_resourceManager;
+	ResourceManager* m_resourceManager;
 };

@@ -2,11 +2,12 @@
 * @file    EventManager.cpp
 * @brief
 *
-* @date	   2022/06/30 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 
 
 #include "EventManager.h"
+#include "EventListener.h"
 
 void EventManager::Initialize()
 {
@@ -20,7 +21,12 @@ void EventManager::Exit()
 	m_job.UnRegisterFromJobSystem();
 
 	m_eventListeners.clear();
-	m_eventQueues->clear();
+	
+	for (size_t i = 0; i < m_eventQueues.max_size(); ++i)
+	{
+		m_eventQueues[i].clear();
+	}
+
 	m_numActiveQueue = 0;
 }
 
@@ -114,7 +120,7 @@ void EventManager::Tick() noexcept
 {
 	// キューの入れ替え
 	auto numQueue = m_numActiveQueue;
-	(++m_numActiveQueue) %= MAX_EVENT_QUEUE;
+	(++m_numActiveQueue) %= m_eventQueues.max_size();
 	m_eventQueues[m_numActiveQueue].clear();
 
 	while (m_eventQueues[numQueue].size() != 0)

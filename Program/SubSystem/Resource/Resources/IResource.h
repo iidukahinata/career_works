@@ -9,13 +9,6 @@
 
 class Context;
 
-enum ResourceType
-{
-	STATIC,
-
-	DYNAMIC,
-};
-
 class IResource
 {
 	SUPER_CLASS(IResource)

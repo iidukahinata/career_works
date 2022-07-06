@@ -7,14 +7,13 @@
 
 
 #include "ResourceManager.h"
-#include "Resources/3DModel/Material.h"
 
 void ResourceManager::Shutdown()
 {
 	Clear();
 }
 
-void ResourceManager::AddResource(ResourcePtr resource, String_View filePath) noexcept
+void ResourceManager::AddResource(UniquePtr<IResource> resource, String_View filePath) noexcept
 {
 	ASSERT(!m_resources.contains(filePath.data()));
 

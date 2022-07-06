@@ -8,7 +8,9 @@
 
 
 #include <mutex>
-#include "Job.h"
+#include "JobHelper.h"
+
+class Job;
 
 class JobSystem
 {

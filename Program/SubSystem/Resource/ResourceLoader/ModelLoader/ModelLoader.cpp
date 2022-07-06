@@ -6,6 +6,7 @@
 */
 
 
+#include <assimp/scene.h>
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include <assimp/cimport.h>
@@ -13,7 +14,12 @@
 #include "ModelLoader.h"
 #include "SubSystem/Core/Context.h"
 #include "SubSystem/Core/IO/FileSystem.h"
+#include "SubSystem/Renderer/Geometry/Vertex.h"
 #include "SubSystem/Resource/ResourceManager.h"
+#include "SubSystem/Resource/Resources/3DModel/Mesh.h"
+#include "SubSystem/Resource/Resources/3DModel/Model.h"
+#include "SubSystem/Resource/Resources/3DModel/Texture.h"
+#include "SubSystem/Resource/Resources/3DModel/Material.h"
 
 extern Context* g_context;
 

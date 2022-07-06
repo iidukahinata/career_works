@@ -7,10 +7,12 @@
 #pragma once
 
 
-#include "Texture.h"
+#include "../IResource.h"
 #include "SubSystem/Renderer/D3D11/D3D11Shader.h"
 #include "SubSystem/Renderer/D3D11/D3D11InputLayout.h"
 #include "SubSystem/Renderer/D3D11/D3D11SamplerState.h"
+
+class Texture;
 
 class Material : public IResource
 {

@@ -9,8 +9,6 @@
 #pragma once
 
 
-#include "TypeDef.h"
-
 constexpr uint32_t CRC_TABLE[256] = {
 			 0,   79764919,  159529838,  222504665,
 	 319059676,  398814059,  445009330,  507990021,

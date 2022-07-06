@@ -11,8 +11,6 @@
 #include "SubSystem/Core/ISubsystem.h"
 #include "SubSystem/JobSystem/Sync/Job.h"
 
-typedef UniquePtr<GameObject> GameObjectPtr;
-
 class World : public ISubsystem
 {
 	SUB_CLASS(World)
@@ -29,15 +27,15 @@ public:
 
 	/** GameObject Function */
 	GameObject* CreateAndAddGameObject() noexcept;
-	void AddGameObject(GameObjectPtr gameObject) noexcept;
+	void AddGameObject(UniquePtr<GameObject> gameObject) noexcept;
 	GameObject* GetGameObjectByName(String_View name) const noexcept;
 	void RemoveGameObject(GameObject* gameObject) noexcept;
 
-	const Vector<GameObjectPtr>& GetGameObjects() noexcept;
+	const Vector<UniquePtr<GameObject>>& GetGameObjects() noexcept;
 
 private:
 
 	Job m_job;
 
-	Vector<GameObjectPtr> m_gameObjects;
+	Vector<UniquePtr<GameObject>> m_gameObjects;
 };

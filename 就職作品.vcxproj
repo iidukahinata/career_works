@@ -146,6 +146,7 @@
     <ClInclude Include="Program\SubSystem\JobSystem\Async\AsyncJobSystem.h" />
     <ClInclude Include="Program\SubSystem\JobSystem\Async\COM.h" />
     <ClInclude Include="Program\SubSystem\JobSystem\Sync\Job.h" />
+    <ClInclude Include="Program\SubSystem\JobSystem\Sync\JobHelper.h" />
     <ClInclude Include="Program\SubSystem\JobSystem\Sync\JobSystem.h" />
     <ClInclude Include="Program\SubSystem\Log\DebugLog.h" />
     <ClInclude Include="Program\SubSystem\Renderer\D3D11\D3D11ConstantBuffer.h" />

@@ -9,13 +9,11 @@
 
 #include "../GameObject.h"
 
-typedef UniquePtr<GameObject> GameObjectPtr;
-
 /**
 * ゲームオブジェクトの生成をシステムから分離させるために作成。
 * このクラスを使用しない場合、Worldポインタを保持しないオブジェクトデータになります。
 */
 struct GameObjectFactory
 {
-	static GameObjectPtr Create(World* world);
+	static UniquePtr<GameObject> Create(World* world);
 };

@@ -13,6 +13,7 @@ class Renderer;
 
 class PostProcessEffect : public IComponent
 {
+	SUB_CLASS(PostProcessEffect)
 public:
 
 	void Initialize() override;

@@ -8,7 +8,8 @@
 
 
 #include "ThirdParty/directxtex/include/DirectXTex.h"
-#include "SubSystem/Resource/Resources/3DModel/Texture.h"
+
+class Texture;
 
 class TextureLoader
 {

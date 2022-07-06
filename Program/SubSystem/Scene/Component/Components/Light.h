@@ -11,18 +11,18 @@
 
 class Renderer;
 
+enum class LightType
+{
+	DirectionalLight,
+	PointLight,
+	SpotLight,
+	Max,
+};
+
 class Light : public IComponent
 {
 	SUB_CLASS(Light)
 public:
-
-	enum class LightType
-	{
-		DirectionalLight,
-		PointLight,
-		SpotLight,
-		Max,
-	};
 
 	void Initialize() override;
 	void Remove() override;

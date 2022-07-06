@@ -11,8 +11,6 @@
 #include "Resources/IResource.h"
 #include "SubSystem/Core/ISubsystem.h"
 
-typedef UniquePtr<IResource> ResourcePtr;
-
 /**
 * このクラスではデータ競合を引き起こさない。
 */
@@ -45,12 +43,12 @@ public:
 
 	void Clear() noexcept;
 
-	void AddResource(ResourcePtr resource, String_View filePath) noexcept;
+	void AddResource(UniquePtr<IResource> resource, String_View filePath) noexcept;
 
 private:
 
 	// * Type -> <ファイル名、リソースオブジェクト>
-	Map<String, ResourcePtr> m_resources;
+	Map<String, UniquePtr<IResource>> m_resources;
 
 	// * このクラス内での排他制御実現用
 	std::mutex m_mutex;

@@ -29,5 +29,5 @@ public:
 
 protected:
 
-	class AudioListener* m_lisrener = nullptr;
+	AudioListener* m_lisrener = nullptr;
 };

@@ -9,6 +9,7 @@
 #include <WICTextureLoader.h>
 #include <DDSTextureLoader.h>
 #include "TextureLoader.h"
+#include "SubSystem/Resource/Resources/3DModel/Texture.h"
 
 bool TextureLoader::Load(Texture* texture, String_View filePath) noexcept
 {

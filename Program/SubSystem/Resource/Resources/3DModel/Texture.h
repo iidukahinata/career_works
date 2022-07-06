@@ -10,8 +10,6 @@
 #include "../IResource.h"
 #include "SubSystem/Renderer/D3D11/D3D11Texture.h"
 
-class DirectX::Image;
-
 struct TextureData
 {
 	size_t m_imageCount;

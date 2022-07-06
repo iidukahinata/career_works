@@ -2,7 +2,7 @@
 * @file    World.cpp
 * @brief
 *
-* @date	   2022/06/30 2022年度初版
+* @date	   2022/07/06 2022年度初版
 */
 
 
@@ -49,11 +49,18 @@ void World::SaveScene(String_View sceneName) noexcept
 
 GameObject* World::CreateAndAddGameObject() noexcept
 {
-	AddGameObject(GameObjectFactory::Create(this));
-	return m_gameObjects.back().Get();
+	GameObject* result = nullptr;
+
+	if (auto gameObject = GameObjectFactory::Create(this))
+	{
+		result = gameObject.Get();
+		AddGameObject(gameObject.Release());
+	}
+
+	return result;
 }
 
-void World::AddGameObject(GameObjectPtr gameObject) noexcept
+void World::AddGameObject(UniquePtr<GameObject> gameObject) noexcept
 {
 	if (gameObject)
 	{
@@ -96,7 +103,7 @@ void World::RemoveGameObject(GameObject* gameObject) noexcept
 	m_gameObjects.pop_back();
 }
 
-const Vector<GameObjectPtr>& World::GetGameObjects() noexcept
+const Vector<UniquePtr<GameObject>>& World::GetGameObjects() noexcept
 {
 	return m_gameObjects;
 }

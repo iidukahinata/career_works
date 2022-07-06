@@ -15,8 +15,6 @@ class Renderer;
 class RenderObject : public IComponent
 {
 	SUB_CLASS(RenderObject)
-
-	friend class Renderer;
 public:
 
 	void Initialize() override;

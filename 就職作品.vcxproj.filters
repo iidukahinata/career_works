@@ -729,6 +729,9 @@
     <ClInclude Include="Program\SubSystem\Renderer\Forward\ForwardRenderer.h">
       <Filter>SubSystem\Renderer\Forward</Filter>
     </ClInclude>
+    <ClInclude Include="Program\SubSystem\JobSystem\Sync\JobHelper.h">
+      <Filter>SubSystem\JobSystem\Sync</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Program\ThirdParty\FMOD\include\fmod_dsp.cs">
