@@ -62,7 +62,7 @@ void FMODAudio::Update() const noexcept
 		auto up			= ToFMODVector(transform.GetUp());
 		auto velocity	= ToFMODVector(m_lisrener->GetVelocity());
 
-		result = m_system->set3DListenerAttributes(0, &position, &forward, &up, &velocity);
+		result = m_system->set3DListenerAttributes(0, &position, &velocity, &forward, &up);
 		AUDIO_EORROR_CHECK(result);
 	}
 
