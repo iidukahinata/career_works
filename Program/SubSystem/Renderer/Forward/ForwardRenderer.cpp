@@ -2,16 +2,16 @@
 * @file	   ForwardRenderer.cpp
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/07 2022年度初版
 */
 
 
 #include "ForwardRenderer.h"
-#include "../LightMap.h"
 #include "SubSystem/Gui/MyGui.h"
 #include "SubSystem/Window/Window.h"
 #include "SubSystem/Renderer/TransformCBuffer.h"
 #include "SubSystem/Renderer/D3D11/D3D11GrahicsDevice.h"
+#include "SubSystem/Scene/Component/Components/Camera.h"
 #include "SubSystem/Scene/Component/Components/RenderObject.h"
 
 ForwardRenderer::ForwardRenderer()
@@ -47,6 +47,9 @@ void ForwardRenderer::Shutdown()
 
 void ForwardRenderer::Update() noexcept
 {
+	TransformCBuffer::Get().SetProjection(m_mainCamera->GetProjectionMatrixXM());
+	TransformCBuffer::Get().SetView(m_mainCamera->GetViewMatrix().ToMatrixXM());
+
 	auto& grahicsDevice = D3D11GrahicsDevice::Get();
 
 	grahicsDevice.SetRenderTarget(grahicsDevice.GetRenderTarget(), grahicsDevice.GetDepthStencil());

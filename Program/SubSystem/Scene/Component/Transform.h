@@ -12,6 +12,7 @@ class Transform
 public:
 
 	Transform();
+	Transform(Math::Vector3 pos, Math::Vector3 rot = Math::Vector3::Zero, Math::Vector3 scale = Math::Vector3::One);
 
 	void SetPosition(const Math::Vector3& position) noexcept;
 	const Math::Vector3& GetPosition() const noexcept;

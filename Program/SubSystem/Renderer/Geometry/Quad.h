@@ -2,7 +2,7 @@
 * @file	   Quad.h
 * @brief
 *
-* @date	   2022/07/01 2022年度初版
+* @date	   2022/07/07 2022年度初版
 */
 #pragma once
 
@@ -15,12 +15,12 @@ class Quad
 {
 public:
 
-	void Create(uint32_t width, uint32_t height) noexcept;
+	void Create(float width, float height) noexcept;
 	void SetBuffer() noexcept;
 	uint32_t GetIndexCount() const { return 6; }
 
 private:
 
-	D3D11VertexBuffer<Vertex2D> m_vertexBuffer;
+	D3D11VertexBuffer<Vertex3D> m_vertexBuffer;
 	D3D11IndexBuffer m_indexBuffer;
 };

@@ -1,4 +1,4 @@
-Texture2D g_texture;
+Texture2D g_texture : register(t0);
 sampler g_sampler;
 
 struct PS_IN {

@@ -19,7 +19,7 @@ void GBuffer::SetRenderTargets() const noexcept
 {
 	auto& grahicsDevice = D3D11GrahicsDevice::Get();
 
-	ID3D11RenderTargetView* renderTargets[GBufferType::Max] = {
+	ID3D11RenderTargetView* renderTargets[] = {
 		m_rendererTexture[GBufferType::Color].GetRenderTarget(),
 		m_rendererTexture[GBufferType::Depth].GetRenderTarget(),
 	};

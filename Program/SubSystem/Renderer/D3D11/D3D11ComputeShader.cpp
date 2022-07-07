@@ -10,7 +10,7 @@
 
 bool D3D11ComputeShader::Create(
 	String_View shader,
-	D3D_SHADER_MACRO* macro,
+	D3D_SHADER_MACRO* macro /*  = nullptr */,
 	String_View entrypoint /* = "main" */,
 	String_View target /* = "gs_5_0" */
 ) noexcept

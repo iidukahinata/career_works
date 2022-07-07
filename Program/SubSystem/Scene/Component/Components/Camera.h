@@ -9,6 +9,8 @@
 
 #include "../IComponent.h"
 
+class Renderer;
+
 class Camera : public IComponent
 {
 	SUB_CLASS(Camera)
@@ -52,4 +54,6 @@ private:
 	float m_fov;
 	float m_near;
 	float m_far;
+
+	Renderer* m_renderer;
 };

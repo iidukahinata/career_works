@@ -2,7 +2,7 @@
 * @file    Transform.cpp
 * @brief
 *
-* @date	   2022/06/29 2022年度初版
+* @date	   2022/07/07 2022年度初版
 */
 
 
@@ -17,6 +17,13 @@ Transform::Transform() :
 	m_forward(0.f, 0.f, 1.f)
 {
 
+}
+
+Transform::Transform(Math::Vector3 pos, Math::Vector3 rot /* = Math::Vector3::Zero */, Math::Vector3 scale /* = Math::Vector3::One */)
+{
+	SetPosition(pos);
+	SetRotation(rot);
+	SetScale(scale);
 }
 
 void Transform::SetPosition(const Math::Vector3& position) noexcept

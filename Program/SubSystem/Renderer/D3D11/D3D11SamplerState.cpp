@@ -13,7 +13,7 @@ bool D3D11SamplerState::Create(
 	D3D11_TEXTURE_ADDRESS_MODE addressU /* = D3D11_TEXTURE_ADDRESS_CLAMP */,
 	D3D11_TEXTURE_ADDRESS_MODE addressV /* = D3D11_TEXTURE_ADDRESS_CLAMP */,
 	D3D11_TEXTURE_ADDRESS_MODE addressW /* = D3D11_TEXTURE_ADDRESS_CLAMP */
-)
+) noexcept
 {
 	// テクスチャ・サンプラーの作成
 	D3D11_SAMPLER_DESC samplerDesc;
@@ -35,7 +35,7 @@ bool D3D11SamplerState::Create(
 	return true;
 }
 
-void D3D11SamplerState::PSSet(UINT slot /* =  0 */)
+void D3D11SamplerState::PSSet(UINT slot /* =  0 */) noexcept
 {
 	GetContext()->PSSetSamplers(slot, 1, m_sampler.GetAddressOf());
 }

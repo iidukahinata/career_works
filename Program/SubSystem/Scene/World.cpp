@@ -35,7 +35,7 @@ void World::LoadScene(String_View sceneName, bool isAsync /* = false */) noexcep
 	camera->AddComponent("PostProcessEffect");
 
 	auto directionalLight = CreateAndAddGameObject();
-	camera->AddComponent("Light");
+	directionalLight->AddComponent("Light");
 
 	auto obj = CreateAndAddGameObject();
 	obj->AddComponent("MeshRender");

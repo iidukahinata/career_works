@@ -2,16 +2,20 @@
 * @file    Camera.cpp
 * @brief
 *
-* @date	   2022/06/29 2022年度初版
+* @date	   2022/07/07 2022年度初版
 */
 
 
 #include "Camera.h"
-#include "SubSystem/Renderer/TransformCBuffer.h"
 #include "SubSystem/Window/Window.h"
+#include "SubSystem/Core/Context.h"
+#include "SubSystem/Renderer/Renderer.h"
 
 void Camera::Initialize()
 {
+	m_renderer = GetContext()->GetSubsystem<Renderer>();
+	m_renderer->AddCamera(this);
+
 	m_fov = DirectX::XMConvertToRadians(45.0f);
 	m_width = Window::Get().GetWindowWidth();
 	m_height = Window::Get().GetWindowHeight();
@@ -25,15 +29,11 @@ void Camera::Initialize()
 
 	GetTransform().SetPosition(Math::Vector3(0.f, 3.f, -8.f));
 	GetTransform().LockAt(Math::Vector3::Zero);
-
-	// 更新処理がないためここに初期化時に書いている。
-	TransformCBuffer::Get().SetProjection(GetProjectionMatrixXM());
-	TransformCBuffer::Get().SetView(GetViewMatrix().ToMatrixXM());
 }
 
 void Camera::Remove()
 {
-
+	m_renderer->RemoveCamera(this);
 }
 
 float Camera::GetAspect() const
