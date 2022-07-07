@@ -25,6 +25,7 @@ bool Engine::Initialize(HINSTANCE hInstance)
 {
 	bool ret = false;
 
+	// system サービスロケータ作成
 	m_context = MakeUnique<Context>();
 	g_context = m_context.Get();
 

@@ -10,6 +10,9 @@
 #include "../Renderer.h"
 #include "SubSystem/JobSystem/Sync/Job.h"
 
+/**
+* フォワードレンダリングで描画を行う。
+*/
 class ForwardRenderer : public Renderer
 {
 	SUB_CLASS(ForwardRenderer)

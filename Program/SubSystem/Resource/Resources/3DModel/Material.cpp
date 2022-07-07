@@ -16,15 +16,8 @@
 Material::Material()
 {
 	// 仮設定
-	SetVSShader("assets/Resource/Shader/PBR_VS.cso");
-	SetPSShader("assets/Resource/Shader/PBR_PS.cso");
-
-	// サンプラー生成
-	m_samplerState.Create(
-		D3D11_FILTER_MIN_MAG_MIP_LINEAR,
-		D3D11_TEXTURE_ADDRESS_WRAP,
-		D3D11_TEXTURE_ADDRESS_WRAP,
-		D3D11_TEXTURE_ADDRESS_WRAP);
+	SetVSShader("assets/Resource/Shader/GBufferVS.cso");
+	SetPSShader("assets/Resource/Shader/GBufferPS.cso");
 }
 
 void Material::SaveToFile(String_View filePath)
@@ -95,6 +88,13 @@ void Material::SetVSShader(String_View name)
 void Material::SetPSShader(String_View name)
 {
 	m_pixelShader.Create(name, nullptr);
+
+	// サンプラー生成
+	m_samplerState.Create(
+		D3D11_FILTER_MIN_MAG_MIP_LINEAR,
+		D3D11_TEXTURE_ADDRESS_WRAP,
+		D3D11_TEXTURE_ADDRESS_WRAP,
+		D3D11_TEXTURE_ADDRESS_WRAP);
 }
 
 void Material::ShaderSet() noexcept

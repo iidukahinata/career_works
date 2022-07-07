@@ -11,6 +11,8 @@ class MyGui
 {
 	MyGui() = default;
 	COPY_PROHIBITED(MyGui);
+
+	typedef Function<void()> Widget;
 public:
 
 	static MyGui& Get() noexcept
@@ -23,8 +25,6 @@ public:
 	void Draw();
 	void Exit();
 	void Clear();
-
-	typedef Function<void()> Widget;
 
 	/**
 	* GUI•`‰æ‚Éˆ—‚³‚ê‚éˆ—‚Ì’Ç‰Á

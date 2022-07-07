@@ -35,9 +35,7 @@ bool DeferredRenderer::Initialize()
 	m_lightMap = MakeUnique<LightMap>();
 	m_lightMap->Initialize();
 
-	TransformCBuffer::Get().Init();
-
-	MyGui::Get().Init();
+	m_renderTexture.Create(width, height, DXGI_FORMAT_R32G32B32A32_FLOAT);
 
 	// スクリーンサイズの四角形を作成
 	m_quad.Create(width, height);
@@ -47,11 +45,20 @@ bool DeferredRenderer::Initialize()
 		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT      , 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 	};
 
+	// deferred shader init
+	m_deferredVSShader.Create("assets/Resource/Shader/DeferredVS.cso");
+	m_deferredInputLayout.Create(inputLayout, ARRAYSIZE(inputLayout), m_deferredVSShader.GetBlob());
+	m_deferredPSShader.Create("assets/Resource/Shader/DeferredPS.cso");
+
+	// sprite shader init
 	m_vsShader.Create("assets/Resource/Shader/TextureVS.cso");
 	m_inputLayout.Create(inputLayout, ARRAYSIZE(inputLayout), m_vsShader.GetBlob());
-
 	m_psShader.Create("assets/Resource/Shader/TexturePS.cso");
 	m_samplerState.Create();
+
+	TransformCBuffer::Get().Init();
+
+	MyGui::Get().Init();
 	
 	return true;
 }
@@ -87,22 +94,46 @@ void DeferredRenderer::GBufferPass() const noexcept
 	TransformCBuffer::Get().SetProjection(m_mainCamera->GetProjectionMatrixXM());
 	TransformCBuffer::Get().SetView(m_mainCamera->GetViewMatrix().ToMatrixXM());
 
-	// GBuffer の生成
 	m_gbuffer->SetRenderTargets();
 	m_gbuffer->Clear();
-	
-	m_lightMap->Update();
 
-	// 通常描画
 	for (auto renderObject : m_renderObjects)
 	{
 		renderObject->Render();
 	}
 }
 
-void DeferredRenderer::LightingPass() const noexcept
+void DeferredRenderer::LightingPass() noexcept
 {
+	m_lightMap->Update();
 
+	auto& grahicsDevice = D3D11GrahicsDevice::Get();
+
+	// レンダーターゲットをセット
+	m_renderTexture.SetRenderTarget();
+	m_renderTexture.Clear(Math::Vector4(0.f, 0.f, 0.f, 1.f));
+
+	// シェーダーをセット
+	m_deferredVSShader.VSSet();
+	m_deferredPSShader.PSSet();
+	m_samplerState.PSSet();
+
+	// 頂点レイアウトをセット
+	m_deferredInputLayout.IASet();
+
+	// プリミティブタイプをセット
+	grahicsDevice.GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	// テクスチャをセット
+	m_gbuffer->GetRenderTexture(GBufferType::Color).GetTexture()->PSSet(0);
+	m_gbuffer->GetRenderTexture(GBufferType::Normal).GetTexture()->PSSet(1);
+	m_gbuffer->GetRenderTexture(GBufferType::Depth).GetTexture()->PSSet(2);
+	m_gbuffer->GetRenderTexture(GBufferType::Parameter).GetTexture()->PSSet(3);
+
+	// 頂点バッファーをセット
+	m_quad.SetBuffer();
+
+	grahicsDevice.GetContext()->DrawIndexed(m_quad.GetIndexCount(), 0, 0);
 }
 
 void DeferredRenderer::FinalPass() noexcept
@@ -122,10 +153,10 @@ void DeferredRenderer::FinalPass() noexcept
 	m_inputLayout.IASet();
 
 	// プリミティブタイプをセット
-	D3D11GrahicsDevice::Get().GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	grahicsDevice.GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	// テクスチャをセット
-	m_gbuffer->GetRenderTexture(GBufferType::Color).GetTexture()->PSSet();
+	m_renderTexture.GetTexture()->PSSet();
 
 	// 頂点バッファーをセット
 	m_quad.SetBuffer();

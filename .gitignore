@@ -1405,3 +1405,7 @@ FodyWeavers.xsd
 /assets/Resource/Shader/BlurPS.cso
 /assets/Resource/Shader/BloomPS.cso
 /assets/Resource/Mesh/Renault.mesh
+/assets/Resource/Shader/GBufferVS.cso
+/assets/Resource/Shader/GBufferPS.cso
+/assets/Resource/Shader/DeferredVS.cso
+/assets/Resource/Shader/DeferredPS.cso

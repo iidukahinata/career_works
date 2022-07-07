@@ -1,19 +1,15 @@
 #include "PBR.hlsli"
 
-struct PS_IN {
+struct PS_IN
+{
 	float4 pos : SV_POSITION;
 	float3 normal : NORMAL;
-	float3 tangent  : TANGENT;
+	float3 tangent : TANGENT;
 	float3 biNormal : BINORMAL;
-	float4 worldPos : TEXCOORD0;
-	float2 tex : TEXCOORD1;
-	float3 toEye : TEXCOORD2;
-	float4 viewPos : TEXCOORD3;
-};
-
-struct PS_OUT {
-	float4 color : SV_TARGET0;
-	float depth : SV_TARGET1;
+	float2 tex : TEXCOORD0;
+	float4 worldPos : TEXCOORD1;
+	float4 viewPos : TEXCOORD2;
+	float3 toEye : TEXCOORD3;
 };
 
 float3 GetNormalsFromNormalMaps(float3 normal, float3 tangent, float3 biNormal, float2 tex)
@@ -23,7 +19,7 @@ float3 GetNormalsFromNormalMaps(float3 normal, float3 tangent, float3 biNormal, 
 	return tangent * binSpaceNormal.x + biNormal * binSpaceNormal.y + normal * binSpaceNormal.z;
 }
 
-PS_OUT main(PS_IN input)
+float4 main(PS_IN input) : SV_TARGET
 {
 	float4 finalColor = float4(0, 0, 0, 1);
 
@@ -47,16 +43,7 @@ PS_OUT main(PS_IN input)
 		finalColor.xyz += PBR(material, ToLightFromSpotLight(spotLights[i], input.worldPos), input.toEye, normal);
 	}
 
-	// 2022/04/16 カラー値が0以下になる現象を発見一時的にmax値で対処
-	finalColor.x = max(finalColor.x, 0.f);
-	finalColor.y = max(finalColor.y, 0.f);
-	finalColor.z = max(finalColor.z, 0.f);
-
 	finalColor.xyz += (ambientColor.xyz * material.albedoColor);
 	
-	PS_OUT output;
-	output.color = finalColor;
-	output.depth = input.viewPos.z;
-	
-	return output;
+	return finalColor;
 }

@@ -13,12 +13,13 @@
 #include "../D3D11/D3D11Shader.h"
 #include "../D3D11/D3D11InputLayout.h"
 #include "../D3D11/D3D11SamplerState.h"
+#include "../D3D11/D3D11RenderTexture.h"
 #include "SubSystem/JobSystem/Sync/Job.h"
 
 class PostProcessEffect;
 
 /**
-* 遅延レンダリングパイプラインを制御します。
+* 遅延レンダリングで描画を行う。
 */
 class DeferredRenderer : public Renderer
 {
@@ -38,7 +39,7 @@ private:
 	void GBufferPass() const noexcept;
 
 	/** 作成したデータからライト計算。*/
-	void LightingPass() const noexcept;
+	void LightingPass() noexcept;
 
 	/** Effect 計算。*/
 	void FinalPass() noexcept;
@@ -47,14 +48,23 @@ private:
 
 private:
 
-	Quad m_quad;
+	UniquePtr<GBuffer> m_gbuffer;
 
+	// * render texture
+	D3D11RenderTexture m_renderTexture;
+	
+	// * deferred shader
+	D3D11VertexShader m_deferredVSShader;
+	D3D11InputLayout m_deferredInputLayout;
+	D3D11PixelShader m_deferredPSShader;
+
+	// * sprite shader
 	D3D11VertexShader m_vsShader;
 	D3D11InputLayout m_inputLayout;
 	D3D11PixelShader m_psShader;
 	D3D11SamplerState m_samplerState;
 
-	UniquePtr<GBuffer> m_gbuffer;
+	Quad m_quad;
 
 	Job m_job;
 };

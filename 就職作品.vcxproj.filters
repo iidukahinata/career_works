@@ -88,6 +88,24 @@
     <Filter Include="SubSystem\Audio\FMOD">
       <UniqueIdentifier>{530113f8-792c-495e-9900-300583077fc2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SubSystem\Renderer\Shader\HLSL">
+      <UniqueIdentifier>{b7389773-9e64-4ca8-a85e-fd11b28ff9be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Renderer\Shader\HLSL\Core">
+      <UniqueIdentifier>{676e59f5-ce95-4a97-aff3-9b7f6d31b0a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Renderer\Shader\HLSL\PostEffect">
+      <UniqueIdentifier>{241629f5-a90c-4fd3-8adc-24ddf0ee6349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Core\Common\Memory">
+      <UniqueIdentifier>{c528e8a5-5b40-4784-befe-ec27ac542172}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Renderer\Deferred">
+      <UniqueIdentifier>{26482f45-1bc7-4772-9eb8-669b1661d93e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Renderer\Forward">
+      <UniqueIdentifier>{c76a9570-729d-4d4b-ad1f-4b7a4920c2ae}</UniqueIdentifier>
+    </Filter>
     <Filter Include="SubSystem\Resource">
       <UniqueIdentifier>{994b5407-09a6-4b77-a937-a7ff952e7d20}</UniqueIdentifier>
     </Filter>
@@ -109,23 +127,11 @@
     <Filter Include="SubSystem\Resource\Resources\Audio">
       <UniqueIdentifier>{4e2e722f-2322-48cb-aff9-9ba3deb9ce19}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SubSystem\Renderer\Shader\HLSL">
-      <UniqueIdentifier>{b7389773-9e64-4ca8-a85e-fd11b28ff9be}</UniqueIdentifier>
+    <Filter Include="SubSystem\Renderer\Shader\HLSL\PBR">
+      <UniqueIdentifier>{f9b5ddc5-496b-4ba7-ba95-4667d9844769}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SubSystem\Renderer\Shader\HLSL\Core">
-      <UniqueIdentifier>{676e59f5-ce95-4a97-aff3-9b7f6d31b0a8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SubSystem\Renderer\Shader\HLSL\PostEffect">
-      <UniqueIdentifier>{241629f5-a90c-4fd3-8adc-24ddf0ee6349}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SubSystem\Core\Common\Memory">
-      <UniqueIdentifier>{c528e8a5-5b40-4784-befe-ec27ac542172}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SubSystem\Renderer\Deferred">
-      <UniqueIdentifier>{26482f45-1bc7-4772-9eb8-669b1661d93e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SubSystem\Renderer\Forward">
-      <UniqueIdentifier>{c76a9570-729d-4d4b-ad1f-4b7a4920c2ae}</UniqueIdentifier>
+    <Filter Include="SubSystem\Renderer\Shader\HLSL\Deferred">
+      <UniqueIdentifier>{6e69277c-bae2-4a89-9fb2-b909387acc0a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -753,7 +759,7 @@
       <Filter>SubSystem\Renderer\Shader\HLSL\Core</Filter>
     </None>
     <None Include="Program\SubSystem\Renderer\Shader\HLSL\PBR.hlsli">
-      <Filter>SubSystem\Renderer\Shader\HLSL</Filter>
+      <Filter>SubSystem\Renderer\Shader\HLSL\PBR</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -793,20 +799,29 @@
     <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\LambertVS.hlsl">
       <Filter>SubSystem\Renderer\Shader\HLSL</Filter>
     </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PBR_PS.hlsl">
-      <Filter>SubSystem\Renderer\Shader\HLSL</Filter>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PBR_VS.hlsl">
-      <Filter>SubSystem\Renderer\Shader\HLSL</Filter>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\Texture2DVS.hlsl">
-      <Filter>SubSystem\Renderer\Shader\HLSL</Filter>
-    </FxCompile>
     <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\TexturePS.hlsl">
       <Filter>SubSystem\Renderer\Shader\HLSL</Filter>
     </FxCompile>
     <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\TextureVS.hlsl">
       <Filter>SubSystem\Renderer\Shader\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PBR_PS.hlsl">
+      <Filter>SubSystem\Renderer\Shader\HLSL\PBR</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PBR_VS.hlsl">
+      <Filter>SubSystem\Renderer\Shader\HLSL\PBR</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\Deferred\GBufferPS.hlsl">
+      <Filter>SubSystem\Renderer\Shader\HLSL\Deferred</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\Deferred\GBufferVS.hlsl">
+      <Filter>SubSystem\Renderer\Shader\HLSL\Deferred</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\Deferred\DeferredPS.hlsl">
+      <Filter>SubSystem\Renderer\Shader\HLSL\Deferred</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\Deferred\DeferredVS.hlsl">
+      <Filter>SubSystem\Renderer\Shader\HLSL\Deferred</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

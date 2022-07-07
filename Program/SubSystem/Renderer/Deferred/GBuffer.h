@@ -2,7 +2,7 @@
 * @file	   GBuffer.h
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/07 2022年度初版
 */
 #pragma once
 
@@ -12,7 +12,9 @@
 enum GBufferType
 {
 	Color,
+	Normal,
 	Depth,
+	Parameter,
 	Max,
 };
 
