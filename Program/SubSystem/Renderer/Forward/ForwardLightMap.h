@@ -12,6 +12,10 @@
 
 #define MAX_LIGHT_COUNT 64
 
+/**
+* 2022/07/08以前のLightMap動作と同じ内容の処理を持つ。
+* クラスタードシェーディング用LightMapが完成するまで使用予定。
+*/
 class ForwardLightMap : public LightMap
 {
 	SUB_CLASS(ForwardLightMap)
