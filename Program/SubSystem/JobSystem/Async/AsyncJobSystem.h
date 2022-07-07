@@ -2,13 +2,10 @@
 * @file    AsyncJobSystem.h
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/08 2022年度初版
 */
 #pragma once
 
-
-#include <queue>
-#include <mutex>
 
 class AsyncJob;
 
@@ -52,7 +49,7 @@ private:
 	int m_numOfThreadsAvailable;
 
 	// * 並列処理で順に実行される関数
-	std::queue<AsyncJob*> m_tasks;
+	Queue<AsyncJob*> m_tasks;
 
 	// * ユーザー指定数で thread 数を変更するために可変長配列で管理
 	Vector<std::thread> m_threads;

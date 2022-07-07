@@ -2,13 +2,12 @@
 * @file    FMODAudio.h
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/08 2022年度初版
 */
 #pragma once
 
 
 #include "../Audio.h"
-#include "SubSystem/JobSystem/Sync/Job.h"
 
 namespace FMOD
 {
@@ -37,8 +36,6 @@ private:
 private:
 
 	FMOD::System* m_system = nullptr;
-
-	class AudioListener* m_lisrener = nullptr;
 
 	// * Audio Update 登録用
 	Job m_job;

@@ -8,9 +8,6 @@
 
 #include "Material.h"
 #include "Texture.h"
-#include "SubSystem/Core/Context.h"
-#include "SubSystem/Core/IO/FileStream.h"
-#include "SubSystem/Core/IO/FileSystem.h"
 #include "SubSystem/Resource/ResourceManager.h"
 
 Material::Material()

@@ -7,8 +7,6 @@
 
 
 #include "Mesh.h"
-#include "SubSystem/Core/IO/FileStream.h"
-#include "SubSystem/Core/IO/FileSystem.h"
 
 void Mesh::Construct(const Vector<VertexBump3D>& vertices, const Vector<uint32_t>& indices) noexcept
 {

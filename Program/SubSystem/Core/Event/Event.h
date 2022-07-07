@@ -7,8 +7,6 @@
 #pragma once
 
 
-#include <any>
-
 typedef ClassTypeData EventType;
 
 class IEvent

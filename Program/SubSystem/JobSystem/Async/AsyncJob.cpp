@@ -2,7 +2,7 @@
 * @file		AsyncJob.cpp
 * @brief
 *
-* @date		2022/07/06 2022年度初版
+* @date		2022/07/08 2022年度初版
 */
 
 
@@ -28,7 +28,7 @@ bool AsyncJob::IsTaskFinish() const noexcept
 	return m_finish;
 }
 
-void AsyncJob::AddToJobSystem()
+void AsyncJob::RegisterToJobSystem()
 {
 	AsyncJobSystem::Get().AddTask(this);
 }

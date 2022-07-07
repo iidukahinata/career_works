@@ -2,13 +2,12 @@
  * @file	InputDevice.h
  * @brief   入力制御クラス
  *
- * @date	2022/07/06 2022年度初版
+ * @date	2022/07/08 2022年度初版
  */
 #pragma once
 
 
 #include "SubSystem/Core/ISubsystem.h"
-#include "SubSystem/JobSystem/Sync/Job.h"
 
 namespace Button
 {

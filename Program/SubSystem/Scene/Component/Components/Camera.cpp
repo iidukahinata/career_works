@@ -8,7 +8,6 @@
 
 #include "Camera.h"
 #include "SubSystem/Window/Window.h"
-#include "SubSystem/Core/Context.h"
 #include "SubSystem/Renderer/Renderer.h"
 
 void Camera::Initialize()

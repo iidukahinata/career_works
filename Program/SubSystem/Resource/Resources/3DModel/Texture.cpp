@@ -7,8 +7,6 @@
 
 
 #include "Texture.h"
-#include "SubSystem/Core/IO/FileStream.h"
-#include "SubSystem/Core/IO/FileSystem.h"
 #include "SubSystem/Resource/ResourceLoader/TextureLoader/TextureLoader.h"
 #include "ThirdParty/directxtex/include/DirectXTex.h"
 

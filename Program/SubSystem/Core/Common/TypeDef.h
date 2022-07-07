@@ -4,11 +4,11 @@
 #include <set>
 #include <map>
 #include <list>
+#include <queue>
 #include <array>
 #include <string>
 #include <vector>
 #include <stdint.h>
-#include <functional>
 #include <unordered_map>
 #include <unordered_set>
 
@@ -20,6 +20,9 @@ using Wstring_View = std::wstring_view;
 
 template<class T>
 using List = std::list<T>;
+
+template<class T>
+using Queue = std::queue<T>;
 
 template<class T, size_t Size>
 using Array = std::array<T, Size>;
@@ -38,6 +41,3 @@ using Set = std::set<T>;
 
 template<class T>
 using Unordered_Set = std::unordered_set<T>;
-
-template<class T>
-using Function = std::function<T>;

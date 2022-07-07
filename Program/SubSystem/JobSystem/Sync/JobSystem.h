@@ -2,18 +2,18 @@
 * @file		JobSystem.h
 * @brief
 *
-* @date		2022/07/06 2022年度初版
+* @date		2022/07/08 2022年度初版
 */
 #pragma once
 
 
-#include <mutex>
 #include "JobHelper.h"
 
 class Job;
 
 class JobSystem
 {
+	JobSystem() = default;
 	COPY_PROHIBITED(JobSystem)
 private:
 
@@ -35,8 +35,6 @@ private:
 	};
 
 public:
-
-	JobSystem() = default;
 
 	static JobSystem& Get()
 	{

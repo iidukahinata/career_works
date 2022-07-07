@@ -7,7 +7,6 @@
 
 
 #include "Light.h"
-#include "SubSystem/Core/Context.h"
 #include "SubSystem/Renderer/Renderer.h"
 
 void Light::Initialize() 

@@ -7,7 +7,6 @@
 
 
 #include "IResource.h"
-#include "SubSystem/Core/Context.h"
 
 extern Context* g_context;
 

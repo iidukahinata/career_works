@@ -2,14 +2,14 @@
 * @file		AsyncJob.h
 * @brief
 *
-* @date		2022/07/06 2022年度初版
+* @date		2022/07/08 2022年度初版
 */
 #pragma once
 
 
 class AsyncJob
 {
-	typedef Function<void()> Task;
+	typedef std::function<void()> Task;
 public:
 
 	void Execute() noexcept;
@@ -24,7 +24,7 @@ public:
 	bool IsTaskFinish() const noexcept;
 
 	/** 実行する処理をタスクに追加。*/
-	void AddToJobSystem();
+	void RegisterToJobSystem();
 
 private:
 

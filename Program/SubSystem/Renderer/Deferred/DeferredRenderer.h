@@ -14,7 +14,6 @@
 #include "../D3D11/D3D11InputLayout.h"
 #include "../D3D11/D3D11SamplerState.h"
 #include "../D3D11/D3D11RenderTexture.h"
-#include "SubSystem/JobSystem/Sync/Job.h"
 
 class PostProcessEffect;
 

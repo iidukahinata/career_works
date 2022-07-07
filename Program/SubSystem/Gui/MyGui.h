@@ -12,7 +12,7 @@ class MyGui
 	MyGui() = default;
 	COPY_PROHIBITED(MyGui);
 
-	typedef Function<void()> Widget;
+	typedef std::function<void()> Widget;
 public:
 
 	static MyGui& Get() noexcept

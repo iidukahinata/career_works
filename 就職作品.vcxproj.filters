@@ -31,9 +31,6 @@
     <Filter Include="SubSystem\Scene">
       <UniqueIdentifier>{97fa475a-e3bf-4d5f-9e7d-a9c3f3f41934}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SubSystem\Timer">
-      <UniqueIdentifier>{532a8617-9fdf-443b-998f-9d23d0617ac9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SubSystem\Window">
       <UniqueIdentifier>{cf390bbc-9dd6-471e-ad1e-b523c8209bf7}</UniqueIdentifier>
     </Filter>
@@ -132,6 +129,9 @@
     </Filter>
     <Filter Include="SubSystem\Renderer\Shader\HLSL\Deferred">
       <UniqueIdentifier>{6e69277c-bae2-4a89-9fb2-b909387acc0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Timer">
+      <UniqueIdentifier>{532a8617-9fdf-443b-998f-9d23d0617ac9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

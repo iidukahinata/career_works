@@ -7,7 +7,6 @@
 
 
 #include "PostProcessEffect.h"
-#include "SubSystem/Core/Context.h"
 #include "SubSystem/Renderer/Renderer.h"
 
 void PostProcessEffect::Initialize()
