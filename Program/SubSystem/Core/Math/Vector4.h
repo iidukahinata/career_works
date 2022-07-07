@@ -26,7 +26,7 @@ namespace Math
 		constexpr Vector4(const Vector4& V) noexcept : DirectX::XMFLOAT4(V.x, V.y, V.z, V.w)
 		{}
 
-		explicit constexpr Vector4(const Vector3& V, float z) noexcept : DirectX::XMFLOAT4(V.x, V.y, V.z, z)
+		explicit constexpr Vector4(const Vector3& V, float w) noexcept : DirectX::XMFLOAT4(V.x, V.y, V.z, w)
 		{}
 
 		explicit constexpr Vector4(const Vector2& V, float z, float w) noexcept : DirectX::XMFLOAT4(V.x, V.y, z, w)

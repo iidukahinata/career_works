@@ -9,6 +9,7 @@
 #include "DeferredRenderer.h"
 #include "SubSystem/Gui/MyGui.h"
 #include "SubSystem/Window/Window.h"
+#include "../Forward/ForwardLightMap.h"
 #include "SubSystem/Renderer/TransformCBuffer.h"
 #include "SubSystem/Renderer/D3D11/D3D11GrahicsDevice.h"
 #include "SubSystem/Scene/Component/Components/Camera.h"
@@ -32,7 +33,7 @@ bool DeferredRenderer::Initialize()
 	m_gbuffer = MakeUnique<GBuffer>();
 	m_gbuffer->Initialize(width, height);
 
-	m_lightMap = MakeUnique<LightMap>();
+	m_lightMap = MakeUnique<ForwardLightMap>();
 	m_lightMap->Initialize();
 
 	m_renderTexture.Create(width, height, DXGI_FORMAT_R32G32B32A32_FLOAT);
@@ -105,7 +106,7 @@ void DeferredRenderer::GBufferPass() const noexcept
 
 void DeferredRenderer::LightingPass() noexcept
 {
-	m_lightMap->Update();
+	m_lightMap->Update(m_mainCamera->GetTransform().GetPosition());
 
 	auto& grahicsDevice = D3D11GrahicsDevice::Get();
 

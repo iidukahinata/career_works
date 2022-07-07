@@ -21,6 +21,8 @@ class Audio : public ISubsystem
 	SUB_CLASS(Audio)
 public:
 
+	virtual ~Audio() {}
+
 	virtual bool Initialize() override { return true; }
 	virtual void Shutdown() override {}
 

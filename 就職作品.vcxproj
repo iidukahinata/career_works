@@ -68,8 +68,10 @@
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12RootSignature.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Shader.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Texture.cpp" />
+    <ClCompile Include="Program\SubSystem\Renderer\Deferred\DeferredLightMap.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\Deferred\DeferredRenderer.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\Deferred\GBuffer.cpp" />
+    <ClCompile Include="Program\SubSystem\Renderer\Forward\ForwardLightMap.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\Forward\ForwardRenderer.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\Geometry\Quad.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\LightMap.cpp" />
@@ -175,8 +177,10 @@
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12Shader.h" />
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12Texture.h" />
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12VertexBuffer.h" />
+    <ClInclude Include="Program\SubSystem\Renderer\Deferred\DeferredLightMap.h" />
     <ClInclude Include="Program\SubSystem\Renderer\Deferred\DeferredRenderer.h" />
     <ClInclude Include="Program\SubSystem\Renderer\Deferred\GBuffer.h" />
+    <ClInclude Include="Program\SubSystem\Renderer\Forward\ForwardLightMap.h" />
     <ClInclude Include="Program\SubSystem\Renderer\Forward\ForwardRenderer.h" />
     <ClInclude Include="Program\SubSystem\Renderer\Geometry\Quad.h" />
     <ClInclude Include="Program\SubSystem\Renderer\Geometry\Vertex.h" />
@@ -229,7 +233,7 @@
   <ItemGroup>
     <None Include="Program\SubSystem\Renderer\Shader\HLSL\Core\Core.hlsli" />
     <None Include="Program\SubSystem\Renderer\Shader\HLSL\Core\Light.hlsli" />
-    <None Include="Program\SubSystem\Renderer\Shader\HLSL\PBR.hlsli" />
+    <None Include="Program\SubSystem\Renderer\Shader\HLSL\PBR\PBR.hlsli" />
     <None Include="Program\SubSystem\Renderer\Shader\HLSL\PostEffect\Blur.hlsli" />
     <None Include="Program\ThirdParty\FMOD\include\fmod.cs" />
     <None Include="Program\ThirdParty\FMOD\include\fmod_dsp.cs" />
@@ -285,12 +289,12 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PBR_PS.hlsl">
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PBR\PBR_PS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PBR_VS.hlsl">
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PBR\PBR_VS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>

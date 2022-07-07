@@ -1,4 +1,4 @@
-#include "../PBR.hlsli"
+#include "../PBR/PBR.hlsli"
 
 Texture2D<float4> g_colorTex	 : register(t0);
 Texture2D<float4> g_normalTex	 : register(t1);

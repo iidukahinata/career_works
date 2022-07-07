@@ -25,6 +25,8 @@ class Renderer : public ISubsystem
 	SUB_CLASS(Renderer)
 public:
 
+	virtual ~Renderer() {}
+
 	virtual bool Initialize() override { return true; }
 	virtual void Shutdown() override {}
 

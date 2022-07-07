@@ -403,6 +403,12 @@
     <ClCompile Include="Program\SubSystem\Renderer\Forward\ForwardRenderer.cpp">
       <Filter>SubSystem\Renderer\Forward</Filter>
     </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\Deferred\DeferredLightMap.cpp">
+      <Filter>SubSystem\Renderer\Deferred</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\Forward\ForwardLightMap.cpp">
+      <Filter>SubSystem\Renderer\Forward</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\ThirdParty\FMOD\include\fmod.h">
@@ -738,6 +744,12 @@
     <ClInclude Include="Program\SubSystem\JobSystem\Sync\JobHelper.h">
       <Filter>SubSystem\JobSystem\Sync</Filter>
     </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\Deferred\DeferredLightMap.h">
+      <Filter>SubSystem\Renderer\Deferred</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\Forward\ForwardLightMap.h">
+      <Filter>SubSystem\Renderer\Forward</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Program\ThirdParty\FMOD\include\fmod_dsp.cs">
@@ -758,7 +770,7 @@
     <None Include="Program\SubSystem\Renderer\Shader\HLSL\Core\Light.hlsli">
       <Filter>SubSystem\Renderer\Shader\HLSL\Core</Filter>
     </None>
-    <None Include="Program\SubSystem\Renderer\Shader\HLSL\PBR.hlsli">
+    <None Include="Program\SubSystem\Renderer\Shader\HLSL\PBR\PBR.hlsli">
       <Filter>SubSystem\Renderer\Shader\HLSL\PBR</Filter>
     </None>
   </ItemGroup>
@@ -805,12 +817,6 @@
     <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\TextureVS.hlsl">
       <Filter>SubSystem\Renderer\Shader\HLSL</Filter>
     </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PBR_PS.hlsl">
-      <Filter>SubSystem\Renderer\Shader\HLSL\PBR</Filter>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PBR_VS.hlsl">
-      <Filter>SubSystem\Renderer\Shader\HLSL\PBR</Filter>
-    </FxCompile>
     <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\Deferred\GBufferPS.hlsl">
       <Filter>SubSystem\Renderer\Shader\HLSL\Deferred</Filter>
     </FxCompile>
@@ -822,6 +828,12 @@
     </FxCompile>
     <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\Deferred\DeferredVS.hlsl">
       <Filter>SubSystem\Renderer\Shader\HLSL\Deferred</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PBR\PBR_VS.hlsl">
+      <Filter>SubSystem\Renderer\Shader\HLSL\PBR</Filter>
+    </FxCompile>
+    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PBR\PBR_PS.hlsl">
+      <Filter>SubSystem\Renderer\Shader\HLSL\PBR</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
