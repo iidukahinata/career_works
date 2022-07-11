@@ -2,7 +2,7 @@
 * @file    Matrix.h
 * @brief
 *
-* @date	   2022/06/01 2022年度初版
+* @date	   2022/07/09 2022年度初版
 */
 #pragma once
 
@@ -101,6 +101,9 @@ namespace Math
 		static Matrix CreateRotation(const Vector3& eulerAngles) noexcept;
 		
 		static Matrix CreateScaling(const Vector3& scale) noexcept;
+
+		static Matrix CreatePerspectiveFovLH(float fov, float aspect, float near, float far) noexcept;
+		static Matrix CreateOrthographicLH(float width, float height, float near, float far) noexcept;
 
 		Vector3 TransformPosition(const Vector3& position) const noexcept;
 

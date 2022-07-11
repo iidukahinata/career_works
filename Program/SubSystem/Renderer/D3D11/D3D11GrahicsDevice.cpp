@@ -10,7 +10,7 @@
 #include "D3D11GrahicsDevice.h"
 #include "RenderStates.h"
 
-bool D3D11GrahicsDevice::Init(HWND hWnd, UINT screenWidth, UINT screenHeight, bool isFullscreen)
+bool D3D11GraphicsDevice::Init(HWND hWnd, UINT screenWidth, UINT screenHeight, bool isFullscreen)
 {
 	HRESULT  hr;
 	Microsoft::WRL::ComPtr<IDXGIFactory> factory;
@@ -214,7 +214,7 @@ bool D3D11GrahicsDevice::Init(HWND hWnd, UINT screenWidth, UINT screenHeight, bo
 	return true;
 }
 
-void D3D11GrahicsDevice::Clear(const Math::Vector4& color)
+void D3D11GraphicsDevice::Clear(const Math::Vector4& color)
 {
 	// 画面クリア（指定色で塗りつぶし）
 	float clearColor[4] = { color.x, color.y, color.z, color.w };
@@ -223,42 +223,42 @@ void D3D11GrahicsDevice::Clear(const Math::Vector4& color)
 	m_context->ClearDepthStencilView(m_depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 }
 
-void D3D11GrahicsDevice::Present()
+void D3D11GraphicsDevice::Present()
 {
 	m_swapChain->Present(0, 0);
 }
 
-ID3D11Device* D3D11GrahicsDevice::GetDevice() noexcept
+ID3D11Device* D3D11GraphicsDevice::GetDevice() noexcept
 {
 	return m_device.Get();
 }
 
-ID3D11DeviceContext* D3D11GrahicsDevice::GetContext() noexcept
+ID3D11DeviceContext* D3D11GraphicsDevice::GetContext() noexcept
 {
 	return m_context.Get();
 }
 
-IDXGISwapChain* D3D11GrahicsDevice::GetSwapChain() noexcept
+IDXGISwapChain* D3D11GraphicsDevice::GetSwapChain() noexcept
 {
 	return m_swapChain.Get();
 }
 
-void D3D11GrahicsDevice::SetRenderTarget(ID3D11RenderTargetView* renderTarget, ID3D11DepthStencilView* depthStencil)
+void D3D11GraphicsDevice::SetRenderTarget(ID3D11RenderTargetView* renderTarget, ID3D11DepthStencilView* depthStencil)
 {
 	m_context->OMSetRenderTargets(1, &renderTarget, depthStencil);
 }
 
-void D3D11GrahicsDevice::SetRenderTargets(UINT numViews, ID3D11RenderTargetView** renderTargets, ID3D11DepthStencilView* depthStencil)
+void D3D11GraphicsDevice::SetRenderTargets(UINT numViews, ID3D11RenderTargetView** renderTargets, ID3D11DepthStencilView* depthStencil)
 {
 	m_context->OMSetRenderTargets(numViews, renderTargets, depthStencil);
 }
 
-ID3D11RenderTargetView* D3D11GrahicsDevice::GetRenderTarget() noexcept
+ID3D11RenderTargetView* D3D11GraphicsDevice::GetRenderTarget() noexcept
 {
 	return m_renderTargetView.Get();
 }
 
-void D3D11GrahicsDevice::SetViewport(float width, float height)
+void D3D11GraphicsDevice::SetViewport(float width, float height)
 {
 	//ビューポート設定
 	D3D11_VIEWPORT viewport = {};
@@ -272,12 +272,12 @@ void D3D11GrahicsDevice::SetViewport(float width, float height)
 	m_context->RSSetViewports(1, &viewport);
 }
 
-void D3D11GrahicsDevice::SetViewports(UINT numBffers, D3D11_VIEWPORT* viewports)
+void D3D11GraphicsDevice::SetViewports(UINT numBffers, D3D11_VIEWPORT* viewports)
 {
 	m_context->RSSetViewports(numBffers, viewports);
 }
 
-ID3D11DepthStencilView* D3D11GrahicsDevice::GetDepthStencil() noexcept
+ID3D11DepthStencilView* D3D11GraphicsDevice::GetDepthStencil() noexcept
 {
 	return m_depthStencilView.Get();
 }

@@ -8,6 +8,7 @@
 
 
 #include"MathHelper.h"
+#include"Vector2.h"
 
 namespace Math
 {
@@ -201,6 +202,11 @@ namespace Math
 		bool operator!=(const Vector2T<T>& V) const noexcept
 		{
 			return x != V.x || y != V.y;
+		}
+
+		Vector2 ToVector() const noexcept
+		{
+			return Vector2(static_cast<float>(x), static_cast<float>(y));
 		}
 	};
 

@@ -11,8 +11,8 @@
 
 bool D3D11RenderStates::Init()
 {
-	auto device = D3D11GrahicsDevice::Get().GetDevice();
-	auto context = D3D11GrahicsDevice::Get().GetContext();
+	auto device = D3D11GraphicsDevice::Get().GetDevice();
+	auto context = D3D11GraphicsDevice::Get().GetContext();
 
 	HRESULT  hr;
 
@@ -136,10 +136,10 @@ bool D3D11RenderStates::Init()
 void D3D11RenderStates::SetBlendState(ID3D11BlendState* blendState)
 {
 	float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-	D3D11GrahicsDevice::Get().GetContext()->OMSetBlendState(blendState, blendFactor, 0xffffffff);
+	D3D11GraphicsDevice::Get().GetContext()->OMSetBlendState(blendState, blendFactor, 0xffffffff);
 }
 
 void D3D11RenderStates::SetRasterizerState(ID3D11RasterizerState* rasterizerState)
 {
-	D3D11GrahicsDevice::Get().GetContext()->RSSetState(rasterizerState);
+	D3D11GraphicsDevice::Get().GetContext()->RSSetState(rasterizerState);
 }

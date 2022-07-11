@@ -14,6 +14,7 @@
 #include "SubSystem/Timer/Timer.h"
 #include "SubSystem/Scene/World.h"
 #include "SubSystem/Window/Window.h"
+#include "SubSystem/Renderer/Forward/ForwardRenderer.h"
 #include "SubSystem/Renderer/Deferred/DeferredRenderer.h"
 #include "SubSystem/Resource/ResourceManager.h"
 #include "SubSystem/JobSystem/Sync/JobSystem.h"

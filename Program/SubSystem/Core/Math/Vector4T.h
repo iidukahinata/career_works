@@ -9,6 +9,7 @@
 
 
 #include"MathHelper.h"
+#include"Vector4.h"
 
 namespace Math
 {
@@ -219,6 +220,11 @@ namespace Math
 		bool operator!=(const Vector4T<T>& V) const noexcept
 		{
 			return x != V.x || y != V.y || z != V.z || w != V.w;
+		}
+
+		Vector4 ToVector() const noexcept
+		{
+			return Vector4(static_cast<float>(x), static_cast<float>(y), static_cast<float>(z), static_cast<float>(w));
 		}
 	};
 

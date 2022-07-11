@@ -8,6 +8,7 @@
 
 
 #include"MathHelper.h"
+#include"Vector3.h"
 
 namespace Math
 {
@@ -212,6 +213,11 @@ namespace Math
 		bool operator!=(const Vector3T<T>& V) const noexcept
 		{
 			return x != V.x || y != V.y || z != V.z;
+		}
+
+		Vector3 ToVector() const noexcept
+		{
+			return Vector3(static_cast<float>(x), static_cast<float>(y), static_cast<float>(z));
 		}
 	};
 

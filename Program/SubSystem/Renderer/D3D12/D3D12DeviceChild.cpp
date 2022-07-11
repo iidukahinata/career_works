@@ -11,10 +11,10 @@
 
 D3D12DeviceChild::D3D12DeviceChild()
 {
-	m_grahicsDevice = &D3D12GrahicsDevice::Get();
+	m_grahicsDevice = &D3D12GraphicsDevice::Get();
 }
 
-D3D12GrahicsDevice* D3D12DeviceChild::GetGraphicsDevice() const noexcept
+D3D12GraphicsDevice* D3D12DeviceChild::GetGraphicsDevice() const noexcept
 {
 	return m_grahicsDevice;
 }

@@ -10,15 +10,15 @@
 #include <d3d11.h>
 #include <wrl/client.h>
 
-class D3D11GrahicsDevice
+class D3D11GraphicsDevice
 {
-	D3D11GrahicsDevice() = default;
-	COPY_PROHIBITED(D3D11GrahicsDevice);
+	D3D11GraphicsDevice() = default;
+	COPY_PROHIBITED(D3D11GraphicsDevice);
 public:
 
-	static D3D11GrahicsDevice& Get() noexcept
+	static D3D11GraphicsDevice& Get() noexcept
 	{
-		static D3D11GrahicsDevice instance;
+		static D3D11GraphicsDevice instance;
 		return instance;
 	}
 

@@ -8,6 +8,7 @@
 
 
 class Light;
+class Camera;
 
 /**
 * 他クラスと分離させるために各インターフェイス関数を持つ Ligth 管理抽象クラスとして実装変更した。
@@ -26,7 +27,7 @@ public:
 	* Light定数バッファをGPUにセットする処理を書き込む。
 	* 基本的には Renderer の描画前に呼び出される。
 	*/
-	virtual void Update(const Math::Vector3& cameraPos) {}
+	virtual void Update(Camera* mainCamera) {}
 
 	void Clear() noexcept;
 

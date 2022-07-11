@@ -24,11 +24,11 @@ public:
 	
 	ID3D11Device* GetDevice() const
 	{
-		return D3D11GrahicsDevice::Get().GetDevice();
+		return D3D11GraphicsDevice::Get().GetDevice();
 	}
 
 	ID3D11DeviceContext* GetContext() const
 	{
-	 	return D3D11GrahicsDevice::Get().GetContext();
+	 	return D3D11GraphicsDevice::Get().GetContext();
 	}
 };

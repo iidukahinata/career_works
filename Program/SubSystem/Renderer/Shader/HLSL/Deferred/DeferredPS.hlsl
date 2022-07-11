@@ -34,7 +34,7 @@ float4 main(PS_IN input) : SV_TARGET
 	// ポイントライト計算
 	const int pointLightCount = lightCount.x;
 	for (int i = 0; i < pointLightCount; ++i)
-	{
+	{		
 		finalColor.xyz += PBR(material, ToLightFromPointLight(pointLights[i], worldPos), toEye, normal.xyz);
 	}
 

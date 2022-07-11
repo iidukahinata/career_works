@@ -27,7 +27,7 @@ bool DeferredRenderer::Initialize()
 	const auto height = Window::Get().GetWindowHeight();
 
 	// デバイス初期化
-	D3D11GrahicsDevice::Get().Init(Window::Get().GetHandle(), width, height, Window::Get().IsFullscreen());
+	D3D11GraphicsDevice::Get().Init(Window::Get().GetHandle(), width, height, Window::Get().IsFullscreen());
 
 	// Set Up
 	m_gbuffer = MakeUnique<GBuffer>();
@@ -87,12 +87,12 @@ void DeferredRenderer::Update() noexcept
 
 	MyGui::Get().Draw();
 
-	D3D11GrahicsDevice::Get().Present();
+	D3D11GraphicsDevice::Get().Present();
 }
 
 void DeferredRenderer::GBufferPass() const noexcept
 {
-	TransformCBuffer::Get().SetProjection(m_mainCamera->GetProjectionMatrixXM());
+	TransformCBuffer::Get().SetProjection(m_mainCamera->GetProjectionMatrix().ToMatrixXM());
 	TransformCBuffer::Get().SetView(m_mainCamera->GetViewMatrix().ToMatrixXM());
 
 	m_gbuffer->SetRenderTargets();
@@ -106,9 +106,9 @@ void DeferredRenderer::GBufferPass() const noexcept
 
 void DeferredRenderer::LightingPass() noexcept
 {
-	m_lightMap->Update(m_mainCamera->GetTransform().GetPosition());
+	m_lightMap->Update(m_mainCamera);
 
-	auto& grahicsDevice = D3D11GrahicsDevice::Get();
+	auto& graphicsDevice = D3D11GraphicsDevice::Get();
 
 	// レンダーターゲットをセット
 	m_renderTexture.SetRenderTarget();
@@ -123,7 +123,7 @@ void DeferredRenderer::LightingPass() noexcept
 	m_deferredInputLayout.IASet();
 
 	// プリミティブタイプをセット
-	grahicsDevice.GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	graphicsDevice.GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	// テクスチャをセット
 	m_gbuffer->GetRenderTexture(GBufferType::Color).GetTexture()->PSSet(0);
@@ -134,16 +134,16 @@ void DeferredRenderer::LightingPass() noexcept
 	// 頂点バッファーをセット
 	m_quad.SetBuffer();
 
-	grahicsDevice.GetContext()->DrawIndexed(m_quad.GetIndexCount(), 0, 0);
+	graphicsDevice.GetContext()->DrawIndexed(m_quad.GetIndexCount(), 0, 0);
 }
 
 void DeferredRenderer::FinalPass() noexcept
 {
-	auto& grahicsDevice = D3D11GrahicsDevice::Get();
+	auto& graphicsDevice = D3D11GraphicsDevice::Get();
 	
 	// メインバッファーをセット
-	grahicsDevice.SetRenderTarget(grahicsDevice.GetRenderTarget(), grahicsDevice.GetDepthStencil());
-	grahicsDevice.Clear(Math::Vector4(0.f, 0.f, 0.f, 1.f));
+	graphicsDevice.SetRenderTarget(graphicsDevice.GetRenderTarget(), graphicsDevice.GetDepthStencil());
+	graphicsDevice.Clear(Math::Vector4(1.f, 0.f, 0.f, 1.f));
 
 	// シェーダーセット
 	m_vsShader.VSSet();
@@ -154,7 +154,7 @@ void DeferredRenderer::FinalPass() noexcept
 	m_inputLayout.IASet();
 
 	// プリミティブタイプをセット
-	grahicsDevice.GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	graphicsDevice.GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	// テクスチャをセット
 	m_renderTexture.GetTexture()->PSSet();
@@ -162,13 +162,13 @@ void DeferredRenderer::FinalPass() noexcept
 	// 頂点バッファーをセット
 	m_quad.SetBuffer();
 
-	grahicsDevice.GetContext()->DrawIndexed(m_quad.GetIndexCount(), 0, 0);
+	graphicsDevice.GetContext()->DrawIndexed(m_quad.GetIndexCount(), 0, 0);
 }
 
 void DeferredRenderer::Set2DCamera() const noexcept
 {
 	Transform camera2D(Math::Vector3(0, 0, 1));
-	TransformCBuffer::Get().SetProjection(m_mainCamera->GetOrthographicMatrixXM());
+	TransformCBuffer::Get().SetProjection(m_mainCamera->GetOrthographicMatrix().ToMatrixXM());
 	TransformCBuffer::Get().SetView(camera2D.GetWorldMatrix().ToMatrixXM());
 	TransformCBuffer::Get().Bind(Math::Matrix::Identity.ToMatrixXM());
 }

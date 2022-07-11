@@ -2,7 +2,7 @@
 * @file    Matrix.cpp
 * @brief
 *
-* @date	   2022/06/01 2022年度初版
+* @date	   2022/07/09 2022年度初版
 */
 
 
@@ -10,12 +10,12 @@
 #include "Vector3.h"
 #include "Vector4.h"
 
-namespace Math 
+namespace Math
 {
 	const Matrix Matrix::Identity(1, 0, 0, 0,
-								  0, 1, 0, 0,
-								  0, 0, 1, 0,
-								  0, 0, 0, 1);
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1);
 
 	Matrix::Matrix(const Vector4& InX, const Vector4& InY, const Vector4& InZ, const Vector4& InW) noexcept
 	{
@@ -59,6 +59,20 @@ namespace Math
 		Matrix scaling;
 		DirectX::XMStoreFloat4x4(&scaling, DirectX::XMMatrixScalingFromVector(DirectX::XMLoadFloat3(&scale)));
 		return scaling;
+	}
+
+	Matrix Matrix::CreatePerspectiveFovLH(float fov, float aspect, float near, float far) noexcept
+	{
+		Matrix projection;
+		DirectX::XMStoreFloat4x4(&projection, DirectX::XMMatrixPerspectiveFovLH(fov, aspect, near, far));
+		return projection;
+	}
+
+	Matrix Matrix::CreateOrthographicLH(float width, float height, float near, float far) noexcept
+	{
+		Matrix orthographic;
+		DirectX::XMStoreFloat4x4(&orthographic, DirectX::XMMatrixOrthographicLH(width, height, near, far));
+		return orthographic;
 	}
 
 	Vector3 Matrix::TransformPosition(const Vector3& position) const noexcept

@@ -10,7 +10,7 @@
 #include "SubSystem/Window/Window.h"
 #include "ThirdParty/directxtex/include/d3dx12.h"
 
-bool D3D12GrahicsDevice::Init()
+bool D3D12GraphicsDevice::Init()
 {
 	auto hWnd = Window::Get().GetHandle();
 
@@ -170,7 +170,7 @@ bool D3D12GrahicsDevice::Init()
 	return false;
 }
 
-void D3D12GrahicsDevice::Prepare(const Math::Vector4& color)
+void D3D12GraphicsDevice::Prepare(const Math::Vector4& color)
 {
 	m_commandContext.Clear();
 
@@ -186,7 +186,7 @@ void D3D12GrahicsDevice::Prepare(const Math::Vector4& color)
 	// レンダーターゲットクリア
 }
 
-void D3D12GrahicsDevice::Present()
+void D3D12GraphicsDevice::Present()
 {
 	// 画面に表示出来る状態に遷移させる
 	ResourceBarrier(
@@ -204,19 +204,19 @@ void D3D12GrahicsDevice::Present()
 	WaitForGpu();
 }
 
-void D3D12GrahicsDevice::WaitForGpu() noexcept
+void D3D12GraphicsDevice::WaitForGpu() noexcept
 {
 	m_commandContext.Signal(m_fence.Get(), m_fence.m_fenceValue);
 
 	m_fence.WaitForSingleToFinish();
 }
 
-void D3D12GrahicsDevice::SetViewports(UINT numViewports, const D3D12_VIEWPORT* viewports)
+void D3D12GraphicsDevice::SetViewports(UINT numViewports, const D3D12_VIEWPORT* viewports)
 {
 	m_commandContext.GetCommandList()->RSSetViewports(numViewports, viewports);
 }
 
-void D3D12GrahicsDevice::SetViewport(float width, float height)
+void D3D12GraphicsDevice::SetViewport(float width, float height)
 {
 	D3D12_VIEWPORT viewport = {};
 	viewport.TopLeftX = 0;
@@ -228,12 +228,12 @@ void D3D12GrahicsDevice::SetViewport(float width, float height)
 	SetViewports(1, &viewport);
 }
 
-void D3D12GrahicsDevice::SetScissorRects(UINT numRects, const D3D12_RECT* rects)
+void D3D12GraphicsDevice::SetScissorRects(UINT numRects, const D3D12_RECT* rects)
 {
 	m_commandContext.GetCommandList()->RSSetScissorRects(numRects, rects);
 }
 
-void D3D12GrahicsDevice::SetScissorRect(float width, float height)
+void D3D12GraphicsDevice::SetScissorRect(float width, float height)
 {
 	D3D12_RECT rect;
 	rect.bottom = static_cast<LONG>(height);
@@ -243,13 +243,13 @@ void D3D12GrahicsDevice::SetScissorRect(float width, float height)
 	SetScissorRects(1, &rect);
 }
 
-void D3D12GrahicsDevice::ResourceBarrier(ID3D12Resource* const pResource, D3D12_RESOURCE_STATES beforeState, D3D12_RESOURCE_STATES afterState)
+void D3D12GraphicsDevice::ResourceBarrier(ID3D12Resource* const pResource, D3D12_RESOURCE_STATES beforeState, D3D12_RESOURCE_STATES afterState)
 {
 	auto&& barriers = CD3DX12_RESOURCE_BARRIER::Transition(pResource, beforeState, afterState);
 	m_commandContext.GetCommandList()->ResourceBarrier(1, &barriers);
 }
 
-Vector<IDXGIAdapter*> D3D12GrahicsDevice::GetAvailableAdapters(IDXGIFactory6* factory) const
+Vector<IDXGIAdapter*> D3D12GraphicsDevice::GetAvailableAdapters(IDXGIFactory6* factory) const
 {
 	Vector<IDXGIAdapter*> adapters;
 	IDXGIAdapter* adapter = nullptr;
@@ -260,7 +260,7 @@ Vector<IDXGIAdapter*> D3D12GrahicsDevice::GetAvailableAdapters(IDXGIFactory6* fa
 	return adapters;
 }
 
-IDXGIAdapter* D3D12GrahicsDevice::GetAdapterWithTheHighestVRAM(IDXGIFactory6* factory) const
+IDXGIAdapter* D3D12GraphicsDevice::GetAdapterWithTheHighestVRAM(IDXGIFactory6* factory) const
 {
 	auto adapters = GetAvailableAdapters(factory);
 
@@ -288,7 +288,7 @@ IDXGIAdapter* D3D12GrahicsDevice::GetAdapterWithTheHighestVRAM(IDXGIFactory6* fa
 	return resultAdapter;
 }
 
-IDXGIAdapter* D3D12GrahicsDevice::GetAdapterByName(const Wstring& adapterName, IDXGIFactory6* factory) const
+IDXGIAdapter* D3D12GraphicsDevice::GetAdapterByName(const Wstring& adapterName, IDXGIFactory6* factory) const
 {
 	Vector<IDXGIAdapter*> adapters = GetAvailableAdapters(factory);
 

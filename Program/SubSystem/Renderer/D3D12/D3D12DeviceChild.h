@@ -20,9 +20,9 @@ public:
 	D3D12DeviceChild();
 	virtual ~D3D12DeviceChild() {}
 
-	class D3D12GrahicsDevice* GetGraphicsDevice() const noexcept;
+	class D3D12GraphicsDevice* GetGraphicsDevice() const noexcept;
 
 private:
 
-	class D3D12GrahicsDevice* m_grahicsDevice = nullptr;
+	class D3D12GraphicsDevice* m_grahicsDevice = nullptr;
 };

@@ -12,18 +12,15 @@
 #include <wrl/client.h>
 #include "D3D12CommandContext.h"
 
-class D3D12GrahicsDevice
+class D3D12GraphicsDevice
 {
-private:
-
-	D3D12GrahicsDevice() = default;
-	COPY_PROHIBITED(D3D12GrahicsDevice)
-
+	D3D12GraphicsDevice() = default;
+	COPY_PROHIBITED(D3D12GraphicsDevice)
 public:
 
-	static D3D12GrahicsDevice& Get() noexcept
+	static D3D12GraphicsDevice& Get() noexcept
 	{
-		static D3D12GrahicsDevice instance;
+		static D3D12GraphicsDevice instance;
 		return instance;
 	}
 

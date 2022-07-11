@@ -26,7 +26,7 @@ void MyGui::Init()
 {
 	ImGui::CreateContext();
 	ImGui_ImplWin32_Init(Window::Get().GetHandle());
-	ImGui_ImplDX11_Init(D3D11GrahicsDevice::Get().GetDevice(), D3D11GrahicsDevice::Get().GetContext());
+	ImGui_ImplDX11_Init(D3D11GraphicsDevice::Get().GetDevice(), D3D11GraphicsDevice::Get().GetContext());
 
 	ImGui::StyleColorsClassic();
 

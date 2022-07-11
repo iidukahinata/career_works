@@ -27,7 +27,7 @@ bool ForwardRenderer::Initialize()
 	const auto height = Window::Get().GetWindowHeight();
 
 	// デバイス初期化
-	D3D11GrahicsDevice::Get().Init(Window::Get().GetHandle(), width, height, Window::Get().IsFullscreen());
+	D3D11GraphicsDevice::Get().Init(Window::Get().GetHandle(), width, height, Window::Get().IsFullscreen());
 
 	m_lightMap = MakeUnique<ForwardLightMap>();
 	m_lightMap->Initialize();
@@ -48,15 +48,14 @@ void ForwardRenderer::Shutdown()
 
 void ForwardRenderer::Update() noexcept
 {
-	TransformCBuffer::Get().SetProjection(m_mainCamera->GetProjectionMatrixXM());
+	TransformCBuffer::Get().SetProjection(m_mainCamera->GetProjectionMatrix().ToMatrixXM());
 	TransformCBuffer::Get().SetView(m_mainCamera->GetViewMatrix().ToMatrixXM());
 
-	auto& grahicsDevice = D3D11GrahicsDevice::Get();
-
+	auto& grahicsDevice = D3D11GraphicsDevice::Get();
 	grahicsDevice.SetRenderTarget(grahicsDevice.GetRenderTarget(), grahicsDevice.GetDepthStencil());
 	grahicsDevice.Clear(Math::Vector4(0.8f, 0.8f, 0.8f, 1.f));
 
-	m_lightMap->Update(m_mainCamera->GetTransform().GetPosition());
+	m_lightMap->Update(m_mainCamera);
 
 	for (auto renderObject : m_renderObjects)
 	{
@@ -65,5 +64,5 @@ void ForwardRenderer::Update() noexcept
 
 	MyGui::Get().Draw();
 
-	D3D11GrahicsDevice::Get().Present();
+	D3D11GraphicsDevice::Get().Present();
 }

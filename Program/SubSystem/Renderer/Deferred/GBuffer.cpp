@@ -19,7 +19,7 @@ void GBuffer::Initialize(uint32_t wight, uint32_t height) noexcept
 
 void GBuffer::SetRenderTargets() const noexcept
 {
-	auto& grahicsDevice = D3D11GrahicsDevice::Get();
+	auto& grahicsDevice = D3D11GraphicsDevice::Get();
 
 	ID3D11RenderTargetView* renderTargets[] = {
 		m_rendererTexture[GBufferType::Color].GetRenderTarget(),

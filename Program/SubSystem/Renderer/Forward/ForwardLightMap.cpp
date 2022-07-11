@@ -8,6 +8,7 @@
 
 #include "ForwardLightMap.h"
 #include "SubSystem/Scene/Component/Components/Light.h"
+#include "SubSystem/Scene/Component/Components/Camera.h"
 
 void ForwardLightMap::Initialize()
 {
@@ -16,7 +17,7 @@ void ForwardLightMap::Initialize()
 	m_constantBuffer.Create(sizeof(ConstantBufferLight));
 }
 
-void ForwardLightMap::Update(const Math::Vector3& cameraPos)
+void ForwardLightMap::Update(Camera* mainCamera)
 {
 	ConstantBufferLight buffer = {};
 
@@ -60,7 +61,7 @@ void ForwardLightMap::Update(const Math::Vector3& cameraPos)
 		}
 	}
 
-	buffer.eyePos = Math::Vector4(cameraPos, 0);
+	buffer.eyePos = Math::Vector4(mainCamera->GetTransform().GetPosition(), 0);
 	buffer.ambientLight = m_ambientLight;
 	buffer.pointLightCount = pointLightCount;
 	buffer.spotLightCount = spotLightCount;

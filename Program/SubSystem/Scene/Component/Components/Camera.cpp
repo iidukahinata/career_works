@@ -2,7 +2,7 @@
 * @file    Camera.cpp
 * @brief
 *
-* @date	   2022/07/07 2022年度初版
+* @date	   2022/07/09 2022年度初版
 */
 
 
@@ -103,27 +103,27 @@ void Camera::SetFar(float farClip)
 	CreateOrthographicMatrix();
 }
 
-Math::Matrix Camera::GetViewMatrix()
+const Math::Matrix& Camera::GetViewMatrix()
 {
 	return GetTransform().GetWorldMatrix().Inverse();
 }
 
-DirectX::XMMATRIX Camera::GetProjectionMatrixXM()
+const Math::Matrix& Camera::GetProjectionMatrix()
 {
 	return m_projection;
 }
 
-DirectX::XMMATRIX Camera::GetOrthographicMatrixXM()
+const Math::Matrix& Camera::GetOrthographicMatrix()
 {
 	return m_orthographic;
 }
 
 void Camera::CreateProjectionMatrix()
 {
-	m_projection = DirectX::XMMatrixPerspectiveFovLH(m_fov, m_aspect, m_near, m_far);
+	m_projection = Math::Matrix::CreatePerspectiveFovLH(m_fov, m_aspect, m_near, m_far);
 }
 
 void Camera::CreateOrthographicMatrix()
 {
-	m_orthographic = DirectX::XMMatrixOrthographicLH(m_width, m_height, m_near, m_far);
+	m_orthographic = Math::Matrix::CreateOrthographicLH(m_width, m_height, m_near, m_far);
 }

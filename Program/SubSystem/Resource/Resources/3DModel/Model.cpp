@@ -94,7 +94,7 @@ void Model::AddMaterial(Material* material) noexcept
 
 void Model::Render()
 {
-	auto context = D3D11GrahicsDevice::Get().GetContext();
+	auto context = D3D11GraphicsDevice::Get().GetContext();
 
 	// Œ»İ‘z’è‚ÍÅ‰‚Ìˆê‚Â‚Ì‚İ
 	m_materials[0]->ShaderSet();

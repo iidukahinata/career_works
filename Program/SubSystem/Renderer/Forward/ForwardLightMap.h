@@ -22,7 +22,7 @@ class ForwardLightMap : public LightMap
 public:
 
 	void Initialize() override;
-	void Update(const Math::Vector3& cameraPos) override;
+	void Update(Camera* mainCamera) override;
 
 private:
 

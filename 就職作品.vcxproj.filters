@@ -403,7 +403,7 @@
     <ClCompile Include="Program\SubSystem\Renderer\Forward\ForwardRenderer.cpp">
       <Filter>SubSystem\Renderer\Forward</Filter>
     </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\Deferred\DeferredLightMap.cpp">
+    <ClCompile Include="Program\SubSystem\Renderer\Deferred\ClusteredLightMap.cpp">
       <Filter>SubSystem\Renderer\Deferred</Filter>
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Renderer\Forward\ForwardLightMap.cpp">
@@ -744,7 +744,7 @@
     <ClInclude Include="Program\SubSystem\JobSystem\Sync\JobHelper.h">
       <Filter>SubSystem\JobSystem\Sync</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\Deferred\DeferredLightMap.h">
+    <ClInclude Include="Program\SubSystem\Renderer\Deferred\ClusteredLightMap.h">
       <Filter>SubSystem\Renderer\Deferred</Filter>
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Renderer\Forward\ForwardLightMap.h">
