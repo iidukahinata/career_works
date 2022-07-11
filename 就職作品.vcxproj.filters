@@ -94,9 +94,6 @@
     <Filter Include="SubSystem\Renderer\Shader\HLSL\PostEffect">
       <UniqueIdentifier>{241629f5-a90c-4fd3-8adc-24ddf0ee6349}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SubSystem\Core\Common\Memory">
-      <UniqueIdentifier>{c528e8a5-5b40-4784-befe-ec27ac542172}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SubSystem\Renderer\Deferred">
       <UniqueIdentifier>{26482f45-1bc7-4772-9eb8-669b1661d93e}</UniqueIdentifier>
     </Filter>
@@ -132,6 +129,12 @@
     </Filter>
     <Filter Include="SubSystem\Timer">
       <UniqueIdentifier>{532a8617-9fdf-443b-998f-9d23d0617ac9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Core\Common\Tools">
+      <UniqueIdentifier>{e9e54b3f-7a92-40e0-b19b-f459d6488fd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Core\Common\Tools\Memory">
+      <UniqueIdentifier>{c528e8a5-5b40-4784-befe-ec27ac542172}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -379,16 +382,7 @@
     <ClCompile Include="Program\SubSystem\JobSystem\Async\COM.cpp">
       <Filter>SubSystem\JobSystem\Async</Filter>
     </ClCompile>
-    <ClCompile Include="Program\SubSystem\Core\Common\Memory\Allocator.cpp">
-      <Filter>SubSystem\Core\Common\Memory</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Core\Common\Memory\Memory.cpp">
-      <Filter>SubSystem\Core\Common\Memory</Filter>
-    </ClCompile>
     <ClCompile Include="Program\SubSystem\Core\Common\pch.cpp">
-      <Filter>SubSystem\Core\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Core\Common\Tools.cpp">
       <Filter>SubSystem\Core\Common</Filter>
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Scene\Component\Components\PostProcessEffect.cpp">
@@ -408,6 +402,15 @@
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Renderer\Forward\ForwardLightMap.cpp">
       <Filter>SubSystem\Renderer\Forward</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Core\Common\Tools\Tools.cpp">
+      <Filter>SubSystem\Core\Common\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Core\Common\Tools\Memory\Allocator.cpp">
+      <Filter>SubSystem\Core\Common\Tools\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Core\Common\Tools\Memory\Memory.cpp">
+      <Filter>SubSystem\Core\Common\Tools\Memory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -705,25 +708,13 @@
     <ClInclude Include="Program\SubSystem\JobSystem\Async\COM.h">
       <Filter>SubSystem\JobSystem\Async</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Core\Common\Memory\Allocator.h">
-      <Filter>SubSystem\Core\Common\Memory</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Core\Common\Memory\Memory.h">
-      <Filter>SubSystem\Core\Common\Memory</Filter>
-    </ClInclude>
     <ClInclude Include="Program\SubSystem\Core\Common\Common.h">
-      <Filter>SubSystem\Core\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Core\Common\Hash.h">
       <Filter>SubSystem\Core\Common</Filter>
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Core\Common\Macro.h">
       <Filter>SubSystem\Core\Common</Filter>
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Core\Common\pch.h">
-      <Filter>SubSystem\Core\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Core\Common\Tools.h">
       <Filter>SubSystem\Core\Common</Filter>
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Core\Common\TypeDef.h">
@@ -749,6 +740,24 @@
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Renderer\Forward\ForwardLightMap.h">
       <Filter>SubSystem\Renderer\Forward</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Core\Common\Tools\Array.h">
+      <Filter>SubSystem\Core\Common\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Core\Common\Tools\Tools.h">
+      <Filter>SubSystem\Core\Common\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Core\Common\Tools\Memory\Allocator.h">
+      <Filter>SubSystem\Core\Common\Tools\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Core\Common\Tools\Memory\Memory.h">
+      <Filter>SubSystem\Core\Common\Tools\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Core\Common\Tools\Hash.h">
+      <Filter>SubSystem\Core\Common\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Core\Common\Tools\String.h">
+      <Filter>SubSystem\Core\Common\Tools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

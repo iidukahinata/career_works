@@ -18,7 +18,7 @@ class GameObject
 public:
 
 	/** 指定名コンポーネントの追加。指定名が存在しない等の場合、null を返す。*/
-	IComponent* AddComponent(String_View name) noexcept;
+	IComponent* AddComponent(StringView name) noexcept;
 	void AddComponent(IComponent* component) noexcept;
 
 	/** 保持するコンポーネントを消去するため、そのアドレスを引数とする。*/
@@ -29,10 +29,10 @@ public:
 	T* GetComponent();
 
 	/** 指定名コンポーネントを保持する場合、そのアドレスを返す。*/
-	IComponent* FindComponent(String_View name) noexcept;
+	IComponent* FindComponent(StringView name) noexcept;
 
 	/** 各GameObject識別用に使用。*/
-	void SetName(String_View name) noexcept;
+	void SetName(StringView name) noexcept;
 	const String& GetName() const noexcept;
 
 	/** Worldクラスで以外で使用されると、場合によってはScene終了時までメモリが解放されず残り続けます。*/

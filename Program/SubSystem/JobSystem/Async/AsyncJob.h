@@ -32,7 +32,7 @@ private:
 	Task m_task;
 
 	// * タスク処理が完了したかを保持する。
-	std::atomic_bool m_finish = false;
+	std::atomic_bool m_finish;
 };
 
 template<class T, class Func>

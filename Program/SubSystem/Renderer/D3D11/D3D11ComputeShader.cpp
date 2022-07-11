@@ -9,10 +9,10 @@
 #include "D3D11Shader.h"
 
 bool D3D11ComputeShader::Create(
-	String_View shader,
+	StringView shader,
 	D3D_SHADER_MACRO* macro /*  = nullptr */,
-	String_View entrypoint /* = "main" */,
-	String_View target /* = "gs_5_0" */
+	StringView entrypoint /* = "main" */,
+	StringView target /* = "gs_5_0" */
 ) noexcept
 {
 	// shader compile

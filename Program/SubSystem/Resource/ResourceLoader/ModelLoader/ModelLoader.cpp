@@ -26,7 +26,7 @@ ModelLoader::ModelLoader()
 	m_resourceManager = g_context->GetSubsystem<ResourceManager>();
 }
 
-bool ModelLoader::Load(Model* model, String_View filePath)
+bool ModelLoader::Load(Model* model, StringView filePath)
 {
 	m_model = model;
 
@@ -171,7 +171,7 @@ Vector<Texture*> ModelLoader::LoadTextures(aiMaterial* aiMaterial)
 		// マテリアルからｉ番目のテクスチャファイル名を取得する
 		aiMaterial->GetTexture(aiTextureType_DIFFUSE, i, &str);
 
-		String_View path(str.C_Str());
+		StringView path(str.C_Str());
 		path = path.substr(path.find_last_of("\\/"), path.length() - 1);
 		auto filePath = FileSystem::Canonical(path);
 

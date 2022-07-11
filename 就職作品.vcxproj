@@ -21,13 +21,13 @@
   <ItemGroup>
     <ClCompile Include="Program\SubSystem\Audio\Audio.cpp" />
     <ClCompile Include="Program\SubSystem\Audio\FMOD\FMODAudio.cpp" />
-    <ClCompile Include="Program\SubSystem\Core\Common\Memory\Allocator.cpp" />
-    <ClCompile Include="Program\SubSystem\Core\Common\Memory\Memory.cpp" />
     <ClCompile Include="Program\SubSystem\Core\Common\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Program\SubSystem\Core\Common\Tools.cpp" />
+    <ClCompile Include="Program\SubSystem\Core\Common\Tools\Memory\Allocator.cpp" />
+    <ClCompile Include="Program\SubSystem\Core\Common\Tools\Memory\Memory.cpp" />
+    <ClCompile Include="Program\SubSystem\Core\Common\Tools\Tools.cpp" />
     <ClCompile Include="Program\SubSystem\Core\Context.cpp" />
     <ClCompile Include="Program\SubSystem\Core\Engine.cpp" />
     <ClCompile Include="Program\SubSystem\Core\Event\EventManager.cpp" />
@@ -120,13 +120,15 @@
     <ClInclude Include="Program\SubSystem\Audio\AudioHelper.h" />
     <ClInclude Include="Program\SubSystem\Audio\FMOD\FMODAudio.h" />
     <ClInclude Include="Program\SubSystem\Core\Common\Common.h" />
-    <ClInclude Include="Program\SubSystem\Core\Common\Hash.h" />
     <ClInclude Include="Program\SubSystem\Core\Common\Macro.h" />
-    <ClInclude Include="Program\SubSystem\Core\Common\Memory\Allocator.h" />
-    <ClInclude Include="Program\SubSystem\Core\Common\Memory\Memory.h" />
     <ClInclude Include="Program\SubSystem\Core\Common\pch.h" />
     <ClInclude Include="Program\SubSystem\Core\Common\ProjectSettings.h" />
-    <ClInclude Include="Program\SubSystem\Core\Common\Tools.h" />
+    <ClInclude Include="Program\SubSystem\Core\Common\Tools\Array.h" />
+    <ClInclude Include="Program\SubSystem\Core\Common\Tools\Hash.h" />
+    <ClInclude Include="Program\SubSystem\Core\Common\Tools\Memory\Allocator.h" />
+    <ClInclude Include="Program\SubSystem\Core\Common\Tools\Memory\Memory.h" />
+    <ClInclude Include="Program\SubSystem\Core\Common\Tools\String.h" />
+    <ClInclude Include="Program\SubSystem\Core\Common\Tools\Tools.h" />
     <ClInclude Include="Program\SubSystem\Core\Common\TypeDef.h" />
     <ClInclude Include="Program\SubSystem\Core\Context.h" />
     <ClInclude Include="Program\SubSystem\Core\Engine.h" />

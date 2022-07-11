@@ -10,7 +10,7 @@
 #include "SubSystem/Resource/ResourceLoader/TextureLoader/TextureLoader.h"
 #include "ThirdParty/directxtex/include/DirectXTex.h"
 
-void Texture::SaveToFile(String_View filePath)
+void Texture::SaveToFile(StringView filePath)
 {
 	auto path = ConvertProprietaryFormat(filePath);
 
@@ -27,7 +27,7 @@ void Texture::SaveToFile(String_View filePath)
 	m_textureData.Reset();
 }
 
-bool Texture::LoadFromFile(String_View filePath)
+bool Texture::LoadFromFile(StringView filePath)
 {
 	auto path = ConvertProprietaryFormat(filePath);
 	
@@ -73,20 +73,20 @@ void Texture::PSSet(int slot) const noexcept
 	m_d3d11Texture.PSSet(slot);
 }
 
-bool Texture::Do_Load(String_View filePath)
+bool Texture::Do_Load(StringView filePath)
 {
 	TextureLoader loader;
 	return loader.Load(this, filePath);
 }
 
-String Texture::ConvertProprietaryFormat(String_View filePath) const noexcept
+String Texture::ConvertProprietaryFormat(StringView filePath) const noexcept
 {
 	String path = "assets/Resource/Texture/";
 
 	// ファイル拡張子を独自ファイル用に変更
 	path += FileSystem::GetFilePath(filePath);
 
-	String_View sub(path);
+	StringView sub(path);
 	path = sub.substr(0, sub.find("."));
 	path += ".texture";
 

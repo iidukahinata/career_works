@@ -16,5 +16,5 @@
 */
 struct ComponentFactory
 {
-	static UniquePtr<IComponent> Create(GameObject* gameObject, String_View name) noexcept;
+	static UniquePtr<IComponent> Create(GameObject* gameObject, StringView name) noexcept;
 };

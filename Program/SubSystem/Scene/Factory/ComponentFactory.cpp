@@ -21,7 +21,7 @@
 #define CASE_CREATE_ISA_COMPONENT(CLASS, NAME, COMPONENT) case GetHashFromCRC(NAME): COMPONENT = MakeUnique<CLASS>(); break;
 #define CASE_CREATE_COMPONENT(CLASS, COMPONENT) case GET_HASH(CLASS): COMPONENT = MakeUnique<CLASS>(); break;
 
-UniquePtr<IComponent> ComponentFactory::Create(GameObject* gameObject, String_View name) noexcept
+UniquePtr<IComponent> ComponentFactory::Create(GameObject* gameObject, StringView name) noexcept
 {
     UniquePtr<IComponent> component;
     const ComponentType type(name);

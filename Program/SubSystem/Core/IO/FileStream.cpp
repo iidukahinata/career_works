@@ -11,7 +11,7 @@
 #include "SubSystem/Core/Common/Common.h"
 
 #if 1
-FileStream::FileStream(String_View filePath, OpenMode mode)
+FileStream::FileStream(StringView filePath, OpenMode mode)
 {
 	Load(filePath, mode);
 }
@@ -21,7 +21,7 @@ FileStream::~FileStream()
 	Close();
 }
 
-bool FileStream::Load(String_View filePath, OpenMode mode) noexcept
+bool FileStream::Load(StringView filePath, OpenMode mode) noexcept
 {
 	if (IsOpen())
 	{
@@ -62,7 +62,7 @@ bool FileStream::Load(String_View filePath, OpenMode mode) noexcept
 	return IsOpen();
 }
 
-bool FileStream::CreateFile(String_View filePath, OpenMode mode) noexcept
+bool FileStream::CreateFile(StringView filePath, OpenMode mode) noexcept
 {
 	FILE* fp = nullptr;
 	errno_t error = 0;
@@ -92,7 +92,7 @@ bool FileStream::CreateFile(String_View filePath, OpenMode mode) noexcept
 	return false;
 }
 
-bool FileStream::CreateFileAndLoad(String_View filePath, OpenMode mode) noexcept
+bool FileStream::CreateFileAndLoad(StringView filePath, OpenMode mode) noexcept
 {
 	if (CreateFile(filePath, mode))
 	{
@@ -122,7 +122,7 @@ bool FileStream::IsEof() const noexcept
 	return feof(m_fp) != 0;
 }
 #else
-FileStream::FileStream(String_View filePath, OpenMode mode)
+FileStream::FileStream(StringView filePath, OpenMode mode)
 {
 	Load(filePath, mode);
 }
@@ -132,7 +132,7 @@ FileStream::~FileStream()
 	Close();
 }
 
-bool FileStream::Load(String_View filePath, OpenMode mode) noexcept
+bool FileStream::Load(StringView filePath, OpenMode mode) noexcept
 {
 	if (IsOpen())
 	{
@@ -157,7 +157,7 @@ bool FileStream::Load(String_View filePath, OpenMode mode) noexcept
 	return IsOpen();
 }
 
-bool FileStream::CreateFile(String_View filePath, OpenMode mode) noexcept
+bool FileStream::CreateFile(StringView filePath, OpenMode mode) noexcept
 {
 	std::ofstream createFile;
 
@@ -181,7 +181,7 @@ bool FileStream::CreateFile(String_View filePath, OpenMode mode) noexcept
 	return false;
 }
 
-bool FileStream::CreateFileAndLoad(String_View filePath, OpenMode mode) noexcept
+bool FileStream::CreateFileAndLoad(StringView filePath, OpenMode mode) noexcept
 {
 	if (CreateFile(filePath, mode))
 	{

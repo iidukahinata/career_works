@@ -10,7 +10,7 @@
 #include "World.h"
 #include "Factory/ComponentFactory.h"
 
-IComponent* GameObject::AddComponent(String_View name) noexcept
+IComponent* GameObject::AddComponent(StringView name) noexcept
 {
 	IComponent* result = nullptr;
 
@@ -48,7 +48,7 @@ void GameObject::RemoveComponent(IComponent* component) noexcept
 	}
 }
 
-IComponent* GameObject::FindComponent(String_View name) noexcept
+IComponent* GameObject::FindComponent(StringView name) noexcept
 {
 	const ComponentType type(name);
 	if (m_components.contains(type.Hash))
@@ -79,7 +79,7 @@ void GameObject::SetID(uint32_t id) noexcept
 	m_id = id;
 }
 
-void GameObject::SetName(String_View name) noexcept
+void GameObject::SetName(StringView name) noexcept
 {
 	m_name = name;
 }

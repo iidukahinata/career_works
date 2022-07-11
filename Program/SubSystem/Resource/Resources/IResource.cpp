@@ -10,17 +10,17 @@
 
 extern Context* g_context;
 
-void IResource::SaveToFile(String_View filePath)
+void IResource::SaveToFile(StringView filePath)
 {
 
 }
 
-bool IResource::LoadFromFile(String_View filePath)
+bool IResource::LoadFromFile(StringView filePath)
 {
 	return false;
 }
 
-bool IResource::Load(String_View filePath) noexcept
+bool IResource::Load(StringView filePath) noexcept
 {
 	m_filePath = filePath;
 

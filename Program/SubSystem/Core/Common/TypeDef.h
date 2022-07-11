@@ -4,40 +4,38 @@
 #include <set>
 #include <map>
 #include <list>
+#include <stack>
 #include <queue>
-#include <array>
 #include <string>
 #include <vector>
 #include <stdint.h>
 #include <unordered_map>
 #include <unordered_set>
 
-using String = std::string;
-using String_View = std::string_view;
+using String = std::basic_string<char, std::char_traits<char>, std::allocator<char>>;
 
-using Wstring = std::wstring;
-using Wstring_View = std::wstring_view;
+using Wstring = std::basic_string<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t>>;
 
 template<class T>
-using List = std::list<T>;
+using List = std::list<T, std::allocator<T>>;
 
 template<class T>
-using Queue = std::queue<T>;
+using Stack = std::stack<T, std::deque<T, std::allocator<T>>>;
 
-template<class T, size_t Size>
-using Array = std::array<T, Size>;
+template<class T>
+using Queue = std::queue<T, std::deque<T, std::allocator<T>>>;
 
-template<class ...Args>
-using Vector = std::vector<Args...>;
+template<class T>
+using Vector = std::vector<T, std::allocator<T>>;
 
 template<class T, class U>
-using Map = std::map<T, U>;
+using Map = std::map<T, U, std::less<T>, std::allocator<std::pair<const T, U>>>;
 
 template<class T, class U>
-using Unordered_Map = std::unordered_map<T, U>;
+using Unordered_Map = std::unordered_map<T, U, std::hash<T>, std::equal_to<T>, std::allocator<std::pair<const T, U>>>;
 
 template<class T>
-using Set = std::set<T>;
+using Set = std::set<T, std::less<T>, std::allocator<T>>;
 
 template<class T>
-using Unordered_Set = std::unordered_set<T>;
+using Unordered_Set = std::unordered_set<T, std::hash<T>, std::equal_to<T>, std::allocator<T>>;

@@ -17,7 +17,7 @@ Material::Material()
 	SetPSShader("assets/Resource/Shader/GBufferPS.cso");
 }
 
-void Material::SaveToFile(String_View filePath)
+void Material::SaveToFile(StringView filePath)
 {
 	const auto path = ConvertProprietaryFormat(filePath);
 
@@ -32,7 +32,7 @@ void Material::SaveToFile(String_View filePath)
 	};
 }
 
-bool Material::LoadFromFile(String_View filePath)
+bool Material::LoadFromFile(StringView filePath)
 {
 	const auto path = ConvertProprietaryFormat(filePath);
 
@@ -67,7 +67,7 @@ void Material::AddTexture(Texture* texture) noexcept
 	m_textures.emplace_back(texture);
 }
 
-void Material::SetVSShader(String_View name)
+void Material::SetVSShader(StringView name)
 {
 	// 頂点レイアウト作成
 	D3D11_INPUT_ELEMENT_DESC vertexDesc[] = {
@@ -82,7 +82,7 @@ void Material::SetVSShader(String_View name)
 	m_inputLayout.Create(vertexDesc, ARRAYSIZE(vertexDesc), m_vertexShader.GetBlob());
 }
 
-void Material::SetPSShader(String_View name)
+void Material::SetPSShader(StringView name)
 {
 	m_pixelShader.Create(name, nullptr);
 
@@ -113,14 +113,14 @@ void Material::ShaderSet() noexcept
 	}
 }
 
-String Material::ConvertProprietaryFormat(String_View filePath) const noexcept
+String Material::ConvertProprietaryFormat(StringView filePath) const noexcept
 {
 	String path = "assets/Resource/Material/";
 
 	// ファイル拡張子を独自ファイル用に変更
 	path += FileSystem::GetFilePath(filePath);
 
-	String_View sub(path);
+	StringView sub(path);
 	path = sub.substr(0, sub.find("."));
 	path += ".material";
 

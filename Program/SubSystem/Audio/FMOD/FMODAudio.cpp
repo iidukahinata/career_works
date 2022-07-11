@@ -13,7 +13,7 @@
 
 FMOD_VECTOR ToFMODVector(const Math::Vector3& v)
 {
-	return FMOD_VECTOR(v.x, v.y, v.z);
+	return { v.x, v.y, v.z };
 }
 
 FMODAudio::FMODAudio()

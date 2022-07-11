@@ -29,7 +29,7 @@ public:
 	* @param title [入力] 生成する Window のタイトルバーに出力する文字列。nullは考慮していない。
 	* @param fullScreen [入力] trueが指定された時は hInstance 以外の引数値の意味はなくなります。
 	*/
-	bool CreateWindowClass(HINSTANCE hInstance, int width, int height, String_View title, bool fullScreen) noexcept;
+	bool CreateWindowClass(HINSTANCE hInstance, int width, int height, StringView title, bool fullScreen) noexcept;
 
 	/**
 	* window message から window 状態を調べる

@@ -9,7 +9,7 @@
 #include <d3dcompiler.h>
 #include "D3D11Shader.h"
 
-bool D3D11Shader::CompileFromFile(String_View shader, D3D_SHADER_MACRO* macro, String_View entrypoint, String_View traget) noexcept
+bool D3D11Shader::CompileFromFile(StringView shader, D3D_SHADER_MACRO* macro, StringView entrypoint, StringView traget) noexcept
 {
 	UINT flags = D3DCOMPILE_ENABLE_STRICTNESS;
 #if defined( DEBUG ) || defined( _DEBUG )

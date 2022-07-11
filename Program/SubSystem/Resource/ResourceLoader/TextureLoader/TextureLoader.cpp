@@ -11,7 +11,7 @@
 #include "TextureLoader.h"
 #include "SubSystem/Resource/Resources/3DModel/Texture.h"
 
-bool TextureLoader::Load(Texture* texture, String_View filePath) noexcept
+bool TextureLoader::Load(Texture* texture, StringView filePath) noexcept
 {
 	DirectX::TexMetadata meta;
 	auto image = std::make_unique<DirectX::ScratchImage>();
@@ -28,7 +28,7 @@ bool TextureLoader::Load(Texture* texture, String_View filePath) noexcept
 	return false;
 }
 
-bool TextureLoader::LoadFromFile(String_View ext, Wstring_View path, DirectX::TexMetadata* meta, DirectX::ScratchImage& image) noexcept
+bool TextureLoader::LoadFromFile(StringView ext, WstringView path, DirectX::TexMetadata* meta, DirectX::ScratchImage& image) noexcept
 {
 	HRESULT hr = S_FALSE;
 

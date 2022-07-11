@@ -31,7 +31,7 @@ namespace Math
 		constexpr Vector4T(const Vector4T<T>& V) noexcept : x(V.x), y(V.y), z(V.z), w(V.w)
 		{}
 
-		constexpr Vector4T(T x, T y, T z, T w) noexcept : x(x), y(y), z(z), z(w)
+		constexpr Vector4T(T x, T y, T z, T w) noexcept : x(x), y(y), z(z), w(w)
 		{}
 
 		constexpr const T& operator[](int index) const

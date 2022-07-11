@@ -13,7 +13,7 @@
 * @param str [入力] 何かしらの文字列である必要があります。
 *					null 指定は想定していない。
 */
-Wstring ToWstring(String_View str) noexcept;
+Wstring ToWstring(StringView str) noexcept;
 
 /**
 * wstring 型から string 型への変換
@@ -21,14 +21,14 @@ Wstring ToWstring(String_View str) noexcept;
 * @param str [入力] 何かしらの文字列である必要があります。
 *					null 指定は想定していない。
 */
-String ToString(Wstring_View str) noexcept;
+String ToString(WstringView str) noexcept;
 
 /**
 * パスから拡張子取得
 *
 * @param filePath [入力] 何かしらのファイル名である必要があります。
 */
-String GetExt(String_View filePath) noexcept;
+String GetExt(StringView filePath) noexcept;
 
 /**
 * 値を指定倍数に切り上げ調整

@@ -2,7 +2,7 @@
 * @file    pch.h
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/12 2022年度初版
 */
 #pragma once
 
@@ -12,11 +12,13 @@
 #include <algorithm>
 #include <functional>
 
-// System
+// Core
 #include "TypeDef.h"
 #include "Macro.h"
-#include "Tools.h"
-#include "Memory/Memory.h"
+#include "Tools/Tools.h"
+#include "Tools/Array.h"
+#include "Tools/String.h"
+#include "Tools/Memory/Memory.h"
 
 // Context
 #include "SubSystem/Core/Context.h"

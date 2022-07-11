@@ -13,7 +13,7 @@ void ResourceManager::Shutdown()
 	Clear();
 }
 
-void ResourceManager::AddResource(UniquePtr<IResource> resource, String_View filePath) noexcept
+void ResourceManager::AddResource(UniquePtr<IResource> resource, StringView filePath) noexcept
 {
 	ASSERT(!m_resources.contains(filePath.data()));
 
@@ -21,7 +21,7 @@ void ResourceManager::AddResource(UniquePtr<IResource> resource, String_View fil
 	m_resources[filePath.data()].Reset(resource.Release());
 }
 
-IResource* ResourceManager::GetResourceByName(String_View filePath) noexcept
+IResource* ResourceManager::GetResourceByName(StringView filePath) noexcept
 {
 	// 配列外にアクセスしないための判定
 	if (m_resources.contains(filePath.data()))

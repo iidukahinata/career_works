@@ -9,7 +9,7 @@
 #include "D3D12Shader.h"
 #include <d3dcompiler.h>
 
-void D3D12Shader::Compile(String_View filePath, String_View entryPoint, String_View traget) noexcept
+void D3D12Shader::Compile(StringView filePath, StringView entryPoint, StringView traget) noexcept
 {
 #ifdef _DEBUG
 	UINT compileFlags = D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION;

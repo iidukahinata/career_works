@@ -8,7 +8,7 @@
 
 #include "FileSystem.h"
 
-String FileSystem::Canonical(String_View file) noexcept
+String FileSystem::Canonical(StringView file) noexcept
 {
 	try
 	{
@@ -21,7 +21,7 @@ String FileSystem::Canonical(String_View file) noexcept
 	}
 }
 
-String FileSystem::GetFilePath(String_View filePath) noexcept
+String FileSystem::GetFilePath(StringView filePath) noexcept
 {
 	try
 	{

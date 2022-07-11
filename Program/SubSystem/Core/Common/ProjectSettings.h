@@ -1,3 +1,9 @@
+/**
+* @file  ProjectSetting.h
+* @brief 起動モード切り替え
+*
+* @date	 2022/07/12 2022年度初版
+*/
 #pragma once
 
 

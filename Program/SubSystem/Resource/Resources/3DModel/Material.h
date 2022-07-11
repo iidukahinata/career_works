@@ -22,24 +22,24 @@ public:
 	Material();
 
 	/** 独自モデルデータとして保存させる。*/
-	void SaveToFile(String_View filePath) override;
+	void SaveToFile(StringView filePath) override;
 
 	/** 独自モデルデータを読み込みする。*/
-	bool LoadFromFile(String_View filePath) override;
+	bool LoadFromFile(StringView filePath) override;
 
 	void AddTexture(Texture* texture) noexcept;
 
 	/** 各シェーダー設定の変更。*/
-	void SetVSShader(String_View name);
-	void SetPSShader(String_View name);
+	void SetVSShader(StringView name);
+	void SetPSShader(StringView name);
 
 	void ShaderSet() noexcept;
 
 protected:
 
-	bool Do_Load(String_View filePath) override { return true; };
+	bool Do_Load(StringView filePath) override { return true; };
 
-	String ConvertProprietaryFormat(String_View filePath) const noexcept;
+	String ConvertProprietaryFormat(StringView filePath) const noexcept;
 
 private:
 

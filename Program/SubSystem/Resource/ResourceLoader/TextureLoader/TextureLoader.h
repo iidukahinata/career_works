@@ -15,10 +15,10 @@ class TextureLoader
 {
 public:
 
-	bool Load(Texture* texture, String_View filePath) noexcept;
+	bool Load(Texture* texture, StringView filePath) noexcept;
 
 private:
 
-	bool LoadFromFile(String_View ext, Wstring_View path, DirectX::TexMetadata* meta, DirectX::ScratchImage& image) noexcept;
+	bool LoadFromFile(StringView ext, WstringView path, DirectX::TexMetadata* meta, DirectX::ScratchImage& image) noexcept;
 	bool CreateFromData(Texture* texture, DirectX::TexMetadata& meta, DirectX::ScratchImage* image) noexcept;
 };

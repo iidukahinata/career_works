@@ -18,10 +18,10 @@ class Model : public IResource
 public:
 
 	/** 独自モデルデータとして保存させる。*/
-	void SaveToFile(String_View filePath) override;
+	void SaveToFile(StringView filePath) override;
 
 	/** 独自モデルデータを読み込みする。*/
-	bool LoadFromFile(String_View filePath) override;
+	bool LoadFromFile(StringView filePath) override;
 
 	void AddMesh(Mesh* mesh) noexcept;
 	void AddMaterial(Material* material) noexcept;
@@ -31,9 +31,9 @@ public:
 private:
 
 	// IResource
-	bool Do_Load(String_View filePath) override;
+	bool Do_Load(StringView filePath) override;
 
-	String ConvertProprietaryFormat(String_View filePath) const noexcept;
+	String ConvertProprietaryFormat(StringView filePath) const noexcept;
 
 private:
 

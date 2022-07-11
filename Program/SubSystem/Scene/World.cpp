@@ -27,7 +27,7 @@ void World::Shutdown()
 	m_job.UnRegisterFromJobSystem();
 }
 
-void World::LoadScene(String_View sceneName, bool isAsync /* = false */) noexcept
+void World::LoadScene(StringView sceneName, bool isAsync /* = false */) noexcept
 {
 	auto camera = CreateAndAddGameObject();
 	camera->AddComponent("Camera");
@@ -42,7 +42,7 @@ void World::LoadScene(String_View sceneName, bool isAsync /* = false */) noexcep
 	obj->AddComponent("AudioSpeaker");
 }
 
-void World::SaveScene(String_View sceneName) noexcept
+void World::SaveScene(StringView sceneName) noexcept
 {
 
 }
@@ -69,7 +69,7 @@ void World::AddGameObject(UniquePtr<GameObject> gameObject) noexcept
 	}
 }
 
-GameObject* World::GetGameObjectByName(String_View name) const noexcept
+GameObject* World::GetGameObjectByName(StringView name) const noexcept
 {
 	for (const auto& gameObject : m_gameObjects)
 	{

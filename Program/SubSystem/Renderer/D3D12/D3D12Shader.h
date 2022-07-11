@@ -15,7 +15,7 @@ class D3D12Shader : public D3D12DeviceChild
 {
 public:
 
-	void Compile(String_View filePath, String_View entryPoint, String_View traget) noexcept;
+	void Compile(StringView filePath, StringView entryPoint, StringView traget) noexcept;
 
 	ID3DBlob* GetBlob() const noexcept { return m_blob.Get(); };
 

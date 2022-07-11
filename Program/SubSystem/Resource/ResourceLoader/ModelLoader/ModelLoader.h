@@ -21,7 +21,7 @@ class ModelLoader
 public:
 
 	ModelLoader();
-	bool Load(Model* model, String_View filePath);
+	bool Load(Model* model, StringView filePath);
 
 private:
 

@@ -2,7 +2,7 @@
 * @file    FileStream.h
 * @brief   ファイル操作クラス
 *
-* @data	   2022/07/06 2022年度初版
+* @data	   2022/07/12 2022年度初版
 * @note
 *  書き読み込み速度向上のため c 言語での処理に修正。
 *  fscanf 操作関数は作成していません。
@@ -29,17 +29,17 @@ class FileStream
 public:
 
 	FileStream() = default;
-	FileStream(String_View filePath, OpenMode mode);
+	FileStream(StringView filePath, OpenMode mode);
 
 	~FileStream();
 
-	bool Load(String_View filePath, OpenMode mode) noexcept;
+	bool Load(StringView filePath, OpenMode mode) noexcept;
 
 	/** もし同じ名前のFileがある場合はデータを上書きして作成する。*/
-	bool CreateFile(String_View filePath, OpenMode mode) noexcept;
+	bool CreateFile(StringView filePath, OpenMode mode) noexcept;
 
 	/** もし同じ名前のFileがある場合はデータを上書きして作成する。*/
-	bool CreateFileAndLoad(String_View filePath, OpenMode mode) noexcept;
+	bool CreateFileAndLoad(StringView filePath, OpenMode mode) noexcept;
 
 	/**
 	* 指定型 T データサイズ分書き込みます。
@@ -115,7 +115,7 @@ inline void FileStream::Write(String data) noexcept
 	{
 		size_t length = data.length();
 		fwrite(reinterpret_cast<void*>(&length), sizeof(size_t), 1, m_fp);
-		fwrite(reinterpret_cast<void*>(data.data()), length, 1, m_fp);
+		fwrite(reinterpret_cast<void*>(const_cast<char*>(data.data())), length, 1, m_fp);
 	}
 }
 
@@ -158,7 +158,7 @@ inline void FileStream::Write<String>(Vector<String> data) noexcept
 		{
 			size_t length = data[i].length();
 			fwrite(reinterpret_cast<void*>(&length), sizeof(size_t), 1, m_fp);
-			fwrite(reinterpret_cast<void*>(data[i].data()), length, 1, m_fp);
+			fwrite(reinterpret_cast<void*>(const_cast<char*>(data[i].data())), length, 1, m_fp);
 		}
 	}
 }
@@ -192,7 +192,7 @@ inline void FileStream::Read<String>(String* data) noexcept
 		fread(reinterpret_cast<void*>(&length), sizeof(size_t), 1, m_fp);
 
 		data->resize(length);
-		fread(reinterpret_cast<void*>(data->data()), length, 1, m_fp);
+		fread(reinterpret_cast<void*>(const_cast<char*>(data->data())), length, 1, m_fp);
 	}
 }
 
@@ -247,7 +247,7 @@ inline void FileStream::Read<String>(Vector<String>* data) noexcept
 			fread(reinterpret_cast<void*>(&length), sizeof(size_t), 1, m_fp);
 
 			data[i].resize(length);
-			fread(reinterpret_cast<void*>(data->at(i).data()), length, 1, m_fp);
+			fread(reinterpret_cast<void*>(const_cast<char*>(data->at(i).data())), length, 1, m_fp);
 		}
 	}
 }
@@ -260,17 +260,17 @@ class FileStream
 public:
 
 	FileStream() = default;
-	FileStream(String_View filePath, OpenMode mode);
+	FileStream(StringView filePath, OpenMode mode);
 
 	~FileStream();
 
-	bool Load(String_View filePath, OpenMode mode) noexcept;
+	bool Load(StringView filePath, OpenMode mode) noexcept;
 
 	/** もし同じ名前のFileがある場合はデータを上書きして作成する。*/
-	bool CreateFile(String_View filePath, OpenMode mode) noexcept;
+	bool CreateFile(StringView filePath, OpenMode mode) noexcept;
 
 	/** もし同じ名前のFileがある場合はデータを上書きして作成する。*/
-	bool CreateFileAndLoad(String_View filePath, OpenMode mode) noexcept;
+	bool CreateFileAndLoad(StringView filePath, OpenMode mode) noexcept;
 
 	/**
 	* 指定型 T データサイズ分書き込みます。
@@ -346,7 +346,7 @@ inline void FileStream::Write<String>(String data) noexcept
 	else if (m_openMode == OpenMode::Write_Mode)
 	{
 		m_fp.write(reinterpret_cast<char*>(data.length()), sizeof(size_t));
-		m_fp.write(const_cast<char*>(data.data()), data.length());
+		m_fp.write(const_cast<char*>(const_cast<char*>(data.data())), data.length());
 	}
 }
 
@@ -367,7 +367,7 @@ inline void FileStream::Write(Vector<T> data) noexcept
 
 	size_t size = data.size();
 	m_fp.write(reinterpret_cast<char*>(&size), sizeof(size_t));
-	m_fp.write(reinterpret_cast<char*>(data.data()), sizeof(T) * data.size());
+	m_fp.write(reinterpret_cast<char*>(const_cast<char*>(data.data())), sizeof(T) * data.size());
 }
 
 template<>
@@ -414,7 +414,7 @@ inline void FileStream::Read<String>(String* data) noexcept
 	m_fp.read(reinterpret_cast<char*>(&length), sizeof(size_t));
 
 	data->resize(length);
-	m_fp.read(reinterpret_cast<char*>(data->data()), length);
+	m_fp.read(reinterpret_cast<char*>(const_cast<char*>(data->data())), length);
 }
 
 template<class T>
@@ -436,7 +436,7 @@ inline void FileStream::Read(Vector<T>* data) noexcept
 	m_fp.read(reinterpret_cast<char*>(&size), sizeof(size_t));
 
 	data->resize(size);
-	m_fp.read(reinterpret_cast<char*>(data->data()), sizeof(T) * data->size());
+	m_fp.read(reinterpret_cast<char*>(const_cast<char*>(data->data()))), sizeof(T) * data->size());
 }
 
 template<>
@@ -468,7 +468,7 @@ inline void FileStream::Read<String>(Vector<String>* data) noexcept
 			m_fp.read(reinterpret_cast<char*>(&length), sizeof(size_t));
 
 			data[i].resize(length);
-			m_fp.read(reinterpret_cast<char*>(data[i].data()), length);
+			m_fp.read(reinterpret_cast<char*>(const_cast<char*>(data[i].data())), length);
 		}
 	}
 }

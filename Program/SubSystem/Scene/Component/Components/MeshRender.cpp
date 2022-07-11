@@ -18,7 +18,7 @@ void MeshRender::Do_Initialize()
 	GetTransform().SetScale(Math::Vector3(0.01f));
 }
 
-void MeshRender::SetModel(String_View name) noexcept
+void MeshRender::SetModel(StringView name) noexcept
 {
 	m_model = GetContext()->GetSubsystem<ResourceManager>()->Load<Model>(name);
 }

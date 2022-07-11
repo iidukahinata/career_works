@@ -14,12 +14,12 @@ class Shader
 {
 public:
 
-	bool SetPSShader(String_View name) noexcept;
-	bool SetVSShader(String_View name) noexcept;
+	bool SetPSShader(StringView name) noexcept;
+	bool SetVSShader(StringView name) noexcept;
 
 	bool SetInputLayout(D3D11_INPUT_ELEMENT_DESC* layout, UINT layoutSize) noexcept;
 
-	void AddMacro(String_View name, String_View value) noexcept;
+	void AddMacro(StringView name, StringView value) noexcept;
 
 private:
 

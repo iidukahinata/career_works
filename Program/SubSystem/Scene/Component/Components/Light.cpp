@@ -47,52 +47,52 @@ void Light::Active(bool active)
 	}
 }
 
-void Light::SetLightType(LightType lightType)
+void Light::SetLightType(LightType lightType) noexcept
 {
 	m_lightType = lightType;
 }
 
-LightType Light::GetLightType()
+LightType Light::GetLightType() const noexcept
 {
 	return m_lightType;
 }
 
-void Light::SetColor(const Math::Vector4& color)
+void Light::SetColor(const Math::Vector4& color) noexcept
 {
 	m_color = color;
 }
 
-const Math::Vector4& Light::GetColor()
+const Math::Vector4& Light::GetColor() const noexcept
 {
 	return m_color;
 }
 
-void Light::SetIntensity(float intensity)
+void Light::SetIntensity(float intensity) noexcept
 {
 	m_intensity = intensity;
 }
 
-float Light::GetIntensity()
+float Light::GetIntensity() const noexcept
 {
 	return m_intensity;
 }
 
-void Light::SetInfluenceRange(float influenceRange)
+void Light::SetInfluenceRange(float influenceRange) noexcept
 {
 	m_influenceRange = influenceRange;
 }
 
-float Light::GetInfluenceRange()
+float Light::GetInfluenceRange() const noexcept
 {
 	return m_influenceRange;
 }
 
-void Light::SetAngle(float angle)
+void Light::SetAngle(float angle) noexcept
 {
 	m_angle = angle;
 }
 
-float Light::GetAngle()
+float Light::GetAngle() const noexcept
 {
 	return m_angle;
 }

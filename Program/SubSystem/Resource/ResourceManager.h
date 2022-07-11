@@ -27,7 +27,7 @@ public:
 	*		  指定名のリソース読み込みに失敗すると nullptrを返す。
 	*/
 	template<class T>
-	T* Load(String_View filePath) noexcept;
+	T* Load(StringView filePath) noexcept;
 
 	/**
 	* 保持しているデータに指定名のリソースがあるか調べる
@@ -35,14 +35,14 @@ public:
 	* @return 指定名が保持するリソースの場合そのポインタを返す。
 	*		  指定名のリソースデータがない場合 nullptrを返す。
 	*/
-	IResource* GetResourceByName(String_View filePath) noexcept;
+	IResource* GetResourceByName(StringView filePath) noexcept;
 
 	/** 2022/04/17 Sceneを跨いで使用されるリソースデータを解放しないために実装 */
 	void FreeUnusedResourceObjects() noexcept;
 
 	void Clear() noexcept;
 
-	void AddResource(UniquePtr<IResource> resource, String_View filePath) noexcept;
+	void AddResource(UniquePtr<IResource> resource, StringView filePath) noexcept;
 
 private:
 
@@ -54,7 +54,7 @@ private:
 };
 
 template<class T>
-FORCEINLINE T* ResourceManager::Load(String_View filePath) noexcept
+FORCEINLINE T* ResourceManager::Load(StringView filePath) noexcept
 {
 	// 同じリソースを読み込まないために保持しているか調べる
 	if (auto copyResource = GetResourceByName(filePath))

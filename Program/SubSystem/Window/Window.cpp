@@ -47,7 +47,7 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lpar
 	return 0;
 }
 
-bool Window::CreateWindowClass(HINSTANCE hInstance, int width, int height, String_View title, bool fullScreen) noexcept
+bool Window::CreateWindowClass(HINSTANCE hInstance, int width, int height, StringView title, bool fullScreen) noexcept
 {
 	// タイトルバーと境界線があるウィンドウ
 	unsigned long windowStyles = WS_OVERLAPPEDWINDOW;

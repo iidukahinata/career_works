@@ -2,12 +2,14 @@
 * @file    Hash.h
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/12 2022年度初版
 * @note
 *  2022/6/13 日時点では CRC_32 のみ定義
 */
 #pragma once
 
+
+#include "String.h"
 
 constexpr uint32_t CRC_TABLE[256] = {
 			 0,   79764919,  159529838,  222504665,
@@ -86,7 +88,7 @@ constexpr uint32_t CRC_32(const char* name, int lenght)
 	return hash;
 }
 
-constexpr uint32_t GetHashFromCRC(String_View name)
+constexpr uint32_t GetHashFromCRC(StringView name)
 {
 	return CRC_32(name.data(), name.size());
 }

@@ -9,7 +9,7 @@
 #include <Windows.h>
 #include "Tools.h"
 
-Wstring ToWstring(String_View str) noexcept
+Wstring ToWstring(StringView str) noexcept
 {
 	// •ÏŠ·Œã‚Ì•¶Žš—ñ‚Ì’·‚³‚ðŽæ“¾
 	int lenght = MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED | MB_ERR_INVALID_CHARS, str.data(), -1, nullptr, 0);
@@ -23,7 +23,7 @@ Wstring ToWstring(String_View str) noexcept
 	return wstr;
 }
 
-String ToString(Wstring_View str) noexcept
+String ToString(WstringView str) noexcept
 {
 	// •ÏŠ·Œã‚Ì•¶Žš—ñ‚Ì’·‚³‚ðŽæ“¾
 	int lenght = WideCharToMultiByte(CP_OEMCP, 0, str.data(), -1, (char*)NULL, 0, NULL, NULL);
@@ -37,10 +37,10 @@ String ToString(Wstring_View str) noexcept
 	return ret;
 }
 
-String GetExt(String_View filePath) noexcept
+String GetExt(StringView filePath) noexcept
 {
 	auto ext_i = filePath.find_last_of(".");
-	if (ext_i == String_View::npos)
+	if (ext_i == StringView::npos)
 	{
 		return String();
 	}

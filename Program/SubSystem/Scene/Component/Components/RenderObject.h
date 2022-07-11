@@ -45,7 +45,7 @@ public:
 
 	void Render() override;
 
-	void SetModel(String_View name) noexcept;
+	void SetModel(StringView name) noexcept;
 
 private:
 

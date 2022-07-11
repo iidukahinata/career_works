@@ -29,20 +29,20 @@ public:
 
 	void Active(bool active) override;
 
-	void SetLightType(LightType lightType);
-	LightType GetLightType();
+	void SetLightType(LightType lightType) noexcept;
+	LightType GetLightType() const noexcept;
 
-	void SetColor(const Math::Vector4& color);
-	const Math::Vector4& GetColor();
+	void SetColor(const Math::Vector4& color) noexcept;
+	const Math::Vector4& GetColor() const noexcept;
 
-	void SetIntensity(float intensity);
-	float GetIntensity();
+	void SetIntensity(float intensity) noexcept;
+	float GetIntensity() const noexcept;
 
-	void SetInfluenceRange(float influenceRange);
-	float GetInfluenceRange();
+	void SetInfluenceRange(float influenceRange) noexcept;
+	float GetInfluenceRange() const noexcept;
 
-	void SetAngle(float angle);
-	float GetAngle();
+	void SetAngle(float angle) noexcept;
+	float GetAngle() const noexcept;
 
 private:
 

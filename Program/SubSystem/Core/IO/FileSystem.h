@@ -17,7 +17,7 @@ class FileSystem
 {
 public:
 
-	static String Canonical(String_View filePath) noexcept;
+	static String Canonical(StringView filePath) noexcept;
 
-	static String GetFilePath(String_View filePath) noexcept;
+	static String GetFilePath(StringView filePath) noexcept;
 };

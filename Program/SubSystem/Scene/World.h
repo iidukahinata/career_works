@@ -21,13 +21,13 @@ public:
 	void Shutdown() override;
 
 	/** ñ¢é¿ëïÉÅÉ\ÉbÉh */
-	void LoadScene(String_View sceneName, bool isAsync = false) noexcept;
-	void SaveScene(String_View sceneName) noexcept;
+	void LoadScene(StringView sceneName, bool isAsync = false) noexcept;
+	void SaveScene(StringView sceneName) noexcept;
 
 	/** GameObject Function */
 	GameObject* CreateAndAddGameObject() noexcept;
 	void AddGameObject(UniquePtr<GameObject> gameObject) noexcept;
-	GameObject* GetGameObjectByName(String_View name) const noexcept;
+	GameObject* GetGameObjectByName(StringView name) const noexcept;
 	void RemoveGameObject(GameObject* gameObject) noexcept;
 
 	const Vector<UniquePtr<GameObject>>& GetGameObjects() noexcept;

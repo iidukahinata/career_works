@@ -15,7 +15,7 @@ void Mesh::Construct(const Vector<VertexBump3D>& vertices, const Vector<uint32_t
 	SetUp();
 }
 
-void Mesh::SaveToFile(String_View filePath)
+void Mesh::SaveToFile(StringView filePath)
 {
 	auto path = ConvertProprietaryFormat(filePath);
 
@@ -28,7 +28,7 @@ void Mesh::SaveToFile(String_View filePath)
 	fileStream.Write(m_indices);
 }
 
-bool Mesh::LoadFromFile(String_View filePath)
+bool Mesh::LoadFromFile(StringView filePath)
 {
 	auto path = ConvertProprietaryFormat(filePath);
 
@@ -76,19 +76,19 @@ void Mesh::Render() const noexcept
 	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
-bool Mesh::Do_Load(String_View filePath)
+bool Mesh::Do_Load(StringView filePath)
 {
 	return false;
 }
 
-String Mesh::ConvertProprietaryFormat(String_View filePath) const noexcept
+String Mesh::ConvertProprietaryFormat(StringView filePath) const noexcept
 {
 	String path = "assets/Resource/Mesh/";
 
 	// ファイル拡張子を独自ファイル用に変更
 	path += FileSystem::GetFilePath(filePath);
 
-	String_View sub(path);
+	StringView sub(path);
 	path = sub.substr(0, sub.find("."));
 	path += ".mesh";
 

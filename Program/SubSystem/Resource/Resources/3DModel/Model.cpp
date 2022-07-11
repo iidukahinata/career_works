@@ -12,7 +12,7 @@
 #include "SubSystem/Resource/ResourceManager.h"
 #include "SubSystem/Resource/ResourceLoader/ModelLoader/ModelLoader.h"
 
-void Model::SaveToFile(String_View filePath)
+void Model::SaveToFile(StringView filePath)
 {
 	auto path = ConvertProprietaryFormat(filePath);
 
@@ -36,7 +36,7 @@ void Model::SaveToFile(String_View filePath)
 	};
 }
 
-bool Model::LoadFromFile(String_View filePath)
+bool Model::LoadFromFile(StringView filePath)
 {
 	auto path = ConvertProprietaryFormat(filePath);
 
@@ -107,20 +107,20 @@ void Model::Render()
 	}
 }
 
-bool Model::Do_Load(String_View filePath)
+bool Model::Do_Load(StringView filePath)
 {
 	ModelLoader modelLoader;
 	return modelLoader.Load(this, filePath);
 }
 
-String Model::ConvertProprietaryFormat(String_View filePath) const noexcept
+String Model::ConvertProprietaryFormat(StringView filePath) const noexcept
 {
 	String path = "assets/Resource/Model/";
 
 	// ファイル拡張子を独自ファイル用に変更
 	path += FileSystem::GetFilePath(filePath);
 
-	String_View sub(path);
+	StringView sub(path);
 	path = sub.substr(0, sub.find("."));
 	path += ".model";
 

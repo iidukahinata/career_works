@@ -172,7 +172,7 @@ void AudioClip::Release() const noexcept
 	AUDIO_EORROR_CHECK(result);
 }
 
-bool AudioClip::Do_Load(String_View filePath) noexcept
+bool AudioClip::Do_Load(StringView filePath) noexcept
 {
 	m_audio = dynamic_cast<FMODAudio*>(GetContext()->GetSubsystem<Audio>());
 

@@ -49,7 +49,7 @@ private:
 	void Release() const noexcept;
 
 	// IResource
-	bool Do_Load(String_View filePath) noexcept;
+	bool Do_Load(StringView filePath) noexcept;
 
 private:
 
