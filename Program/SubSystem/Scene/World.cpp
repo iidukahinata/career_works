@@ -129,7 +129,7 @@ void World::RemoveGameObject(GameObject* gameObject) noexcept
 	m_gameObjects.pop_back();
 }
 
-const Vector<UniquePtr<GameObject>>& World::GetGameObjects() noexcept
+const Vector<UniquePtr<GameObject>>& World::GetAllGameObjects() noexcept
 {
 	return m_gameObjects;
 }

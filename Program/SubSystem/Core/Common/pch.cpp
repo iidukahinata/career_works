@@ -16,3 +16,4 @@
 #pragma comment(lib, "DirectXTex.lib")
 #pragma comment(lib, "assimp-vc141-mtd.lib")
 #pragma comment(lib, "fmodL_vc.lib")
+#pragma comment (lib,"dinput8.lib")

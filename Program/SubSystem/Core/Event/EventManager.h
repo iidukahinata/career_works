@@ -7,6 +7,7 @@
 #pragma once
 
 
+#include <cstdio>
 #include "Event.h"
 
 class EventListener;

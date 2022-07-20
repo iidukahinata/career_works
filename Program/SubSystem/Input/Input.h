@@ -2,7 +2,7 @@
  * @file	InputDevice.h
  * @brief   入力制御クラス
  *
- * @date	2022/07/08 2022年度初版
+ * @date	2022/07/19 2022年度初版
  */
 #pragma once
 
@@ -14,30 +14,23 @@ namespace Button
 	enum KeyAndMouse
 	{
 		// Mouse
-		Lbutton = 0x01,
+		Lbutton,
 		Rbutton,
-		Cancel,
 		Mbutton,
-		Xbutton1,
-		Xbutton2,
 
 		// Keyboard
-		Back = 0x08, Tab,
-		Clear = 0x0C, Return,
-		Shift = 0x10, Control,
-		Menu, Pause,
-		Escape = 0x1B, SPACE = 0x20,
-		Left = 0x25, Up, Right, Down,
-		SEelect, Delete = 0x2E, Help,
+		Back, Tab, Return, Pause, Escape, Space,
+		Left, Up, Right, Down,
+		Select, Delete, Help,
 
-		A = 0x41,
-		B, C, D, E, F, G, H, I, J, K, L, N,
+		A, B, C, D, E, F, G, H, I, J, K, L, N,
 		M, O, P, Q, R, S, T, U, V, W, X, Y, Z,
 
-		Lwin = 0x5B, Rwin, Apps, Sleep = 0x5F,
-		F1 = 0x70, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12,
-		Lshift = 0xA0, Rshift, Lcontrol, Rcontrol, Lmenu, Rmenu,
-		Volume_Mute = 0xAD, Volume_Down, Volume_Up,
+		Lwin, Rwin, Apps, Sleep = 0x5F,
+		F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12,
+		Lshift, Rshift, Lcontrol, Rcontrol, Lmenu, Rmenu, Home, End,
+		
+		Max,
 	};
 }
 
@@ -46,10 +39,8 @@ class Input : public ISubsystem
 	SUB_CLASS(Input)
 public:
 
-	Input();
-
-	bool Initialize() override;
-	void Shutdown() override;
+	virtual bool Initialize() override { return true; }
+	virtual void Shutdown() override {}
 
 	/** マウス位置をスクリーン座標で返します */
 	const Math::Vector2& GetMousePosition() const noexcept;
@@ -57,22 +48,18 @@ public:
 	/** マウス表示を管理します */
 	void ShowMouse(bool show) const noexcept;
 
-private:
+protected:
 
-	/** 入力イベントチェックを行う。*/
-	void Update() noexcept;
-
-	/** Event Set 関数 */
+	/** 
+	* Event Set 関数。
+	* この関数を呼び出すことで、InputEventをEventManagerに登録し処理します。
+	* 各派生Inputクラスではこの関数を使用しEventを知らせます。
+	*/
 	void PressKey(Button::KeyAndMouse id) const noexcept;
 	void ReleaseKey(Button::KeyAndMouse id) const noexcept;
 
-	void AddKey(Button::KeyAndMouse id) noexcept;
+protected:
 
-private:
-
-	// Type -> <キーID、押されたか>
-	Map<Button::KeyAndMouse, bool> m_previousKeyState;
-
-	// * Input Update 登録用
-	Job m_job;
+	// 任意キーが押されているかを保持
+	Array<bool, Button::KeyAndMouse::Max> m_previousKeyState;
 };

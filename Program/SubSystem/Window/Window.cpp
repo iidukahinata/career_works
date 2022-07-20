@@ -96,6 +96,8 @@ bool Window::CreateWindowClass(HINSTANCE hInstance, int width, int height, Strin
 		return false;
 	}
 
+	m_hInstance = hInstance;
+
 	return true;
 }
 
@@ -108,6 +110,11 @@ bool Window::Tick()
 	}
 
 	return m_message.message != WM_QUIT;
+}
+
+HINSTANCE Window::GetHInstance() const noexcept
+{
+	return m_hInstance;
 }
 
 HWND Window::GetHandle() const noexcept

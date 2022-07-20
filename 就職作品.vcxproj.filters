@@ -139,6 +139,12 @@
     <Filter Include="SubSystem\Renderer\GraphicsAPI\D3D12">
       <UniqueIdentifier>{07c26028-c438-4ccf-98a4-d6ff0dee0571}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SubSystem\Input\Direct">
+      <UniqueIdentifier>{9e61f23d-7ec0-40f5-8a6b-27303c737231}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Input\WinAPI">
+      <UniqueIdentifier>{653db2bb-049f-43f6-bcc7-77682630333f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program\WinMain.cpp" />
@@ -411,6 +417,12 @@
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Core\Common\Tools\Memory\Memory.cpp">
       <Filter>SubSystem\Core\Common\Tools\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Input\Direct\DirectInput.cpp">
+      <Filter>SubSystem\Input\Direct</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Input\WinAPI\WinAPIInput.cpp">
+      <Filter>SubSystem\Input\WinAPI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -755,6 +767,12 @@
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Core\Common\Tools\String.h">
       <Filter>SubSystem\Core\Common\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Input\Direct\DirectInput.h">
+      <Filter>SubSystem\Input\Direct</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Input\WinAPI\WinAPIInput.h">
+      <Filter>SubSystem\Input\WinAPI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

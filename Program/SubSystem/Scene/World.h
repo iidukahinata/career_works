@@ -30,7 +30,7 @@ public:
 	GameObject* GetGameObjectByName(StringView name) const noexcept;
 	void RemoveGameObject(GameObject* gameObject) noexcept;
 
-	const Vector<UniquePtr<GameObject>>& GetGameObjects() noexcept;
+	const Vector<UniquePtr<GameObject>>& GetAllGameObjects() noexcept;
 
 private:
 

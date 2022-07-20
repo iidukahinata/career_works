@@ -10,7 +10,7 @@
 #include "Common/ProjectSettings.h"
 #include "Event/EventManager.h"
 #include "SubSystem/Audio/FMOD/FMODAudio.h"
-#include "SubSystem/Input/Input.h"
+#include "SubSystem/Input/Direct/DirectInput.h"
 #include "SubSystem/Timer/Timer.h"
 #include "SubSystem/Scene/World.h"
 #include "SubSystem/Window/Window.h"
@@ -108,7 +108,7 @@ bool Engine::StartUpScreen(HINSTANCE hInstance) noexcept
 void Engine::RegisterSubsystemsToContainer() noexcept
 {
 	m_context->RegisterSubsystem<Timer>(MakeUnique<Timer>());
-	m_context->RegisterSubsystem<Input>(MakeUnique<Input>());
+	m_context->RegisterSubsystem<Input>(MakeUnique<DirectInput>());
 	m_context->RegisterSubsystem<Audio>(MakeUnique<FMODAudio>());
 	m_context->RegisterSubsystem<ResourceManager>(MakeUnique<ResourceManager>());
 	m_context->RegisterSubsystem<World>(MakeUnique<World>());

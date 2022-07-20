@@ -37,6 +37,8 @@ public:
 	*/
 	bool Tick();
 
+	HINSTANCE GetHInstance() const noexcept;
+
 	/** ê∂ê¨Ç≥ÇÍÇΩ Window éØï éqÇï‘ÇµÇ‹Ç∑ÅB */
 	HWND GetHandle() const noexcept;
 
@@ -48,6 +50,8 @@ public:
 	bool IsFullscreen() const noexcept;
 
 private:
+
+	HINSTANCE m_hInstance;
 
 	// * ê∂ê¨ÇµÇΩ window éØï éq
 	HWND m_hWnd;
