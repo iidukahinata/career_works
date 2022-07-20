@@ -76,7 +76,6 @@
     <ClCompile Include="Program\SubSystem\Renderer\Geometry\Quad.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\LightMap.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\Renderer.cpp" />
-    <ClCompile Include="Program\SubSystem\Renderer\Shader\Shader.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\TransformCBuffer.cpp" />
     <ClCompile Include="Program\SubSystem\Resource\ResourceLoader\ModelLoader\ModelLoader.cpp" />
     <ClCompile Include="Program\SubSystem\Resource\ResourceLoader\TextureLoader\TextureLoader.cpp" />
@@ -188,7 +187,6 @@
     <ClInclude Include="Program\SubSystem\Renderer\Geometry\Vertex.h" />
     <ClInclude Include="Program\SubSystem\Renderer\LightMap.h" />
     <ClInclude Include="Program\SubSystem\Renderer\Renderer.h" />
-    <ClInclude Include="Program\SubSystem\Renderer\Shader\Shader.h" />
     <ClInclude Include="Program\SubSystem\Renderer\TransformCBuffer.h" />
     <ClInclude Include="Program\SubSystem\Resource\ResourceLoader\ModelLoader\ModelLoader.h" />
     <ClInclude Include="Program\SubSystem\Resource\ResourceLoader\TextureLoader\TextureLoader.h" />
@@ -233,8 +231,10 @@
     <ClInclude Include="Program\ThirdParty\imgui\imstb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Program\SubSystem\Renderer\Shader\HLSL\Core\ClusteredLight.hlsli" />
     <None Include="Program\SubSystem\Renderer\Shader\HLSL\Core\Core.hlsli" />
     <None Include="Program\SubSystem\Renderer\Shader\HLSL\Core\Light.hlsli" />
+    <None Include="Program\SubSystem\Renderer\Shader\HLSL\PBR\ClusteredPBR.hlsli" />
     <None Include="Program\SubSystem\Renderer\Shader\HLSL\PBR\PBR.hlsli" />
     <None Include="Program\SubSystem\Renderer\Shader\HLSL\PostEffect\Blur.hlsli" />
     <None Include="Program\ThirdParty\FMOD\include\fmod.cs" />

@@ -7,6 +7,7 @@
 
 
 #include "DeferredRenderer.h"
+#include "ClusteredLightMap.h"
 #include "SubSystem/Gui/MyGui.h"
 #include "SubSystem/Window/Window.h"
 #include "../Forward/ForwardLightMap.h"
@@ -149,19 +150,19 @@ void DeferredRenderer::FinalPass() noexcept
 	m_vsShader.VSSet();
 	m_psShader.PSSet();
 	m_samplerState.PSSet();
-
+	
 	// 頂点レイアウトをセット
 	m_inputLayout.IASet();
-
+	
 	// プリミティブタイプをセット
 	graphicsDevice.GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
+	
 	// テクスチャをセット
 	m_renderTexture.GetTexture()->PSSet();
-
+	
 	// 頂点バッファーをセット
 	m_quad.SetBuffer();
-
+	
 	graphicsDevice.GetContext()->DrawIndexed(m_quad.GetIndexCount(), 0, 0);
 }
 

@@ -27,6 +27,21 @@ void World::Shutdown()
 	m_job.UnRegisterFromJobSystem();
 }
 
+#include "Component/Components/Light.h"
+void CreateLight(World* world, int numX, int numY, int numZ)
+{
+	auto light = world->CreateAndAddGameObject();
+	light->AddComponent("Light");
+
+	light->GetTransform().SetPosition(Math::Vector3(numX * 2, numY * 2, numZ * 2));
+
+	auto com = light->GetComponent<Light>();
+	com->SetLightType(LightType::PointLight);
+	com->SetColor(Math::Vector4(1, 0, 0, 0));
+	com->SetInfluenceRange(2);
+	com->SetIntensity(5);
+}
+
 void World::LoadScene(StringView sceneName, bool isAsync /* = false */) noexcept
 {
 	auto camera = CreateAndAddGameObject();
@@ -40,6 +55,17 @@ void World::LoadScene(StringView sceneName, bool isAsync /* = false */) noexcept
 	auto obj = CreateAndAddGameObject();
 	obj->AddComponent("MeshRender");
 	obj->AddComponent("AudioSpeaker");
+
+	for (size_t x = 0; x < 8; ++x)
+	{
+		for (size_t y = 0; y < 1; ++y)
+		{
+			for (size_t z = 0; z < 8; ++z)
+			{
+				CreateLight(this, x, y, z);
+			}
+		}
+	}
 }
 
 void World::SaveScene(StringView sceneName) noexcept

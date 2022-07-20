@@ -2,7 +2,7 @@
 * @file    ForwardLightMap.cpp
 * @brief
 *
-* @date	   2022/07/08 2022年度初版
+* @date	   2022/07/13 2022年度初版
 */
 
 
@@ -19,6 +19,19 @@ void ForwardLightMap::Initialize()
 
 void ForwardLightMap::Update(Camera* mainCamera)
 {
+	// pre update
+	ConstantBufferLight buffer = CreateConstantBufferLight(mainCamera);
+
+	// update buffer
+	m_constantBuffer.Update(buffer);
+
+	// set buffer
+	m_constantBuffer.VSSet(2);
+	m_constantBuffer.PSSet(2);
+}
+
+ForwardLightMap::ConstantBufferLight ForwardLightMap::CreateConstantBufferLight(const Camera* mainCamera) const noexcept
+{
 	ConstantBufferLight buffer = {};
 
 	int pointLightCount = 0;
@@ -27,19 +40,16 @@ void ForwardLightMap::Update(Camera* mainCamera)
 	// 各Light情報を取得し、bufferにセット
 	for (auto light : m_lights)
 	{
-		Math::Vector4 position(light->GetTransform().GetRotation(), 0.f);
-		Math::Vector4 direction(light->GetTransform().GetRotation(), 0.f);
-
 		switch (light->GetLightType())
 		{
 		case LightType::DirectionalLight:
-			buffer.directionalLight.direction = direction;
+			buffer.directionalLight.direction = Math::Vector4(light->GetTransform().GetRotation(), 0.f);
 			buffer.directionalLight.color = light->GetColor();
-			buffer.directionalLight.intensity = light->GetIntensity();
+			buffer.directionalLight.color.w = light->GetIntensity();
 			break;
 
 		case LightType::PointLight:
-			buffer.pointLights[pointLightCount].position = position;
+			buffer.pointLights[pointLightCount].position = Math::Vector4(light->GetTransform().GetPosition(), 0.f);
 			buffer.pointLights[pointLightCount].color = light->GetColor();
 			buffer.pointLights[pointLightCount].intensity = light->GetIntensity();
 			buffer.pointLights[pointLightCount].influenceRange = light->GetInfluenceRange();
@@ -47,12 +57,12 @@ void ForwardLightMap::Update(Camera* mainCamera)
 			break;
 
 		case LightType::SpotLight:
-			buffer.spotLights[pointLightCount].position = position;
-			buffer.spotLights[pointLightCount].direction = direction;
-			buffer.spotLights[pointLightCount].color = light->GetColor();
-			buffer.spotLights[pointLightCount].intensity = light->GetIntensity();
-			buffer.spotLights[pointLightCount].influenceRange = light->GetInfluenceRange();
-			buffer.spotLights[pointLightCount].angle = light->GetAngle();
+			buffer.spotLights[spotLightCount].position = Math::Vector4(light->GetTransform().GetPosition(), 0.f);
+			buffer.spotLights[spotLightCount].direction = Math::Vector4(light->GetTransform().GetRotation(), 0.f);
+			buffer.spotLights[spotLightCount].color = light->GetColor();
+			buffer.spotLights[spotLightCount].intensity = light->GetIntensity();
+			buffer.spotLights[spotLightCount].influenceRange = light->GetInfluenceRange();
+			buffer.spotLights[spotLightCount].angle = light->GetAngle();
 			++spotLightCount;
 			break;
 
@@ -60,16 +70,12 @@ void ForwardLightMap::Update(Camera* mainCamera)
 			break;
 		}
 	}
-
+	
+	// 他Lightデータを設定
 	buffer.eyePos = Math::Vector4(mainCamera->GetTransform().GetPosition(), 0);
 	buffer.ambientLight = m_ambientLight;
 	buffer.pointLightCount = pointLightCount;
 	buffer.spotLightCount = spotLightCount;
 
-	// GPUデータ更新
-	m_constantBuffer.Update(buffer);
-
-	// set buffer
-	m_constantBuffer.VSSet(2);
-	m_constantBuffer.PSSet(2);
+	return buffer;
 }

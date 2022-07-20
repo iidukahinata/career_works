@@ -2,7 +2,7 @@
 * @file    ForwardLightMap.h
 * @brief
 *
-* @date	   2022/07/08 2022年度初版
+* @date	   2022/07/13 2022年度初版
 */
 #pragma once
 
@@ -29,10 +29,7 @@ private:
 	struct DirectionalLightDate
 	{
 		Math::Vector4 direction;
-		Math::Vector4 color;
-		float intensity;
-
-		Math::Vector3 padding; // 16ビット調整用変数
+		Math::Vector4 color; // w intensity
 	};
 
 	struct PointLightDate
@@ -68,6 +65,11 @@ private:
 		float pointLightCount;
 		float spotLightCount;
 	};
+
+	/* LightListからGPU転送用データを作成し、戻り値として返します。*/
+	ConstantBufferLight CreateConstantBufferLight(const Camera* mainCamera) const noexcept;
+
+private:
 
 	D3D11ConstantBuffer<ConstantBufferLight> m_constantBuffer;
 };

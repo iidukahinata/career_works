@@ -84,9 +84,25 @@ public:
 	* @param entrypoint [入力] 何かしらの文字列である必要があります。
 	* @param traget [入力] 何かしらの文字列である必要があります。
 	*/
-	bool Create(StringView shader, D3D_SHADER_MACRO* macro = nullptr, StringView entrypoint = "main", StringView target = "gs_5_0") noexcept;
+	bool Create(StringView shader, D3D_SHADER_MACRO* macro = nullptr, StringView entrypoint = "main", StringView target = "cs_5_0") noexcept;
 
 private:
 
 	Microsoft::WRL::ComPtr<ID3D11ComputeShader> m_computeShader;
+};
+
+class D3D11GeometryShader : public D3D11Shader
+{
+public:
+
+	/**
+	* @param shader [入力] 何かしらの文字列である必要があります。
+	* @param entrypoint [入力] 何かしらの文字列である必要があります。
+	* @param traget [入力] 何かしらの文字列である必要があります。
+	*/
+	bool Create(StringView shader, D3D_SHADER_MACRO* macro = nullptr, StringView entrypoint = "main", StringView target = "gs_5_0") noexcept;
+
+private:
+
+	Microsoft::WRL::ComPtr<ID3D11GeometryShader> m_geometryShader;
 };

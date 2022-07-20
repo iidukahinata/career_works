@@ -1,6 +1,9 @@
-#define MAXLIGHTCOUNT 64
+#define MAX_LIGHT_COUNT 256
 
-struct Light 
+Texture3D<uint2> g_lightDataTex : register(t10);
+Texture1D<min16int> g_lightIndicesTex : register(t11);
+
+struct Light
 {
 	float3 direction;
 	float3 color;
@@ -10,7 +13,7 @@ struct Light
 struct DirectionalLight
 {
 	float4 direction;
-	float4 color;
+	float4 color; // w’l intensity
 };
 
 struct PointLight
@@ -33,18 +36,25 @@ cbuffer ConstBufferLight : register(b2)
 	float4 gEyePos;
 	float4 ambientColor;
 	DirectionalLight directionalLight;
-	PointLight pointLights[MAXLIGHTCOUNT];
-	SpotLight spotLights[MAXLIGHTCOUNT];
+	PointLight pointLights[MAX_LIGHT_COUNT];
+	SpotLight spotLights[MAX_LIGHT_COUNT];
 	
 	float2 lightCount; // x’l pointLight : y’l sptLight
+	
+	float4 invScale;
+	float4 bias;
 };
 
+cbuffer ConstBufferLightList
+{
+	min16int lightIndices[0x1000];
+}
 
 Light ToLightFromDirectionalLight(DirectionalLight directionalLight)
 {
 	Light light;
-	light.direction = normalize(-directionalLight.direction);
-	light.color = directionalLight.color;
+	light.direction = normalize(-directionalLight.direction).xyz;
+	light.color = directionalLight.color.xyz;
 	light.intensity = directionalLight.color.w;
 	return light;
 }
@@ -52,9 +62,9 @@ Light ToLightFromDirectionalLight(DirectionalLight directionalLight)
 Light ToLightFromPointLight(PointLight pointLight, float4 pos)
 {
 	Light light;
-	light.color = pointLight.color;
-	light.intensity = pointLight.intensity.x;
 	light.direction = normalize(pos - pointLight.position);
+	light.color = pointLight.color.xyz;
+	light.intensity = pointLight.intensity.x;
 
 	// ‹——£‚É‚æ‚é‰e‹¿—Í‚ðŒvŽZ
 	float distance = length(pos - pointLight.position);
@@ -68,9 +78,9 @@ Light ToLightFromPointLight(PointLight pointLight, float4 pos)
 Light ToLightFromSpotLight(SpotLight spotLight, float4 pos)
 {
 	Light light;
+	light.direction = normalize(pos - spotLight.position);
 	light.color = spotLight.color;
 	light.intensity = spotLight.intensity.x;
-	light.direction = normalize(pos - spotLight.position);
 
 	// ‹——£‚É‚æ‚é‰e‹¿—Í‚ðŒvŽZ
 	float distance = length(pos - spotLight.position);

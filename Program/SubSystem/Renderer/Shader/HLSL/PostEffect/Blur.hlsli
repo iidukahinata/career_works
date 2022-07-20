@@ -1,7 +1,7 @@
 Texture2D g_texture;
 sampler g_sampler;
 
-cbuffer ConstBufferBlur : register(b2)
+cbuffer ConstBufferBlur : register(b3)
 {
 	float4 weights[2];
 	float2 screenSize;
