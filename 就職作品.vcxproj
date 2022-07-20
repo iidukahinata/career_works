@@ -37,11 +37,11 @@
     <ClCompile Include="Program\SubSystem\Core\Math\Matrix.cpp" />
     <ClCompile Include="Program\SubSystem\Core\Math\Vector2.cpp" />
     <ClCompile Include="Program\SubSystem\Core\Math\Vector3.cpp" />
-    <ClCompile Include="Program\SubSystem\Gui\MyGui.cpp" />
+    <ClCompile Include="Program\SubSystem\Editer\EditerSystem.cpp" />
+    <ClCompile Include="Program\SubSystem\Editer\Widget.cpp" />
     <ClCompile Include="Program\SubSystem\Input\Direct\DirectInput.cpp" />
     <ClCompile Include="Program\SubSystem\Input\Input.cpp" />
     <ClCompile Include="Program\SubSystem\Input\InputEvents.cpp" />
-    <ClCompile Include="Program\SubSystem\Input\WinAPI\WinAPIInput.cpp" />
     <ClCompile Include="Program\SubSystem\JobSystem\Async\AsyncJob.cpp" />
     <ClCompile Include="Program\SubSystem\JobSystem\Async\AsyncJobSystem.cpp" />
     <ClCompile Include="Program\SubSystem\JobSystem\Async\COM.cpp" />
@@ -147,11 +147,11 @@
     <ClInclude Include="Program\SubSystem\Core\Math\Vector3T.h" />
     <ClInclude Include="Program\SubSystem\Core\Math\Vector4.h" />
     <ClInclude Include="Program\SubSystem\Core\Math\Vector4T.h" />
-    <ClInclude Include="Program\SubSystem\Gui\MyGui.h" />
+    <ClInclude Include="Program\SubSystem\Editer\EditerSystem.h" />
+    <ClInclude Include="Program\SubSystem\Editer\Widget.h" />
     <ClInclude Include="Program\SubSystem\Input\Direct\DirectInput.h" />
     <ClInclude Include="Program\SubSystem\Input\Input.h" />
     <ClInclude Include="Program\SubSystem\Input\InputEvents.h" />
-    <ClInclude Include="Program\SubSystem\Input\WinAPI\WinAPIInput.h" />
     <ClInclude Include="Program\SubSystem\JobSystem\Async\AsyncJob.h" />
     <ClInclude Include="Program\SubSystem\JobSystem\Async\AsyncJobSystem.h" />
     <ClInclude Include="Program\SubSystem\JobSystem\Async\COM.h" />

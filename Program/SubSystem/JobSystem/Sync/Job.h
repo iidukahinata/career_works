@@ -33,7 +33,7 @@ public:
 	/** 更新処理を行うためには、一度実行しなければならない。*/
 	void RegisterToJobSystem() noexcept;
 
-	/** TickManager に登録した場合、呼び出す必要があります。*/
+	/** JobSystem に登録した場合、呼び出す必要があります。*/
 	void UnRegisterFromJobSystem() noexcept;
 
 	bool IsRegistered() const noexcept;

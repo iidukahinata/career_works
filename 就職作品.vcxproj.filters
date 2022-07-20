@@ -19,9 +19,6 @@
     <Filter Include="SubSystem\Audio">
       <UniqueIdentifier>{280d0a0f-b395-493f-9b59-ac4225d9e233}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SubSystem\Gui">
-      <UniqueIdentifier>{64d3f7a4-7f6b-4490-b1ee-e456f9fec62e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SubSystem\Input">
       <UniqueIdentifier>{cbd31513-91ed-49d3-ae9d-8fc557513c0e}</UniqueIdentifier>
     </Filter>
@@ -142,8 +139,8 @@
     <Filter Include="SubSystem\Input\Direct">
       <UniqueIdentifier>{9e61f23d-7ec0-40f5-8a6b-27303c737231}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SubSystem\Input\WinAPI">
-      <UniqueIdentifier>{653db2bb-049f-43f6-bcc7-77682630333f}</UniqueIdentifier>
+    <Filter Include="SubSystem\Editer">
+      <UniqueIdentifier>{64d3f7a4-7f6b-4490-b1ee-e456f9fec62e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -156,9 +153,6 @@
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Audio\Audio.cpp">
       <Filter>SubSystem\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Gui\MyGui.cpp">
-      <Filter>SubSystem\Gui</Filter>
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Input\Input.cpp">
       <Filter>SubSystem\Input</Filter>
@@ -421,8 +415,11 @@
     <ClCompile Include="Program\SubSystem\Input\Direct\DirectInput.cpp">
       <Filter>SubSystem\Input\Direct</Filter>
     </ClCompile>
-    <ClCompile Include="Program\SubSystem\Input\WinAPI\WinAPIInput.cpp">
-      <Filter>SubSystem\Input\WinAPI</Filter>
+    <ClCompile Include="Program\SubSystem\Editer\EditerSystem.cpp">
+      <Filter>SubSystem\Editer</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Editer\Widget.cpp">
+      <Filter>SubSystem\Editer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -455,9 +452,6 @@
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Audio\AudioHelper.h">
       <Filter>SubSystem\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Gui\MyGui.h">
-      <Filter>SubSystem\Gui</Filter>
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Input\Input.h">
       <Filter>SubSystem\Input</Filter>
@@ -771,8 +765,11 @@
     <ClInclude Include="Program\SubSystem\Input\Direct\DirectInput.h">
       <Filter>SubSystem\Input\Direct</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Input\WinAPI\WinAPIInput.h">
-      <Filter>SubSystem\Input\WinAPI</Filter>
+    <ClInclude Include="Program\SubSystem\Editer\EditerSystem.h">
+      <Filter>SubSystem\Editer</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Editer\Widget.h">
+      <Filter>SubSystem\Editer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

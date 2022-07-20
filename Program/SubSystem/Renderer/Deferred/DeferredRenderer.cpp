@@ -8,7 +8,7 @@
 
 #include "DeferredRenderer.h"
 #include "ClusteredLightMap.h"
-#include "SubSystem/Gui/MyGui.h"
+#include "SubSystem/Editer/EditerSystem.h"
 #include "SubSystem/Window/Window.h"
 #include "../Forward/ForwardLightMap.h"
 #include "SubSystem/Renderer/TransformCBuffer.h"
@@ -16,10 +16,23 @@
 #include "SubSystem/Scene/Component/Components/Camera.h"
 #include "SubSystem/Scene/Component/Components/RenderObject.h"
 
+void DrawFrameRate()
+{
+	ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiCond_Once);
+	ImGui::SetNextWindowSize(ImVec2(210, 50), ImGuiCond_Once);
+
+	ImGui::Begin("Frame Rate");
+	ImGui::Text(" %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+	ImGui::End();
+}
+
 DeferredRenderer::DeferredRenderer()
 {
 	m_job.SetFunction([this](double) { Update(); }, FunctionType::Render);
 	m_job.RegisterToJobSystem();
+
+	m_widget.SetFunction(DrawFrameRate);
+	m_widget.RegisterToEditerSystem();
 }
 
 bool DeferredRenderer::Initialize()
@@ -60,14 +73,14 @@ bool DeferredRenderer::Initialize()
 
 	TransformCBuffer::Get().Init();
 
-	MyGui::Get().Init();
+	EditerSystem::Get().Initialize();
 	
 	return true;
 }
 
 void DeferredRenderer::Shutdown()
 {
-	MyGui::Get().Exit();
+	EditerSystem::Get().Exit();
 
 	m_job.UnRegisterFromJobSystem();
 }
@@ -86,7 +99,7 @@ void DeferredRenderer::Update() noexcept
 
 	FinalPass();
 
-	MyGui::Get().Draw();
+	EditerSystem::Get().Draw();
 
 	D3D11GraphicsDevice::Get().Present();
 }

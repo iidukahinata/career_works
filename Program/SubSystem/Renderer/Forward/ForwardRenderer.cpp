@@ -7,7 +7,7 @@
 
 
 #include "ForwardRenderer.h"
-#include "SubSystem/Gui/MyGui.h"
+#include "SubSystem/Editer/EditerSystem.h"
 #include "SubSystem/Window/Window.h"
 #include "../Forward/ForwardLightMap.h"
 #include "SubSystem/Renderer/TransformCBuffer.h"
@@ -34,14 +34,14 @@ bool ForwardRenderer::Initialize()
 
 	TransformCBuffer::Get().Init();
 
-	MyGui::Get().Init();
+	EditerSystem::Get().Initialize();
 
 	return true;
 }
 
 void ForwardRenderer::Shutdown()
 {
-	MyGui::Get().Exit();
+	EditerSystem::Get().Exit();
 
 	m_job.UnRegisterFromJobSystem();
 }
@@ -62,7 +62,7 @@ void ForwardRenderer::Update() noexcept
 		renderObject->Render();
 	}
 
-	MyGui::Get().Draw();
+	EditerSystem::Get().Draw();
 
 	D3D11GraphicsDevice::Get().Present();
 }

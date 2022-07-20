@@ -66,4 +66,6 @@ private:
 	Quad m_quad;
 
 	Job m_job;
+
+	Widget m_widget;
 };
