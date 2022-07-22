@@ -9,12 +9,12 @@
 #include "D3D12DeviceChild.h"
 #include "D3D12GrahicsDevice.h"
 
-ID3D12Device* D3D12DeviceChild::GetDevice() noexcept
+ID3D12Device* D3D12DeviceChild::GetDevice() const noexcept
 {
 	return D3D12GraphicsDevice::Get().GetDevice();
 }
 
-D3D12CommandContext* D3D12DeviceChild::GetContext() noexcept
+D3D12CommandContext* D3D12DeviceChild::GetContext() const noexcept
 {
 	return &D3D12GraphicsDevice::Get().GetCommandContext();
 }

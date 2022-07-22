@@ -20,7 +20,7 @@ public:
 
 	void Update(const Vector<T>& vertices) noexcept;
 
-	void IASet(UINT slot = 0) noexcept;
+	void IASet(UINT slot = 0) const noexcept;
 
 	ID3D12Resource*           Get() const noexcept     { return m_buffer.Get(); };
 	D3D12_VERTEX_BUFFER_VIEW& GetBufferView() noexcept { return m_bufferView; };
@@ -81,7 +81,7 @@ inline void D3D12VertexBuffer<T>::Update(const Vector<T>& vertices) noexcept
 }
 
 template<class T>
-inline void D3D12VertexBuffer<T>::IASet(UINT slot /* = 0 */) noexcept
+inline void D3D12VertexBuffer<T>::IASet(UINT slot /* = 0 */) const noexcept
 {
 	GetContext()->GetCommandList()->IASetVertexBuffers(slot, 1, &m_bufferView);
 }

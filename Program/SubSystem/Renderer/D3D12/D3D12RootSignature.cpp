@@ -89,12 +89,12 @@ bool D3D12RootSignature::Create(
 	return true;
 }
 
-void D3D12RootSignature::SetGraphics()
+void D3D12RootSignature::SetGraphics() const noexcept
 {
 	GetContext()->GetCommandList()->SetGraphicsRootSignature(m_rootsignature.Get());
 }
 
-void D3D12RootSignature::SetCompute()
+void D3D12RootSignature::SetCompute() const noexcept
 {
 	GetContext()->GetCommandList()->SetComputeRootSignature(m_rootsignature.Get());
 }

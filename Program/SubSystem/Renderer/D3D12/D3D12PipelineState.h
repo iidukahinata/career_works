@@ -17,7 +17,7 @@ public:
 
 	bool Create(const D3D12_GRAPHICS_PIPELINE_STATE_DESC& desc) noexcept;
 	bool Create(const D3D12_COMPUTE_PIPELINE_STATE_DESC& desc) noexcept;
-	void Set() noexcept;
+	void Set() const noexcept;
 
 	ID3D12PipelineState* Get() const noexcept { return m_pipelineState.Get(); };
 

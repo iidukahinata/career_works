@@ -2,12 +2,14 @@
 * @file	   TransformCBuffer.h
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/22 2022年度初版
 */
 #pragma once
 
 
 #include "SubSystem/Renderer/D3D11/D3D11ConstantBuffer.h"
+#include "SubSystem/Renderer/D3D12/D3D12ConstantBuffer.h"
+#include "SubSystem/Renderer/D3D12/D3D12DescriptorHeap.h"
 
 class TransformCBuffer
 {
@@ -45,4 +47,7 @@ private:
 	};
 
 	D3D11ConstantBuffer<ConstantBufferMatrix> m_constantBuffer;
+
+	D3D12DescriptorHeap m_descriptorHeap;
+	D3D12ConstantBuffer<ConstantBufferMatrix> m_constantBuffer12;
 };

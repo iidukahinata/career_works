@@ -11,10 +11,7 @@
 
 bool D3D12Texture::Create(const DirectX::Image* images, size_t imageSize, const DirectX::TexMetadata& meta)
 {
-	auto hr = DirectX::CreateTextureEx(
-		GetDevice(), meta,
-		D3D12_RESOURCE_FLAG_DENY_SHADER_RESOURCE, false,
-		m_texture.ReleaseAndGetAddressOf());
+	auto hr = DirectX::CreateTexture(GetDevice(), meta, m_texture.ReleaseAndGetAddressOf());
 
 	if (FAILED(hr)) {
 		LOG_ERROR("ShaderResourceView ÇÃê∂ê¨Ç…é∏îsÇµÇ‹ÇµÇΩÅB");

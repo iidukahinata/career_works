@@ -19,7 +19,7 @@ public:
 
 	bool Create(const Vector<UINT>& indices) noexcept;
 	void Update(const Vector<UINT>& indices) noexcept;
-	void IASet() noexcept;
+	void IASet() const noexcept;
 
 	ID3D12Resource* Get() const noexcept { return m_buffer.Get(); }
 	D3D12_INDEX_BUFFER_VIEW& GetView() noexcept { return m_bufferView; }

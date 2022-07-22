@@ -33,7 +33,7 @@ bool D3D12PipelineState::Create(const D3D12_COMPUTE_PIPELINE_STATE_DESC& desc) n
 	return true;
 }
 
-void D3D12PipelineState::Set() noexcept
+void D3D12PipelineState::Set() const noexcept
 {
 	GetContext()->GetCommandList()->SetPipelineState(m_pipelineState.Get());
 }

@@ -51,7 +51,7 @@ void D3D12IndexBuffer::Update(const Vector<UINT>& indices) noexcept
 	}
 }
 
-void D3D12IndexBuffer::IASet() noexcept
+void D3D12IndexBuffer::IASet() const noexcept
 {
 	GetContext()->GetCommandList()->IASetIndexBuffer(&m_bufferView);
 }

@@ -2,7 +2,7 @@
 * @file    Mesh.h
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/22 2022年度初版
 */
 #pragma once
 
@@ -57,6 +57,6 @@ private:
 	D3D11VertexBuffer<VertexBump3D> m_vertexBuffer;
 	D3D11IndexBuffer m_indexBuffer;
 
-	//D3D12VertexBuffer<VertexBump3D> m_vertexBuffer;
-	//D3D12IndexBuffer m_indexBuffer;
+	D3D12VertexBuffer<VertexBump3D> m_vertexBuffer12;
+	D3D12IndexBuffer m_indexBuffer12;
 };

@@ -21,8 +21,10 @@ public:
 				D3D12_TEXTURE_ADDRESS_MODE samplerAdressModeW) noexcept;
 
 	/** デバイス設定するための関数です。*/
-	void SetGraphics();
-	void SetCompute();
+	void SetGraphics() const noexcept;
+	void SetCompute() const noexcept;
+
+	ID3D12RootSignature* GetRootSignature() const noexcept { return m_rootsignature.Get(); }
 
 private:
 

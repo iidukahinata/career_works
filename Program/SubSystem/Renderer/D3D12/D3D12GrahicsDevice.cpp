@@ -57,6 +57,10 @@ bool D3D12GraphicsDevice::Init(HWND hWnd, UINT screenWidth, UINT screenHeight, b
 		return false;
 	}
 
+	if (!m_fence.Create()) {
+		return false;
+	}
+
 	DXGI_SWAP_CHAIN_DESC1 swapChainDesc = {};
 	swapChainDesc.BufferCount = bufferCount;
 	swapChainDesc.Width = screenWidth;

@@ -65,6 +65,10 @@ bool Texture::Create(TextureData& textureData) noexcept
 
 bool Texture::Create(const DirectX::Image* images, size_t imageSize, const DirectX::TexMetadata& meta)
 {
+	if (!m_d3d12Texture.Create(images, imageSize, meta))
+	{
+		return false;
+	}
 	return m_d3d11Texture.Create(images, imageSize, meta);
 }
 

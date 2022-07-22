@@ -19,6 +19,6 @@ public:
 
 	virtual ~D3D12DeviceChild() {}
 
-	class ID3D12Device* GetDevice() noexcept;
-	class D3D12CommandContext* GetContext() noexcept;
+	class ID3D12Device* GetDevice() const noexcept;
+	class D3D12CommandContext* GetContext() const noexcept;
 };

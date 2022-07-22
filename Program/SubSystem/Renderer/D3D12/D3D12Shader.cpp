@@ -2,7 +2,7 @@
 * @file    D3D12Shader.cpp
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/22 2022年度初版
 */
 
 
@@ -17,30 +17,43 @@ void D3D12Shader::Compile(StringView filePath, StringView entryPoint, StringView
 	UINT compileFlags = 0;
 #endif // DEBUG
 
-	Microsoft::WRL::ComPtr<ID3DBlob> errorBlob = nullptr;
-	HRESULT hr = D3DCompileFromFile(
-		ToWstring(filePath).data(),
-		nullptr,
-		D3D_COMPILE_STANDARD_FILE_INCLUDE,
-		entryPoint.data(), traget.data(),
-		compileFlags, 0,
-		m_blob.ReleaseAndGetAddressOf(),
-		errorBlob.ReleaseAndGetAddressOf());
-
-	if (FAILED(hr))
+	HRESULT hr;
+	if (GetExt(filePath) == "cso")
 	{
-		if (hr == HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND))
+		hr = D3DReadFileToBlob(ToWstring(filePath).data(), m_blob.ReleaseAndGetAddressOf());
+		if (FAILED(hr))
 		{
-			LOG_ERROR("指定されたファイルが見つかりませんでした。: Shader.cpp");
+			LOG_ERROR("シェーダコンパイルに失敗。: Shader.cpp");
 			return;
 		}
-		if (errorBlob) 
+	}
+	else
+	{
+		Microsoft::WRL::ComPtr<ID3DBlob> errorBlob = nullptr;
+		HRESULT hr = D3DCompileFromFile(
+			ToWstring(filePath).data(),
+			nullptr,
+			D3D_COMPILE_STANDARD_FILE_INCLUDE,
+			entryPoint.data(), traget.data(),
+			compileFlags, 0,
+			m_blob.ReleaseAndGetAddressOf(),
+			errorBlob.ReleaseAndGetAddressOf());
+
+		if (FAILED(hr))
 		{
-			String error;
-			error.resize(errorBlob->GetBufferSize());
-			std::copy_n((char*)errorBlob->GetBufferPointer(), errorBlob->GetBufferSize(), error.begin());
-			error += "\n";
-			LOG_ERROR(error.data());
+			if (hr == HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND))
+			{
+				LOG_ERROR("指定されたファイルが見つかりませんでした。: Shader.cpp");
+				return;
+			}
+			if (errorBlob)
+			{
+				String error;
+				error.resize(errorBlob->GetBufferSize());
+				std::copy_n((char*)errorBlob->GetBufferPointer(), errorBlob->GetBufferSize(), error.begin());
+				error += "\n";
+				LOG_ERROR(error.data());
+			}
 		}
 	}
 }

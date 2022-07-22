@@ -2,7 +2,7 @@
 * @file	   TransformCBuffer.cpp
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/22 2022年度初版
 */
 
 
@@ -11,17 +11,21 @@
 void TransformCBuffer::Init()
 {
 	m_constantBuffer.Create(sizeof(ConstantBufferMatrix));
+	m_constantBuffer12.Create(ConstantBufferMatrix());
+	m_descriptorHeap.Create(1, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 }
 
 void TransformCBuffer::Bind(const DirectX::XMMATRIX& world)
 {
 	ConstantBufferMatrix buffer = { DirectX::XMMatrixTranspose(world), m_viewXM, m_projectionXM };
 
-	m_constantBuffer.Update(buffer);
+	//m_constantBuffer.Update(buffer);
+	m_constantBuffer12.Update(buffer);
 
 	// set buffer
-	m_constantBuffer.VSSet(1);
-	m_constantBuffer.PSSet(1);
+	//m_constantBuffer.VSSet(1);
+	//m_constantBuffer.PSSet(1);
+	m_descriptorHeap.Set();
 }
 
 const DirectX::XMMATRIX& TransformCBuffer::GetProjection() noexcept
