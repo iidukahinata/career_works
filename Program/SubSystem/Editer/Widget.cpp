@@ -19,7 +19,7 @@ Widget::~Widget()
 	UnRegisterFromEditerSystem();
 }
 
-void Widget::Draw()
+void Widget::Draw() noexcept
 {
 	m_task();
 }

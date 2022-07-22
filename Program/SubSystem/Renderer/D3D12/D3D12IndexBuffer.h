@@ -2,14 +2,13 @@
 * @file    D3D12IndexBuffer.h
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/22 2022年度初版
 * @note
 *	このクラスでは unsigned short型には対応していない
 */
 #pragma once
 
 
-#include <vector>
 #include <d3d12.h>
 #include <wrl/client.h>
 #include "D3D12DeviceChild.h"
@@ -22,8 +21,8 @@ public:
 	void Update(const Vector<UINT>& indices) noexcept;
 	void IASet() noexcept;
 
-	ID3D12Resource*          Get() const noexcept { return m_buffer.Get(); };
-	D3D12_INDEX_BUFFER_VIEW& GetView() noexcept { return m_bufferView; };
+	ID3D12Resource* Get() const noexcept { return m_buffer.Get(); }
+	D3D12_INDEX_BUFFER_VIEW& GetView() noexcept { return m_bufferView; }
 
 private:
 

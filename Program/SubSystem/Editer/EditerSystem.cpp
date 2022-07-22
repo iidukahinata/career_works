@@ -13,7 +13,7 @@
 #include "ThirdParty/imgui/imgui_impl_dx11.h"
 #include "ThirdParty/imgui/imgui_impl_win32.h"
 
-void EditerSystem::Initialize()
+void EditerSystem::Initialize() noexcept
 {
 	ImGui::CreateContext();
 	ImGui_ImplWin32_Init(Window::Get().GetHandle());
@@ -22,7 +22,7 @@ void EditerSystem::Initialize()
 	ImGui::StyleColorsClassic();
 }
 
-void EditerSystem::Draw()
+void EditerSystem::Draw() noexcept
 {
 	// start the dear ImGui frame
 	ImGui_ImplDX11_NewFrame();
@@ -40,15 +40,12 @@ void EditerSystem::Draw()
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 }
 
-void EditerSystem::Exit()
-{
-	ImGui_ImplDX11_Shutdown();
-	ImGui::DestroyContext();
-}
-
-void EditerSystem::Clear()
+void EditerSystem::Exit() noexcept
 {
 	m_widgets.clear();
+
+	ImGui_ImplDX11_Shutdown();
+	ImGui::DestroyContext();
 }
 
 void EditerSystem::RegisterWidget(Widget* widget) noexcept

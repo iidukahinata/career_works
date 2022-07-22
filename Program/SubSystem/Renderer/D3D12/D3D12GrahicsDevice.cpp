@@ -2,7 +2,7 @@
 * @file    D3D12GrahicsDevice.cpp
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/22 2022年度初版
 */
 
 
@@ -10,12 +10,8 @@
 #include "SubSystem/Window/Window.h"
 #include "ThirdParty/directxtex/include/d3dx12.h"
 
-bool D3D12GraphicsDevice::Init()
+bool D3D12GraphicsDevice::Init(HWND hWnd, UINT screenWidth, UINT screenHeight, bool isFullscreen)
 {
-	auto hWnd = Window::Get().GetHandle();
-
-	auto screenWidth = Window::Get().GetWindowWidth();
-	auto screenHeight = Window::Get().GetWindowHeight();
 	constexpr auto bufferCount = 2;
 
 	//機能レベル
@@ -54,6 +50,10 @@ bool D3D12GraphicsDevice::Init()
 	adapter->Release();
 
 	if (FAILED(hr)) {
+		return false;
+	}
+
+	if (!m_commandContext.Create()) {
 		return false;
 	}
 
@@ -172,18 +172,30 @@ bool D3D12GraphicsDevice::Init()
 
 void D3D12GraphicsDevice::Prepare(const Math::Vector4& color)
 {
-	m_commandContext.Clear();
-
 	// バックバッファに描画出来る状態に遷移させる
 	ResourceBarrier(
 		m_renderTargets[0].Get(),
 		D3D12_RESOURCE_STATE_PRESENT,
 		D3D12_RESOURCE_STATE_RENDER_TARGET);
 
-	//SetViewports(1, &m_viewport);
-	//SetScissorRect(m_viewport.Width, m_viewport.Height);
+	auto bbidnex = m_swapchain->GetCurrentBackBufferIndex();
 
-	// レンダーターゲットクリア
+	//レンダーターゲットを指定
+	auto rtvHandle = m_rtvDescriptorHeap->GetCPUDescriptorHandleForHeapStart();
+	rtvHandle.ptr += bbidnex * m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+
+	//深度を指定
+	auto dsvHandle = m_dsvDescriptorHeap->GetCPUDescriptorHandleForHeapStart();
+	m_commandContext.GetCommandList()->OMSetRenderTargets(1, &rtvHandle, false, &dsvHandle);
+
+	//画面クリア
+	float clearColor[] = { color.x, color.y, color.z, color.w };
+	m_commandContext.GetCommandList()->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
+	m_commandContext.GetCommandList()->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+
+	//ビューポート、シザー矩形のセット
+	SetViewports(1, &m_viewport);
+	SetScissorRects(1, &m_scissorRect);
 }
 
 void D3D12GraphicsDevice::Present()
@@ -194,17 +206,17 @@ void D3D12GraphicsDevice::Present()
 		D3D12_RESOURCE_STATE_RENDER_TARGET,
 		D3D12_RESOURCE_STATE_PRESENT);
 
-	// コミット？
-
 	// コマンドリストをGPUに送信して実行させる
 	m_commandContext.RunCommandList();
 
+	WaitForGpuTask();
+
 	m_swapchain->Present(1, 0);
 
-	WaitForGpu();
+	m_commandContext.Clear();
 }
 
-void D3D12GraphicsDevice::WaitForGpu() noexcept
+void D3D12GraphicsDevice::WaitForGpuTask() noexcept
 {
 	m_commandContext.Signal(m_fence.Get(), m_fence.m_fenceValue);
 

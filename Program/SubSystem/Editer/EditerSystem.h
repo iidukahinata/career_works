@@ -21,17 +21,12 @@ public:
 		return instance;
 	}
 
-	void Initialize();
-	void Draw();
-	void Exit();
-	void Clear();
+	void Initialize() noexcept;
+	void Draw() noexcept;
+	void Exit() noexcept;
 
-	/**
-	* GUI描画時に処理される処理の追加
-	* @param widget [入力] 追加処理する関数を指定。
-	*/
+	/** Widget メソッド */
 	void RegisterWidget(Widget* widget) noexcept;
-
 	void RemoveWidget(Widget* widget) noexcept;
 
 private:

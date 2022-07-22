@@ -2,7 +2,7 @@
 * @file    D3D12Fence.cpp
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/22 2022年度初版
 */
 
 
@@ -16,7 +16,7 @@ D3D12Fence::~D3D12Fence()
 
 bool D3D12Fence::Create() noexcept
 {
-	HRESULT hr = GetGraphicsDevice()->GetDevice()->CreateFence(
+	HRESULT hr = GetDevice()->CreateFence(
 		0,
 		D3D12_FENCE_FLAG_NONE,
 		IID_PPV_ARGS(m_fence.ReleaseAndGetAddressOf()));

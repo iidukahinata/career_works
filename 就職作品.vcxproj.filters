@@ -142,6 +142,9 @@
     <Filter Include="SubSystem\Editer">
       <UniqueIdentifier>{64d3f7a4-7f6b-4490-b1ee-e456f9fec62e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SubSystem\Thread">
+      <UniqueIdentifier>{0f0c351f-64e7-4c12-89d9-d90ffaba2977}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program\WinMain.cpp" />
@@ -420,6 +423,21 @@
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Editer\Widget.cpp">
       <Filter>SubSystem\Editer</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Thread\ThreadManager.cpp">
+      <Filter>SubSystem\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Thread\GameThread.cpp">
+      <Filter>SubSystem\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Thread\RenderingThread.cpp">
+      <Filter>SubSystem\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Thread\Thread.cpp">
+      <Filter>SubSystem\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Core\Common\Tools\Memory\STLAllocator.cpp">
+      <Filter>SubSystem\Core\Common\Tools\Memory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -770,6 +788,21 @@
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Editer\Widget.h">
       <Filter>SubSystem\Editer</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Thread\ThreadManager.h">
+      <Filter>SubSystem\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Thread\GameThread.h">
+      <Filter>SubSystem\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Thread\RenderingThread.h">
+      <Filter>SubSystem\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Thread\Thread.h">
+      <Filter>SubSystem\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Core\Common\Tools\Memory\STLAllocator.h">
+      <Filter>SubSystem\Core\Common\Tools\Memory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

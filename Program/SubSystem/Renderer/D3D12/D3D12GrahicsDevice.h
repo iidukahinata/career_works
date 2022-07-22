@@ -2,7 +2,7 @@
 * @file    D3D12GrahicsDevice.h
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/22 2022年度初版
 */
 #pragma once
 
@@ -25,12 +25,12 @@ public:
 	}
 
 	// 初期化
-	bool Init();
+	bool Init(HWND hWnd, UINT screenWidth, UINT screenHeight, bool isFullscreen);
 
 	// 更新
 	void Prepare(const Math::Vector4& color);
 	void Present();
-	void WaitForGpu() noexcept;
+	void WaitForGpuTask() noexcept;
 
 	// ViewPort
 	void SetViewports(UINT numViewports, const D3D12_VIEWPORT* viewports);

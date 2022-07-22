@@ -9,8 +9,12 @@
 
 #include "../IResource.h"
 #include "SubSystem/Renderer/Geometry/Vertex.h"
+
 #include "SubSystem/Renderer/D3D11/D3D11IndexBuffer.h"
 #include "SubSystem/Renderer/D3D11/D3D11VertexBuffer.h"
+
+#include "SubSystem/Renderer/D3D12/D3D12IndexBuffer.h"
+#include "SubSystem/Renderer/D3D12/D3D12VertexBuffer.h"
 
 class Mesh : public IResource
 {
@@ -52,4 +56,7 @@ private:
 
 	D3D11VertexBuffer<VertexBump3D> m_vertexBuffer;
 	D3D11IndexBuffer m_indexBuffer;
+
+	//D3D12VertexBuffer<VertexBump3D> m_vertexBuffer;
+	//D3D12IndexBuffer m_indexBuffer;
 };

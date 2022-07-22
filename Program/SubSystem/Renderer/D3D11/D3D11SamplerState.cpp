@@ -35,7 +35,7 @@ bool D3D11SamplerState::Create(
 	return true;
 }
 
-void D3D11SamplerState::PSSet(UINT slot /* =  0 */) noexcept
+void D3D11SamplerState::PSSet(UINT slot /* =  0 */) const noexcept
 {
 	GetContext()->PSSetSamplers(slot, 1, m_sampler.GetAddressOf());
 }

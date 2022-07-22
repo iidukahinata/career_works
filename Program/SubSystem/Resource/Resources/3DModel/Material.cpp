@@ -94,7 +94,7 @@ void Material::SetPSShader(StringView name)
 		D3D11_TEXTURE_ADDRESS_WRAP);
 }
 
-void Material::ShaderSet() noexcept
+void Material::ShaderSet() const noexcept
 {
 	// 頂点シェーダーのパラメータセット
 	m_vertexShader.VSSet();

@@ -23,13 +23,8 @@ void MeshRender::SetModel(StringView name) noexcept
 	m_model = GetContext()->GetSubsystem<ResourceManager>()->Load<Model>(name);
 }
 
-void MeshRender::Render()
+void MeshRender::Render() const
 {
-	// ‰¼ƒ€[ƒu
-	auto rot = GetTransform().GetRotation();
-	rot.y += 0.01f;
-	GetTransform().SetRotation(rot);
-
 	TransformCBuffer::Get().Bind(GetTransform().GetWorldMatrix().ToMatrixXM());
 
 	m_model->Render();

@@ -21,7 +21,7 @@ public:
 	void Remove() override;
 
 	/** 各描画処理を記述。*/
-	virtual void Render() = 0;
+	virtual void Render() const = 0;
 
 	virtual void Active(bool active) override;
 
@@ -43,7 +43,7 @@ class MeshRender : public RenderObject
 	SUB_CLASS(MeshRender)
 public:
 
-	void Render() override;
+	void Render() const override;
 
 	void SetModel(StringView name) noexcept;
 

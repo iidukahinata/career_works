@@ -27,6 +27,7 @@
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Core\Common\Tools\Memory\Allocator.cpp" />
     <ClCompile Include="Program\SubSystem\Core\Common\Tools\Memory\Memory.cpp" />
+    <ClCompile Include="Program\SubSystem\Core\Common\Tools\Memory\STLAllocator.cpp" />
     <ClCompile Include="Program\SubSystem\Core\Common\Tools\Tools.cpp" />
     <ClCompile Include="Program\SubSystem\Core\Context.cpp" />
     <ClCompile Include="Program\SubSystem\Core\Engine.cpp" />
@@ -103,6 +104,10 @@
     <ClCompile Include="Program\SubSystem\Scene\TickFunction.cpp" />
     <ClCompile Include="Program\SubSystem\Scene\TickManager.cpp" />
     <ClCompile Include="Program\SubSystem\Scene\World.cpp" />
+    <ClCompile Include="Program\SubSystem\Thread\GameThread.cpp" />
+    <ClCompile Include="Program\SubSystem\Thread\RenderingThread.cpp" />
+    <ClCompile Include="Program\SubSystem\Thread\Thread.cpp" />
+    <ClCompile Include="Program\SubSystem\Thread\ThreadManager.cpp" />
     <ClCompile Include="Program\SubSystem\Timer\Timer.cpp" />
     <ClCompile Include="Program\SubSystem\Window\Window.cpp" />
     <ClCompile Include="Program\ThirdParty\directxtex\include\DDSTextureLoader.cpp" />
@@ -128,6 +133,7 @@
     <ClInclude Include="Program\SubSystem\Core\Common\Tools\Hash.h" />
     <ClInclude Include="Program\SubSystem\Core\Common\Tools\Memory\Allocator.h" />
     <ClInclude Include="Program\SubSystem\Core\Common\Tools\Memory\Memory.h" />
+    <ClInclude Include="Program\SubSystem\Core\Common\Tools\Memory\STLAllocator.h" />
     <ClInclude Include="Program\SubSystem\Core\Common\Tools\String.h" />
     <ClInclude Include="Program\SubSystem\Core\Common\Tools\Tools.h" />
     <ClInclude Include="Program\SubSystem\Core\Common\TypeDef.h" />
@@ -215,6 +221,10 @@
     <ClInclude Include="Program\SubSystem\Scene\TickFunction.h" />
     <ClInclude Include="Program\SubSystem\Scene\TickManager.h" />
     <ClInclude Include="Program\SubSystem\Scene\World.h" />
+    <ClInclude Include="Program\SubSystem\Thread\GameThread.h" />
+    <ClInclude Include="Program\SubSystem\Thread\RenderingThread.h" />
+    <ClInclude Include="Program\SubSystem\Thread\Thread.h" />
+    <ClInclude Include="Program\SubSystem\Thread\ThreadManager.h" />
     <ClInclude Include="Program\SubSystem\Timer\Timer.h" />
     <ClInclude Include="Program\SubSystem\Window\Window.h" />
     <ClInclude Include="Program\ThirdParty\FMOD\include\fmod.h" />

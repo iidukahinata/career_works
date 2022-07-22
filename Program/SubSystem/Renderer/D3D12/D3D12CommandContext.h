@@ -2,7 +2,7 @@
 * @file    D3D12CommandContext.h
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/22 2022年度初版
 */
 #pragma once
 
@@ -43,9 +43,9 @@ public:
 	void Clear(ID3D12PipelineState* const pPipelineSate = nullptr) noexcept;
 	bool Signal(ID3D12Fence* const pFence, const UINT64& currentFenceValue) noexcept;
 
-	ID3D12GraphicsCommandList* GetCommandList() const noexcept       { return m_commandList.Get(); };
-	ID3D12CommandQueue*        GetCommandQueue() const noexcept      { return m_commandQueue.Get(); };
-	ID3D12CommandAllocator*    GetCommandAllocator()  const noexcept { return m_commandAllocator.Get(); };
+	ID3D12GraphicsCommandList* GetCommandList()      const noexcept { return m_commandList.Get(); };
+	ID3D12CommandQueue*        GetCommandQueue()     const noexcept { return m_commandQueue.Get(); };
+	ID3D12CommandAllocator*    GetCommandAllocator() const noexcept { return m_commandAllocator.Get(); };
 
 private:
 

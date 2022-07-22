@@ -2,7 +2,7 @@
 * @file    D3D12VertexBuffer.h
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/22 2022年度初版
 */
 #pragma once
 
@@ -43,7 +43,7 @@ inline bool D3D12VertexBuffer<T>::Create(const Vector<T>& vertices) noexcept
 	auto resourceDesc = CD3DX12_RESOURCE_DESC::Buffer(size);
 
 	// バッファー生成
-	HRESULT hr = GetGraphicsDevice()->GetDevice()->CreateCommittedResource(
+	HRESULT hr = GetDevice()->CreateCommittedResource(
 		&heapProperties,
 		D3D12_HEAP_FLAG_NONE,
 		&resourceDesc,
@@ -76,12 +76,12 @@ inline void D3D12VertexBuffer<T>::Update(const Vector<T>& vertices) noexcept
 	if (SUCCEEDED(hr)) 
 	{
 		memcpy_s(pData, m_bytesSize, vertices.data(), sizeof(T) * vertices.size());
-		m_buffer.Get()->Unmap(0, nullptr);
+		m_buffer->Unmap(0, nullptr);
 	}
 }
 
 template<class T>
 inline void D3D12VertexBuffer<T>::IASet(UINT slot /* = 0 */) noexcept
 {
-	GetGraphicsDevice()->GetCommandContext().GetCommandList()->IASetVertexBuffers(slot, 1, &m_bufferView);
+	GetContext()->GetCommandList()->IASetVertexBuffers(slot, 1, &m_bufferView);
 }

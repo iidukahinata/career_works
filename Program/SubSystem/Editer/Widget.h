@@ -22,7 +22,7 @@ public:
 	~Widget();
 
 	/** Widget ‚Ì•`‰æˆ— */
-	void Draw();
+	void Draw() noexcept;
 
 	/** EditerSystem ‚ÅÀs‚³‚ê‚éŠÖ” function ‚ğİ’è */
 	void SetFunction(Task&& task) noexcept;

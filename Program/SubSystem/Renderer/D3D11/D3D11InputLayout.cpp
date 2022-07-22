@@ -36,7 +36,7 @@ bool D3D11InputLayout::Create(D3D11_INPUT_ELEMENT_DESC* layout, UINT layoutSize,
 	return true;
 }
 
-void D3D11InputLayout::IASet() noexcept
+void D3D11InputLayout::IASet() const noexcept
 {
 	GetContext()->IASetInputLayout(m_inputLayout.Get());
 }

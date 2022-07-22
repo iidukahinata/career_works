@@ -17,10 +17,7 @@ class D3D11DeviceChild
 {
 public:
 
-	virtual ~D3D11DeviceChild() 
-	{
-
-	}
+	virtual ~D3D11DeviceChild() {}
 	
 	ID3D11Device* GetDevice() const
 	{

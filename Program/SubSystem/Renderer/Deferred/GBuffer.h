@@ -2,12 +2,13 @@
 * @file	   GBuffer.h
 * @brief
 *
-* @date	   2022/07/07 2022年度初版
+* @date	   2022/07/22 2022年度初版
 */
 #pragma once
 
 
 #include "../D3D11/D3D11RenderTexture.h"
+#include "../D3D12/D3D12RenderTexture.h"
 
 enum GBufferType
 {
@@ -31,4 +32,5 @@ public:
 private:
 
 	Array<D3D11RenderTexture, GBufferType::Max> m_rendererTexture;
+	Array<D3D12RenderTexture, GBufferType::Max> m_rendererTexture12;
 };

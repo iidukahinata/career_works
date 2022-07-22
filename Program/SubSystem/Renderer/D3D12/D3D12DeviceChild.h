@@ -2,7 +2,7 @@
 * @file    D3D12DeviceChild.h
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/22 2022年度初版
 */
 #pragma once
 
@@ -17,12 +17,8 @@ class D3D12DeviceChild
 {
 public:
 
-	D3D12DeviceChild();
 	virtual ~D3D12DeviceChild() {}
 
-	class D3D12GraphicsDevice* GetGraphicsDevice() const noexcept;
-
-private:
-
-	class D3D12GraphicsDevice* m_grahicsDevice = nullptr;
+	class ID3D12Device* GetDevice() noexcept;
+	class D3D12CommandContext* GetContext() noexcept;
 };

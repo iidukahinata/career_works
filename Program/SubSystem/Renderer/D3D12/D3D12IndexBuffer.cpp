@@ -2,7 +2,7 @@
 * @file    D3D12IndexBuffer.cpp
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/22 2022年度初版
 */
 
 
@@ -18,7 +18,7 @@ bool D3D12IndexBuffer::Create(const Vector<UINT>& indices) noexcept
 	auto resourceDesc = CD3DX12_RESOURCE_DESC::Buffer(bytesSize);
 
 	// バッファー生成
-	HRESULT hr = GetGraphicsDevice()->GetDevice()->CreateCommittedResource(
+	HRESULT hr = GetDevice()->CreateCommittedResource(
 		&heapProperties,
 		D3D12_HEAP_FLAG_NONE,
 		&resourceDesc,
@@ -53,5 +53,5 @@ void D3D12IndexBuffer::Update(const Vector<UINT>& indices) noexcept
 
 void D3D12IndexBuffer::IASet() noexcept
 {
-	GetGraphicsDevice()->GetCommandContext().GetCommandList()->IASetIndexBuffer(&m_bufferView);
+	GetContext()->GetCommandList()->IASetIndexBuffer(&m_bufferView);
 }

@@ -10,7 +10,7 @@
 #include <cstdio>
 #include "Event.h"
 
-class EventListener;
+class IEventListener;
 
 class EventManager
 {
@@ -39,8 +39,8 @@ public:
 	void RemoveFromQueue(EventType eventType, bool isAll) noexcept;
 
 	/** @param eventType [入力] 通知対応させるイベントタイプを指定。*/
-	bool AddEventLisener(EventListener* eventListener, const EventType& eventType) noexcept;
-	bool RemoveEventLisener(EventListener* eventListener, const EventType& eventType) noexcept;
+	bool AddEventLisener(IEventListener* eventListener, const EventType& eventType) noexcept;
+	bool RemoveEventLisener(IEventListener* eventListener, const EventType& eventType) noexcept;
 
 private:
 
@@ -49,11 +49,11 @@ private:
 
 private:
 
-	// * キューが一つの場合イベントがイベント呼び出し処理が終わらない可能性があるため複数用意する
+	// * キューが一つの場合イベント呼び出し処理が終わらない可能性があるため複数用意する
 	Array<List<UniquePtr<IEvent>>, 2> m_eventQueues;
 
 	// * -> ハッシュ値 : リスナーポインタ配列
-	Map<uint32_t, Set<EventListener*>> m_eventListeners;
+	Map<uint32_t, Set<IEventListener*>> m_eventListeners;
 
 	// * 現在使用中キュー番号
 	int m_numActiveQueue = 0;

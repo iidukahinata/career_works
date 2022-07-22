@@ -92,7 +92,7 @@ void Model::AddMaterial(Material* material) noexcept
 	m_materials.emplace_back(material);
 }
 
-void Model::Render()
+void Model::Render() const noexcept
 {
 	auto context = D3D11GraphicsDevice::Get().GetContext();
 

@@ -20,7 +20,7 @@ public:
 		D3D11_TEXTURE_ADDRESS_MODE addressW = D3D11_TEXTURE_ADDRESS_CLAMP) noexcept;
 
 	/** デバイス設定するための関数です。*/
-	void PSSet(UINT slot = 0) noexcept;
+	void PSSet(UINT slot = 0) const noexcept;
 
 private:
 

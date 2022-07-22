@@ -33,7 +33,7 @@ public:
 	void SetVSShader(StringView name);
 	void SetPSShader(StringView name);
 
-	void ShaderSet() noexcept;
+	void ShaderSet() const noexcept;
 
 protected:
 

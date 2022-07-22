@@ -2,7 +2,7 @@
 * @file    D3D12CommandContext.cpp
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/22 2022年度初版
 */
 
 
@@ -11,9 +11,7 @@
 
 bool D3D12CommandContext::Create() noexcept
 {
-	auto device = GetGraphicsDevice()->GetDevice();
-
-	HRESULT hr = GetGraphicsDevice()->GetDevice()->CreateCommandAllocator(
+	HRESULT hr = GetDevice()->CreateCommandAllocator(
 		D3D12_COMMAND_LIST_TYPE_DIRECT,
 		IID_PPV_ARGS(m_commandAllocator.ReleaseAndGetAddressOf()));
 
@@ -22,7 +20,7 @@ bool D3D12CommandContext::Create() noexcept
 		return false;
 	}
 
-	hr = device->CreateCommandList(
+	hr = GetDevice()->CreateCommandList(
 		0,
 		D3D12_COMMAND_LIST_TYPE_DIRECT,
 		m_commandAllocator.Get(),
@@ -42,7 +40,7 @@ bool D3D12CommandContext::Create() noexcept
 	commandQueueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
 	commandQueueDesc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT;
 
-	hr = device->CreateCommandQueue(
+	hr = GetDevice()->CreateCommandQueue(
 		&commandQueueDesc,
 		IID_PPV_ARGS(m_commandQueue.ReleaseAndGetAddressOf()));
 

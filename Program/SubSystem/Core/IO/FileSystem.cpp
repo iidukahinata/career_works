@@ -13,7 +13,7 @@ String FileSystem::Canonical(StringView file) noexcept
 	try
 	{
 		std::filesystem::path buf = std::filesystem::canonical(String("./") + file.data());
-		return buf.string();
+		return buf.string().c_str();
 	}
 	catch (const std::exception&)
 	{

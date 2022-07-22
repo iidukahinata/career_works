@@ -2,7 +2,7 @@
 * @file    Allocator.h
 * @brief   
 *
-* @date	   2022/07/05 2022年度初版
+* @date	   2022/07/19 2022年度初版
 */
 #pragma once
 
@@ -60,8 +60,8 @@ private:
 	uint32_t m_globalFLI = 0;
 
 	// * 第二カテゴリの所持メモリフラグ
-	Vector<uint32_t> m_freeListBits;
+	uint32_t* m_freeListBits;
 
 	// * 割り振り可能なフリーメモリリスト
-	Vector<BoundaryBlock*> m_freeLists;
+	BoundaryBlock** m_freeLists;
 };

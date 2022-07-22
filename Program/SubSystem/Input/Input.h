@@ -34,6 +34,11 @@ namespace Button
 	};
 }
 
+/**
+* Input抽象クラス
+* このクラスではインターフェースのみを実装。
+* 派生クラスで初期化等の関数を実装する。
+*/
 class Input : public ISubsystem
 {
 	SUB_CLASS(Input)

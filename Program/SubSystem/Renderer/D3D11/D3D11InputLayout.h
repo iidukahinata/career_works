@@ -21,7 +21,7 @@ public:
 	bool Create(D3D11_INPUT_ELEMENT_DESC* layout, UINT layoutSize, ID3DBlob* blob) noexcept;
 
 	/** デバイス設定するための関数です。*/
-	void IASet() noexcept;
+	void IASet() const noexcept;
 
 private:
 

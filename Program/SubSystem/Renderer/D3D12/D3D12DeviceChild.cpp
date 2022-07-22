@@ -2,19 +2,19 @@
 * @file    D3D12DeviceChild.cpp
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/22 2022年度初版
 */
 
 
 #include "D3D12DeviceChild.h"
 #include "D3D12GrahicsDevice.h"
 
-D3D12DeviceChild::D3D12DeviceChild()
+ID3D12Device* D3D12DeviceChild::GetDevice() noexcept
 {
-	m_grahicsDevice = &D3D12GraphicsDevice::Get();
+	return D3D12GraphicsDevice::Get().GetDevice();
 }
 
-D3D12GraphicsDevice* D3D12DeviceChild::GetGraphicsDevice() const noexcept
+D3D12CommandContext* D3D12DeviceChild::GetContext() noexcept
 {
-	return m_grahicsDevice;
+	return &D3D12GraphicsDevice::Get().GetCommandContext();
 }

@@ -2,7 +2,7 @@
 * @file    D3D12RootSignature.cpp
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/22 2022年度初版
 */
 
 
@@ -79,7 +79,7 @@ bool D3D12RootSignature::Create(
 	}
 
 	// ルートシグネチャ生成
-	hr = GetGraphicsDevice()->GetDevice()->CreateRootSignature(
+	hr = GetDevice()->CreateRootSignature(
 		0, rootSignature->GetBufferPointer(), rootSignature->GetBufferSize(),
 		IID_PPV_ARGS(m_rootsignature.ReleaseAndGetAddressOf()));
 
@@ -91,10 +91,10 @@ bool D3D12RootSignature::Create(
 
 void D3D12RootSignature::SetGraphics()
 {
-	GetGraphicsDevice()->GetCommandContext().GetCommandList()->SetComputeRootSignature(m_rootsignature.Get());
+	GetContext()->GetCommandList()->SetGraphicsRootSignature(m_rootsignature.Get());
 }
 
 void D3D12RootSignature::SetCompute()
 {
-	GetGraphicsDevice()->GetCommandContext().GetCommandList()->SetGraphicsRootSignature(m_rootsignature.Get());
+	GetContext()->GetCommandList()->SetComputeRootSignature(m_rootsignature.Get());
 }

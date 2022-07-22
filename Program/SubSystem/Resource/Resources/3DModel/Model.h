@@ -26,7 +26,7 @@ public:
 	void AddMesh(Mesh* mesh) noexcept;
 	void AddMaterial(Material* material) noexcept;
 
-	void Render();
+	void Render() const noexcept;
 
 private:
 

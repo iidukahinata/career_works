@@ -2,7 +2,7 @@
 * @file    D3D12DescriptorHeap.cpp
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/22 2022年度初版
 */
 
 
@@ -14,9 +14,10 @@ bool D3D12DescriptorHeap::Create(UINT NumDescriptors, D3D12_DESCRIPTOR_HEAP_TYPE
 	D3D12_DESCRIPTOR_HEAP_DESC descriptHeapDesc = {};
 	descriptHeapDesc.NumDescriptors = NumDescriptors;
 	descriptHeapDesc.Type = type;
+	descriptHeapDesc.NodeMask = 0;
 	descriptHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
 
-	HRESULT hr = GetGraphicsDevice()->GetDevice()->CreateDescriptorHeap(
+	HRESULT hr = GetDevice()->CreateDescriptorHeap(
 		&descriptHeapDesc,
 		IID_PPV_ARGS(m_descriptHeap.ReleaseAndGetAddressOf()));
 
@@ -25,13 +26,14 @@ bool D3D12DescriptorHeap::Create(UINT NumDescriptors, D3D12_DESCRIPTOR_HEAP_TYPE
 		return false;
 	}
 
-	m_d12DescriptorSize = GetGraphicsDevice()->GetDevice()->GetDescriptorHandleIncrementSize(type);
+	m_d12DescriptorSize = GetDevice()->GetDescriptorHandleIncrementSize(type);
 	return true;
 }
 
 void D3D12DescriptorHeap::Set()
 {
-	GetGraphicsDevice()->GetCommandContext().GetCommandList()->SetDescriptorHeaps(1, m_descriptHeap.GetAddressOf());
+	GetContext()->GetCommandList()->SetDescriptorHeaps(1, m_descriptHeap.GetAddressOf());
+	GetContext()->GetCommandList()->SetGraphicsRootDescriptorTable(1, m_descriptHeap->GetGPUDescriptorHandleForHeapStart());
 }
 
 UINT D3D12DescriptorHeap::IncrementSize()

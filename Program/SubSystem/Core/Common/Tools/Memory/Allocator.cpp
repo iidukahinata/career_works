@@ -2,7 +2,7 @@
 * @file    Allocator.h
 * @brief
 *
-* @date	   2022/07/05 2022年度初版
+* @date	   2022/07/19 2022年度初版
 */
 
 
@@ -63,7 +63,7 @@ public:
 
     void Marge() noexcept
     {
-        const uint32_t newSize = GetBlockSize() + Next()->GetMemorySize();
+        const uint32_t newSize = GetMemorySize() + Next()->GetBlockSize();
         m_header.memorySize = newSize;
         WriteEndTag();
     }
@@ -106,7 +106,7 @@ Allocator::Allocator(uint32_t memorySize) : m_maxMemorySize(memorySize)
 {
     m_numOfDivisions = powf(2, N);
 
-    m_memory = malloc(memorySize);
+    m_memory = std::malloc(memorySize);
 
     BoundaryBlock* block = new (m_memory) BoundaryBlock(memorySize - (sizeof(TLSFMemoryHeader) + sizeof(uint32_t)));
 
@@ -115,19 +115,27 @@ Allocator::Allocator(uint32_t memorySize) : m_maxMemorySize(memorySize)
 
     // SLI のリスト有無を保持するビット配列の生成
     const uint32_t maxBitSize = fli + 1;
-    m_freeListBits.resize(maxBitSize);
+    m_freeListBits = static_cast<uint32_t*>(std::malloc(sizeof(uint32_t) * maxBitSize));
+    memset(m_freeListBits, 0, sizeof(uint32_t) * maxBitSize);
 
     // フリーリスト配列生成
     const uint32_t maxListSize = fli * powf(2, N) + sli + 1;
-    m_freeLists.resize(maxListSize);
+    m_freeLists = static_cast<BoundaryBlock**>(std::malloc(sizeof(BoundaryBlock*) * maxListSize));
+    memset(m_freeLists, 0, sizeof(BoundaryBlock*) * maxListSize);
 
     AddToFreeList(block);
 }
 
 Allocator::~Allocator()
 {
-    free(m_memory);
+    std::free(m_memory);
     m_memory = nullptr;
+
+    std::free(m_freeLists);
+    m_freeLists = nullptr;
+
+    std::free(m_freeListBits);
+    m_freeListBits = nullptr;
 }
 
 void* Allocator::Allocate(uint32_t size) noexcept
@@ -136,6 +144,10 @@ void* Allocator::Allocate(uint32_t size) noexcept
     const uint32_t sli = GetSecondCategory(size, fli);
 
     BoundaryBlock* block = GetFreeList(fli, sli);
+    if (!block)
+    {
+        block = GetFreeList(fli, sli);
+    }
 
     // Allocateされるデータをリスナーから消去
     RemoveFromFreeList(block);
@@ -199,7 +211,7 @@ ulong Allocator::GetSecondCategory(const uint32_t num, const uint32_t msb) const
 
 uint8_t Allocator::GetFreeListToCategory(const uint8_t bit, const uint32_t listBit) const noexcept
 {
-    // sli 以上の値が立っているマスクを使用して有効な sli を導く
+    // bit 以上の値が立っているマスクを使用して bit 以上の有効な bit を導く
     const uint32_t mask = 0xffffffff << bit;
     const uint32_t enableBit = listBit & mask;
 
@@ -215,6 +227,13 @@ BoundaryBlock* Allocator::GetFreeList(uint32_t fli, uint32_t sli) const noexcept
 {
     uint32_t ret = 0;
 
+    // 指定サイズと同じサイズのフリーリストが存在するか
+    uint32_t index = fli * m_numOfDivisions + sli;
+    if (m_freeLists[index])
+    {
+        return m_freeLists[index];
+    }
+
     // for分を使わない第二カテゴリの調査
     ret = GetFreeListToCategory(sli, m_freeListBits[fli]);
     if (ret != uint8_t(-1))
@@ -223,16 +242,20 @@ BoundaryBlock* Allocator::GetFreeList(uint32_t fli, uint32_t sli) const noexcept
     }
     else
     {
-        // より大きなカテゴリが存在を調査
-        ret = GetFreeListToCategory(fli, m_globalFLI);
+        // より大きなカテゴリの存在を調査
+        ret = GetFreeListToCategory(fli + 1, m_globalFLI);
         if (ret != uint8_t(-1))
         {
             fli = ret;
-            sli = GetFreeListToCategory(sli, m_freeListBits[fli]);
+            sli = GetFreeListToCategory(0, m_freeListBits[fli]);
         }
     }
 
-    const uint32_t index = fli * m_numOfDivisions + sli;
+    ASSERT(ret != uint8_t(-1));
+    ASSERT(fli != uint8_t(-1));
+    ASSERT(sli != uint8_t(-1));
+
+    index = fli * m_numOfDivisions + sli;
     return m_freeLists[index];
 }
 
@@ -247,10 +270,10 @@ void Allocator::AddToFreeList(BoundaryBlock* block) noexcept
     const uint32_t sli = GetSecondCategory(block->GetMemorySize(), fli);
 
     // FLI のリストビットに追加
-    m_globalFLI |= 1 << fli;
+    m_globalFLI |= (1 << fli);
 
     // SLI のリストビットに追加
-    m_freeListBits[fli] |= 1 << sli;
+    m_freeListBits[fli] |= (1 << sli);
 
     // フリーリストの先頭に追加
     const uint32_t numList = fli * m_numOfDivisions + sli;
@@ -316,4 +339,8 @@ void Allocator::RemoveFromFreeList(BoundaryBlock* block) noexcept
         const uint32_t index = fli * m_numOfDivisions + sli;
         m_freeLists[index] = nullptr;
     }
+
+    // エラーを未然に防ぐため null 埋めしておく
+    block->m_header.prev = nullptr;
+    block->m_header.next = nullptr;
 }

@@ -2,7 +2,7 @@
 * @file    D3D12ConstantBuffer.h
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/22 2022年度初版
 */
 #pragma once
 
@@ -36,7 +36,7 @@ inline bool D3D12ConstantBuffer<T>::Create(const T& buffer) noexcept
 	auto heapProperties = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD);
 	auto resourceDesc = CD3DX12_RESOURCE_DESC::Buffer(m_adjustBufferSize);
 
-	HRESULT hr = GetGraphicsDevice()->GetDevice()->CreateCommittedResource(
+	HRESULT hr = GetDevice()->CreateCommittedResource(
 		&heapProperties,
 		D3D12_HEAP_FLAG_NONE,
 		&resourceDesc,
@@ -67,5 +67,5 @@ inline void D3D12ConstantBuffer<T>::RegisterForDescriptor(D3D12_CPU_DESCRIPTOR_H
 	D3D12_CONSTANT_BUFFER_VIEW_DESC desc = {};
 	desc.BufferLocation = m_constantBuffer->GetGPUVirtualAddress();
 	desc.SizeInBytes = m_adjustBufferSize;
-	GetGraphicsDevice()->GetDevice()->CreateConstantBufferView(&desc, descriptorHandle);
+	GetDevice()->CreateConstantBufferView(&desc, descriptorHandle);
 }

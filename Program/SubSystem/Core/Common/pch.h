@@ -36,6 +36,10 @@
 #include "../IO/FileStream.h"
 #include "../IO/FileSystem.h"
 
+// Event System
+#include "SubSystem/Core/Event/Event.h"
+#include "SubSystem/Core/Event/EventListener.h"
+
 // Job System
 #include "SubSystem/JobSystem/Sync/Job.h"
 #include "SubSystem/JobSystem/Async/AsyncJob.h"

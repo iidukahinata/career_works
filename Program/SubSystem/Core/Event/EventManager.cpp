@@ -81,7 +81,7 @@ void EventManager::RemoveFromQueue(EventType eventType, bool isAll) noexcept
 	}
 }
 
-bool EventManager::AddEventLisener(EventListener* eventListener, const EventType& eventType) noexcept
+bool EventManager::AddEventLisener(IEventListener* eventListener, const EventType& eventType) noexcept
 {
 	// –³Œø‚È Event ‚ğ“o˜^‚µ‚È‚¢‚½‚ß
 	if (eventType.Name.size() == 0)
@@ -101,7 +101,7 @@ bool EventManager::AddEventLisener(EventListener* eventListener, const EventType
 	return true;
 }
 
-bool EventManager::RemoveEventLisener(EventListener* eventListener, const EventType& eventType) noexcept
+bool EventManager::RemoveEventLisener(IEventListener* eventListener, const EventType& eventType) noexcept
 {
 	// –³Œø‚È Event ‚ğŒŸõ‚µ‚È‚¢‚½‚ß
 	if (eventType.Name.size() == 0)

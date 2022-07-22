@@ -7,9 +7,6 @@
 #pragma once
 
 
-#include "SubSystem/Core/Event/Event.h"
-#include "SubSystem/Core/Event/EventListener.h"
-
 class KeyPressed : public IEvent
 {
 	SUB_CLASS(KeyPressed)

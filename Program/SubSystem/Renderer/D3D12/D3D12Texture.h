@@ -2,7 +2,7 @@
 * @file    D3D12Texture.h
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/22 2022年度初版
 */
 #pragma once
 
@@ -26,8 +26,8 @@ public:
 	void SetResource(ID3D12Resource* resource);
 
 	/* アクセス */
-	ID3D12Resource* GetResource() const noexcept;
-	ID3D12Resource** GetAddressOfResource() noexcept;
+	ID3D12Resource* GetResource()	  const noexcept { return m_texture.Get(); }
+	ID3D12Resource** GetAddressOfResource() noexcept { return m_texture.GetAddressOf(); }
 
 private:
 
