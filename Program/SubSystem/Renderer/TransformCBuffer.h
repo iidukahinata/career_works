@@ -8,8 +8,6 @@
 
 
 #include "SubSystem/Renderer/D3D11/D3D11ConstantBuffer.h"
-#include "SubSystem/Renderer/D3D12/D3D12ConstantBuffer.h"
-#include "SubSystem/Renderer/D3D12/D3D12DescriptorHeap.h"
 
 class TransformCBuffer
 {
@@ -47,7 +45,4 @@ private:
 	};
 
 	D3D11ConstantBuffer<ConstantBufferMatrix> m_constantBuffer;
-
-	D3D12DescriptorHeap m_descriptorHeap;
-	D3D12ConstantBuffer<ConstantBufferMatrix> m_constantBuffer12;
 };

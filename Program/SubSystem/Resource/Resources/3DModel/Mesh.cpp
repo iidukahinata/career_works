@@ -67,12 +67,10 @@ void Mesh::Render() const noexcept
 {
 	// 頂点バッファのパラメータセット
 	m_vertexBuffer.IASet();
-	m_vertexBuffer12.IASet();
 
 	// インデックスバッファのパラメータセット
 	m_indexBuffer.IASet();
-	m_indexBuffer12.IASet();
-
+	
 	// プリミティブタイプをセット
 	auto context = m_vertexBuffer.GetContext();
 	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -104,17 +102,9 @@ bool Mesh::SetUp() noexcept
 	{
 		return false;
 	}
-	if (!m_vertexBuffer12.Create(m_vertices))
-	{
-		return false;
-	}
 
 	// CPU側からの更新はないものとして D3D11_USAGE_DEFAULT で生成。
 	if (!m_indexBuffer.Create(m_indices))
-	{
-		return false;
-	}
-	if (!m_indexBuffer12.Create(m_indices))
 	{
 		return false;
 	}

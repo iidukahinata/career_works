@@ -12,10 +12,6 @@
 #include "SubSystem/Renderer/D3D11/D3D11InputLayout.h"
 #include "SubSystem/Renderer/D3D11/D3D11SamplerState.h"
 
-#include "SubSystem/Renderer/D3D12/D3D12Shader.h"
-#include "SubSystem/Renderer/D3D12/D3D12PipelineState.h"
-#include "SubSystem/Renderer/D3D12/D3D12RootSignature.h"
-
 class Texture;
 
 class Material : public IResource
@@ -47,11 +43,6 @@ protected:
 
 private:
 
-	void CreateRootSignature() noexcept;
-	void CreatePipelineState() noexcept;
-
-private:
-
 	Vector<Texture*> m_textures;
 
 	// * shader object
@@ -61,9 +52,4 @@ private:
 	D3D11InputLayout m_inputLayout;
 
 	D3D11SamplerState m_samplerState;
-
-	D3D12Shader m_VSShader;
-	D3D12Shader  m_PSShader;
-	D3D12PipelineState m_pipelineState;
-	D3D12RootSignature m_rootSignature;
 };

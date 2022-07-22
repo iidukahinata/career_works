@@ -13,7 +13,6 @@
 #include "../Forward/ForwardLightMap.h"
 #include "SubSystem/Renderer/TransformCBuffer.h"
 #include "SubSystem/Renderer/D3D11/D3D11GrahicsDevice.h"
-#include "SubSystem/Renderer/D3D12/D3D12GrahicsDevice.h"
 #include "SubSystem/Scene/Component/Components/Camera.h"
 #include "SubSystem/Scene/Component/Components/RenderObject.h"
 
@@ -43,7 +42,6 @@ bool DeferredRenderer::Initialize()
 
 	// デバイス初期化
 	D3D11GraphicsDevice::Get().Init(Window::Get().GetHandle(), width, height, Window::Get().IsFullscreen());
-	D3D12GraphicsDevice::Get().Init(Window::Get().GetHandle(), width, height, Window::Get().IsFullscreen());
 
 	// Set Up
 	m_gbuffer = MakeUnique<GBuffer>();

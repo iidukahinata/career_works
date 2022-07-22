@@ -15,10 +15,6 @@ void ForwardLightMap::Initialize()
 	m_ambientLight = Math::Vector4(0.5f);
 
 	m_constantBuffer.Create(sizeof(ConstantBufferLight));
-
-	m_constantBuffer12.Create(ConstantBufferLight());
-	m_descriptorHeap.Create(1, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-	m_constantBuffer12.RegisterForDescriptor(m_descriptorHeap.GetCPUDescriptorHandleForHeapStart());
 }
 
 void ForwardLightMap::Update(Camera* mainCamera)
@@ -28,12 +24,10 @@ void ForwardLightMap::Update(Camera* mainCamera)
 
 	// update buffer
 	m_constantBuffer.Update(buffer);
-	m_constantBuffer12.Update(buffer);
 
 	// set buffer
 	m_constantBuffer.VSSet(2);
 	m_constantBuffer.PSSet(2);
-	m_descriptorHeap.Set();
 }
 
 ForwardLightMap::ConstantBufferLight ForwardLightMap::CreateConstantBufferLight(const Camera* mainCamera) const noexcept

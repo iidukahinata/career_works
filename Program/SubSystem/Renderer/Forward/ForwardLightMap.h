@@ -10,9 +10,6 @@
 #include "../LightMap.h"
 #include "SubSystem/Renderer/D3D11/D3D11ConstantBuffer.h"
 
-#include "SubSystem/Renderer/D3D12/D3D12DescriptorHeap.h"
-#include "SubSystem/Renderer/D3D12/D3D12ConstantBuffer.h"
-
 #define MAX_LIGHT_COUNT 64
 
 /**
@@ -75,7 +72,4 @@ private:
 private:
 
 	D3D11ConstantBuffer<ConstantBufferLight> m_constantBuffer;
-
-	D3D12DescriptorHeap m_descriptorHeap;
-	D3D12ConstantBuffer<ConstantBufferLight> m_constantBuffer12;
 };

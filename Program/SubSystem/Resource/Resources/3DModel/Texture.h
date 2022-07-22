@@ -9,7 +9,6 @@
 
 #include "../IResource.h"
 #include "SubSystem/Renderer/D3D11/D3D11Texture.h"
-#include "SubSystem/Renderer/D3D12/D3D12Texture.h"
 
 struct TextureData
 {
@@ -56,5 +55,4 @@ private:
 	UniquePtr<TextureData> m_textureData;
 
 	D3D11Texture m_d3d11Texture;
-	D3D12Texture m_d3d12Texture;
 };

@@ -25,6 +25,10 @@ void MeshRender::SetModel(StringView name) noexcept
 
 void MeshRender::Render() const
 {
+	auto rot = GetTransform().GetRotation();
+	rot.y += 0.01f;
+	GetTransform().SetRotation(rot);
+
 	TransformCBuffer::Get().Bind(GetTransform().GetWorldMatrix().ToMatrixXM());
 
 	m_model->Render();
