@@ -35,16 +35,16 @@ void GBuffer::SetRenderTargets() const noexcept
 		m_rendererTexture[GBufferType::Parameter].GetRenderTarget(),
 	};
 
-	CD3DX12_CPU_DESCRIPTOR_HANDLE handles[GBufferType::Max];
-	D3D12_CPU_DESCRIPTOR_HANDLE baseH = _peraRTVHeap->GetCPUDescriptorHandleForHeapStart();
-	auto incSize = _dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
-	uint32_t offset = 0;
-	for (auto& handle : handles) {
-		handle.InitOffsetted(baseH, offset);
-		offset += incSize;
-	}
+	//CD3DX12_CPU_DESCRIPTOR_HANDLE handles[GBufferType::Max];
+	//D3D12_CPU_DESCRIPTOR_HANDLE baseH = _peraRTVHeap->GetCPUDescriptorHandleForHeapStart();
+	//auto incSize = _dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+	//uint32_t offset = 0;
+	//for (auto& handle : handles) {
+	//	handle.InitOffsetted(baseH, offset);
+	//	offset += incSize;
+	//}
 
-	auto& grahicsDevice = D3D12GraphicsDevice::Get();
+	//auto& grahicsDevice = D3D12GraphicsDevice::Get();
 
 
 
