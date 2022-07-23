@@ -9,6 +9,22 @@
 #include "AsyncJob.h"
 #include "AsyncJobSystem.h"
 
+AsyncJob::AsyncJob(Task&& task) noexcept
+{
+	SetFunction(std::forward<Task>(task));
+}
+
+AsyncJob::AsyncJob(const AsyncJob& asyncJob)
+{
+	m_task = asyncJob.m_task;
+}
+
+AsyncJob& AsyncJob::operator=(const AsyncJob& asyncJob)
+{
+	m_task = asyncJob.m_task;
+	return *this;
+}
+
 void AsyncJob::Execute() noexcept
 {
 	// ä÷êîÇ™ê›íËÇ≥ÇÍÇƒÇ¢Ç»Ç¢ Job Ç™é¿çsÇ≥ÇÍÇƒÇ¢ÇÈéûÅAÇ±Ç±Ç≈é~Ç‹ÇËÇ‹Ç∑ÅB
@@ -20,6 +36,7 @@ void AsyncJob::Execute() noexcept
 
 void AsyncJob::SetFunction(Task&& task) noexcept
 {
+	m_finish = true;
 	m_task = std::forward<Task>(task);
 }
 
@@ -30,5 +47,6 @@ bool AsyncJob::IsTaskFinish() const noexcept
 
 void AsyncJob::RegisterToJobSystem()
 {
+	m_finish = false;
 	AsyncJobSystem::Get().AddTask(this);
 }

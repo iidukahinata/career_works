@@ -9,23 +9,11 @@
 
 #include "Thread.h"
 
-enum RenderCommandType
-{
-	Execute,
-	Flush,
-};
-
-class RenderCommandFance
-{
-public:
-
-	//void BegineFrame() noexcept;
-	//void Wait() noexcept;
-
-private:
-
-	RenderCommandType m_type;
-};
+/**
+* RenderingThread で処理されるコマンド処理が終了するまで待機する。
+* 主に、アプリケーション終了時などに使用される。
+*/
+void FlushRenderCommand() noexcept;
 
 /**
 * RenderingThread で順次処理される CommandList と CommandList 追加待ち TaskList を管理
@@ -39,6 +27,7 @@ public:
 	/** GameThread 側からの使用アクセスされる Task 追加関数 */
 	static void AddTask(Command&& task) noexcept
 	{
+		std::unique_lock lock(m_mutex);
 		m_taskList.push(std::forward<Command>(task));
 	}
 
@@ -49,6 +38,9 @@ public:
 	void CommandProcess() noexcept;
 
 private:
+
+	// * command の swap 時の排他制御で使用
+	static std::mutex m_mutex;
 
 	// * RenderingThread で順次処理される CommandList
 	static Queue<Command> m_commandList;

@@ -102,8 +102,8 @@ namespace Math
 		
 		static Matrix CreateScaling(const Vector3& scale) noexcept;
 
-		static Matrix CreatePerspectiveFovLH(float fov, float aspect, float near, float far) noexcept;
-		static Matrix CreateOrthographicLH(float width, float height, float near, float far) noexcept;
+		static Matrix CreatePerspectiveFovLH(float fov, float aspect, float nearZ, float farZ) noexcept;
+		static Matrix CreateOrthographicLH(float width, float height, float nearZ, float farZ) noexcept;
 
 		Vector3 TransformPosition(const Vector3& position) const noexcept;
 

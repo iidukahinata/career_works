@@ -12,6 +12,12 @@ class AsyncJob
 	typedef std::function<void()> Task;
 public:
 
+	AsyncJob() = default;
+	AsyncJob(Task&& task) noexcept;
+
+	AsyncJob(const AsyncJob&);
+	AsyncJob& operator=(const AsyncJob&);
+
 	void Execute() noexcept;
 
 	/** JobSystem ‚ÅÀs‚³‚ê‚éŠÖ” function ‚ğİ’èB*/

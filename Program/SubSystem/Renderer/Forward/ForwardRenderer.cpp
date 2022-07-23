@@ -34,14 +34,14 @@ bool ForwardRenderer::Initialize()
 
 	TransformCBuffer::Get().Init();
 
-	EditerSystem::Get().Initialize();
+	//EditerSystem::Get().Initialize();
 
 	return true;
 }
 
 void ForwardRenderer::Shutdown()
 {
-	EditerSystem::Get().Exit();
+	//EditerSystem::Get().Exit();
 
 	m_job.UnRegisterFromJobSystem();
 }
@@ -62,5 +62,5 @@ void ForwardRenderer::Update() noexcept
 		renderObject->Render();
 	}
 
-	EditerSystem::Get().Draw();
+	//EditerSystem::Get().Draw();
 }

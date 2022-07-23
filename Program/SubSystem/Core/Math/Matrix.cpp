@@ -61,17 +61,17 @@ namespace Math
 		return scaling;
 	}
 
-	Matrix Matrix::CreatePerspectiveFovLH(float fov, float aspect, float near, float far) noexcept
+	Matrix Matrix::CreatePerspectiveFovLH(float fov, float aspect, float nearZ, float farZ) noexcept
 	{
 		Matrix projection;
-		DirectX::XMStoreFloat4x4(&projection, DirectX::XMMatrixPerspectiveFovLH(fov, aspect, near, far));
+		DirectX::XMStoreFloat4x4(&projection, DirectX::XMMatrixPerspectiveFovLH(fov, aspect, nearZ, farZ));
 		return projection;
 	}
 
-	Matrix Matrix::CreateOrthographicLH(float width, float height, float near, float far) noexcept
+	Matrix Matrix::CreateOrthographicLH(float width, float height, float nearZ, float farZ) noexcept
 	{
 		Matrix orthographic;
-		DirectX::XMStoreFloat4x4(&orthographic, DirectX::XMMatrixOrthographicLH(width, height, near, far));
+		DirectX::XMStoreFloat4x4(&orthographic, DirectX::XMMatrixOrthographicLH(width, height, nearZ, farZ));
 		return orthographic;
 	}
 

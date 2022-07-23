@@ -19,6 +19,8 @@
 #include "SubSystem/Resource/ResourceManager.h"
 #include "SubSystem/JobSystem/Sync/JobSystem.h"
 #include "SubSystem/JobSystem/Async/AsyncJobSystem.h"
+#include "SubSystem/Thread/ThreadManager.h"
+#include "SubSystem/Thread/RenderingThread.h"
 
 Context* g_context = nullptr;
 
@@ -38,7 +40,7 @@ bool Engine::Initialize(HINSTANCE hInstance)
 
 	// 外部からスレッドが使用される可能性があるのでCPU内最大スレッド数の半分を使用
 	// 最低でも renderer thread と outer thread の2スレッド使用できる用にする。(まだ未完成)
-	//AsyncJobSystem::Get().Initialize(AsyncJobSystem::Get().GetMaxThreadCount() / 2);
+	AsyncJobSystem::Get().Initialize(3);
 
 	EventManager::Get().Initialize();
 
@@ -49,6 +51,8 @@ bool Engine::Initialize(HINSTANCE hInstance)
 		LOG_ERROR("Subsystemの初期化に失敗");
 		return false;
 	}
+
+	ThreadManager::Get().CreateThread(MakeUnique<RenderingThread>());
 
 	m_hInstance = hInstance;
 
@@ -66,8 +70,7 @@ long Engine::MainLoop()
 		if (timer->ReachedNextFrame())
 		{
 			jobSystem.Execute(timer->GetDeltaTime(), FunctionType::Update);
-	
-			// renderer thread として分ける予定のため分離している。
+
 			jobSystem.Execute(timer->GetDeltaTime(), FunctionType::Render);
 		}
 	}

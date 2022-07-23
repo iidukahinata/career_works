@@ -145,6 +145,12 @@
     <Filter Include="SubSystem\Thread">
       <UniqueIdentifier>{0f0c351f-64e7-4c12-89d9-d90ffaba2977}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SubSystem\Thread\RenderingThrad">
+      <UniqueIdentifier>{b3f4ee85-cce3-4f42-9592-5c003613e096}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystem\Thread\GameThread">
+      <UniqueIdentifier>{3d1f94db-a500-4a4e-a6e8-f23ecc2417f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program\WinMain.cpp" />
@@ -427,17 +433,20 @@
     <ClCompile Include="Program\SubSystem\Thread\ThreadManager.cpp">
       <Filter>SubSystem\Thread</Filter>
     </ClCompile>
-    <ClCompile Include="Program\SubSystem\Thread\GameThread.cpp">
-      <Filter>SubSystem\Thread</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Thread\RenderingThread.cpp">
-      <Filter>SubSystem\Thread</Filter>
-    </ClCompile>
     <ClCompile Include="Program\SubSystem\Thread\Thread.cpp">
       <Filter>SubSystem\Thread</Filter>
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Core\Common\Tools\Memory\STLAllocator.cpp">
       <Filter>SubSystem\Core\Common\Tools\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Thread\RenderingThread\RenderCommandFance.cpp">
+      <Filter>SubSystem\Thread\RenderingThrad</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Thread\RenderingThread.cpp">
+      <Filter>SubSystem\Thread\RenderingThrad</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Thread\GameThread.cpp">
+      <Filter>SubSystem\Thread\GameThread</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -792,17 +801,20 @@
     <ClInclude Include="Program\SubSystem\Thread\ThreadManager.h">
       <Filter>SubSystem\Thread</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Thread\GameThread.h">
-      <Filter>SubSystem\Thread</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Thread\RenderingThread.h">
-      <Filter>SubSystem\Thread</Filter>
-    </ClInclude>
     <ClInclude Include="Program\SubSystem\Thread\Thread.h">
       <Filter>SubSystem\Thread</Filter>
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Core\Common\Tools\Memory\STLAllocator.h">
       <Filter>SubSystem\Core\Common\Tools\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Thread\RenderingThread\RenderCommandFance.h">
+      <Filter>SubSystem\Thread\RenderingThrad</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Thread\RenderingThread.h">
+      <Filter>SubSystem\Thread\RenderingThrad</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Thread\GameThread.h">
+      <Filter>SubSystem\Thread\GameThread</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

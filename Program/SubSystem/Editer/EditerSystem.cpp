@@ -15,9 +15,9 @@
 
 void EditerSystem::Initialize() noexcept
 {
-	ImGui::CreateContext();
-	ImGui_ImplWin32_Init(Window::Get().GetHandle());
-	ImGui_ImplDX11_Init(D3D11GraphicsDevice::Get().GetDevice(), D3D11GraphicsDevice::Get().GetContext());
+	bool ret = ImGui::CreateContext();
+	ret = ImGui_ImplWin32_Init(Window::Get().GetHandle());
+	ret = ImGui_ImplDX11_Init(D3D11GraphicsDevice::Get().GetDevice(), D3D11GraphicsDevice::Get().GetContext());
 
 	ImGui::StyleColorsClassic();
 }
@@ -28,7 +28,7 @@ void EditerSystem::Draw() noexcept
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
-
+	
 	// draw user gui
 	for (auto& widget : m_widgets)
 	{
