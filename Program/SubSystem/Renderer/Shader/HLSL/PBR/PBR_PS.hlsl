@@ -29,13 +29,22 @@ float4 main(PS_IN input) : SV_TARGET
 	// 平行光源計算
 	finalColor.xyz += PBR(material, ToLightFromDirectionalLight(directionalLight), input.toEye, normal);
 
+	//uint lightData = g_lightDataTex.Load(int4(((input.worldPos * invScale) + bias).xyz, 0.f));
+	//while (lightData)
+	//{
+	//	uint i = firstbitlow(lightData);
+	//	lightData &= ~(1 << i);
+	//
+	//	finalColor.xyz += PBR(material, ToLightFromPointLight(pointLights[i], input.worldPos), input.toEye, normal.xyz);
+	//}
+	
 	// ポイントライト計算
 	const int pointLightCount = lightCount.x;
 	for (int i = 0; i < pointLightCount; ++i)
 	{
 		finalColor.xyz += PBR(material, ToLightFromPointLight(pointLights[i], input.worldPos), input.toEye, normal);
 	}
-
+	
 	// スポットライト計算
 	const int spotLightCount = lightCount.y;
 	for (int i = 0; i < spotLightCount; ++i)
@@ -43,7 +52,6 @@ float4 main(PS_IN input) : SV_TARGET
 		finalColor.xyz += PBR(material, ToLightFromSpotLight(spotLights[i], input.worldPos), input.toEye, normal);
 	}
 
-	finalColor.xyz += (ambientColor.xyz * material.albedoColor);
-	
+	finalColor.xyz += (ambientColor.xyz * material.albedoColor);	
 	return finalColor;
 }

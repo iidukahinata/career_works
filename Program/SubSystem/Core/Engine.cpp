@@ -70,7 +70,7 @@ long Engine::MainLoop()
 			RenderingThread::BegineFrame();
 
 			JobSystem::Get().Execute(timer->GetDeltaTime(), FunctionType::Update);
-			
+
 			RenderingThread::EndFrame();
 		}
 	}

@@ -22,6 +22,14 @@ float4 main(PS_IN input) : SV_TARGET
 	float4 worldPos = float4(param.x, param.y, depth.y, 0.f);
 	float3 toEye = normalize(gEyePos - worldPos).xyz;
 	
+	int4 texCoord = int4(((worldPos * invScale) + bias).xyz, 0);
+	uint lightData = g_lightDataTex.Load(texCoord);
+	uint lightIndex = lightData.x;
+	//const uint pointLightCount = lightData.y & 0xFFFF;
+	//const uint spotLightCount = lightData.y >> 16;
+	const uint pointLightCount = lightCount.x;
+	const uint spotLightCount = lightCount.y;
+	
 	// マテリアル生成
 	Material material;
 	material.albedoColor = color;
@@ -30,22 +38,23 @@ float4 main(PS_IN input) : SV_TARGET
 
 	// 平行光源計算
 	finalColor.xyz += PBR(material, ToLightFromDirectionalLight(directionalLight), toEye, normal.xyz);
-
+	
 	// ポイントライト計算
-	const int pointLightCount = lightCount.x;
-	for (int i = 0; i < pointLightCount; ++i)
-	{		
+	for (uint i = 0; i < pointLightCount; ++i)
+	{
+		const int index = lightIndices[lightIndex++];
+		
 		finalColor.xyz += PBR(material, ToLightFromPointLight(pointLights[i], worldPos), toEye, normal.xyz);
 	}
 
 	// スポットライト計算
-	const int spotLightCount = lightCount.y;
-	for (int i = 0; i < spotLightCount; ++i)
+	for (uint i = 0; i < spotLightCount; ++i)
 	{
-		finalColor.xyz += PBR(material, ToLightFromSpotLight(spotLights[i], worldPos), toEye, normal.xyz);
+		const int index = lightIndices[lightIndex++];
+		
+		finalColor.xyz += PBR(material, ToLightFromSpotLight(spotLights[index], worldPos), toEye, normal.xyz);
 	}
 
-	finalColor.xyz += (ambientColor.xyz * color.xyz);
-	
+	finalColor.xyz += (ambientColor.xyz * color.xyz);	
 	return finalColor;
 }

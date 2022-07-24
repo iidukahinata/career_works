@@ -116,5 +116,4 @@ private:
 
 	// * Light データテクスチャ
 	D3D11Texture m_texture;
-	D3D11Texture m_textureLightIndices;
 };

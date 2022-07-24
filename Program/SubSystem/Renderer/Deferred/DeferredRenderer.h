@@ -2,7 +2,7 @@
 * @file	   DeferredRenderer.h
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/24 2022年度初版
 */
 #pragma once
 
@@ -30,6 +30,11 @@ public:
 	bool Initialize() override;
 	void Shutdown() override;
 
+	/**
+	* 22/07/24時点では RederingThread で操作されているが、
+	* 関数内の一部処理を GameThread に受託するもしくは TaskThread の作成を検討している。
+	* 主に、定数バッファの更新などが挙げられる。
+	*/
 	void Update() noexcept;
 
 private:

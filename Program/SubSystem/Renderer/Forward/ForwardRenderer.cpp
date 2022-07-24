@@ -2,7 +2,7 @@
 * @file	   ForwardRenderer.cpp
 * @brief
 *
-* @date	   2022/07/08 2022年度初版
+* @date	   2022/07/24 2022年度初版
 */
 
 
@@ -10,6 +10,7 @@
 #include "SubSystem/Editer/EditerSystem.h"
 #include "SubSystem/Window/Window.h"
 #include "../Forward/ForwardLightMap.h"
+#include "../Deferred/ClusteredLightMap.h"
 #include "SubSystem/Renderer/TransformCBuffer.h"
 #include "SubSystem/Renderer/D3D11/D3D11GrahicsDevice.h"
 #include "SubSystem/Scene/Component/Components/Camera.h"
@@ -34,15 +35,11 @@ bool ForwardRenderer::Initialize()
 
 	TransformCBuffer::Get().Init();
 
-	//EditerSystem::Get().Initialize();
-
 	return true;
 }
 
 void ForwardRenderer::Shutdown()
 {
-	//EditerSystem::Get().Exit();
-
 	m_job.UnRegisterFromJobSystem();
 }
 
@@ -53,7 +50,7 @@ void ForwardRenderer::Update() noexcept
 
 	auto& grahicsDevice = D3D11GraphicsDevice::Get();
 	grahicsDevice.SetRenderTarget(grahicsDevice.GetRenderTarget(), grahicsDevice.GetDepthStencil());
-	grahicsDevice.Clear(Math::Vector4(0.8f, 0.8f, 0.8f, 1.f));
+	grahicsDevice.Clear(Math::Vector4(0.f, 0.f, 0.f, 1.f));
 
 	m_lightMap->Update(m_mainCamera);
 
@@ -62,5 +59,7 @@ void ForwardRenderer::Update() noexcept
 		renderObject->Render();
 	}
 
-	//EditerSystem::Get().Draw();
+	EditerSystem::Get().Render();
+
+	grahicsDevice.Present();
 }

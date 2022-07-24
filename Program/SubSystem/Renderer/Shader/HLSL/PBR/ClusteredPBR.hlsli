@@ -10,7 +10,6 @@
 
 
 #include "../Core/Core.hlsli"
-#include "../Core/ClusteredLight.hlsli"
 
 Texture2D g_texture : register(t0);
 Texture2D g_normalMap : register(t1);

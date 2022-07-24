@@ -104,7 +104,6 @@
     <ClCompile Include="Program\SubSystem\Scene\TickFunction.cpp" />
     <ClCompile Include="Program\SubSystem\Scene\TickManager.cpp" />
     <ClCompile Include="Program\SubSystem\Scene\World.cpp" />
-    <ClCompile Include="Program\SubSystem\Thread\GameThread.cpp" />
     <ClCompile Include="Program\SubSystem\Thread\RenderingThread\RenderCommandFance.cpp" />
     <ClCompile Include="Program\SubSystem\Thread\RenderingThread\RenderingThread.cpp" />
     <ClCompile Include="Program\SubSystem\Thread\Thread.cpp" />
@@ -222,7 +221,6 @@
     <ClInclude Include="Program\SubSystem\Scene\TickFunction.h" />
     <ClInclude Include="Program\SubSystem\Scene\TickManager.h" />
     <ClInclude Include="Program\SubSystem\Scene\World.h" />
-    <ClInclude Include="Program\SubSystem\Thread\GameThread.h" />
     <ClInclude Include="Program\SubSystem\Thread\RenderingThread\RenderCommandFance.h" />
     <ClInclude Include="Program\SubSystem\Thread\RenderingThread\RenderingThread.h" />
     <ClInclude Include="Program\SubSystem\Thread\Thread.h" />
@@ -247,10 +245,8 @@
     <ClInclude Include="Program\ThirdParty\imgui\imstb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Program\SubSystem\Renderer\Shader\HLSL\Core\ClusteredLight.hlsli" />
     <None Include="Program\SubSystem\Renderer\Shader\HLSL\Core\Core.hlsli" />
     <None Include="Program\SubSystem\Renderer\Shader\HLSL\Core\Light.hlsli" />
-    <None Include="Program\SubSystem\Renderer\Shader\HLSL\PBR\ClusteredPBR.hlsli" />
     <None Include="Program\SubSystem\Renderer\Shader\HLSL\PBR\PBR.hlsli" />
     <None Include="Program\SubSystem\Renderer\Shader\HLSL\PostEffect\Blur.hlsli" />
     <None Include="Program\ThirdParty\FMOD\include\fmod.cs" />

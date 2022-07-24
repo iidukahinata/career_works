@@ -27,8 +27,11 @@ void ClusteredLightMap::Initialize()
 	m_constantBufferLightIndices.Create(sizeof(ConstantBufferLightIndeices));
 
 	// 仮置きで可視性空間を作成。
-	Math::Vector3 min = Math::Vector3(-10.f, -5.f, -10.f);
-	Math::Vector3 max = Math::Vector3(10.f, 5.f, 10.f);
+	//Math::Vector3 min = Math::Vector3(-10.f, -5.f, -10.f);
+	//Math::Vector3 max = Math::Vector3(10.f, 5.f, 10.f);
+
+	Math::Vector3 min = Math::Vector3(-2048.f, -256.f, -2048.f);
+	Math::Vector3 max = Math::Vector3( 2048.f,  256.f,  2048.f);
 	SetAABB(min, max);
 
 	// light data 保持用テクスチャ
@@ -37,7 +40,7 @@ void ClusteredLightMap::Initialize()
 	texture3DDesc.Height = clusterY;
 	texture3DDesc.Depth = clusterZ;
 	texture3DDesc.MipLevels = 1;
-	texture3DDesc.Format = DXGI_FORMAT_R32G32_UINT;
+	texture3DDesc.Format = DXGI_FORMAT_R32_UINT;
 	texture3DDesc.Usage = D3D11_USAGE_DYNAMIC;
 	texture3DDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
 	texture3DDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
@@ -52,7 +55,7 @@ void ClusteredLightMap::Update(Camera* mainCamera)
 	ConstantBufferLight lightBuffer = CreateConstantBufferLight(mainCamera);
 
 	// update buffer
-	UpdateLightTexture();
+	//UpdateLightTexture();
 	m_constantBufferLight.Update(lightBuffer);
 
 	// set buffer
@@ -60,7 +63,6 @@ void ClusteredLightMap::Update(Camera* mainCamera)
 	m_constantBufferLight.PSSet(2);
 
 	m_texture.PSSet(10);
-	m_textureLightIndices.PSSet(11);
 }
 
 void ClusteredLightMap::SetAABB(const Math::Vector3& min, const Math::Vector3& max) noexcept
@@ -123,8 +125,8 @@ ClusteredLightMap::ConstantBufferLight ClusteredLightMap::CreateConstantBufferLi
 	buffer.ambientLight = m_ambientLight;
 	buffer.pointLightCount = pointLightCount;
 	buffer.spotLightCount = spotLightCount;
-	buffer.invScale = Math::Vector4(m_invScale, 0.f);
-	buffer.bias = Math::Vector4(-m_invScale * m_aabbMin, 0.f);
+	buffer.invScale = Math::Vector4(m_scale, 0.f);
+	buffer.bias = Math::Vector4(-m_scale * m_aabbMin, 0.f);
 
 	return buffer;
 }
@@ -134,8 +136,8 @@ void ClusteredLightMap::UpdateLightTexture() noexcept
 	struct LightStruct
 	{
 		uint32_t offset;
-		uint16_t pointLightCount;
-		uint16_t spotLightCount;
+		//uint16_t pointLightCount;
+		//uint16_t spotLightCount;
 	};
 
 	const auto context = D3D11GraphicsDevice::Get().GetContext();
@@ -160,31 +162,34 @@ void ClusteredLightMap::UpdateLightTexture() noexcept
 			for (int x = 0; x < clusterX; ++x)
 			{
 				auto pointIndices = m_lightList[z][y][x].pointLightIndices;
-				auto spotIndices = m_lightList[z][y][x].spotLightIndices;
+				//auto spotIndices = m_lightList[z][y][x].spotLightIndices;
 
 				// テクスチャデータ用
-				lightData[x].offset = indicesOffset;
-				lightData[x].pointLightCount = pointIndices.size();
-				lightData[x].spotLightCount = spotIndices.size();
+				//lightData[x].offset = indicesOffset;
+				//lightData[x].pointLightCount = pointIndices.size();
+				//lightData[x].spotLightCount = spotIndices.size();
 
 				// buffer データ追加
 				for (auto& pointIndex : pointIndices)
 				{
-					if (indicesOffset < 4096)
-					{
-						lightIndices.lightIndices[indicesOffset] = pointIndex;
-					}
-					++indicesOffset;
-				}
+					const uint32_t mask = (1 << pointIndex);
+					lightData[x].offset |= mask;
 
-				for (auto& spotIndex : spotIndices)
-				{
-					lightIndices.lightIndices[indicesOffset] = spotIndex;
-					++indicesOffset;
+					//if (indicesOffset < 4096)
+					//{
+					//	lightIndices.lightIndices[indicesOffset] = pointIndex;
+					//}
+					//++indicesOffset;
 				}
+				
+				//for (auto& spotIndex : spotIndices)
+				//{
+				//	lightIndices.lightIndices[indicesOffset] = spotIndex;
+				//	++indicesOffset;
+				//}
 			}
 			
-			const int size = clusterX * clusterY * clusterZ * 16;
+			constexpr int size = clusterX * clusterY * clusterZ * 32;
 			void* data = ((uint8_t*)(pLightData.pData)) + (z * pLightData.DepthPitch) + (y * pLightData.RowPitch);
 			memcpy_s(data, size, lightData.data(), sizeof(LightStruct) * clusterX);
 		}

@@ -43,12 +43,12 @@ void RenderingThread::Start() noexcept
 	EditerSystem::Get().Initialize();
 
 	// renderingThread が正常動作しているか確認。
-	FlushRenderCommand();
+	WiatForRenderCommand();
 }
 
 void RenderingThread::Stop() noexcept
 {
-	FlushRenderCommand();
+	WiatForRenderCommand();
 
 	// unregister
 	ThreadManager::Get().QuitThread(RenderingThread::TypeData.Name);
@@ -59,6 +59,10 @@ void RenderingThread::Stop() noexcept
 void RenderingThread::BegineFrame() noexcept
 {
 	RegisterRenderCommand([] {
+
+		// この実装方法では処理がGameThreadが早すぎる場合、操作関数コマンドを実行しないなどの問題がある
+		RenderCommandList::FlushCommand();
+
 		EditerSystem::Get().BegineFrame();
 	});
 }
@@ -70,7 +74,7 @@ void RenderingThread::EndFrame() noexcept
 	});
 }
 
-void RenderingThread::FlushRenderCommand() noexcept
+void RenderingThread::WiatForRenderCommand() noexcept
 {
 	RenderCommandFance renderCommandFance;
 	renderCommandFance.BegineFrame();

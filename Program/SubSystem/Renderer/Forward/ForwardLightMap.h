@@ -10,7 +10,7 @@
 #include "../LightMap.h"
 #include "SubSystem/Renderer/D3D11/D3D11ConstantBuffer.h"
 
-#define MAX_LIGHT_COUNT 64
+#define MAX_LIGHT_COUNT 256
 
 /**
 * 2022/07/08ˆÈ‘O‚ÌLightMap“®ì‚Æ“¯‚¶“à—e‚Ìˆ—‚ğ‚ÂB

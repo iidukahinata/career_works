@@ -1,4 +1,6 @@
-#define MAXLIGHTCOUNT 64
+#define MAXLIGHTCOUNT 256
+
+Texture3D<uint> g_lightDataTex : register(t10);
 
 struct Light 
 {
@@ -10,7 +12,7 @@ struct Light
 struct DirectionalLight
 {
 	float4 direction;
-	float4 color;
+	float4 color; // w’l intensity
 };
 
 struct PointLight
@@ -37,14 +39,21 @@ cbuffer ConstBufferLight : register(b2)
 	SpotLight spotLights[MAXLIGHTCOUNT];
 	
 	float2 lightCount; // x’l pointLight : y’l sptLight
+	
+	float4 invScale;
+	float4 bias;
 };
 
+cbuffer ConstBufferLightList : register(b3)
+{	
+	min16int lightIndices[0x1000];
+};
 
 Light ToLightFromDirectionalLight(DirectionalLight directionalLight)
 {
 	Light light;
-	light.direction = normalize(-directionalLight.direction);
-	light.color = directionalLight.color;
+	light.direction = normalize(-directionalLight.direction).xyz;
+	light.color = directionalLight.color.xyz;
 	light.intensity = directionalLight.color.w;
 	return light;
 }
@@ -52,9 +61,9 @@ Light ToLightFromDirectionalLight(DirectionalLight directionalLight)
 Light ToLightFromPointLight(PointLight pointLight, float4 pos)
 {
 	Light light;
-	light.color = pointLight.color;
+	light.color = pointLight.color.xyz;
 	light.intensity = pointLight.intensity.x;
-	light.direction = normalize(pos - pointLight.position);
+	light.direction = normalize(pos - pointLight.position).xyz;
 
 	// ‹——£‚É‚æ‚é‰e‹¿—Í‚ðŒvŽZ
 	float distance = length(pos - pointLight.position);
@@ -68,9 +77,9 @@ Light ToLightFromPointLight(PointLight pointLight, float4 pos)
 Light ToLightFromSpotLight(SpotLight spotLight, float4 pos)
 {
 	Light light;
-	light.color = spotLight.color;
+	light.color = spotLight.color.xyz;
 	light.intensity = spotLight.intensity.x;
-	light.direction = normalize(pos - spotLight.position);
+	light.direction = normalize(pos - spotLight.position).xyz;
 
 	// ‹——£‚É‚æ‚é‰e‹¿—Í‚ðŒvŽZ
 	float distance = length(pos - spotLight.position);

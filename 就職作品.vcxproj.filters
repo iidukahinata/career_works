@@ -148,9 +148,6 @@
     <Filter Include="SubSystem\Thread\RenderingThrad">
       <UniqueIdentifier>{b3f4ee85-cce3-4f42-9592-5c003613e096}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SubSystem\Thread\GameThread">
-      <UniqueIdentifier>{3d1f94db-a500-4a4e-a6e8-f23ecc2417f9}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program\WinMain.cpp" />
@@ -438,9 +435,6 @@
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Core\Common\Tools\Memory\STLAllocator.cpp">
       <Filter>SubSystem\Core\Common\Tools\Memory</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Thread\GameThread.cpp">
-      <Filter>SubSystem\Thread\GameThread</Filter>
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Thread\RenderingThread\RenderCommandFance.cpp">
       <Filter>SubSystem\Thread\RenderingThrad</Filter>
@@ -807,9 +801,6 @@
     <ClInclude Include="Program\SubSystem\Core\Common\Tools\Memory\STLAllocator.h">
       <Filter>SubSystem\Core\Common\Tools\Memory</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Thread\GameThread.h">
-      <Filter>SubSystem\Thread\GameThread</Filter>
-    </ClInclude>
     <ClInclude Include="Program\SubSystem\Thread\RenderingThread\RenderCommandFance.h">
       <Filter>SubSystem\Thread\RenderingThrad</Filter>
     </ClInclude>
@@ -837,12 +828,6 @@
       <Filter>SubSystem\Renderer\Shader\HLSL\Core</Filter>
     </None>
     <None Include="Program\SubSystem\Renderer\Shader\HLSL\PBR\PBR.hlsli">
-      <Filter>SubSystem\Renderer\Shader\HLSL\PBR</Filter>
-    </None>
-    <None Include="Program\SubSystem\Renderer\Shader\HLSL\Core\ClusteredLight.hlsli">
-      <Filter>SubSystem\Renderer\Shader\HLSL\Core</Filter>
-    </None>
-    <None Include="Program\SubSystem\Renderer\Shader\HLSL\PBR\ClusteredPBR.hlsli">
       <Filter>SubSystem\Renderer\Shader\HLSL\PBR</Filter>
     </None>
   </ItemGroup>
