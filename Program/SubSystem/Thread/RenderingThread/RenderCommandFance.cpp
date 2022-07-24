@@ -2,16 +2,16 @@
 * @file    RenderCommandFance.cpp
 * @brief
 *
-* @date	   2022/07/22 2022年度初版
+* @date	   2022/07/24 2022年度初版
 */
 
 
 #include "RenderCommandFance.h"
-#include "../RenderingThread.h"
+#include "RenderingThread.h"
 
 RenderCommandFance::RenderCommandFance()
 {
-	m_hEvent = CreateEvent(nullptr, true, false, "Render");
+	m_hEvent = CreateEvent(nullptr, true, false, nullptr);
 	ASSERT(m_hEvent);
 }
 
@@ -32,11 +32,16 @@ void RenderCommandFance::BegineFrame() noexcept
 
 void RenderCommandFance::WaitForSingle() const noexcept
 {
-	while (0 < m_fanceValue)
+	while (!IsSingle())
 	{
 		if (WaitForSingleObject(m_hEvent, INFINITE) == WAIT_OBJECT_0)
 		{
 			ResetEvent(m_hEvent);
 		}
 	}
+}
+
+bool RenderCommandFance::IsSingle() const noexcept
+{
+	return m_fanceValue.load() == 0;
 }

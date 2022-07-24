@@ -22,7 +22,8 @@ public:
 	}
 
 	void Initialize() noexcept;
-	void Draw() noexcept;
+	void BegineFrame() noexcept;
+	void Render() noexcept;
 	void Exit() noexcept;
 
 	/** Widget メソッド */
@@ -33,4 +34,7 @@ private:
 
 	// * Gui 用描画クラス配列
 	Set<Widget*> m_widgets;
+
+	// * renderCommand が処理されたかどうかを判別
+	bool isRender = true;
 };

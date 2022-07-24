@@ -2,13 +2,17 @@
 * @file    ThreadManager.h
 * @brief
 *
-* @date	   2022/07/22 2022年度初版
+* @date	   2022/07/24 2022年度初版
 */
 #pragma once
 
 
 #include "Thread.h"
 
+/**
+* IThread クラスは数個(多くて４個)しか派生しないと想定して実装しているため、
+* Hash 値の被りを考慮した設計にせず名前変更を推奨している。
+*/
 class ThreadManager
 {
 public:
@@ -19,12 +23,46 @@ public:
 		return instance;
 	}
 
-	void CreateThread(UniquePtr<IThread> thread) noexcept;
+	/** スレッドを作成し、他 Thread 上で Run関数を実行。*/
+	template<class T>
+	void CreateThread() noexcept;
 
-	void Tick() noexcept;
+	/** 指定スレッドの Run関数 が終了するまで待機が入る。*/
+	void QuitThread(StringView threadName) noexcept;
 
 private:
 
-	Vector<UniquePtr<IThread>> m_threads;
-	Vector<AsyncJob> m_threadJob;
+	/** thread class メソッド */
+	void RegisterThread(IThread* ptr, const uint32_t hash) noexcept;
+	void UnRegisterThread(const uint32_t hash) noexcept;
+
+	/** async run job メソッド */
+	template<typename Func>
+	void AddAsyncJob(const uint32_t hash, Func&& func) noexcept;
+	void RemoveAsyncJob(const uint32_t hash) noexcept;
+
+private:
+
+	Map<uint32_t, UniquePtr<IThread>> m_threads;
+	Map<uint32_t, AsyncJob> m_threadJob;
 };
+
+template<class T>
+FORCEINLINE void ThreadManager::CreateThread() noexcept
+{
+	const uint32_t threadId = T::TypeData.Hash;
+	T* newThread = NewObject<T>();
+
+	RegisterThread(newThread, threadId);
+	AddAsyncJob(threadId, [this, newThread]() { newThread->Run(); });
+
+	// 追加した Job を実行
+	m_threadJob[threadId].RegisterToJobSystem();
+}
+
+template<typename Func>
+FORCEINLINE void ThreadManager::AddAsyncJob(const uint32_t hash, Func&& func) noexcept
+{
+	ASSERT(!m_threadJob.contains(hash));
+	m_threadJob.emplace(std::pair<uint32_t, AsyncJob>(hash, func));
+}

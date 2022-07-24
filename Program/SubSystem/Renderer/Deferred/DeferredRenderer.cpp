@@ -72,16 +72,12 @@ bool DeferredRenderer::Initialize()
 	m_samplerState.Create();
 
 	TransformCBuffer::Get().Init();
-
-	EditerSystem::Get().Initialize();
 	
 	return true;
 }
 
 void DeferredRenderer::Shutdown()
 {
-	EditerSystem::Get().Exit();
-
 	m_job.UnRegisterFromJobSystem();
 }
 
@@ -99,7 +95,7 @@ void DeferredRenderer::Update() noexcept
 
 	FinalPass();
 
-	EditerSystem::Get().Draw();
+	EditerSystem::Get().Render();
 
 	D3D11GraphicsDevice::Get().Present();
 }

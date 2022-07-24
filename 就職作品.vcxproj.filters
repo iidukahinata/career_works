@@ -439,14 +439,14 @@
     <ClCompile Include="Program\SubSystem\Core\Common\Tools\Memory\STLAllocator.cpp">
       <Filter>SubSystem\Core\Common\Tools\Memory</Filter>
     </ClCompile>
+    <ClCompile Include="Program\SubSystem\Thread\GameThread.cpp">
+      <Filter>SubSystem\Thread\GameThread</Filter>
+    </ClCompile>
     <ClCompile Include="Program\SubSystem\Thread\RenderingThread\RenderCommandFance.cpp">
       <Filter>SubSystem\Thread\RenderingThrad</Filter>
     </ClCompile>
-    <ClCompile Include="Program\SubSystem\Thread\RenderingThread.cpp">
+    <ClCompile Include="Program\SubSystem\Thread\RenderingThread\RenderingThread.cpp">
       <Filter>SubSystem\Thread\RenderingThrad</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Thread\GameThread.cpp">
-      <Filter>SubSystem\Thread\GameThread</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -807,14 +807,14 @@
     <ClInclude Include="Program\SubSystem\Core\Common\Tools\Memory\STLAllocator.h">
       <Filter>SubSystem\Core\Common\Tools\Memory</Filter>
     </ClInclude>
+    <ClInclude Include="Program\SubSystem\Thread\GameThread.h">
+      <Filter>SubSystem\Thread\GameThread</Filter>
+    </ClInclude>
     <ClInclude Include="Program\SubSystem\Thread\RenderingThread\RenderCommandFance.h">
       <Filter>SubSystem\Thread\RenderingThrad</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Thread\RenderingThread.h">
+    <ClInclude Include="Program\SubSystem\Thread\RenderingThread\RenderingThread.h">
       <Filter>SubSystem\Thread\RenderingThrad</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Thread\GameThread.h">
-      <Filter>SubSystem\Thread\GameThread</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

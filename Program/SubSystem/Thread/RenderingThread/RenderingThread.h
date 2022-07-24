@@ -2,18 +2,12 @@
 * @file    RenderingThread.h
 * @brief
 *
-* @date	   2022/07/22 2022年度初版
+* @date	   2022/07/24 2022年度初版
 */
 #pragma once
 
 
-#include "Thread.h"
-
-/**
-* RenderingThread で処理されるコマンド処理が終了するまで待機する。
-* 主に、アプリケーション終了時などに使用される。
-*/
-void FlushRenderCommand() noexcept;
+#include "../Thread.h"
 
 /**
 * RenderingThread で順次処理される CommandList と CommandList 追加待ち TaskList を管理
@@ -27,7 +21,7 @@ public:
 	/** GameThread 側からの使用アクセスされる Task 追加関数 */
 	static void AddTask(Command&& task) noexcept
 	{
-		std::unique_lock lock(m_mutex);
+		std::unique_lock<std::mutex> lock(m_mutex);
 		m_taskList.push(std::forward<Command>(task));
 	}
 
@@ -51,7 +45,6 @@ private:
 
 /**
 * 使用者側で RenderingCommand の追加を行うためのインターフェース関数。
-* この関数を使用し、追加された Command は１フレーム遅れて実行される。
 */
 template<class Func>
 void RegisterRenderCommand(Func&& task) noexcept
@@ -59,13 +52,34 @@ void RegisterRenderCommand(Func&& task) noexcept
 	RenderCommandList::AddTask(std::forward<Func>(task));
 }
 
-/**
-* 
-*/
 class RenderingThread : public IThread
 {
 	SUB_CLASS(RenderingThread)
 public:
+
+	/** RenderingThread の立ち上げ処理を行う。*/
+	static void Start() noexcept;
+
+	/** RenderingThread の終了処理を行う。*/
+	static void Stop() noexcept;
+
+	/**
+	* GemaThread 開始時に呼び出される。
+	* RenderingThread での開始処理のコマンドセットを行う。
+	*/
+	static void BegineFrame() noexcept;
+
+	/**
+	* GemaThread 終了時に呼び出される。
+	* RenderingThread での終了処理のコマンドセットを行う。
+	*/
+	static void EndFrame() noexcept;
+
+	/**
+	* RenderingThread で処理されるコマンド処理が終了するまで待機する。
+	* 主に、アプリケーション終了時などに使用する。
+	*/
+	static void FlushRenderCommand() noexcept;
 
 	void Run() override;
 

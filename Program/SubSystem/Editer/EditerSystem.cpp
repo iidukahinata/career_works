@@ -15,15 +15,20 @@
 
 void EditerSystem::Initialize() noexcept
 {
-	bool ret = ImGui::CreateContext();
-	ret = ImGui_ImplWin32_Init(Window::Get().GetHandle());
-	ret = ImGui_ImplDX11_Init(D3D11GraphicsDevice::Get().GetDevice(), D3D11GraphicsDevice::Get().GetContext());
+	ImGui::CreateContext();
+	ImGui_ImplWin32_Init(Window::Get().GetHandle());
+	ImGui_ImplDX11_Init(D3D11GraphicsDevice::Get().GetDevice(), D3D11GraphicsDevice::Get().GetContext());
 
 	ImGui::StyleColorsClassic();
 }
 
-void EditerSystem::Draw() noexcept
+void EditerSystem::BegineFrame() noexcept
 {
+	if (!isRender)
+	{
+		return;
+	}
+
 	// start the dear ImGui frame
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
@@ -35,9 +40,20 @@ void EditerSystem::Draw() noexcept
 		widget->Draw();
 	}
 
+	isRender = false;
+}
+
+void EditerSystem::Render() noexcept
+{
+	if (isRender)
+	{
+		return;
+	}
+
 	// rendering
 	ImGui::Render();
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+	isRender = true;
 }
 
 void EditerSystem::Exit() noexcept

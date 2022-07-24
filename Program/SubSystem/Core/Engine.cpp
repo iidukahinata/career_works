@@ -19,8 +19,7 @@
 #include "SubSystem/Resource/ResourceManager.h"
 #include "SubSystem/JobSystem/Sync/JobSystem.h"
 #include "SubSystem/JobSystem/Async/AsyncJobSystem.h"
-#include "SubSystem/Thread/ThreadManager.h"
-#include "SubSystem/Thread/RenderingThread.h"
+#include "SubSystem/Thread/RenderingThread/RenderingThread.h"
 
 Context* g_context = nullptr;
 
@@ -52,7 +51,7 @@ bool Engine::Initialize(HINSTANCE hInstance)
 		return false;
 	}
 
-	ThreadManager::Get().CreateThread(MakeUnique<RenderingThread>());
+	RenderingThread::Start();
 
 	m_hInstance = hInstance;
 
@@ -62,16 +61,17 @@ bool Engine::Initialize(HINSTANCE hInstance)
 long Engine::MainLoop()
 {
 	Window& window = Window::Get();
-	auto& jobSystem = JobSystem::Get();
-	auto timer = m_context->GetSubsystem<Timer>();
+	Timer* timer = m_context->GetSubsystem<Timer>();
 	
 	while (window.Tick())
 	{
 		if (timer->ReachedNextFrame())
 		{
-			jobSystem.Execute(timer->GetDeltaTime(), FunctionType::Update);
+			RenderingThread::BegineFrame();
 
-			jobSystem.Execute(timer->GetDeltaTime(), FunctionType::Render);
+			JobSystem::Get().Execute(timer->GetDeltaTime(), FunctionType::Update);
+			
+			RenderingThread::EndFrame();
 		}
 	}
 
@@ -80,6 +80,8 @@ long Engine::MainLoop()
 
 void Engine::Shutdown()
 {
+	RenderingThread::Stop();
+
 	EventManager::Get().Exit();
 
 #if DEBUG_MODE_CONSOL
