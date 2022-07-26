@@ -2,7 +2,7 @@
 * @file    D3D12Fence.cpp
 * @brief
 *
-* @date	   2022/07/22 2022年度初版
+* @date	   2022/07/26 2022年度初版
 */
 
 
@@ -16,23 +16,19 @@ D3D12Fence::~D3D12Fence()
 
 bool D3D12Fence::Create() noexcept
 {
-	HRESULT hr = GetDevice()->CreateFence(
-		0,
-		D3D12_FENCE_FLAG_NONE,
-		IID_PPV_ARGS(m_fence.ReleaseAndGetAddressOf()));
-
-	if (FAILED(hr))
-	{
+	auto hr = GetDevice()->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(m_fence.ReleaseAndGetAddressOf()));
+	if (FAILED(hr)) {
 		return false;
 	}
-
-	m_fenceValue = 1;
 
 	m_fenceEvent = CreateEvent(nullptr, false, false, nullptr);
-	if (!m_fenceEvent)
-	{
+	if (!m_fenceEvent) {
 		return false;
 	}
+
+	// 1フレーム目としてセット
+	m_fenceValue = 1;
+
 	return true;
 }
 
@@ -44,6 +40,6 @@ void D3D12Fence::WaitForSingleToFinish() noexcept
 		WaitForSingleObject(m_fenceEvent, INFINITE);
 
 		// 次のフレームのフェンス値に更新
-		m_fenceValue++;
+		++m_fenceValue;
 	}
 }

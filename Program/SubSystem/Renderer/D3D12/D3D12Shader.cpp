@@ -2,25 +2,29 @@
 * @file    D3D12Shader.cpp
 * @brief
 *
-* @date	   2022/07/22 2022年度初版
+* @date	   2022/07/26 2022年度初版
 */
 
 
 #include "D3D12Shader.h"
 #include <d3dcompiler.h>
 
+D3D12Shader::D3D12Shader(StringView filePath, StringView entryPoint, StringView traget)
+{
+	Compile(filePath, entryPoint, traget);
+}
+
 void D3D12Shader::Compile(StringView filePath, StringView entryPoint, StringView traget) noexcept
 {
 #ifdef _DEBUG
-	UINT compileFlags = D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION;
+	const UINT compileFlags = D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION;
 #else
-	UINT compileFlags = 0;
+	const UINT compileFlags = 0;
 #endif // DEBUG
 
-	HRESULT hr;
 	if (GetExt(filePath) == "cso")
 	{
-		hr = D3DReadFileToBlob(ToWstring(filePath).data(), m_blob.ReleaseAndGetAddressOf());
+		auto hr = D3DReadFileToBlob(ToWstring(filePath).data(), m_blob.ReleaseAndGetAddressOf());
 		if (FAILED(hr))
 		{
 			LOG_ERROR("シェーダコンパイルに失敗。: Shader.cpp");
@@ -30,7 +34,7 @@ void D3D12Shader::Compile(StringView filePath, StringView entryPoint, StringView
 	else
 	{
 		Microsoft::WRL::ComPtr<ID3DBlob> errorBlob = nullptr;
-		HRESULT hr = D3DCompileFromFile(
+		auto hr = D3DCompileFromFile(
 			ToWstring(filePath).data(),
 			nullptr,
 			D3D_COMPILE_STANDARD_FILE_INCLUDE,

@@ -2,18 +2,22 @@
 * @file    D3D12Shader.h
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/26 2022年度初版
 */
 #pragma once
 
 
 #include <d3d12.h>
 #include <wrl/client.h>
+#include <string>
 #include "D3D12DeviceChild.h"
 
 class D3D12Shader : public D3D12DeviceChild
 {
 public:
+
+	D3D12Shader() = default;
+	D3D12Shader(StringView filePath, StringView entryPoint, StringView traget);
 
 	void Compile(StringView filePath, StringView entryPoint, StringView traget) noexcept;
 

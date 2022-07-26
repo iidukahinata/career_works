@@ -2,7 +2,7 @@
 * @file    D3D12VertexBuffer.h
 * @brief
 *
-* @date	   2022/07/22 2022年度初版
+* @date	   2022/07/26 2022年度初版
 */
 #pragma once
 
@@ -16,13 +16,11 @@ class D3D12VertexBuffer : public D3D12DeviceChild
 {
 public:
 
-	bool Create(const Vector<T>& vertices) noexcept;
-
-	void Update(const Vector<T>& vertices) noexcept;
-
+	bool Create(const std::vector<T>& vertices) noexcept;
+	void Update(const std::vector<T>& vertices) noexcept;
 	void IASet(UINT slot = 0) const noexcept;
 
-	ID3D12Resource*           Get() const noexcept     { return m_buffer.Get(); };
+	ID3D12Resource*           Get()		const noexcept { return m_buffer.Get(); };
 	D3D12_VERTEX_BUFFER_VIEW& GetBufferView() noexcept { return m_bufferView; };
 
 private:
@@ -34,7 +32,7 @@ private:
 };
 
 template<class T>
-inline bool D3D12VertexBuffer<T>::Create(const Vector<T>& vertices) noexcept
+inline bool D3D12VertexBuffer<T>::Create(const std::vector<T>& vertices) noexcept
 {
 	const UINT size = sizeof(T) * vertices.size();
 	const UINT stride = sizeof(T);
@@ -69,7 +67,7 @@ inline bool D3D12VertexBuffer<T>::Create(const Vector<T>& vertices) noexcept
 }
 
 template<class T>
-inline void D3D12VertexBuffer<T>::Update(const Vector<T>& vertices) noexcept
+inline void D3D12VertexBuffer<T>::Update(const std::vector<T>& vertices) noexcept
 {
 	T* pData;
 	HRESULT hr = m_buffer->Map(0, nullptr, reinterpret_cast<void**>(&pData));
@@ -83,5 +81,5 @@ inline void D3D12VertexBuffer<T>::Update(const Vector<T>& vertices) noexcept
 template<class T>
 inline void D3D12VertexBuffer<T>::IASet(UINT slot /* = 0 */) const noexcept
 {
-	GetContext()->GetCommandList()->IASetVertexBuffers(slot, 1, &m_bufferView);
+	GetCommandList()->IASetVertexBuffers(slot, 1, &m_bufferView);
 }

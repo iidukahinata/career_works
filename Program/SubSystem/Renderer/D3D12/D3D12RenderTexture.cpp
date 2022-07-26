@@ -2,7 +2,7 @@
 * @file    D3D12RenderTexture.cpp
 * @brief
 *
-* @date	   2022/07/22 2022年度初版
+* @date	   2022/07/26 2022年度初版
 */
 
 
@@ -10,7 +10,7 @@
 #include "D3D12GrahicsDevice.h"
 #include "ThirdParty/directxtex/include/d3dx12.h"
 
-bool D3D12RenderTexture::Create(int width, int height, DXGI_FORMAT colorFormat, DXGI_FORMAT depthFormat) noexcept
+bool D3D12RenderTexture::Create(UINT width, UINT height, DXGI_FORMAT colorFormat, DXGI_FORMAT depthFormat) noexcept
 {
 	if (!CreateRenderTarget(width, height, colorFormat))
 		return false;
@@ -22,43 +22,43 @@ bool D3D12RenderTexture::Create(int width, int height, DXGI_FORMAT colorFormat, 
 		return false;
 
 	// レンダーターゲットテクスチャのディスクリプタを作成
-	auto rtvHandle = m_rtvHeap->GetCPUDescriptorHandleForHeapStart();
+	const auto rtvHandle = m_rtvHeap->GetCPUDescriptorHandleForHeapStart();
 	GetDevice()->CreateRenderTargetView(m_renderTarget.Get(), nullptr, rtvHandle);
 
 	// 深度テクスチャのディスクリプタを作成
-	auto dsvHandle = m_dsvHeap->GetCPUDescriptorHandleForHeapStart();
+	const auto dsvHandle = m_dsvHeap->GetCPUDescriptorHandleForHeapStart();
 	GetDevice()->CreateDepthStencilView(m_depthStencil.Get(), nullptr, dsvHandle);
 
 	return true;
 }
 
-void D3D12RenderTexture::SetRenderTarget() noexcept
+void D3D12RenderTexture::SetRenderTarget() const noexcept
 {
-	auto rtvHandle = m_rtvHeap->GetCPUDescriptorHandleForHeapStart();
-	auto dsvHandle = m_dsvHeap->GetCPUDescriptorHandleForHeapStart();
+	const auto rtvHandle = m_rtvHeap->GetCPUDescriptorHandleForHeapStart();
+	const auto dsvHandle = m_dsvHeap->GetCPUDescriptorHandleForHeapStart();
 
-	GetContext()->GetCommandList()->OMSetRenderTargets(1, &rtvHandle, false, &dsvHandle);
+	GetCommandList()->OMSetRenderTargets(1, &rtvHandle, false, &dsvHandle);
 }
 
-void D3D12RenderTexture::Clear(Math::Vector4 color) noexcept
+void D3D12RenderTexture::Clear(const Math::Vector4& color) noexcept
 {
-	auto rtvHandle = m_rtvHeap->GetCPUDescriptorHandleForHeapStart();
-	auto dsvHandle = m_dsvHeap->GetCPUDescriptorHandleForHeapStart();
+	const auto rtvHandle = m_rtvHeap->GetCPUDescriptorHandleForHeapStart();
+	const auto dsvHandle = m_dsvHeap->GetCPUDescriptorHandleForHeapStart();
 
-	float clearColor[] = { color.x, color.y, color.z, color.w };
-	GetContext()->GetCommandList()->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
-	GetContext()->GetCommandList()->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+	const float clearColor[] = { color.x, color.y, color.z, color.w };
+	GetCommandList()->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
+	GetCommandList()->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 
-	GetContext()->GetCommandList()->RSSetViewports(1, &m_viewport);
+	GetCommandList()->RSSetViewports(1, &m_viewport);
 }
 
-bool D3D12RenderTexture::CreateRenderTarget(int width, int height, DXGI_FORMAT colorFormat) noexcept
+bool D3D12RenderTexture::CreateRenderTarget(UINT width, UINT height, DXGI_FORMAT colorFormat) noexcept
 {
 	CD3DX12_RESOURCE_DESC renderTargetDesc(
 		D3D12_RESOURCE_DIMENSION_TEXTURE2D,
 		0,
-		static_cast<UINT>(width),
-		static_cast<UINT>(height),
+		static_cast<const UINT>(width),
+		static_cast<const UINT>(height),
 		1,
 		1,
 		colorFormat,
@@ -74,8 +74,9 @@ bool D3D12RenderTexture::CreateRenderTarget(int width, int height, DXGI_FORMAT c
 	rtvClearValue.Color[2] = 0.f;
 	rtvClearValue.Color[3] = 1.f;
 
-	auto heapProperties = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT);
-	HRESULT hr = GetDevice()->CreateCommittedResource(
+	const auto heapProperties = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT);
+
+	auto hr = GetDevice()->CreateCommittedResource(
 		&heapProperties,
 		D3D12_HEAP_FLAG_NONE,
 		&renderTargetDesc,
@@ -89,13 +90,13 @@ bool D3D12RenderTexture::CreateRenderTarget(int width, int height, DXGI_FORMAT c
 	return true;
 }
 
-bool D3D12RenderTexture::CreateDepthStencil(int width, int height, DXGI_FORMAT depthFormat) noexcept
+bool D3D12RenderTexture::CreateDepthStencil(UINT width, UINT height, DXGI_FORMAT depthFormat) noexcept
 {
 	CD3DX12_RESOURCE_DESC depthStencilDesc(
 		D3D12_RESOURCE_DIMENSION_TEXTURE2D,
 		0,
-		static_cast<UINT>(width),
-		static_cast<UINT>(height),
+		static_cast<const UINT>(width),
+		static_cast<const UINT>(height),
 		1,
 		1,
 		depthFormat,
@@ -109,8 +110,9 @@ bool D3D12RenderTexture::CreateDepthStencil(int width, int height, DXGI_FORMAT d
 	dsvClearValue.DepthStencil.Depth = 1.0f;
 	dsvClearValue.DepthStencil.Stencil = 0;
 
-	auto heapProperties = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT);
-	HRESULT hr = GetDevice()->CreateCommittedResource(
+	const auto heapProperties = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT);
+
+	auto hr = GetDevice()->CreateCommittedResource(
 		&heapProperties,
 		D3D12_HEAP_FLAG_NONE,
 		&depthStencilDesc,
@@ -127,11 +129,11 @@ bool D3D12RenderTexture::CreateDepthStencil(int width, int height, DXGI_FORMAT d
 bool D3D12RenderTexture::CreateDescriptorHeap() noexcept
 {
 	D3D12_DESCRIPTOR_HEAP_DESC descriptorDesc = {};
-
 	descriptorDesc.NumDescriptors = 2;
 	descriptorDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
 	descriptorDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
-	HRESULT hr = GetDevice()->CreateDescriptorHeap(&descriptorDesc, IID_PPV_ARGS(m_rtvHeap.ReleaseAndGetAddressOf()));
+
+	auto hr = GetDevice()->CreateDescriptorHeap(&descriptorDesc, IID_PPV_ARGS(m_rtvHeap.ReleaseAndGetAddressOf()));
 	if (FAILED(hr)) {
 		return false;
 	}

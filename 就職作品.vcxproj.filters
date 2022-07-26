@@ -214,39 +214,6 @@
     <ClCompile Include="Program\SubSystem\Renderer\D3D11\D3D11VertexShader.cpp">
       <Filter>SubSystem\Renderer\GraphicsAPI\D3D11</Filter>
     </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12CommandContext.cpp">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12DescriptorHeap.cpp">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12DeviceChild.cpp">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Fence.cpp">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12GrahicsDevice.cpp">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12IndexBuffer.cpp">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12PipelineState.cpp">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12RenderTexture.cpp">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12RootSignature.cpp">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Shader.cpp">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Texture.cpp">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClCompile>
     <ClCompile Include="Program\SubSystem\Renderer\Renderer.cpp">
       <Filter>SubSystem\Renderer</Filter>
     </ClCompile>
@@ -442,6 +409,39 @@
     <ClCompile Include="Program\SubSystem\Thread\RenderingThread\RenderingThread.cpp">
       <Filter>SubSystem\Thread\RenderingThrad</Filter>
     </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12IndexBuffer.cpp">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12PipelineState.cpp">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12RenderTexture.cpp">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12RootSignature.cpp">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Shader.cpp">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Texture.cpp">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12CommandContext.cpp">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12DescriptorHeap.cpp">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12DeviceChild.cpp">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Fence.cpp">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12GrahicsDevice.cpp">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\ThirdParty\FMOD\include\fmod.h">
@@ -527,42 +527,6 @@
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Renderer\D3D11\D3D11VertexBuffer.h">
       <Filter>SubSystem\Renderer\GraphicsAPI\D3D11</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12CommandContext.h">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12ConstantBuffer.h">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12DescriptorHeap.h">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12DeviceChild.h">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12GrahicsDevice.h">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12IndexBuffer.h">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12PipelineState.h">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12RenderTexture.h">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12RootSignature.h">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12Shader.h">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12Texture.h">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12VertexBuffer.h">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Renderer\Renderer.h">
       <Filter>SubSystem\Renderer</Filter>
@@ -806,6 +770,42 @@
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Thread\RenderingThread\RenderingThread.h">
       <Filter>SubSystem\Thread\RenderingThrad</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12IndexBuffer.h">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12PipelineState.h">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12RenderTexture.h">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12RootSignature.h">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12Shader.h">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12Texture.h">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12VertexBuffer.h">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12CommandContext.h">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12ConstantBuffer.h">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12DescriptorHeap.h">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12DeviceChild.h">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12GrahicsDevice.h">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

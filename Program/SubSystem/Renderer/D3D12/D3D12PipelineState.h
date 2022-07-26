@@ -2,7 +2,7 @@
 * @file    D3D12PipelineState.h
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/26 2022年度初版
 */
 #pragma once
 
@@ -17,6 +17,7 @@ public:
 
 	bool Create(const D3D12_GRAPHICS_PIPELINE_STATE_DESC& desc) noexcept;
 	bool Create(const D3D12_COMPUTE_PIPELINE_STATE_DESC& desc) noexcept;
+
 	void Set() const noexcept;
 
 	ID3D12PipelineState* Get() const noexcept { return m_pipelineState.Get(); };

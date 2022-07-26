@@ -2,7 +2,7 @@
 * @file    D3D12PipelineState.cpp
 * @brief
 *
-* @date	   2022/07/22 2022年度初版
+* @date	   2022/07/26 2022年度初版
 */
 
 
@@ -11,7 +11,7 @@
 
 bool D3D12PipelineState::Create(const D3D12_GRAPHICS_PIPELINE_STATE_DESC& desc) noexcept
 {
-	HRESULT hr = GetDevice()->CreateGraphicsPipelineState(
+	auto hr = GetDevice()->CreateGraphicsPipelineState(
 		&desc,
 		IID_PPV_ARGS(m_pipelineState.ReleaseAndGetAddressOf()));
 
@@ -23,7 +23,7 @@ bool D3D12PipelineState::Create(const D3D12_GRAPHICS_PIPELINE_STATE_DESC& desc) 
 
 bool D3D12PipelineState::Create(const D3D12_COMPUTE_PIPELINE_STATE_DESC& desc) noexcept
 {
-	HRESULT hr = GetDevice()->CreateComputePipelineState(
+	auto hr = GetDevice()->CreateComputePipelineState(
 		&desc,
 		IID_PPV_ARGS(m_pipelineState.ReleaseAndGetAddressOf()));
 
@@ -35,5 +35,5 @@ bool D3D12PipelineState::Create(const D3D12_COMPUTE_PIPELINE_STATE_DESC& desc) n
 
 void D3D12PipelineState::Set() const noexcept
 {
-	GetContext()->GetCommandList()->SetPipelineState(m_pipelineState.Get());
+	GetCommandList()->SetPipelineState(m_pipelineState.Get());
 }

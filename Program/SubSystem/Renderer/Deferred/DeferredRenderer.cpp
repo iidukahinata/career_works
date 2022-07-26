@@ -153,7 +153,7 @@ void DeferredRenderer::FinalPass() noexcept
 	
 	// メインバッファーをセット
 	graphicsDevice.SetRenderTarget(graphicsDevice.GetRenderTarget(), graphicsDevice.GetDepthStencil());
-	graphicsDevice.Clear(Math::Vector4(1.f, 0.f, 0.f, 1.f));
+	graphicsDevice.Clear(Math::Vector4(0.f, 0.f, 0.f, 1.f));
 
 	// シェーダーセット
 	m_vsShader.VSSet();

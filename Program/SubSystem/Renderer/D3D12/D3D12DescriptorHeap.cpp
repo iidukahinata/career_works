@@ -2,7 +2,7 @@
 * @file    D3D12DescriptorHeap.cpp
 * @brief
 *
-* @date	   2022/07/22 2022年度初版
+* @date	   2022/07/26 2022年度初版
 */
 
 
@@ -15,9 +15,9 @@ bool D3D12DescriptorHeap::Create(UINT NumDescriptors, D3D12_DESCRIPTOR_HEAP_TYPE
 	descriptHeapDesc.NumDescriptors = NumDescriptors;
 	descriptHeapDesc.Type = type;
 	descriptHeapDesc.NodeMask = 0;
-	descriptHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
+	descriptHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
 
-	HRESULT hr = GetDevice()->CreateDescriptorHeap(
+	auto hr = GetDevice()->CreateDescriptorHeap(
 		&descriptHeapDesc,
 		IID_PPV_ARGS(m_descriptHeap.ReleaseAndGetAddressOf()));
 
@@ -26,22 +26,27 @@ bool D3D12DescriptorHeap::Create(UINT NumDescriptors, D3D12_DESCRIPTOR_HEAP_TYPE
 		return false;
 	}
 
-	m_d12DescriptorSize = GetDevice()->GetDescriptorHandleIncrementSize(type);
+	m_descriptorSize = GetDevice()->GetDescriptorHandleIncrementSize(type);
 	return true;
 }
 
-void D3D12DescriptorHeap::Set()
+void D3D12DescriptorHeap::Set() const noexcept
 {
-	GetContext()->GetCommandList()->SetDescriptorHeaps(1, m_descriptHeap.GetAddressOf());
-	GetContext()->GetCommandList()->SetGraphicsRootDescriptorTable(1, m_descriptHeap->GetGPUDescriptorHandleForHeapStart());
+	ID3D12DescriptorHeap* descriptHeaps[] = { m_descriptHeap.Get() };
+	GetCommandList()->SetDescriptorHeaps(1, descriptHeaps);
 }
 
-UINT D3D12DescriptorHeap::IncrementSize()
+void D3D12DescriptorHeap::SetGraphicsRootTable(UINT pramatorIndex) const noexcept
 {
-	return m_d12DescriptorSize;
+	GetCommandList()->SetGraphicsRootDescriptorTable(pramatorIndex, m_descriptHeap->GetGPUDescriptorHandleForHeapStart());
 }
 
-D3D12_CPU_DESCRIPTOR_HANDLE D3D12DescriptorHeap::GetCPUDescriptorHandleForHeapStart()
+D3D12_CPU_DESCRIPTOR_HANDLE D3D12DescriptorHeap::GetCPUDescriptorHandleForHeapStart() noexcept
 {
 	return m_descriptHeap->GetCPUDescriptorHandleForHeapStart();
+}
+
+D3D12_GPU_DESCRIPTOR_HANDLE D3D12DescriptorHeap::GetGPUDescriptorHandleForHeapStart() noexcept
+{
+	return m_descriptHeap->GetGPUDescriptorHandleForHeapStart();
 }

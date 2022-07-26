@@ -13,8 +13,8 @@
 Material::Material()
 {
 	// âºê›íË
-	SetVSShader("assets/Resource/Shader/PBR_VS.cso");
-	SetPSShader("assets/Resource/Shader/PBR_PS.cso");
+	SetVSShader("assets/Resource/Shader/GBufferVS.cso");
+	SetPSShader("assets/Resource/Shader/GBufferPS.cso");
 }
 
 void Material::SaveToFile(StringView filePath)

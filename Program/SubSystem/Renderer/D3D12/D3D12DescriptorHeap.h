@@ -2,7 +2,7 @@
 * @file    D3D12DescriptorHeap.h
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/26 2022年度初版
 */
 #pragma once
 
@@ -18,15 +18,17 @@ public:
 	bool Create(UINT NumDescriptors, D3D12_DESCRIPTOR_HEAP_TYPE type) noexcept;
 
 	/** デバイス設定するための関数です。*/
-	void Set();
+	void Set() const noexcept;
+	void SetGraphicsRootTable(UINT pramatorIndex) const noexcept;
 
-	UINT IncrementSize();
+	UINT GetIncrementSize() const noexcept { return m_descriptorSize; }
+	ID3D12DescriptorHeap* Get() const noexcept { return m_descriptHeap.Get(); }
 
-	D3D12_CPU_DESCRIPTOR_HANDLE GetCPUDescriptorHandleForHeapStart();
+	D3D12_CPU_DESCRIPTOR_HANDLE GetCPUDescriptorHandleForHeapStart() noexcept;
+	D3D12_GPU_DESCRIPTOR_HANDLE GetGPUDescriptorHandleForHeapStart() noexcept;
 
 private:
 
-	UINT m_d12DescriptorSize;
-
+	UINT m_descriptorSize;
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> m_descriptHeap;
 };
