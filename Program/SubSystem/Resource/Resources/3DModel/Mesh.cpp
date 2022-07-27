@@ -2,7 +2,7 @@
 * @file    Mesh.cpp
 * @brief
 *
-* @date	   2022/07/22 2022年度初版
+* @date	   2022/07/27 2022年度初版
 */
 
 
@@ -72,7 +72,7 @@ void Mesh::Render() const noexcept
 	m_indexBuffer.IASet();
 	
 	// プリミティブタイプをセット
-	auto context = m_vertexBuffer.GetContext();
+	auto context = m_vertexBuffer.GetCommandList();
 	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 

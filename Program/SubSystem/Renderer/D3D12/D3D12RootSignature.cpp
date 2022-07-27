@@ -2,13 +2,34 @@
 * @file    D3D12RootSignature.cpp
 * @brief
 *
-* @date	   2022/07/26 2022年度初版
+* @date	   2022/07/27 2022年度初版
 */
 
 
+#include <d3dcompiler.h>
 #include "D3D12RootSignature.h"
 #include "D3D12GrahicsDevice.h"
 #include "ThirdParty/directxtex/include/d3dx12.h"
+
+bool D3D12RootSignature::Create(ID3DBlob* blob) noexcept
+{
+	ID3DBlob* Signature = nullptr;
+
+	auto hr = D3DGetBlobPart(
+		blob->GetBufferPointer(), blob->GetBufferSize(),
+		D3D_BLOB_ROOT_SIGNATURE, 0, &Signature);
+
+	// ルートシグネチャの生成
+	hr = GetDevice()->CreateRootSignature(
+		0, Signature->GetBufferPointer(), Signature->GetBufferSize(),
+		IID_PPV_ARGS(m_rootsignature.ReleaseAndGetAddressOf()));
+
+	if (FAILED(hr)) {
+		return false;
+	}
+
+	return true;
+}
 
 bool D3D12RootSignature::Create(
 	UINT parameterCount,

@@ -2,7 +2,7 @@
 * @file    Texture.cpp
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/27 2022年度初版
 */
 
 
@@ -65,12 +65,12 @@ bool Texture::Create(TextureData& textureData) noexcept
 
 bool Texture::Create(const DirectX::Image* images, size_t imageSize, const DirectX::TexMetadata& meta)
 {
-	return m_d3d11Texture.Create(images, imageSize, meta);
+	return m_texture.Create(images, imageSize, meta);
 }
 
-void Texture::PSSet(int slot) const noexcept
+void* Texture::GetResource() const noexcept
 {
-	m_d3d11Texture.PSSet(slot);
+	return m_texture.Get();
 }
 
 bool Texture::Do_Load(StringView filePath)

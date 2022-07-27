@@ -2,15 +2,16 @@
 * @file    Material.h
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/26 2022年度初版
 */
 #pragma once
 
 
 #include "../IResource.h"
-#include "SubSystem/Renderer/D3D11/D3D11Shader.h"
-#include "SubSystem/Renderer/D3D11/D3D11InputLayout.h"
-#include "SubSystem/Renderer/D3D11/D3D11SamplerState.h"
+#include "SubSystem/Renderer/D3D12/D3D12Shader.h"
+#include "SubSystem/Renderer/D3D12/D3D12PipelineState.h"
+#include "SubSystem/Renderer/D3D12/D3D12RootSignature.h"
+#include "SubSystem/Renderer/D3D12/D3D12DescriptorHeap.h"
 
 class Texture;
 
@@ -41,15 +42,17 @@ protected:
 
 	String ConvertProprietaryFormat(StringView filePath) const noexcept;
 
+	bool CreatePipelineState() noexcept;
+	bool CreateRootSignature() noexcept;
+
 private:
 
 	Vector<Texture*> m_textures;
 
 	// * shader object
-	D3D11VertexShader m_vertexShader;
-	D3D11PixelShader  m_pixelShader;
-
-	D3D11InputLayout m_inputLayout;
-
-	D3D11SamplerState m_samplerState;
+	D3D12Shader m_vertexShader;
+	D3D12Shader  m_pixelShader;
+	D3D12PipelineState m_pipelineState;
+	D3D12RootSignature m_rootSignature;
+	D3D12DescriptorHeap m_descriptHeap;
 };

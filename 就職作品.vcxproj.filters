@@ -442,6 +442,12 @@
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12GrahicsDevice.cpp">
       <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
     </ClCompile>
+    <ClCompile Include="Program\ThirdParty\imgui\imgui_impl_dx12.cpp">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12ConstantBuffer.cpp">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Program\ThirdParty\FMOD\include\fmod.h">
@@ -806,6 +812,12 @@
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12GrahicsDevice.h">
       <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\ThirdParty\imgui\imgui_impl_dx12.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Input\InputHelper.h">
+      <Filter>SubSystem\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

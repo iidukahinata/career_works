@@ -7,17 +7,19 @@
 #pragma once
 
 
+#include "InputHelper.h"
+
 class KeyPressed : public IEvent
 {
 	SUB_CLASS(KeyPressed)
 public:
 
-	KeyPressed(uint32_t key);
+	KeyPressed(Button::KeyAndMouse key);
 	std::any GetData() override;
 
 private:
 
-	uint32_t m_key;
+	Button::KeyAndMouse m_key;
 };
 
 class KeyReleased : public IEvent
@@ -25,10 +27,10 @@ class KeyReleased : public IEvent
 	SUB_CLASS(KeyReleased)
 public:
 
-	KeyReleased(uint32_t key);
+	KeyReleased(Button::KeyAndMouse key);
 	std::any GetData() override;
 
 private:
 
-	uint32_t m_key;
+	Button::KeyAndMouse m_key;
 };

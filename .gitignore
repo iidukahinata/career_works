@@ -1409,3 +1409,5 @@ FodyWeavers.xsd
 /assets/Resource/Shader/GBufferPS.cso
 /assets/Resource/Shader/DeferredVS.cso
 /assets/Resource/Shader/DeferredPS.cso
+/Program/ThirdParty/imgui/imgui_impl_dx12.h
+/Program/ThirdParty/imgui/imgui_impl_dx12.cpp

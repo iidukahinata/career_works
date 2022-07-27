@@ -31,7 +31,7 @@ public:
 	void SetResource(ID3D12Resource* resource);
 
 	/* アクセス */
-	ID3D12Resource*  Get()	  const noexcept { return m_texture.Get(); }
+	ID3D12Resource* Get()	  const noexcept { return m_texture.Get(); }
 	ID3D12Resource** GetAddressOf() noexcept { return m_texture.GetAddressOf(); }
 
 private:

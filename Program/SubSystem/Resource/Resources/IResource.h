@@ -44,4 +44,6 @@ private:
 
 	// * 同じリソースかをリソース名から判断するため
 	String m_filePath;
+
+	//Unordered_Map<String, IResource*> m_referenceResources;
 };

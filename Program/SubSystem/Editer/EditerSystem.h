@@ -2,10 +2,12 @@
 * @file    MyGui.h
 * @brief   gui管理クラス
 *
-* @date	   2022/07/19 2022年度初版
+* @date	   2022/07/26 2022年度初版
 */
 #pragma once
 
+
+#include "SubSystem/Renderer/D3D12/D3D12DescriptorHeap.h"
 
 class Widget;
 
@@ -37,4 +39,6 @@ private:
 
 	// * renderCommand が処理されたかどうかを判別
 	bool isRender = true;
+
+	D3D12DescriptorHeap m_descriptHeap;
 };

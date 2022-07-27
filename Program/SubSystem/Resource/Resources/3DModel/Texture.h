@@ -2,13 +2,13 @@
 * @file		Texture.h
 * @brief
 *
-* @date		2022/07/06 2022年度初版
+* @date		2022/07/27 2022年度初版
 */
 #pragma once
 
 
 #include "../IResource.h"
-#include "SubSystem/Renderer/D3D11/D3D11Texture.h"
+#include "SubSystem/Renderer/D3D12/D3D12Texture.h"
 
 struct TextureData
 {
@@ -39,7 +39,7 @@ public:
 	bool Create(TextureData& textureData) noexcept;
 	bool Create(const DirectX::Image* images, size_t imageSize, const DirectX::TexMetadata& meta);
 
-	void PSSet(int slot) const noexcept;
+	void* GetResource() const noexcept;
 
 private:
 
@@ -54,5 +54,5 @@ private:
 	//* もっといい実装があると思うので今後変更予定。
 	UniquePtr<TextureData> m_textureData;
 
-	D3D11Texture m_d3d11Texture;
+	D3D12Texture m_texture;
 };

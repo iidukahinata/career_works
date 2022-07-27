@@ -2,7 +2,7 @@
 * @file    ForwardLightMap.cpp
 * @brief
 *
-* @date	   2022/07/13 2022年度初版
+* @date	   2022/07/27 2022年度初版
 */
 
 
@@ -14,7 +14,9 @@ void ForwardLightMap::Initialize()
 {
 	m_ambientLight = Math::Vector4(0.5f);
 
+	m_descriptHeap.Create(1, DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 	m_constantBuffer.Create(sizeof(ConstantBufferLight));
+	m_descriptHeap.RegisterConstantBufferView(m_constantBuffer.GetDesc());
 }
 
 void ForwardLightMap::Update(Camera* mainCamera)
@@ -24,10 +26,6 @@ void ForwardLightMap::Update(Camera* mainCamera)
 
 	// update buffer
 	m_constantBuffer.Update(buffer);
-
-	// set buffer
-	m_constantBuffer.VSSet(2);
-	m_constantBuffer.PSSet(2);
 }
 
 ForwardLightMap::ConstantBufferLight ForwardLightMap::CreateConstantBufferLight(const Camera* mainCamera) const noexcept

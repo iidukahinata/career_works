@@ -37,8 +37,8 @@ private:
 	Microsoft::WRL::ComPtr<IDirectInputDevice8>	m_directKeyboard;
 	Microsoft::WRL::ComPtr<IDirectInputDevice8>	m_directMouse;
 
-	char m_keybuffer[256];		// キーボードバッファ
-	DIMOUSESTATE2 m_mouseState; // マウスの状態
+	Array<char, 256> m_keybuffer; // キーボードバッファ
+	DIMOUSESTATE2 m_mouseState;   // マウスの状態
 
 	// * Input Update 登録用
 	Job m_job;

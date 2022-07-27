@@ -27,4 +27,6 @@ public:
 private:
 
 	Job m_job;
+
+	Widget m_widget;
 };

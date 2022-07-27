@@ -19,10 +19,10 @@ DirectInput::DirectInput()
 
 bool DirectInput::Initialize()
 {
-	auto width = Window::Get().GetWindowWidth();
-	auto height = Window::Get().GetWindowHeight();
-	auto hwnd = Window::Get().GetHandle();
-	auto hInstance = Window::Get().GetHInstance();
+	const auto width = Window::Get().GetWindowWidth();
+	const auto height = Window::Get().GetWindowHeight();
+	const auto hwnd = Window::Get().GetHandle();
+	const auto hInstance = Window::Get().GetHInstance();
 
 	HRESULT	hr;
 	hr = DirectInput8Create(hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&m_directInput, nullptr);
@@ -100,6 +100,8 @@ void DirectInput::Shutdown()
 
 void DirectInput::Update() noexcept
 {
+	const auto oldKeybuffer = m_keybuffer;
+
 	// key 情報の取得。
 	GetKeyBuffer();
 	GetMouseBuffer();
@@ -141,7 +143,7 @@ bool DirectInput::GetKeyBuffer() noexcept
 bool DirectInput::GetMouseBuffer() noexcept
 {
 	HRESULT	hr;
-	DIMOUSESTATE2 mouseStateOld = m_mouseState;
+	//DIMOUSESTATE2 mouseStateOld = m_mouseState;
 
 	// デバイスの認識
 	hr = m_directMouse->Acquire();

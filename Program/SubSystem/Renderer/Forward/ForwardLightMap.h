@@ -2,13 +2,14 @@
 * @file    ForwardLightMap.h
 * @brief
 *
-* @date	   2022/07/13 2022年度初版
+* @date	   2022/07/27 2022年度初版
 */
 #pragma once
 
 
 #include "../LightMap.h"
-#include "SubSystem/Renderer/D3D11/D3D11ConstantBuffer.h"
+#include "SubSystem/Renderer/D3D12/D3D12ConstantBuffer.h"
+#include "SubSystem/Renderer/D3D12/D3D12DescriptorHeap.h"
 
 #define MAX_LIGHT_COUNT 256
 
@@ -71,5 +72,6 @@ private:
 
 private:
 
-	D3D11ConstantBuffer<ConstantBufferLight> m_constantBuffer;
+	D3D12DescriptorHeap m_descriptHeap;
+	D3D12ConstantBuffer m_constantBuffer;
 };

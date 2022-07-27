@@ -11,10 +11,10 @@
 
 ID3D12Device* D3D12DeviceChild::GetDevice() const noexcept
 {
-	return D3D12GrahicsDevice::Get().Device();
+	return D3D12GraphicsDevice::Get().GetDevice();
 }
 
 ID3D12GraphicsCommandList* D3D12DeviceChild::GetCommandList() const noexcept
 {
-	return 	D3D12GrahicsDevice::Get().CommandList();
+	return 	D3D12GraphicsDevice::Get().GetCommandList();
 }

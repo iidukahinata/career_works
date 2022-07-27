@@ -61,6 +61,7 @@
     <ClCompile Include="Program\SubSystem\Renderer\D3D11\D3D11VertexShader.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\D3D11\RenderStates.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12CommandContext.cpp" />
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12ConstantBuffer.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12DescriptorHeap.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12DeviceChild.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Fence.cpp" />
@@ -116,6 +117,7 @@
     <ClCompile Include="Program\ThirdParty\imgui\imgui_demo.cpp" />
     <ClCompile Include="Program\ThirdParty\imgui\imgui_draw.cpp" />
     <ClCompile Include="Program\ThirdParty\imgui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="Program\ThirdParty\imgui\imgui_impl_dx12.cpp" />
     <ClCompile Include="Program\ThirdParty\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="Program\ThirdParty\imgui\imgui_tables.cpp" />
     <ClCompile Include="Program\ThirdParty\imgui\imgui_widgets.cpp" />
@@ -158,6 +160,7 @@
     <ClInclude Include="Program\SubSystem\Input\Direct\DirectInput.h" />
     <ClInclude Include="Program\SubSystem\Input\Input.h" />
     <ClInclude Include="Program\SubSystem\Input\InputEvents.h" />
+    <ClInclude Include="Program\SubSystem\Input\InputHelper.h" />
     <ClInclude Include="Program\SubSystem\JobSystem\Async\AsyncJob.h" />
     <ClInclude Include="Program\SubSystem\JobSystem\Async\AsyncJobSystem.h" />
     <ClInclude Include="Program\SubSystem\JobSystem\Async\COM.h" />
@@ -238,6 +241,7 @@
     <ClInclude Include="Program\ThirdParty\imgui\imconfig.h" />
     <ClInclude Include="Program\ThirdParty\imgui\imgui.h" />
     <ClInclude Include="Program\ThirdParty\imgui\imgui_impl_dx11.h" />
+    <ClInclude Include="Program\ThirdParty\imgui\imgui_impl_dx12.h" />
     <ClInclude Include="Program\ThirdParty\imgui\imgui_impl_win32.h" />
     <ClInclude Include="Program\ThirdParty\imgui\imgui_internal.h" />
     <ClInclude Include="Program\ThirdParty\imgui\imstb_rectpack.h" />

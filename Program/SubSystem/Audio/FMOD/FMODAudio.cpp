@@ -24,7 +24,7 @@ FMODAudio::FMODAudio()
 
 bool FMODAudio::Initialize()
 {
-	auto maxChannel = 64;
+	constexpr auto maxChannel = 64;
 	FMOD_RESULT result;
 
 	result = FMOD::System_Create(&m_system);

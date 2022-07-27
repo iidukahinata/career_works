@@ -16,7 +16,7 @@
 #include "SubSystem/Scene/Component/Components/Camera.h"
 #include "SubSystem/Scene/Component/Components/RenderObject.h"
 
-void DrawFrameRate()
+static void DrawFrameRate()
 {
 	ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiCond_Once);
 	ImGui::SetNextWindowSize(ImVec2(210, 50), ImGuiCond_Once);

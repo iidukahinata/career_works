@@ -15,6 +15,9 @@ class D3D12RootSignature : public D3D12DeviceChild
 {
 public:
 
+	/** シェーダ情報から生成。*/
+	bool Create(ID3DBlob* blob) noexcept;
+
 	/** D3D12_ROOT_SIGNATURE_FLAGSは小さな最適化として有効 */
 	bool Create(UINT parameterCount,
 		class CD3DX12_ROOT_PARAMETER1* rootParameters,

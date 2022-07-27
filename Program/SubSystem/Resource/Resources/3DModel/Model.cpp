@@ -2,7 +2,7 @@
 * @file    Model.cpp
 * @brief
 *
-* @date	   2022/07/06 2022年度初版
+* @date	   2022/07/27 2022年度初版
 */
 
 
@@ -94,7 +94,7 @@ void Model::AddMaterial(Material* material) noexcept
 
 void Model::Render() const noexcept
 {
-	auto context = D3D11GraphicsDevice::Get().GetContext();
+	auto commadList = D3D12GraphicsDevice::Get().GetCommandList();
 
 	// 現在想定は最初の一つのみ
 	m_materials[0]->ShaderSet();
@@ -103,7 +103,7 @@ void Model::Render() const noexcept
 	{
 		mesh->Render();
 	
-		context->DrawIndexed(static_cast<UINT>(mesh->GetIndices().size()), 0, 0);
+		commadList->DrawIndexedInstanced(static_cast<UINT>(mesh->GetIndices().size()), 1, 0, 0, 0);
 	}
 }
 

@@ -2,16 +2,15 @@
 * @file    Mesh.h
 * @brief
 *
-* @date	   2022/07/22 2022年度初版
+* @date	   2022/07/26 2022年度初版
 */
 #pragma once
 
 
 #include "../IResource.h"
 #include "SubSystem/Renderer/Geometry/Vertex.h"
-
-#include "SubSystem/Renderer/D3D11/D3D11IndexBuffer.h"
-#include "SubSystem/Renderer/D3D11/D3D11VertexBuffer.h"
+#include "SubSystem/Renderer/D3D12/D3D12IndexBuffer.h"
+#include "SubSystem/Renderer/D3D12/D3D12VertexBuffer.h"
 
 class Mesh : public IResource
 {
@@ -51,6 +50,6 @@ private:
 	Vector<VertexBump3D> m_vertices;
 	Vector<uint32_t> m_indices;
 
-	D3D11VertexBuffer<VertexBump3D> m_vertexBuffer;
-	D3D11IndexBuffer m_indexBuffer;
+	D3D12VertexBuffer<VertexBump3D> m_vertexBuffer;
+	D3D12IndexBuffer m_indexBuffer;
 };

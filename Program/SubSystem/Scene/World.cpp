@@ -56,16 +56,16 @@ void World::LoadScene(StringView sceneName, bool isAsync /* = false */) noexcept
 	obj->AddComponent("MeshRender");
 	obj->AddComponent("AudioSpeaker");
 
-	for (size_t x = 0; x < 2; ++x)
-	{
-		for (size_t y = 0; y < 1; ++y)
-		{
-			for (size_t z = 0; z < 2; ++z)
-			{
-				CreateLight(this, x, y, z);
-			}
-		}
-	}
+	//for (size_t x = 0; x < 2; ++x)
+	//{
+	//	for (size_t y = 0; y < 1; ++y)
+	//	{
+	//		for (size_t z = 0; z < 2; ++z)
+	//		{
+	//			CreateLight(this, x, y, z);
+	//		}
+	//	}
+	//}
 }
 
 void World::SaveScene(StringView sceneName) noexcept

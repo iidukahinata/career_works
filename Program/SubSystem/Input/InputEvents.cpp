@@ -8,7 +8,7 @@
 
 #include "InputEvents.h"
 
-KeyPressed::KeyPressed(uint32_t key) : m_key(key)
+KeyPressed::KeyPressed(Button::KeyAndMouse key) : m_key(key)
 {
 
 }
@@ -18,7 +18,7 @@ std::any KeyPressed::GetData()
 	return m_key;
 }
 
-KeyReleased::KeyReleased(uint32_t key) : m_key(key)
+KeyReleased::KeyReleased(Button::KeyAndMouse key) : m_key(key)
 {
 
 }
