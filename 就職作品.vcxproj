@@ -60,9 +60,11 @@
     <ClCompile Include="Program\SubSystem\Renderer\D3D11\D3D11Texture.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\D3D11\D3D11VertexShader.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\D3D11\RenderStates.cpp" />
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Buffer.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12CommandContext.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12ConstantBuffer.cpp" />
-    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12DescriptorHeap.cpp" />
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12DescriptorAllocator.cpp" />
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12DescriptorCache.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12DeviceChild.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Fence.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12GrahicsDevice.cpp" />
@@ -70,8 +72,12 @@
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12PipelineState.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12RenderTexture.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12RootSignature.cpp" />
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Sampler.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Shader.cpp" />
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12StateCache.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Texture.cpp" />
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12VertexBuffer.cpp" />
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12View.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\Deferred\ClusteredLightMap.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\Deferred\DeferredRenderer.cpp" />
     <ClCompile Include="Program\SubSystem\Renderer\Deferred\GBuffer.cpp" />
@@ -179,18 +185,25 @@
     <ClInclude Include="Program\SubSystem\Renderer\D3D11\D3D11Texture.h" />
     <ClInclude Include="Program\SubSystem\Renderer\D3D11\D3D11VertexBuffer.h" />
     <ClInclude Include="Program\SubSystem\Renderer\D3D11\RenderStates.h" />
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12Buffer.h" />
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12CommandContext.h" />
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12ConstantBuffer.h" />
-    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12DescriptorHeap.h" />
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12DescriptorAllocator.h" />
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12DescriptorCache.h" />
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12DeviceChild.h" />
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12GrahicsDevice.h" />
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12Helper.h" />
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12IndexBuffer.h" />
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12PipelineState.h" />
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12RenderTexture.h" />
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12RootSignature.h" />
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12Sampler.h" />
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12Shader.h" />
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12StateCache.h" />
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12Texture.h" />
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12VertexBuffer.h" />
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12View.h" />
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\Hash.h" />
     <ClInclude Include="Program\SubSystem\Renderer\Deferred\ClusteredLightMap.h" />
     <ClInclude Include="Program\SubSystem\Renderer\Deferred\DeferredRenderer.h" />
     <ClInclude Include="Program\SubSystem\Renderer\Deferred\GBuffer.h" />
@@ -252,7 +265,6 @@
     <None Include="Program\SubSystem\Renderer\Shader\HLSL\Core\Core.hlsli" />
     <None Include="Program\SubSystem\Renderer\Shader\HLSL\Core\Light.hlsli" />
     <None Include="Program\SubSystem\Renderer\Shader\HLSL\PBR\PBR.hlsli" />
-    <None Include="Program\SubSystem\Renderer\Shader\HLSL\PostEffect\Blur.hlsli" />
     <None Include="Program\ThirdParty\FMOD\include\fmod.cs" />
     <None Include="Program\ThirdParty\FMOD\include\fmod_dsp.cs" />
     <None Include="Program\ThirdParty\FMOD\include\fmod_errors.cs" />
@@ -297,57 +309,12 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\LambertPS.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\LambertVS.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
-    </FxCompile>
     <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PBR\PBR_PS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PBR\PBR_VS.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PostEffect\BloomPS.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PostEffect\BlurPS.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PostEffect\DepthOfFieldPS.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PostEffect\LuminanceSamplingPS.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PostEffect\MonotonePS.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PostEffect\XBlurVS.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PostEffect\YBlurVS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>

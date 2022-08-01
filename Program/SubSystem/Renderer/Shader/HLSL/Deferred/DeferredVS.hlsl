@@ -16,9 +16,9 @@ VS_OUT main(VS_IN input)
 {
 	VS_OUT output;
 
-	output.pos = mul(input.pos, world);
-	output.pos = mul(output.pos, view);
-	output.pos = mul(output.pos, projection);
+	output.pos = mul(input.pos, gWorld);
+	output.pos = mul(output.pos, gView);
+	output.pos = mul(output.pos, gProjection);
 
 	output.tex = input.tex;
 

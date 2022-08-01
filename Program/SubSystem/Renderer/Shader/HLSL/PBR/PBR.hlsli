@@ -12,10 +12,7 @@
 #include "../Core/Core.hlsli"
 #include "../Core/Light.hlsli"
 
-Texture2D g_texture : register(t0);
-Texture2D g_normalMap : register(t1);
-Texture2D g_metallicSmoothMap : register(t2); // rにメタリック、aにスムース
-sampler g_sampler;
+sampler g_sampler : register(s0);
 
 struct Material
 {
@@ -23,23 +20,6 @@ struct Material
 	float roughness;
 	float metallic;
 };
-
-Material GetMaterial(float2 tex)
-{
-	// サンプル取得
-	float4 albedoColor = g_texture.Sample(g_sampler, tex);
-	float4 metallicSmooth = g_metallicSmoothMap.Sample(g_sampler, tex);
-	float metallic = metallicSmooth.r;
-	float smooth = metallicSmooth.a;
-
-	// マテリアル生成
-	Material material;
-	material.albedoColor = albedoColor.xyz;
-	material.metallic = metallic;
-	material.roughness = (1.f - smooth); // 滑らかさ → 粗さ に変更
-	
-	return material;
-}
 
 // [Beckmann 1963]
 float DistributionBeckmann(float NdotH, float a2)

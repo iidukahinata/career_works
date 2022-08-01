@@ -1,7 +1,7 @@
-Texture2D g_texture;
-sampler g_sampler;
+Texture2D g_texture : register(t0);
+sampler g_sampler : register(s0);
 
-cbuffer ConstBufferColor : register(b3)
+cbuffer ConstBufferColor : register(b0)
 {
 	float4 color;
 };

@@ -42,12 +42,11 @@ bool ForwardRenderer::Initialize()
 
 	// デバイス初期化
 	D3D12GraphicsDevice::Get().Init(Window::Get().GetHandle(), width, height, Window::Get().IsFullscreen());
-	D3D11GraphicsDevice::Get().Init(Window::Get().GetHandle(), width, height, Window::Get().IsFullscreen());
 
 	m_lightMap = MakeUnique<ForwardLightMap>();
-	//m_lightMap->Initialize();
+	m_lightMap->Initialize();
 	
-	//TransformCBuffer::Get().Init();
+	TransformCBuffer::Get().Init();
 
 	return true;
 }
@@ -59,8 +58,8 @@ void ForwardRenderer::Shutdown()
 
 void ForwardRenderer::Update() noexcept
 {
-	//TransformCBuffer::Get().SetProjection(m_mainCamera->GetProjectionMatrix().ToMatrixXM());
-	//TransformCBuffer::Get().SetView(m_mainCamera->GetViewMatrix().ToMatrixXM());
+	TransformCBuffer::Get().SetProjection(m_mainCamera->GetProjectionMatrix().ToMatrixXM());
+	TransformCBuffer::Get().SetView(m_mainCamera->GetViewMatrix().ToMatrixXM());
 
 	auto& grahicsDevice = D3D12GraphicsDevice::Get();
 
@@ -68,7 +67,7 @@ void ForwardRenderer::Update() noexcept
 	grahicsDevice.SetRenderTarget(grahicsDevice.GetRenderTarget(), grahicsDevice.GetDepthStencil());
 	grahicsDevice.Clear(Math::Vector4(0.f, 0.f, 0.f, 1.f));
 
-	//m_lightMap->Update(m_mainCamera);
+	m_lightMap->Update(m_mainCamera);
 	
 	//for (auto renderObject : m_renderObjects)
 	//{

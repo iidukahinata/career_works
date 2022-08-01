@@ -1,10 +1,12 @@
 #include "Core/Core.hlsli"
 
-struct VS_IN {
+struct VS_IN 
+{
 	float4 pos : POSITION;
 };
 
-struct VS_OUT {
+struct VS_OUT
+{
 	float4 pos : SV_POSITION;
 	float4 tex : TEXCOORD1;
 	float4 viewPos : TEXCOORD2;
@@ -14,13 +16,10 @@ VS_OUT main(VS_IN input)
 {
 	VS_OUT output;
 	
-	output.pos = mul(input.pos, world);
-
-    // カメラ空間の位置取得
-	output.viewPos = mul(output.pos, view);
-
-	output.pos = output.viewPos;
-	output.pos = mul(output.pos, projection);
+	// カメラ空間の位置取得
+	output.pos = mul(input.pos, gWorld);
+	output.viewPos = mul(output.pos, gView);
+	output.pos = mul(output.viewPos, gProjection);
 
 	output.tex = input.pos;
 

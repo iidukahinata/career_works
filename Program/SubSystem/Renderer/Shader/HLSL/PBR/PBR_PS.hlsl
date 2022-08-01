@@ -1,5 +1,9 @@
 #include "PBR.hlsli"
 
+Texture2D g_texture : register(t1);
+Texture2D g_normalMap : register(t2);
+Texture2D g_metallicSmoothMap : register(t3); // rにメタリック、aにスムース
+
 struct PS_IN
 {
 	float4 pos : SV_POSITION;
@@ -11,6 +15,24 @@ struct PS_IN
 	float4 viewPos : TEXCOORD2;
 	float3 toEye : TEXCOORD3;
 };
+
+Material GetMaterial(float2 tex)
+{
+	// サンプル取得
+	float4 albedoColor = g_texture.Sample(g_sampler, tex);
+	float4 metallicSmooth = g_metallicSmoothMap.Sample(g_sampler, tex);
+	float metallic = metallicSmooth.r;
+	float smooth = metallicSmooth.a;
+
+	// マテリアル生成
+	Material material;
+	material.albedoColor = albedoColor.xyz;
+	material.metallic = metallic;
+	material.roughness = (1.f - smooth); // 滑らかさ → 粗さ に変更
+	
+	return material;
+}
+
 
 float3 GetNormalsFromNormalMaps(float3 normal, float3 tangent, float3 biNormal, float2 tex)
 {
@@ -27,31 +49,22 @@ float4 main(PS_IN input) : SV_TARGET
 	float3 normal = GetNormalsFromNormalMaps(input.normal, input.tangent, input.biNormal, input.tex);
 
 	// 平行光源計算
-	finalColor.xyz += PBR(material, ToLightFromDirectionalLight(directionalLight), input.toEye, normal);
+	finalColor.xyz += PBR(material, ToLightFromDirectionalLight(gDirectionalLight), input.toEye, normal);
 
-	//uint lightData = g_lightDataTex.Load(int4(((input.worldPos * invScale) + bias).xyz, 0.f));
-	//while (lightData)
-	//{
-	//	uint i = firstbitlow(lightData);
-	//	lightData &= ~(1 << i);
-	//
-	//	finalColor.xyz += PBR(material, ToLightFromPointLight(pointLights[i], input.worldPos), input.toEye, normal.xyz);
-	//}
-	
 	// ポイントライト計算
-	const int pointLightCount = lightCount.x;
+	const int pointLightCount = gLightCount.x;
 	for (int i = 0; i < pointLightCount; ++i)
 	{
-		finalColor.xyz += PBR(material, ToLightFromPointLight(pointLights[i], input.worldPos), input.toEye, normal);
+		finalColor.xyz += PBR(material, ToLightFromPointLight(gPointLights[i], input.worldPos), input.toEye, normal);
 	}
 	
 	// スポットライト計算
-	const int spotLightCount = lightCount.y;
+	const int spotLightCount = gLightCount.y;
 	for (int i = 0; i < spotLightCount; ++i)
 	{
-		finalColor.xyz += PBR(material, ToLightFromSpotLight(spotLights[i], input.worldPos), input.toEye, normal);
+		finalColor.xyz += PBR(material, ToLightFromSpotLight(gSpotLights[i], input.worldPos), input.toEye, normal);
 	}
 
-	finalColor.xyz += (ambientColor.xyz * material.albedoColor);	
+	finalColor.xyz += (gAmbientColor.xyz * material.albedoColor);	
 	return finalColor;
 }

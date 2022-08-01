@@ -22,10 +22,11 @@ void ForwardLightMap::Initialize()
 void ForwardLightMap::Update(Camera* mainCamera)
 {
 	// pre update
-	ConstantBufferLight buffer = CreateConstantBufferLight(mainCamera);
-
 	// update buffer
-	m_constantBuffer.Update(buffer);
+	m_constantBuffer.Update(CreateConstantBufferLight(mainCamera));
+
+	m_descriptHeap.Set();
+	m_descriptHeap.SetGraphicsRootTable(1);
 }
 
 ForwardLightMap::ConstantBufferLight ForwardLightMap::CreateConstantBufferLight(const Camera* mainCamera) const noexcept

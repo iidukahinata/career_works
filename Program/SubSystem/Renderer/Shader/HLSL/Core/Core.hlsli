@@ -1,10 +1,10 @@
 #define PI 3.141592654
 
-cbuffer ConstBufferMatrix : register(b1)
+cbuffer ConstBufferMatrix : register(b0)
 {
-	matrix world;
-	matrix view;
-	matrix projection;
+	matrix gWorld;
+	matrix gView;
+	matrix gProjection;
 };
 
 float Pow2(float x)

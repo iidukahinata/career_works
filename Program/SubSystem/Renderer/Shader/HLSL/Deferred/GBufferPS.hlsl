@@ -1,6 +1,11 @@
 #include "../PBR/PBR.hlsli"
 
-struct PS_IN {
+Texture2D g_texture : register(t1);
+Texture2D g_normalMap : register(t2);
+Texture2D g_metallicSmoothMap : register(t3); // rにメタリック、aにスムース
+
+struct PS_IN 
+{
 	float4 pos : SV_POSITION;
 	float3 normal : NORMAL;
 	float3 tangent : TANGENT;
@@ -10,12 +15,30 @@ struct PS_IN {
 	float4 viewPos : TEXCOORD2;
 };
 
-struct PS_OUT {
+struct PS_OUT 
+{
 	float4 color : SV_TARGET0;
 	float4 normal : SV_TARGET1;
 	float2 depth : SV_TARGET2;
 	float4 param : SV_TARGET3;
 };
+
+Material GetMaterial(float2 tex)
+{
+	// サンプル取得
+	float4 albedoColor = g_texture.Sample(g_sampler, tex);
+	float4 metallicSmooth = g_metallicSmoothMap.Sample(g_sampler, tex);
+	float metallic = metallicSmooth.r;
+	float smooth = metallicSmooth.a;
+
+	// マテリアル生成
+	Material material;
+	material.albedoColor = albedoColor.xyz;
+	material.metallic = metallic;
+	material.roughness = (1.f - smooth); // 滑らかさ → 粗さ に変更
+	
+	return material;
+}
 
 float3 GetNormalsFromNormalMaps(float3 normal, float3 tangent, float3 biNormal, float2 tex)
 {

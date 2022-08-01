@@ -82,9 +82,6 @@
     <Filter Include="SubSystem\Renderer\Shader\HLSL\Core">
       <UniqueIdentifier>{676e59f5-ce95-4a97-aff3-9b7f6d31b0a8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SubSystem\Renderer\Shader\HLSL\PostEffect">
-      <UniqueIdentifier>{241629f5-a90c-4fd3-8adc-24ddf0ee6349}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SubSystem\Renderer\Deferred">
       <UniqueIdentifier>{26482f45-1bc7-4772-9eb8-669b1661d93e}</UniqueIdentifier>
     </Filter>
@@ -409,6 +406,18 @@
     <ClCompile Include="Program\SubSystem\Thread\RenderingThread\RenderingThread.cpp">
       <Filter>SubSystem\Thread\RenderingThrad</Filter>
     </ClCompile>
+    <ClCompile Include="Program\ThirdParty\imgui\imgui_impl_dx12.cpp">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12DeviceChild.cpp">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Fence.cpp">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12GrahicsDevice.cpp">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClCompile>
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12IndexBuffer.cpp">
       <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
     </ClCompile>
@@ -421,31 +430,37 @@
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12RootSignature.cpp">
       <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
     </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Sampler.cpp">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClCompile>
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Shader.cpp">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12StateCache.cpp">
       <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
     </ClCompile>
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Texture.cpp">
       <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
     </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12VertexBuffer.cpp">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12View.cpp">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Buffer.cpp">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClCompile>
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12CommandContext.cpp">
       <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
     </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12DescriptorHeap.cpp">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12DeviceChild.cpp">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12Fence.cpp">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12GrahicsDevice.cpp">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClCompile>
-    <ClCompile Include="Program\ThirdParty\imgui\imgui_impl_dx12.cpp">
-      <Filter>ThirdParty\imgui</Filter>
-    </ClCompile>
     <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12ConstantBuffer.cpp">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12DescriptorAllocator.cpp">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\SubSystem\Renderer\D3D12\D3D12DescriptorCache.cpp">
       <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
     </ClCompile>
   </ItemGroup>
@@ -777,6 +792,24 @@
     <ClInclude Include="Program\SubSystem\Thread\RenderingThread\RenderingThread.h">
       <Filter>SubSystem\Thread\RenderingThrad</Filter>
     </ClInclude>
+    <ClInclude Include="Program\ThirdParty\imgui\imgui_impl_dx12.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Input\InputHelper.h">
+      <Filter>SubSystem\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12DescriptorCache.h">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12DeviceChild.h">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12GrahicsDevice.h">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12Helper.h">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClInclude>
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12IndexBuffer.h">
       <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
     </ClInclude>
@@ -789,7 +822,13 @@
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12RootSignature.h">
       <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
     </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12Sampler.h">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClInclude>
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12Shader.h">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12StateCache.h">
       <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12Texture.h">
@@ -798,26 +837,23 @@
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12VertexBuffer.h">
       <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
     </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12View.h">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\Hash.h">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12Buffer.h">
+      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
+    </ClInclude>
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12CommandContext.h">
       <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
     </ClInclude>
     <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12ConstantBuffer.h">
       <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
     </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12DescriptorHeap.h">
+    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12DescriptorAllocator.h">
       <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12DeviceChild.h">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Renderer\D3D12\D3D12GrahicsDevice.h">
-      <Filter>SubSystem\Renderer\GraphicsAPI\D3D12</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\ThirdParty\imgui\imgui_impl_dx12.h">
-      <Filter>ThirdParty\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Program\SubSystem\Input\InputHelper.h">
-      <Filter>SubSystem\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -830,9 +866,6 @@
     <None Include="Program\ThirdParty\FMOD\include\fmod.cs">
       <Filter>ThirdParty\FMOD</Filter>
     </None>
-    <None Include="Program\SubSystem\Renderer\Shader\HLSL\PostEffect\Blur.hlsli">
-      <Filter>SubSystem\Renderer\Shader\HLSL\PostEffect</Filter>
-    </None>
     <None Include="Program\SubSystem\Renderer\Shader\HLSL\Core\Core.hlsli">
       <Filter>SubSystem\Renderer\Shader\HLSL\Core</Filter>
     </None>
@@ -844,27 +877,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PostEffect\BloomPS.hlsl">
-      <Filter>SubSystem\Renderer\Shader\HLSL\PostEffect</Filter>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PostEffect\BlurPS.hlsl">
-      <Filter>SubSystem\Renderer\Shader\HLSL\PostEffect</Filter>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PostEffect\DepthOfFieldPS.hlsl">
-      <Filter>SubSystem\Renderer\Shader\HLSL\PostEffect</Filter>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PostEffect\LuminanceSamplingPS.hlsl">
-      <Filter>SubSystem\Renderer\Shader\HLSL\PostEffect</Filter>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PostEffect\MonotonePS.hlsl">
-      <Filter>SubSystem\Renderer\Shader\HLSL\PostEffect</Filter>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PostEffect\XBlurVS.hlsl">
-      <Filter>SubSystem\Renderer\Shader\HLSL\PostEffect</Filter>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\PostEffect\YBlurVS.hlsl">
-      <Filter>SubSystem\Renderer\Shader\HLSL\PostEffect</Filter>
-    </FxCompile>
     <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\BoxPS.hlsl">
       <Filter>SubSystem\Renderer\Shader\HLSL</Filter>
     </FxCompile>
@@ -872,12 +884,6 @@
       <Filter>SubSystem\Renderer\Shader\HLSL</Filter>
     </FxCompile>
     <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\ColorTexturePS.hlsl">
-      <Filter>SubSystem\Renderer\Shader\HLSL</Filter>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\LambertPS.hlsl">
-      <Filter>SubSystem\Renderer\Shader\HLSL</Filter>
-    </FxCompile>
-    <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\LambertVS.hlsl">
       <Filter>SubSystem\Renderer\Shader\HLSL</Filter>
     </FxCompile>
     <FxCompile Include="Program\SubSystem\Renderer\Shader\HLSL\TexturePS.hlsl">

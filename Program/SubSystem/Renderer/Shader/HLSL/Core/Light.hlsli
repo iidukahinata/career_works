@@ -1,8 +1,8 @@
 #define MAXLIGHTCOUNT 256
 
-Texture3D<uint> g_lightDataTex : register(t10);
+Texture3D<uint2> g_lightDataTex : register(t0);
 
-struct Light 
+struct Light
 {
 	float3 direction;
 	float3 color;
@@ -30,23 +30,23 @@ struct SpotLight
 	float4 intensity; // x値 intensity : y値 influenceRange : z値 angle
 };
 
-cbuffer ConstBufferLight : register(b2)
+cbuffer ConstBufferLight : register(b1)
 {
 	float4 gEyePos;
-	float4 ambientColor;
-	DirectionalLight directionalLight;
-	PointLight pointLights[MAXLIGHTCOUNT];
-	SpotLight spotLights[MAXLIGHTCOUNT];
+	float4 gAmbientColor;
+	DirectionalLight gDirectionalLight;
+	PointLight gPointLights[MAXLIGHTCOUNT];
+	SpotLight gSpotLights[MAXLIGHTCOUNT];
 	
-	float2 lightCount; // x値 pointLight : y値 sptLight
+	float2 gLightCount; // x値 pointLight : y値 sptLight
 	
-	float4 invScale;
-	float4 bias;
+	float4 gInvScale;
+	float4 gBias;
 };
 
-cbuffer ConstBufferLightList : register(b3)
-{	
-	min16int lightIndices[0x1000];
+cbuffer ConstBufferLightList : register(b2)
+{
+	min16int gLightIndices[0x1000];
 };
 
 Light ToLightFromDirectionalLight(DirectionalLight directionalLight)

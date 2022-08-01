@@ -2,11 +2,12 @@
 * @file    D3D12IndexBuffer.cpp
 * @brief
 *
-* @date	   2022/07/26 2022年度初版
+* @date	   2022/08/01 2022年度初版
 */
 
 
 #include "D3D12IndexBuffer.h"
+#include "D3D12CommandContext.h"
 
 bool D3D12IndexBuffer::Create(const std::vector<UINT>& indices) noexcept
 {
@@ -15,10 +16,10 @@ bool D3D12IndexBuffer::Create(const std::vector<UINT>& indices) noexcept
 
 bool D3D12IndexBuffer::Create(const std::vector<UINT16>& indices) noexcept
 {
-	return Create(indices, DXGI_FORMAT_R16_UINT);
+	return !Create(indices, DXGI_FORMAT_R16_UINT);
 }
 
-void D3D12IndexBuffer::IASet() const noexcept
+void D3D12IndexBuffer::IASet() noexcept
 {
-	GetCommandList()->IASetIndexBuffer(&m_bufferView);
+	GetCommandContext()->SetIndexBuffer(&m_bufferView);
 }

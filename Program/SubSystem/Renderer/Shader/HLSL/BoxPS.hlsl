@@ -1,7 +1,8 @@
-TextureCube<float4> g_cubeMap;
-SamplerState g_sampler;
+TextureCube<float4> g_cubeMap : register(t0);
+SamplerState g_sampler : register(s0);
 
-struct PS_IN {
+struct PS_IN 
+{
 	float4 pos : SV_POSITION;
 	float4 tex : TEXCOORD1;
 	float4 viewPos : TEXCOORD3;

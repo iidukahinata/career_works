@@ -2,26 +2,26 @@
 * @file	   TransformCBuffer.cpp
 * @brief
 *
-* @date	   2022/07/22 2022年度初版
+* @date	   2022/07/27 2022年度初版
 */
 
 
 #include "TransformCBuffer.h"
 
-void TransformCBuffer::Init()
+void TransformCBuffer::Init() noexcept
 {
+	m_descriptHeap.Create(1, DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 	m_constantBuffer.Create(sizeof(ConstantBufferMatrix));
+	m_descriptHeap.RegisterConstantBufferView(m_constantBuffer.GetDesc());
 }
 
-void TransformCBuffer::Bind(const DirectX::XMMATRIX& world)
+void TransformCBuffer::Bind(const DirectX::XMMATRIX& world) noexcept
 {
-	ConstantBufferMatrix buffer = { DirectX::XMMatrixTranspose(world), m_viewXM, m_projectionXM };
-
-	m_constantBuffer.Update(buffer);
+	static_cast<ConstantBufferMatrix*>(m_constantBuffer.GetCPUData())->world = DirectX::XMMatrixTranspose(world);
 
 	// set buffer
-	m_constantBuffer.VSSet(1);
-	m_constantBuffer.PSSet(1);
+	m_descriptHeap.Set();
+	m_descriptHeap.SetGraphicsRootTable(1);
 }
 
 const DirectX::XMMATRIX& TransformCBuffer::GetProjection() noexcept
@@ -32,6 +32,7 @@ const DirectX::XMMATRIX& TransformCBuffer::GetProjection() noexcept
 void TransformCBuffer::SetProjection(const DirectX::XMMATRIX& projection) noexcept
 {
 	m_projectionXM = DirectX::XMMatrixTranspose(projection);
+	static_cast<ConstantBufferMatrix*>(m_constantBuffer.GetCPUData())->projection = m_projectionXM;
 }
 
 const DirectX::XMMATRIX& TransformCBuffer::GetView() noexcept
@@ -42,4 +43,5 @@ const DirectX::XMMATRIX& TransformCBuffer::GetView() noexcept
 void TransformCBuffer::SetView(const DirectX::XMMATRIX& view) noexcept
 {
 	m_viewXM = DirectX::XMMatrixTranspose(view);
+	static_cast<ConstantBufferMatrix*>(m_constantBuffer.GetCPUData())->view = m_viewXM;
 }

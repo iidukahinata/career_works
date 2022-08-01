@@ -1,5 +1,5 @@
 Texture2D g_texture : register(t0);
-sampler g_sampler;
+sampler g_sampler : register(s0);
 
 struct PS_IN {
 	float4 pos : SV_POSITION;

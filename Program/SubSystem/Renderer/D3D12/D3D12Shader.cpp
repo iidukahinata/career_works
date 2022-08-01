@@ -2,39 +2,53 @@
 * @file    D3D12Shader.cpp
 * @brief
 *
-* @date	   2022/07/27 2022年度初版
+* @date	   2022/07/26 2022年度初版
 */
 
 
 #include "D3D12Shader.h"
-#include <d3dcompiler.h>
 
-D3D12Shader::D3D12Shader(StringView filePath, StringView entryPoint, StringView traget)
+std::wstring ToWstring(std::string_view str) noexcept
+{
+	// 変換後の文字列の長さを取得
+	int lenght = MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED | MB_ERR_INVALID_CHARS, str.data(), -1, nullptr, 0);
+
+	std::wstring wstr;
+	wstr.reserve(lenght);
+
+	// 文字列変換
+	MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED | MB_ERR_INVALID_CHARS, str.data(), -1, &wstr[0], lenght);
+
+	return wstr;
+}
+
+D3D12Shader::D3D12Shader(std::string_view filePath, std::string_view entryPoint, std::string_view traget)
 {
 	Compile(filePath, entryPoint, traget);
 }
 
-void D3D12Shader::Compile(StringView filePath, StringView entryPoint, StringView traget) noexcept
+void D3D12Shader::Compile(std::string_view filePath, std::string_view entryPoint, std::string_view traget) noexcept
 {
 #ifdef _DEBUG
-	const UINT compileFlags = D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION;
+	UINT compileFlags = D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION;
 #else
-	const UINT compileFlags = 0;
+	UINT compileFlags = 0;
 #endif // DEBUG
 
-	if (GetExt(filePath) == "cso")
-	{
-		auto hr = D3DReadFileToBlob(ToWstring(filePath).data(), m_blob.ReleaseAndGetAddressOf());
-		if (FAILED(hr))
-		{
-			LOG_ERROR("シェーダコンパイルに失敗。: Shader.cpp");
-			return;
-		}
-	}
-	else
+	HRESULT hr;
+	//if (GetExt(filePath) == "cso")
+	//{
+	//	hr = D3DReadFileToBlob(ToWstring(filePath).data(), m_blob.ReleaseAndGetAddressOf());
+	//	if (FAILED(hr))
+	//	{
+	//		LOG_ERROR("シェーダコンパイルに失敗。: Shader.cpp");
+	//		return;
+	//	}
+	//}
+	//else
 	{
 		Microsoft::WRL::ComPtr<ID3DBlob> errorBlob = nullptr;
-		auto hr = D3DCompileFromFile(
+		HRESULT hr = D3DCompileFromFile(
 			ToWstring(filePath).data(),
 			nullptr,
 			D3D_COMPILE_STANDARD_FILE_INCLUDE,
@@ -47,35 +61,33 @@ void D3D12Shader::Compile(StringView filePath, StringView entryPoint, StringView
 		{
 			if (hr == HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND))
 			{
-				LOG_ERROR("指定されたファイルが見つかりませんでした。: Shader.cpp");
+				//LOG_ERROR("指定されたファイルが見つかりませんでした。: Shader.cpp");
 				return;
 			}
 			if (errorBlob)
 			{
-				String error;
+				std::string error;
 				error.resize(errorBlob->GetBufferSize());
 				std::copy_n((char*)errorBlob->GetBufferPointer(), errorBlob->GetBufferSize(), error.begin());
 				error += "\n";
-				LOG_ERROR(error.data());
+				//LOG_ERROR(error.data());
 			}
 		}
 	}
 }
 
-D3D12_INPUT_LAYOUT_DESC D3D12Shader::GetInputLayout() const noexcept
+std::vector<D3D12_INPUT_ELEMENT_DESC> D3D12Shader::GetInputLayout() noexcept
 {
-	Microsoft::WRL::ComPtr<ID3D12ShaderReflection> reflection;
-	D3DReflect(m_blob->GetBufferPointer(), m_blob->GetBufferSize()
-		, IID_PPV_ARGS(reflection.ReleaseAndGetAddressOf()));
+	D3DReflect(m_blob->GetBufferPointer(), m_blob->GetBufferSize(), IID_PPV_ARGS(m_reflection.ReleaseAndGetAddressOf()));
 
 	D3D12_SHADER_DESC shaderDesc;
-	reflection->GetDesc(&shaderDesc);
+	m_reflection->GetDesc(&shaderDesc);
 
-	Vector<D3D12_INPUT_ELEMENT_DESC> inputElementDescs;
+	std::vector<D3D12_INPUT_ELEMENT_DESC> inputElementDescs;
 	for (UINT i = 0; i < shaderDesc.InputParameters; ++i)
 	{
 		D3D12_SIGNATURE_PARAMETER_DESC paramDesc;
-		reflection->GetInputParameterDesc(i, &paramDesc);
+		m_reflection->GetInputParameterDesc(i, &paramDesc);
 
 		D3D12_INPUT_ELEMENT_DESC inputElementDesc;
 		ZeroMemory(&inputElementDesc, sizeof(inputElementDesc));
@@ -117,14 +129,11 @@ D3D12_INPUT_LAYOUT_DESC D3D12Shader::GetInputLayout() const noexcept
 			else if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_SINT32)
 				inputElementDesc.Format = DXGI_FORMAT_R32G32B32A32_SINT;
 			else if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_FLOAT32)
-				inputElementDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+				inputElementDesc.Format = DXGI_FORMAT_R32G32B32_FLOAT;
 		}
 
-		inputElementDescs.push_back(inputElementDesc);
+		inputElementDescs.push_back(std::move(inputElementDesc));
 	}
 
-	D3D12_INPUT_LAYOUT_DESC result;
-	result.NumElements = inputElementDescs.size();
-	result.pInputElementDescs = inputElementDescs.data();
-	return result;
+	return inputElementDescs;
 }

@@ -108,6 +108,10 @@ bool Material::CreatePipelineState() noexcept
 	gpipeline.VS = CD3DX12_SHADER_BYTECODE(m_vertexShader.GetBlob());
 	gpipeline.PS = CD3DX12_SHADER_BYTECODE(m_pixelShader.GetBlob());
 
+	auto inputLayout = m_vertexShader.GetInputLayout();
+	gpipeline.InputLayout.pInputElementDescs = inputLayout.data();
+	gpipeline.InputLayout.NumElements = inputLayout.size();
+
 	gpipeline.SampleMask = D3D12_DEFAULT_SAMPLE_MASK;
 	gpipeline.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
 	gpipeline.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
@@ -119,8 +123,6 @@ bool Material::CreatePipelineState() noexcept
 	gpipeline.DSVFormat = DXGI_FORMAT_D32_FLOAT;
 	gpipeline.DepthStencilState.StencilEnable = false;
 
-	gpipeline.InputLayout = m_vertexShader.GetInputLayout();
-
 	gpipeline.IBStripCutValue = D3D12_INDEX_BUFFER_STRIP_CUT_VALUE_DISABLED;
 	gpipeline.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
 
@@ -130,32 +132,53 @@ bool Material::CreatePipelineState() noexcept
 	gpipeline.SampleDesc.Count = 1;
 	gpipeline.SampleDesc.Quality = 0;
 
-	return m_pipelineState.Create(gpipeline);
+	ASSERT(m_pipelineState.Create(gpipeline));
+	return true;
 }
 
 bool Material::CreateRootSignature() noexcept
 {
 	constexpr UINT maxCBVCount = 8;
-	constexpr UINT maxSRVCount = 16;
+	constexpr UINT maxSRVCount = 8;
 	constexpr UINT maxUAVCount = 8;
 
 	// パラメータ設定
-	Array<CD3DX12_DESCRIPTOR_RANGE1, 3> descTblRanges;
-	Array<CD3DX12_ROOT_PARAMETER1, 3> rootParams;
+	Array<CD3DX12_DESCRIPTOR_RANGE1, 7> descTblRanges;
+	Array<CD3DX12_ROOT_PARAMETER1, 7> rootParams;
 
 	//=== CBV用設定 ============================================
-	descTblRanges[0].Init(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, maxCBVCount, 0, 0, D3D12_DESCRIPTOR_RANGE_FLAG_DATA_STATIC);
+	descTblRanges[0].Init(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, 1, 0, 0, D3D12_DESCRIPTOR_RANGE_FLAG_DATA_STATIC);
 	rootParams[0].InitAsDescriptorTable(1, &descTblRanges[0]);
 	//==========================================================
 
-	//=== SRV用設定 ============================================
-	descTblRanges[1].Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, maxSRVCount, 0, 0, D3D12_DESCRIPTOR_RANGE_FLAG_DATA_STATIC);
+	//=== CBV用設定 ============================================
+	descTblRanges[1].Init(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, 1, 1, 0, D3D12_DESCRIPTOR_RANGE_FLAG_DATA_STATIC);
 	rootParams[1].InitAsDescriptorTable(1, &descTblRanges[1]);
 	//==========================================================
 
+	//=== CBV用設定 ============================================
+	descTblRanges[2].Init(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, 1, 2, 0, D3D12_DESCRIPTOR_RANGE_FLAG_DATA_STATIC);
+	rootParams[2].InitAsDescriptorTable(1, &descTblRanges[2]);
+	//==========================================================
+
+	//=== CBV用設定 ============================================
+	descTblRanges[3].Init(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, maxCBVCount, 0, 0, D3D12_DESCRIPTOR_RANGE_FLAG_DATA_STATIC);
+	rootParams[3].InitAsDescriptorTable(1, &descTblRanges[3]);
+	//==========================================================
+
+	//=== SRV用設定 ============================================
+	descTblRanges[4].Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 0, 0, D3D12_DESCRIPTOR_RANGE_FLAG_DATA_STATIC);
+	rootParams[4].InitAsDescriptorTable(1, &descTblRanges[4]);
+	//==========================================================
+
+	//=== SRV用設定 ============================================
+	descTblRanges[5].Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, maxSRVCount, 1, 0, D3D12_DESCRIPTOR_RANGE_FLAG_DATA_STATIC);
+	rootParams[5].InitAsDescriptorTable(1, &descTblRanges[5]);
+	//==========================================================
+
 	//=== UAV用設定 ============================================
-	descTblRanges[2].Init(D3D12_DESCRIPTOR_RANGE_TYPE_UAV, maxUAVCount, 0, 0, D3D12_DESCRIPTOR_RANGE_FLAG_DATA_STATIC);
-	rootParams[2].InitAsDescriptorTable(2, &descTblRanges[2]);
+	descTblRanges[6].Init(D3D12_DESCRIPTOR_RANGE_TYPE_UAV, maxUAVCount, 0, 0, D3D12_DESCRIPTOR_RANGE_FLAG_DATA_STATIC);
+	rootParams[6].InitAsDescriptorTable(1, &descTblRanges[6]);
 	//==========================================================
 
 	Array<CD3DX12_STATIC_SAMPLER_DESC, 1> samplerDescs;
